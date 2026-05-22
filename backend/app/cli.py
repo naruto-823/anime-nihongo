@@ -24,6 +24,17 @@ def import_episode_from_file(session: Session, series_title: str, number: int,
         session.add(series)
         session.flush()
 
+    existing = (
+        session.query(Episode)
+        .filter_by(series_id=series.id, number=number)
+        .first()
+    )
+    if existing is not None:
+        raise ValueError(
+            f"《{series_title}》第 {number} 集已存在（episode id={existing.id}）。"
+            "请先删除它或换一个 --number。"
+        )
+
     episode = Episode(series_id=series.id, number=number, source="upload",
                       status="processing", total_lines=len(parsed))
     for p in parsed:

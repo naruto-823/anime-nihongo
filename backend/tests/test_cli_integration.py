@@ -19,8 +19,9 @@ def test_import_from_file_then_process(db_session, monkeypatch):
         file_path=str(FIXTURES / "sample.srt"))
 
     assert db_session.query(Series).filter_by(title="测试番").count() == 1
-    lines = db_session.query(Line).filter_by(episode_id=episode.id).all()
+    lines = db_session.query(Line).filter_by(episode_id=episode.id).order_by(Line.idx).all()
     assert len(lines) == 2
+    assert lines[0].text_jp == "おはよう、元気？"
 
     pipeline.process_episode(db_session, episode.id)
     db_session.refresh(episode)
