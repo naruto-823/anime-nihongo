@@ -45,3 +45,11 @@ def test_error_on_non_200():
 
     with pytest.raises(JimakuError):
         _client(handler).search_entries("test")
+
+
+def test_download_file_error_on_non_200():
+    def handler(request):
+        return httpx.Response(403, text="forbidden")
+
+    with pytest.raises(JimakuError):
+        _client(handler).download_file("https://x/ep1.srt")
