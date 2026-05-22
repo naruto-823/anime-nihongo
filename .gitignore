@@ -4,6 +4,9 @@
 
 # 数据库与数据
 data/
+# app/data/ seed files should be committed
+!backend/app/data/
+!backend/app/data/**
 *.db
 *.sqlite*
 
