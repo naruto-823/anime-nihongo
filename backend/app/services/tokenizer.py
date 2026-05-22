@@ -21,6 +21,12 @@ def _has_kanji(s: str) -> bool:
     return any("一" <= c <= "鿿" for c in s)
 
 
+def _canonical_reading(form: str) -> str:
+    """对辞书形重新分词，取与辞书形匹配的规范读音（平假名）。"""
+    kata = "".join(m.reading_form() for m in _tokenizer().tokenize(form, SplitMode.A))
+    return _kata_to_hira(kata)
+
+
 def to_furigana(text: str) -> list[dict]:
     """把文本切成段：含汉字的段为 {"t": 表层, "r": 平假名读音}，纯假名为 {"t": 表层}。"""
     segs: list[dict] = []
@@ -41,12 +47,12 @@ def extract_vocab_candidates(text: str) -> list[dict]:
         if pos not in _CONTENT_POS:
             continue
         form = m.dictionary_form()
-        if form in _STOP_FORMS or len(form) < 1:
+        if form in _STOP_FORMS:
             continue
         if form not in seen:
             seen[form] = {
                 "headword": form,
-                "reading": _kata_to_hira(m.reading_form()),
+                "reading": _canonical_reading(form),
                 "pos": pos,
             }
     return list(seen.values())

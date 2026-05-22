@@ -19,7 +19,9 @@ def test_furigana_pure_kana_has_no_reading():
 
 def test_extract_vocab_candidates_returns_dictionary_forms():
     cands = extract_vocab_candidates("猫が走った")
-    forms = {c["headword"] for c in cands}
-    assert "猫" in forms
-    assert "走る" in forms          # 辞书形
+    by_word = {c["headword"]: c for c in cands}
+    assert "猫" in by_word
+    assert "走る" in by_word          # 辞书形
+    assert by_word["猫"]["reading"] == "ねこ"
+    assert by_word["走る"]["reading"] == "はしる"   # 读音与辞书形匹配，而非表层形
     assert all("reading" in c and "pos" in c for c in cands)
