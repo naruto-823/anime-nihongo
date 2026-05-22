@@ -12,7 +12,7 @@ def make_engine(url: str) -> Engine:
 
 
 def make_session_factory(engine: Engine) -> sessionmaker[Session]:
-    return sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
+    return sessionmaker(engine, autoflush=False, expire_on_commit=False)
 
 
 def init_db(engine: Engine) -> None:

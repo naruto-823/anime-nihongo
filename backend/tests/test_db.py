@@ -1,13 +1,13 @@
 from sqlalchemy import inspect
 
-from app.db import Base, init_db, make_engine, make_session_factory
+from app.db import init_db, make_engine, make_session_factory
 
 
 def test_make_engine_and_session():
     engine = make_engine("sqlite://")
-    SessionFactory = make_session_factory(engine)
+    session_factory = make_session_factory(engine)
     init_db(engine)
-    with SessionFactory() as session:
+    with session_factory() as session:
         assert session.is_active
 
 
