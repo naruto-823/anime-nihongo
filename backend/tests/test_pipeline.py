@@ -82,3 +82,25 @@ def test_process_episode_is_resumable(db_session, monkeypatch):
     # 只应处理剩下的 1 行
     assert calls == [1]
     assert ep.status == "ready"
+
+
+def test_process_episode_sets_failed_on_llm_error(db_session, monkeypatch):
+    import pytest
+
+    from app.services.llm import LLMError
+
+    load_grammar_seed(db_session)
+
+    def failing_llm(**kwargs):
+        raise LLMError("boom")
+
+    monkeypatch.setattr(pipeline.llm, "call_json", failing_llm)
+    ep = _episode_with_lines(db_session, ["猫が走る"])
+
+    with pytest.raises(LLMError):
+        pipeline.process_episode(db_session, ep.id)
+
+    db_session.refresh(ep)
+    assert ep.status == "failed"
+    lines = db_session.query(Line).filter_by(episode_id=ep.id).all()
+    assert all(not ln.processed for ln in lines)

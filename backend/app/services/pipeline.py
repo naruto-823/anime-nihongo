@@ -65,7 +65,12 @@ def process_episode(session: Session, episode_id: int, batch_size: int = 15) -> 
     session.commit()
 
     grammar_index = _grammar_index(session)
-    pending = [ln for ln in episode.lines if not ln.processed]
+    pending = (
+        session.query(Line)
+        .filter_by(episode_id=episode_id, processed=False)
+        .order_by(Line.idx)
+        .all()
+    )
 
     try:
         for start in range(0, len(pending), batch_size):
@@ -74,6 +79,7 @@ def process_episode(session: Session, episode_id: int, batch_size: int = 15) -> 
                 system=_SYSTEM, user=_build_user(batch, grammar_index))
             by_idx = {item["idx"]: item for item in result.get("lines", [])}
             for ln in batch:
+                # LLM 若漏掉某行 idx，该行仍标记 processed（注释留空），保持断点续跑干净
                 ann = by_idx.get(ln.idx, {})
                 ln.furigana = to_furigana(ln.text_jp)
                 ln.translation_zh = ann.get("translation_zh")
@@ -87,11 +93,22 @@ def process_episode(session: Session, episode_id: int, batch_size: int = 15) -> 
             # vocab 归到该批首行作为语境来源
             if batch:
                 _upsert_vocab(session, result.get("vocab", []), batch[0].id)
-            episode.processed_lines = sum(1 for x in episode.lines if x.processed)
+            episode.processed_lines = (
+                session.query(Line)
+                .filter_by(episode_id=episode_id, processed=True)
+                .count()
+            )
             session.commit()
         episode.status = "ready"
         session.commit()
     except Exception:
-        episode.status = "failed"
-        session.commit()
+        # 出错时回滚脏事务，再独立把状态记为 failed，最后重新抛出原始异常
+        try:
+            session.rollback()
+            ep = session.get(Episode, episode_id)
+            if ep is not None:
+                ep.status = "failed"
+                session.commit()
+        except Exception:
+            pass
         raise
