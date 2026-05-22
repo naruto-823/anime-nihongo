@@ -41,7 +41,7 @@ def extract_json(text: str) -> dict:
 
 
 def call_json(system: str, user: str, model: str | None = None,
-              max_tokens: int = 4000) -> dict:
+              max_tokens: int = 8000) -> dict:
     """调用 Claude，要求返回 JSON 对象并解析。失败抛 LLMError。"""
     try:
         resp = _client().messages.create(
@@ -53,4 +53,7 @@ def call_json(system: str, user: str, model: str | None = None,
     except Exception as exc:  # noqa: BLE001
         raise LLMError(f"LLM 调用失败: {exc}") from exc
     text = "".join(getattr(b, "text", "") for b in resp.content)
-    return extract_json(text)
+    result = extract_json(text)
+    if not isinstance(result, dict):
+        raise LLMError(f"模型返回的不是 JSON 对象，而是 {type(result).__name__}")
+    return result

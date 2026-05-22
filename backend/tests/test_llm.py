@@ -37,3 +37,35 @@ def test_call_json_uses_client(monkeypatch):
     monkeypatch.setattr(llm, "_client", lambda: FakeClient())
     out = llm.call_json(system="sys", user="hi", model="test-model")
     assert out == {"ok": True}
+
+
+def test_call_json_wraps_network_error(monkeypatch):
+    class FailingMessages:
+        def create(self, **kwargs):
+            raise ConnectionError("network down")
+
+    class FakeClient:
+        messages = FailingMessages()
+
+    monkeypatch.setattr(llm, "_client", lambda: FakeClient())
+    with pytest.raises(LLMError, match="LLM 调用失败"):
+        llm.call_json(system="s", user="u", model="m")
+
+
+def test_call_json_rejects_non_object_json(monkeypatch):
+    class FakeBlock:
+        text = "[1, 2, 3]"
+
+    class FakeResp:
+        content = [FakeBlock()]
+
+    class FakeMessages:
+        def create(self, **kwargs):
+            return FakeResp()
+
+    class FakeClient:
+        messages = FakeMessages()
+
+    monkeypatch.setattr(llm, "_client", lambda: FakeClient())
+    with pytest.raises(LLMError):
+        llm.call_json(system="s", user="u", model="m")
