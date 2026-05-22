@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, ForeignKey, func
+from sqlalchemy import JSON, ForeignKey, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
@@ -23,6 +23,7 @@ class Series(Base):
 
 class Episode(Base):
     __tablename__ = "episode"
+    __table_args__ = (UniqueConstraint("series_id", "number", name="uq_episode_series_number"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     series_id: Mapped[int] = mapped_column(ForeignKey("series.id"))
@@ -44,6 +45,7 @@ class Episode(Base):
 
 class Line(Base):
     __tablename__ = "line"
+    __table_args__ = (UniqueConstraint("episode_id", "idx", name="uq_line_episode_idx"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     episode_id: Mapped[int] = mapped_column(ForeignKey("episode.id"))

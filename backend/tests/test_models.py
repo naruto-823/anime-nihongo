@@ -21,6 +21,7 @@ def test_vocab_unique_headword_reading(db_session):
     db_session.add(Vocab(headword="本", reading="ほん", meaning_zh="重复"))
     with pytest.raises(IntegrityError):
         db_session.commit()
+    db_session.rollback()
 
 
 def test_grammar_point_defaults(db_session):

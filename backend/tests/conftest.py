@@ -11,3 +11,4 @@ def db_session():
     session = session_factory()
     yield session
     session.close()
+    engine.dispose()
