@@ -7,6 +7,16 @@ from app.services import pipeline
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
+def test_import_unparseable_subtitle_raises(db_session, tmp_path):
+    import pytest
+
+    bad = tmp_path / "garbage.srt"
+    bad.write_text("これは字幕ではないただのテキスト\n", encoding="utf-8")
+    with pytest.raises(ValueError):
+        import_episode_from_file(db_session, series_title="x", number=1,
+                                 file_path=str(bad))
+
+
 def test_import_from_file_then_process(db_session, monkeypatch):
     from app.grammar_loader import load_grammar_seed
     from tests.test_pipeline import _fake_llm

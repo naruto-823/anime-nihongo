@@ -16,3 +16,9 @@ def test_init_db_is_idempotent():
     init_db(engine)
     init_db(engine)  # 第二次不应报错
     assert inspect(engine) is not None
+
+
+def test_make_engine_creates_sqlite_parent_dir(tmp_path):
+    db_file = tmp_path / "nested" / "sub" / "x.db"
+    make_engine(f"sqlite:///{db_file}")
+    assert db_file.parent.is_dir()

@@ -18,6 +18,9 @@ def import_episode_from_file(session: Session, series_title: str, number: int,
     content = path.read_text(encoding="utf-8", errors="ignore")
     parsed = parse_subtitle(content, path.suffix)
 
+    if not parsed:
+        raise ValueError(f"字幕文件未解析出任何台词，无法导入：{file_path}")
+
     series = session.query(Series).filter_by(title=series_title).first()
     if series is None:
         series = Series(title=series_title)
