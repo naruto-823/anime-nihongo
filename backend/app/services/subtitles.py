@@ -16,7 +16,7 @@ class ParsedLine:
 
 def _clean(text: str) -> str:
     text = _TAG_RE.sub("", text)
-    text = text.replace("\\N", "").replace("\\n", "").replace("\n", " ")
+    text = text.replace("\\N", "").replace("\\n", "").replace("\n", " ")  # \N/\n 软换行直接去掉（日文无需词间空格）
     return _WS_RE.sub(" ", text).strip()
 
 
@@ -41,12 +41,19 @@ def _parse_srt(content: str) -> list[ParsedLine]:
         rows = [r for r in block.splitlines() if r.strip()]
         if len(rows) < 2 or "-->" not in rows[1]:
             continue
-        start, end = rows[1].split("-->")
+        parts = rows[1].split("-->", 1)
+        if len(parts) != 2:
+            continue
+        start, end = parts
+        try:
+            start_ms = _srt_time_to_ms(start)
+            end_ms = _srt_time_to_ms(end)
+        except ValueError:
+            continue
         text = _clean(" ".join(rows[2:]))
         if not text:
             continue
-        out.append(ParsedLine(len(out), _srt_time_to_ms(start), _srt_time_to_ms(end),
-                              None, text))
+        out.append(ParsedLine(len(out), start_ms, end_ms, None, text))
     return out
 
 
@@ -69,9 +76,12 @@ def _parse_ass(content: str) -> list[ParsedLine]:
             if not text:
                 continue
             speaker = (row.get("name") or "").strip() or None
-            out.append(ParsedLine(
-                len(out), _ass_time_to_ms(row.get("start", "0:0:0.0")),
-                _ass_time_to_ms(row.get("end", "0:0:0.0")), speaker, text))
+            try:
+                start_ms = _ass_time_to_ms(row.get("start", "0:0:0.0"))
+                end_ms = _ass_time_to_ms(row.get("end", "0:0:0.0"))
+            except ValueError:
+                continue
+            out.append(ParsedLine(len(out), start_ms, end_ms, speaker, text))
     return out
 
 

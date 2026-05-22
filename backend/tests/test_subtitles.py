@@ -29,3 +29,9 @@ def test_parse_ass_strips_tags_and_reads_speaker():
 def test_parse_detects_format_from_filename():
     lines = parse_subtitle((FIXTURES / "sample.srt").read_text(encoding="utf-8"), "SRT")
     assert len(lines) == 2
+
+
+def test_parse_unsupported_format_raises():
+    import pytest
+    with pytest.raises(ValueError):
+        parse_subtitle("whatever", "vtt")
