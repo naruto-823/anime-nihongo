@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     # 数据库
     database_url: str = f"sqlite:///{PROJECT_ROOT / 'data' / 'anime-nihongo.db'}"
 
+    # VOICEVOX 本地 TTS 引擎
+    voicevox_url: str = "http://localhost:50021"
+
     def validate_ai(self) -> bool:
         return bool(self.anthropic_api_key and self.anthropic_api_key != "your_key")
 

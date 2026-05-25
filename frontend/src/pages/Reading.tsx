@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Furigana from "../components/Furigana";
 import Loading from "../components/Loading";
 import { getEpisode, getLines, setReadingProgress } from "../lib/api";
+import { useVoicevox } from "../lib/voicevox";
 
 export default function Reading() {
   const { id } = useParams();
@@ -14,6 +15,7 @@ export default function Reading() {
   const { data: lines } = useQuery({ queryKey: ["lines", epId], queryFn: () => getLines(epId) });
   const [showRuby, setShowRuby] = useState(true);
   const [showZh, setShowZh] = useState<Record<number, boolean>>({});
+  const tts = useVoicevox();
 
   const advance = useMutation({
     mutationFn: (position: number) => setReadingProgress(epId, position),
@@ -47,6 +49,11 @@ export default function Reading() {
             <div className="mt-1 flex items-center gap-3 text-xs text-slate-500">
               <button
                 className="hover:text-indigo-600"
+                onClick={() => tts.speak(ln.text_jp)}
+                disabled={tts.loading}
+              >🔊 朗读</button>
+              <button
+                className="hover:text-indigo-600"
                 onClick={() => setShowZh((m) => ({ ...m, [ln.id]: !m[ln.id] }))}
               >{showZh[ln.id] ? "收起译文" : "看译文"}</button>
               {ln.register_tag && (
@@ -69,6 +76,10 @@ export default function Reading() {
           </li>
         ))}
       </ul>
+
+      {tts.error && (
+        <div className="text-xs text-amber-700">TTS: {tts.error}</div>
+      )}
 
       <div className="flex gap-3">
         <button

@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 
 import Loading from "../components/Loading";
 import { conversationFeedback, conversationTurn, getEpisode } from "../lib/api";
-import { useSTT, useTTS } from "../lib/speech";
+import { useSTT } from "../lib/speech";
+import { useVoicevox } from "../lib/voicevox";
 import type { ConvTurn } from "../types";
 
 export default function Conversation() {
@@ -12,7 +13,7 @@ export default function Conversation() {
   const epId = Number(id);
   const { data: ep } = useQuery({ queryKey: ["episode", epId], queryFn: () => getEpisode(epId) });
   const stt = useSTT();
-  const tts = useTTS();
+  const tts = useVoicevox();
   const [history, setHistory] = useState<ConvTurn[]>([]);
   const [draft, setDraft] = useState("");
   const [character, setCharacter] = useState("登場人物");
@@ -33,7 +34,7 @@ export default function Conversation() {
       ];
       setHistory(next);
       setDraft("");
-      if (tts.supported) tts.speak(r.reply);
+      tts.speak(r.reply);
     },
   });
 
@@ -94,6 +95,10 @@ export default function Conversation() {
           className="px-3 py-2 bg-indigo-600 text-white rounded disabled:opacity-50"
         >发送</button>
       </div>
+
+      {tts.error && (
+        <div className="text-xs text-amber-700">TTS: {tts.error}</div>
+      )}
 
       {history.length > 0 && (
         <div className="pt-2">

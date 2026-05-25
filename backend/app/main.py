@@ -31,8 +31,10 @@ def create_app() -> FastAPI:
     def health() -> dict:
         return {"status": "ok"}
 
-    from app.api import conversation, episodes, grammar, progress, series, srs, study
-    for module in (series, episodes, study, srs, grammar, conversation, progress):
+    from app.api import (
+        conversation, episodes, grammar, progress, series, srs, study, tts,
+    )
+    for module in (series, episodes, study, srs, grammar, conversation, progress, tts):
         app.include_router(module.router)
 
     frontend_dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
