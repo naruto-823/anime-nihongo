@@ -116,9 +116,17 @@ export default function Conversation() {
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="说点什么…（Enter 发送）"
+          placeholder="说点什么…（Enter 发送，输入法选词时不会误触）"
           className="input flex-1"
-          onKeyDown={(e) => { if (e.key === "Enter" && draft && !turn.isPending) turn.mutate(); }}
+          onKeyDown={(e) => {
+            // 输入法（IME）选词/确认时 nativeEvent.isComposing 为 true，此时按 Enter 是确认候选，不应提交
+            if (e.key !== "Enter") return;
+            if (e.nativeEvent.isComposing || e.keyCode === 229) return;
+            if (draft && !turn.isPending) {
+              e.preventDefault();
+              turn.mutate();
+            }
+          }}
         />
         <button
           onClick={() => turn.mutate()}
