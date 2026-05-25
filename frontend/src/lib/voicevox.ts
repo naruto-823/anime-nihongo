@@ -34,12 +34,16 @@ export function useVoicevox() {
         const blob = await resp.blob();
         const audio = new Audio(URL.createObjectURL(blob));
         currentRef.current = audio;
-        audio.onended = () => setLoading(false);
-        audio.onerror = () => setLoading(false);
-        await audio.play();
+        // 等播放真正结束才 resolve，便于上层在「念完之后」做下一步（比如对讲机模式重开麦克风）
+        await new Promise<void>((resolve) => {
+          audio.onended = () => resolve();
+          audio.onerror = () => resolve();
+          audio.play().catch(() => resolve());
+        });
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : "TTS 失败";
         setError(msg);
+      } finally {
         setLoading(false);
       }
     },

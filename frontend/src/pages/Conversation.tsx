@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Loading from "../components/Loading";
@@ -17,24 +17,55 @@ export default function Conversation() {
   const [history, setHistory] = useState<ConvTurn[]>([]);
   const [draft, setDraft] = useState("");
   const [character, setCharacter] = useState("登場人物");
-
-  useEffect(() => { if (stt.transcript) setDraft(stt.transcript); }, [stt.transcript]);
+  const [handsFree, setHandsFree] = useState(false);
+  // 在异步 onSuccess 里读 handsFree 的最新值，避免闭包陈旧
+  const handsFreeRef = useRef(handsFree);
+  useEffect(() => { handsFreeRef.current = handsFree; }, [handsFree]);
 
   const turn = useMutation({
-    mutationFn: () => conversationTurn({
-      episode_id: epId, character, history, user_text: draft,
+    mutationFn: (text: string) => conversationTurn({
+      episode_id: epId, character, history, user_text: text,
     }),
-    onSuccess: (r) => {
-      const next: ConvTurn[] = [
-        ...history,
-        { role: "user", text: draft, critique: r.critique },
+    onSuccess: async (r, sentText) => {
+      setHistory((h) => [
+        ...h,
+        { role: "user", text: sentText, critique: r.critique },
         { role: "assistant", text: r.reply },
-      ];
-      setHistory(next);
+      ]);
       setDraft("");
-      tts.speak(r.reply);
+      // 等 AI 念完，再决定要不要重开麦
+      await tts.speak(r.reply);
+      if (handsFreeRef.current && stt.supported && !stt.listening) {
+        stt.start();
+      }
     },
   });
+
+  // STT 转写出来后：对讲机模式 → 直接提交；普通模式 → 灌入草稿框
+  useEffect(() => {
+    if (!stt.transcript) return;
+    if (handsFree) {
+      if (!turn.isPending) turn.mutate(stt.transcript);
+    } else {
+      setDraft(stt.transcript);
+    }
+    // 故意只依赖 transcript，避免 handsFree 切换时误触发
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stt.transcript]);
+
+  // 切换对讲机：开 → 立刻拉起麦克风；关 → 立刻松手
+  const prevHF = useRef(false);
+  useEffect(() => {
+    const turnedOn = !prevHF.current && handsFree;
+    const turnedOff = prevHF.current && !handsFree;
+    prevHF.current = handsFree;
+    if (turnedOn && stt.supported && !stt.listening && !tts.loading) {
+      stt.start();
+    } else if (turnedOff && stt.listening) {
+      stt.stop();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handsFree]);
 
   const feedback = useMutation({
     mutationFn: () => conversationFeedback({ episode_id: epId, history }),
@@ -105,35 +136,62 @@ export default function Conversation() {
         ))}
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-wrap">
         {stt.supported && (
-          <button
-            onClick={() => (stt.listening ? stt.stop() : stt.start())}
-            className={stt.listening ? "btn-danger" : "btn-secondary"}
-            title="麦克风"
-          >{stt.listening ? "■ 停止" : "🎙"}</button>
+          <>
+            <button
+              onClick={() => (stt.listening ? stt.stop() : stt.start())}
+              className={stt.listening ? "btn-danger" : "btn-secondary"}
+              title="麦克风"
+              disabled={handsFree && turn.isPending}
+            >{stt.listening ? "■ 在听" : "🎙"}</button>
+            <label
+              className={`btn-sm flex items-center gap-1.5 cursor-pointer rounded-lg border px-2.5 py-1.5 transition ${
+                handsFree
+                  ? "bg-brand-50 border-brand-300 text-brand-700"
+                  : "bg-white border-ink-200 text-ink-600"
+              }`}
+              title="说完自动发送、AI 念完自动开麦克风，连续对话"
+            >
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={handsFree}
+                onChange={(e) => setHandsFree(e.target.checked)}
+              />
+              {handsFree ? "🔁 对讲机模式 · 开" : "对讲机模式"}
+            </label>
+          </>
         )}
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="说点什么…（Enter 发送，输入法选词时不会误触）"
-          className="input flex-1"
+          placeholder={handsFree
+            ? "对讲机模式开启：说完自动发送，无需手动提交"
+            : "说点什么…（Enter 发送，输入法选词时不会误触）"}
+          className="input flex-1 min-w-[180px]"
           onKeyDown={(e) => {
-            // 输入法（IME）选词/确认时 nativeEvent.isComposing 为 true，此时按 Enter 是确认候选，不应提交
             if (e.key !== "Enter") return;
             if (e.nativeEvent.isComposing || e.keyCode === 229) return;
             if (draft && !turn.isPending) {
               e.preventDefault();
-              turn.mutate();
+              turn.mutate(draft);
             }
           }}
         />
         <button
-          onClick={() => turn.mutate()}
+          onClick={() => turn.mutate(draft)}
           disabled={!draft || turn.isPending}
           className="btn-primary"
         >发送</button>
       </div>
+      {handsFree && (
+        <div className="text-xs text-brand-700 -mt-2">
+          {tts.loading ? "🔊 角色说话中…" :
+            stt.listening ? "🎙 在听你说…" :
+            turn.isPending ? "✨ 思考中…" : "准备就绪"}
+        </div>
+      )}
 
       {tts.error && <div className="text-xs text-amber-700">TTS: {tts.error}</div>}
 
