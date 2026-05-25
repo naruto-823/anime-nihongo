@@ -1,13 +1,21 @@
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.pool import StaticPool
 
-from app.db import get_db, init_db, make_engine, make_session_factory
+from app.db import get_db, init_db, make_session_factory
 from app.main import app
 
 
 @pytest.fixture
 def db_session():
-    engine = make_engine("sqlite://")
+    # StaticPool ensures all threads share the same in-memory connection,
+    # which is required for TestClient (runs route handlers in worker threads).
+    engine = create_engine(
+        "sqlite://",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
     init_db(engine)
     session_factory = make_session_factory(engine)
     session = session_factory()
