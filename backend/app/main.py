@@ -27,9 +27,9 @@ def create_app() -> FastAPI:
     def health() -> dict:
         return {"status": "ok"}
 
-    from app.api import episodes, series
-    app.include_router(series.router)
-    app.include_router(episodes.router)
+    from app.api import episodes, series, study
+    for module in (series, episodes, study):
+        app.include_router(module.router)
 
     return app
 
