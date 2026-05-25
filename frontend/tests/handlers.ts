@@ -37,4 +37,16 @@ export const handlers = [
       translation_zh: "早上好，精神吗？",
       grammar_notes: [], register_tag: "casual", grammar_point_keys: [], processed: true },
   ])),
+  http.get("/api/tts/speakers", () => HttpResponse.json([
+    {
+      name: "ずんだもん",
+      speaker_uuid: "uuid-1",
+      styles: [{ id: 3, name: "ノーマル" }],
+    },
+    {
+      name: "四国めたん",
+      speaker_uuid: "uuid-2",
+      styles: [{ id: 2, name: "ノーマル" }],
+    },
+  ])),
 ];

@@ -1,5 +1,5 @@
 import type {
-  ConvTurn, DueItems, Episode, Grade, GrammarPoint, Line, Progress, Series, Today,
+  ConvTurn, DueItems, Episode, Grade, GrammarPoint, Line, Progress, Series, SpeakerCharacter, Today,
 } from "../types";
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
@@ -81,3 +81,7 @@ export const conversationFeedback = (body: { episode_id: number; history: ConvTu
 
 // Progress
 export const getProgress = () => http<Progress>("/api/progress");
+
+// TTS (VOICEVOX)
+export const getSpeakers = () =>
+  http<SpeakerCharacter[]>("/api/tts/speakers");

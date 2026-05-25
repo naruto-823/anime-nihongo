@@ -1,5 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 
+import SpeakerPicker from "./SpeakerPicker";
+
 const NAV = [
   { to: "/", label: "今日训练", end: true },
   { to: "/series", label: "番剧" },
@@ -28,6 +30,9 @@ export default function Layout() {
               {n.label}
             </NavLink>
           ))}
+          <div className="ml-auto">
+            <SpeakerPicker />
+          </div>
         </div>
       </nav>
       <main className="max-w-5xl mx-auto px-4 py-6">
