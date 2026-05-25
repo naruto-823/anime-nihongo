@@ -4,7 +4,7 @@ export default function Furigana({ segs, showRuby = true }:
   { segs: FuriganaSeg[] | null; showRuby?: boolean }) {
   if (!segs) return null;
   return (
-    <span>
+    <span className="ja">
       {segs.map((s, i) =>
         s.r && showRuby ? (
           <ruby key={i}>{s.t}<rt>{s.r}</rt></ruby>

@@ -18,9 +18,7 @@ export default function Conversation() {
   const [draft, setDraft] = useState("");
   const [character, setCharacter] = useState("登場人物");
 
-  useEffect(() => {
-    if (stt.transcript) setDraft(stt.transcript);
-  }, [stt.transcript]);
+  useEffect(() => { if (stt.transcript) setDraft(stt.transcript); }, [stt.transcript]);
 
   const turn = useMutation({
     mutationFn: () => conversationTurn({
@@ -44,30 +42,49 @@ export default function Conversation() {
 
   if (!ep) return <Loading />;
 
+  // 角色名首字符作为头像 fallback
+  const avatar = (character || "?").slice(0, 1);
+
   return (
-    <div className="space-y-4">
-      <header className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">角色对话 · 第 {ep.number} 集</h1>
+    <div className="space-y-4 max-w-3xl mx-auto">
+      <header className="flex items-center justify-between gap-3">
+        <h1 className="text-xl font-bold text-ink-900">💬 第 {ep.number} 集 · 角色对话</h1>
         <input value={character} onChange={(e) => setCharacter(e.target.value)}
-               placeholder="角色名" className="border rounded px-2 py-1 text-sm w-40" />
+               placeholder="角色名" className="input text-sm w-40" />
       </header>
 
       {!stt.supported && (
-        <div className="bg-amber-50 border border-amber-200 text-amber-800 text-sm p-2 rounded">
+        <div className="card-padded bg-amber-50 border-amber-200 text-amber-800 text-sm py-2">
           当前浏览器不支持语音识别（请用 Chrome / Edge）。可改为打字。
         </div>
       )}
 
-      <div className="space-y-2 bg-white border rounded p-3 max-h-96 overflow-auto">
+      <div className="card bg-ink-50/60 p-4 space-y-3 max-h-[60vh] overflow-auto">
         {history.length === 0 && (
-          <div className="text-slate-500 text-sm">用日语和角色聊聊这一集吧。</div>
+          <div className="text-ink-400 text-sm text-center py-8">
+            用日语和「{character}」聊聊这一集吧。
+          </div>
         )}
         {history.map((t, i) => (
-          <div key={i} className={t.role === "user" ? "text-right" : ""}>
-            <span className={`inline-block px-3 py-2 rounded ${
-              t.role === "user" ? "bg-indigo-600 text-white" : "bg-slate-100"
-            }`}>{t.text}</span>
-          </div>
+          t.role === "user" ? (
+            <div key={i} className="flex justify-end">
+              <div className="ja max-w-[75%] bg-brand-600 text-white px-3.5 py-2 rounded-2xl rounded-br-md">
+                {t.text}
+              </div>
+            </div>
+          ) : (
+            <div key={i} className="flex items-start gap-2">
+              <div className="w-8 h-8 rounded-full bg-sakura-500 text-white flex items-center justify-center text-sm font-semibold shrink-0 ja">
+                {avatar}
+              </div>
+              <div>
+                <div className="text-xs text-ink-500 mb-1 ja">{character}</div>
+                <div className="ja max-w-[75%] bg-white border border-ink-200 px-3.5 py-2 rounded-2xl rounded-bl-md">
+                  {t.text}
+                </div>
+              </div>
+            </div>
+          )
         ))}
       </div>
 
@@ -75,62 +92,56 @@ export default function Conversation() {
         {stt.supported && (
           <button
             onClick={() => (stt.listening ? stt.stop() : stt.start())}
-            className={`px-3 py-2 rounded text-sm ${
-              stt.listening ? "bg-red-600 text-white" : "bg-slate-200"
-            }`}
-          >{stt.listening ? "■ 停止" : "🎙 说话"}</button>
+            className={stt.listening ? "btn-danger" : "btn-secondary"}
+            title="麦克风"
+          >{stt.listening ? "■ 停止" : "🎙"}</button>
         )}
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="说点什么…（按 Enter 提交）"
-          className="border rounded px-3 py-2 flex-1"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && draft && !turn.isPending) turn.mutate();
-          }}
+          placeholder="说点什么…（Enter 发送）"
+          className="input flex-1"
+          onKeyDown={(e) => { if (e.key === "Enter" && draft && !turn.isPending) turn.mutate(); }}
         />
         <button
           onClick={() => turn.mutate()}
           disabled={!draft || turn.isPending}
-          className="px-3 py-2 bg-indigo-600 text-white rounded disabled:opacity-50"
+          className="btn-primary"
         >发送</button>
       </div>
 
-      {tts.error && (
-        <div className="text-xs text-amber-700">TTS: {tts.error}</div>
-      )}
+      {tts.error && <div className="text-xs text-amber-700">TTS: {tts.error}</div>}
 
       {history.length > 0 && (
-        <div className="pt-2">
+        <div>
           <button
             onClick={() => feedback.mutate()}
-            className="px-3 py-2 bg-slate-800 text-white rounded text-sm"
+            className="btn-secondary"
             disabled={feedback.isPending}
           >{feedback.isPending ? "AI 复盘中…" : "结束对话 · 让 AI 复盘"}</button>
         </div>
       )}
 
       {feedback.data && (
-        <section className="space-y-2 bg-white border rounded p-4">
-          <h3 className="font-medium">复盘</h3>
+        <section className="card-padded space-y-3">
+          <h3 className="font-semibold text-ink-900">复盘</h3>
           {feedback.data.corrections.length > 0 && (
-            <ul className="text-sm space-y-1">
+            <ul className="text-sm space-y-2">
               {feedback.data.corrections.map((c, i) => (
-                <li key={i}>
-                  <span className="line-through text-slate-400">{c.original}</span>
-                  {" → "}<span className="text-indigo-700 font-medium">{c.fixed}</span>
-                  <span className="text-slate-500 ml-2">{c.explain}</span>
+                <li key={i} className="ja">
+                  <span className="line-through text-ink-400">{c.original}</span>
+                  {" → "}
+                  <span className="text-brand-700 font-medium">{c.fixed}</span>
+                  <span className="text-ink-500 ml-2 not-italic" style={{ fontFamily: "inherit" }}>{c.explain}</span>
                 </li>
               ))}
             </ul>
           )}
           {feedback.data.suggestions.length > 0 && (
-            <div className="text-sm text-slate-700">
-              💡 {feedback.data.suggestions.join("；")}
-            </div>
+            <div className="text-sm text-ink-700">💡 {feedback.data.suggestions.join("；")}</div>
           )}
           {feedback.data.new_vocab.length > 0 && (
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-ink-500 ja">
               新词已加入复习：{feedback.data.new_vocab.map((v) => v.headword).join("、")}
             </div>
           )}

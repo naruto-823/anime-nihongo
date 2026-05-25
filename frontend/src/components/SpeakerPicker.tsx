@@ -13,11 +13,11 @@ export default function SpeakerPicker() {
   });
 
   if (isLoading) {
-    return <span className="text-xs text-slate-400">音色…</span>;
+    return <span className="text-xs text-ink-400">音色…</span>;
   }
   if (error || !data) {
     return (
-      <span className="text-xs text-slate-400" title="VOICEVOX 引擎未启动">
+      <span className="text-xs text-ink-400" title="VOICEVOX 引擎未启动">
         🔇 TTS 离线
       </span>
     );
@@ -27,7 +27,7 @@ export default function SpeakerPicker() {
     <select
       value={speaker}
       onChange={(e) => setSpeaker(Number(e.target.value))}
-      className="text-xs border rounded px-2 py-1 bg-white max-w-[18ch]"
+      className="input py-1 text-xs max-w-[20ch]"
       title="VOICEVOX 音色"
     >
       {data.map((c) =>

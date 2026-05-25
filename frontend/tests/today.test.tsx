@@ -20,7 +20,8 @@ describe("Today page", () => {
     await waitFor(() => expect(screen.getByText(/连续/)).toBeInTheDocument());
     expect(screen.getByText(/5/)).toBeInTheDocument();
     expect(screen.getByText(/词汇/)).toBeInTheDocument();
-    expect(screen.getByText(/3/)).toBeInTheDocument();
+    // "3" appears in both the hero summary and the SRS card breakdown; use getAllByText
+    expect(screen.getAllByText(/3/).length).toBeGreaterThan(0);
     expect(screen.getByText(/第 1 集/)).toBeInTheDocument();
   });
 });
