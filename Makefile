@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint frontend frontend-dev frontend-build
+.PHONY: setup dev test lint frontend frontend-dev frontend-build serve
 
 setup:
 	cd backend && python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -20,3 +20,7 @@ frontend-dev:
 
 frontend-build:
 	cd frontend && npm run build
+
+# 全量启动：前端先 build，由后端静态托管
+serve: frontend-build
+	cd backend && .venv/bin/uvicorn app.main:app --port 8000
