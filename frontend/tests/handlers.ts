@@ -29,6 +29,7 @@ export const handlers = [
     id: 10, series_id: 1, number: 1, title: null, status: "ready",
     total_lines: 2, processed_lines: 2, read_position: 0, reading_done: false,
   })),
+  http.post("/api/study/complete-today", () => HttpResponse.json({ streak: 6 })),
   http.get("/api/episodes/10/lines", () => HttpResponse.json([
     { id: 100, idx: 0, start_ms: 1000, end_ms: 4000, speaker: null,
       text_jp: "おはよう、元気？",
