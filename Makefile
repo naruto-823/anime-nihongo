@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint
+.PHONY: setup dev test lint frontend frontend-dev frontend-build
 
 setup:
 	cd backend && python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -11,3 +11,12 @@ test:
 
 lint:
 	cd backend && .venv/bin/ruff check app tests
+
+frontend:
+	cd frontend && npm install
+
+frontend-dev:
+	cd frontend && npm run dev
+
+frontend-build:
+	cd frontend && npm run build
