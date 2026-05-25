@@ -2,6 +2,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db import SessionLocal, init_app_db
@@ -36,8 +37,16 @@ def create_app() -> FastAPI:
 
     frontend_dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
     if frontend_dist.is_dir():
-        app.mount("/", StaticFiles(directory=str(frontend_dist), html=True),
-                  name="frontend")
+        # 静态资源直挂；其他所有非 /api 路径都回退到 index.html，
+        # 由前端 React Router 接管，避免刷新子页面被后端 404。
+        assets_dir = frontend_dist / "assets"
+        if assets_dir.is_dir():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+        index_html = frontend_dist / "index.html"
+
+        @app.get("/{full_path:path}", include_in_schema=False)
+        def spa_fallback(full_path: str) -> FileResponse:
+            return FileResponse(str(index_html))
 
     return app
 
