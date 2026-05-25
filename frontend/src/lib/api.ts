@@ -30,6 +30,11 @@ export const importEpisodeFile = async (seriesId: number, number: number, file: 
 };
 export const getEpisode = (id: number) => http<Episode>(`/api/episodes/${id}`);
 export const getLines = (id: number) => http<Line[]>(`/api/episodes/${id}/lines`);
+export const generateDemoEpisode = (seriesId: number, number: number, lines_count = 20) =>
+  http<Episode>("/api/episodes/generate-demo", {
+    method: "POST",
+    body: JSON.stringify({ series_id: seriesId, number, lines_count }),
+  });
 
 // Study
 export const getToday = () => http<Today>("/api/study/today");

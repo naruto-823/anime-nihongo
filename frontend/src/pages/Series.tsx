@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import Loading from "../components/Loading";
-import { createSeries, importEpisodeFile, listSeries, setCurrentSeries } from "../lib/api";
+import { createSeries, generateDemoEpisode, importEpisodeFile, listSeries, setCurrentSeries } from "../lib/api";
 
 export default function Series() {
   const qc = useQueryClient();
@@ -77,6 +77,15 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
     },
     onError: (e: Error) => setError(e.message),
   });
+  const gen = useMutation({
+    mutationFn: () => generateDemoEpisode(seriesId, number),
+    onSuccess: () => {
+      setError(null);
+      qc.invalidateQueries({ queryKey: ["series"] });
+      qc.invalidateQueries({ queryKey: ["today"] });
+    },
+    onError: (e: Error) => setError(e.message),
+  });
   return (
     <div className="mt-3 text-sm space-y-1">
       <div className="text-slate-500">导入字幕（.srt / .ass）</div>
@@ -97,9 +106,20 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
           disabled={!file || imp.isPending}
         >{imp.isPending ? "处理中…" : "导入并加工"}</button>
       </div>
+      <div className="flex items-center gap-2">
+        <span className="text-slate-400">或</span>
+        <button
+          onClick={() => gen.mutate()}
+          className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded disabled:opacity-50"
+          disabled={gen.isPending}
+        >{gen.isPending ? "生成中…" : "服务端生成示例剧集（约 20 行）"}</button>
+      </div>
       {error && <div className="text-red-600">{error}</div>}
       {imp.isSuccess && (
         <div className="text-green-700">第 {number} 集已加工完成。</div>
+      )}
+      {gen.isSuccess && (
+        <div className="text-green-700">第 {number} 集（生成的示例）已加工完成。</div>
       )}
     </div>
   );
