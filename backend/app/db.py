@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from pathlib import Path
 
 from sqlalchemy import Engine, create_engine
@@ -25,3 +26,23 @@ def init_db(engine: Engine) -> None:
     import app.models  # noqa: F401
 
     Base.metadata.create_all(engine)
+
+
+from app.config import settings  # noqa: E402
+
+_engine = make_engine(settings.database_url)
+SessionLocal = make_session_factory(_engine)
+
+
+def init_app_db() -> None:
+    """应用启动时建表。"""
+    init_db(_engine)
+
+
+def get_db() -> Iterator[Session]:
+    """FastAPI 依赖：每请求一个会话。"""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
