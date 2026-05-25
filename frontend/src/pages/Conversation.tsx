@@ -27,7 +27,7 @@ export default function Conversation() {
     onSuccess: (r) => {
       const next: ConvTurn[] = [
         ...history,
-        { role: "user", text: draft },
+        { role: "user", text: draft, critique: r.critique },
         { role: "assistant", text: r.reply },
       ];
       setHistory(next);
@@ -67,10 +67,27 @@ export default function Conversation() {
         )}
         {history.map((t, i) => (
           t.role === "user" ? (
-            <div key={i} className="flex justify-end">
-              <div className="ja max-w-[75%] bg-brand-600 text-white px-3.5 py-2 rounded-2xl rounded-br-md">
-                {t.text}
+            <div key={i} className="space-y-1.5">
+              <div className="flex justify-end">
+                <div className="ja max-w-[75%] bg-brand-600 text-white px-3.5 py-2 rounded-2xl rounded-br-md">
+                  {t.text}
+                </div>
               </div>
+              {t.critique && !t.critique.ok && (
+                <div className="flex justify-end">
+                  <div className="max-w-[75%] bg-amber-50 border border-amber-200 text-amber-900 px-3 py-2 rounded-lg text-xs space-y-1">
+                    <div className="font-semibold text-amber-700">👩‍🏫 老师建议</div>
+                    {t.critique.corrected && (
+                      <div className="ja text-amber-900">
+                        更自然： <b>{t.critique.corrected}</b>
+                      </div>
+                    )}
+                    {t.critique.note && (
+                      <div className="text-amber-800">{t.critique.note}</div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div key={i} className="flex items-start gap-2">

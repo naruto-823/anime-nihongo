@@ -1,5 +1,5 @@
 import type {
-  ConvTurn, DueItems, Episode, Grade, GrammarPoint, Line, Progress, Series, SpeakerCharacter, Today,
+  ConvTurn, Critique, DueItems, Episode, Grade, GrammarPoint, Line, Progress, Series, SpeakerCharacter, Today,
 } from "../types";
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
@@ -68,7 +68,7 @@ export const getQuiz = (grammarId: number) =>
 // Conversation
 export const conversationTurn = (body: {
   episode_id: number; character?: string; history: ConvTurn[]; user_text: string;
-}) => http<{ reply: string }>("/api/conversation/turn",
+}) => http<{ reply: string; critique: Critique }>("/api/conversation/turn",
   { method: "POST", body: JSON.stringify(body) });
 export const conversationFeedback = (body: { episode_id: number; history: ConvTurn[] }) =>
   http<{

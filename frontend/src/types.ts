@@ -54,7 +54,18 @@ export type Progress = {
 
 export type Grade = "again" | "hard" | "good" | "easy";
 
-export type ConvTurn = { role: "user" | "assistant"; text: string };
+export type Critique = {
+  ok: boolean;
+  corrected: string | null;
+  note: string | null;
+};
+
+export type ConvTurn = {
+  role: "user" | "assistant";
+  text: string;
+  /** Only present on user turns once the teacher critique has come back. */
+  critique?: Critique;
+};
 
 export type SpeakerStyle = { id: number; name: string };
 export type SpeakerCharacter = {

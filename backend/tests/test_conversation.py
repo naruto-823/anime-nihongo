@@ -3,7 +3,11 @@ from app.services import conversation
 
 def _fake_turn_llm(system, user, model=None, max_tokens=8000):
     assert "アキラ" in system  # 角色名进了 system
-    return {"reply": "うん、面白かったね。君はどう思った？"}
+    return {
+        "reply": "うん、面白かったね。君はどう思った？",
+        "critique": {"ok": False, "corrected": "面白かった",
+                     "note": "「思う」前用普通形即可"},
+    }
 
 
 def _fake_feedback_llm(system, user, model=None, max_tokens=8000):
@@ -25,6 +29,19 @@ def test_converse_returns_reply(monkeypatch):
         history=[{"role": "user", "text": "今日のエピソードどうだった？"}],
         user_text="面白かったよ")
     assert out["reply"].startswith("うん")
+    assert out["critique"]["ok"] is False
+    assert out["critique"]["corrected"] == "面白かった"
+
+
+def test_converse_defaults_critique_to_ok(monkeypatch):
+    monkeypatch.setattr(
+        conversation.llm, "call_json",
+        lambda **kw: {"reply": "ええ。"})  # no critique key at all
+    out = conversation.converse(
+        series_title="サンプル", episode_number=1, character="アキラ",
+        history=[], user_text="こんにちは")
+    assert out["critique"]["ok"] is True
+    assert out["critique"]["corrected"] is None
 
 
 def test_conversation_feedback_structure(monkeypatch):

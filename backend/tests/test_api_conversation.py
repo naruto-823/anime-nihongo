@@ -12,13 +12,18 @@ def _episode(db_session):
 
 def test_conversation_turn(client, db_session, monkeypatch):
     monkeypatch.setattr(conversation.llm, "call_json",
-                        lambda **kw: {"reply": "そうだね。"})
+                        lambda **kw: {
+                            "reply": "そうだね。",
+                            "critique": {"ok": True, "corrected": None, "note": None},
+                        })
     ep = _episode(db_session)
     resp = client.post("/api/conversation/turn", json={
         "episode_id": ep.id, "character": "アキラ",
         "history": [], "user_text": "こんにちは"})
     assert resp.status_code == 200
-    assert resp.json()["reply"] == "そうだね。"
+    body = resp.json()
+    assert body["reply"] == "そうだね。"
+    assert body["critique"]["ok"] is True
 
 
 def test_conversation_feedback_mines_srs(client, db_session, monkeypatch):
