@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.db import SessionLocal, init_app_db
 from app.grammar_loader import load_grammar_seed
@@ -30,6 +33,11 @@ def create_app() -> FastAPI:
     from app.api import conversation, episodes, grammar, progress, series, srs, study
     for module in (series, episodes, study, srs, grammar, conversation, progress):
         app.include_router(module.router)
+
+    frontend_dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
+    if frontend_dist.is_dir():
+        app.mount("/", StaticFiles(directory=str(frontend_dist), html=True),
+                  name="frontend")
 
     return app
 
