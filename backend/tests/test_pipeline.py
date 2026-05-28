@@ -9,6 +9,7 @@ def _episode_with_lines(db_session, texts):
                  total_lines=len(texts))
     for i, t in enumerate(texts):
         ep.lines.append(Line(idx=i, text_jp=t, processed=False))
+    ep.scenes_split = True
     db_session.add(series)
     db_session.commit()
     return ep

@@ -24,7 +24,7 @@ export default function Review() {
     onSuccess: () => {
       setShow(false);
       qc.invalidateQueries({ queryKey: ["due"] });
-      qc.invalidateQueries({ queryKey: ["today"] });
+      qc.invalidateQueries({ queryKey: ["journey"] });
     },
   });
 

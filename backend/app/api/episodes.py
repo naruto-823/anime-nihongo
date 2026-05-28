@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+from app.api._scene import build_scene_list
 from app.config import settings
 from app.db import get_db
 from app.models import Episode, Line, Series
@@ -143,3 +144,13 @@ def get_lines(episode_id: int, db: Session = Depends(get_db)) -> list[dict]:
         raise HTTPException(404, "剧集不存在")
     lines = db.query(Line).filter_by(episode_id=episode_id).order_by(Line.idx).all()
     return [_line_dict(ln) for ln in lines]
+
+
+@router.get("/{episode_id}/scenes")
+def get_scenes(episode_id: int, db: Session = Depends(get_db)) -> list[dict]:
+    ep = db.get(Episode, episode_id)
+    if ep is None:
+        raise HTTPException(404, "剧集不存在")
+    if not ep.scenes_split or ep.status != "ready":
+        return []
+    return build_scene_list(db, episode_id, ep.read_position)

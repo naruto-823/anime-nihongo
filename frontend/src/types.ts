@@ -1,8 +1,20 @@
 export type FuriganaSeg = { t: string; r?: string };
 
+export type AnilistStatus = "pending" | "matched" | "not_found" | "failed";
+
+export type Character = {
+  name_en: string | null;
+  name_jp: string | null;
+  image_url: string | null;
+  role: "MAIN" | "SUPPORTING" | null;
+};
+
 export type Series = {
   id: number; title: string; title_jp: string | null;
   jimaku_entry_id: number | null; is_current: boolean;
+  anilist_id: number | null;
+  anilist_status: AnilistStatus;
+  characters: Character[] | null;
 };
 
 export type Episode = {
@@ -35,12 +47,48 @@ export type DueItems = {
              explanation: string }[];
 };
 
-export type Today = {
-  due: { vocab: number; grammar: number };
-  current_episode: { id: number; number: number; title: string | null;
-                     read_position: number; total_lines: number;
-                     reading_done: boolean } | null;
+export type MainCharacter = {
+  name_en: string | null;
+  name_jp: string | null;
+  image_url: string | null;
+  fallback_initial: string;
+};
+
+export type SeriesWithAniList = Series;
+
+export type SceneState = "done" | "current" | "locked";
+
+export type SceneNode = {
+  id: number;
+  idx: number;
+  state: SceneState;
+  title_zh: string | null;
+  line_count: number | null;
+  start_line_idx: number | null;
+  end_line_idx: number | null;
+  preview_lines?: string[];
+};
+
+export type JourneyResponse = {
   streak: number;
+  due_total: number;
+  series: {
+    id: number;
+    title: string;
+    anilist_status: AnilistStatus;
+    main_character: MainCharacter | null;
+  } | null;
+  current_episode: {
+    id: number;
+    number: number;
+    title: string | null;
+    read_position: number;
+    total_lines: number;
+    completed_scenes: number;
+    total_scenes: number;
+    status: "importing" | "processing" | "ready" | "failed";
+  } | null;
+  scenes: SceneNode[];
 };
 
 export type Progress = {

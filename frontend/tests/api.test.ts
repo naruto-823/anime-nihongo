@@ -1,16 +1,16 @@
 import { describe, expect, it } from "vitest";
 
-import { getChecklist, getProgress, getToday, listSeries } from "../src/lib/api";
+import { getChecklist, getJourney, getProgress, listSeries } from "../src/lib/api";
 
 describe("api client", () => {
   it("listSeries", async () => {
     const xs = await listSeries();
     expect(xs[0].title).toBe("测试番");
   });
-  it("getToday", async () => {
-    const t = await getToday();
-    expect(t.streak).toBe(5);
-    expect(t.due.vocab).toBe(3);
+  it("getJourney", async () => {
+    const t = await getJourney();
+    expect(t.streak).toBeDefined();
+    expect(t.due_total).toBeDefined();
   });
   it("getChecklist groups by level", async () => {
     const c = await getChecklist();

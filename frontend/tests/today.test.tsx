@@ -15,13 +15,12 @@ function wrap(node: React.ReactNode) {
 }
 
 describe("Today page", () => {
-  it("renders streak, due counts and current episode", async () => {
+  it("renders character header, streak chip and scene timeline", async () => {
     wrap(<Today />);
-    await waitFor(() => expect(screen.getByText(/连续/)).toBeInTheDocument());
-    expect(screen.getByText(/5/)).toBeInTheDocument();
-    expect(screen.getByText(/词汇/)).toBeInTheDocument();
-    // "3" appears in both the hero summary and the SRS card breakdown; use getAllByText
-    expect(screen.getAllByText(/3/).length).toBeGreaterThan(0);
-    expect(screen.getByText(/第 1 集/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("测试番")).toBeInTheDocument());
+    expect(screen.getByText(/5 天/)).toBeInTheDocument();
+    expect(screen.getByText(/4 到期/)).toBeInTheDocument();
+    expect(screen.getByText(/开场/)).toBeInTheDocument();
+    expect(screen.getByText(/继续读这一场/)).toBeInTheDocument();
   });
 });

@@ -22,7 +22,17 @@ def test_import_from_file_then_process(db_session, monkeypatch):
     from tests.test_pipeline import _fake_llm
 
     load_grammar_seed(db_session)
-    monkeypatch.setattr(pipeline.llm, "call_json", _fake_llm)
+
+    _calls = {"n": 0}
+
+    def _scene_aware_llm(system, user, model=None, max_tokens=8000):
+        _calls["n"] += 1
+        if _calls["n"] == 1:
+            # Scene-split call — return one scene covering 2 lines
+            return {"scenes": [{"title_zh": "場面", "start_idx": 0, "end_idx": 1}]}
+        return _fake_llm(system, user, model, max_tokens)
+
+    monkeypatch.setattr(pipeline.llm, "call_json", _scene_aware_llm)
 
     episode = import_episode_from_file(
         db_session, series_title="测试番", number=1,

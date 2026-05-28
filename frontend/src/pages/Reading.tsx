@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import Furigana from "../components/Furigana";
 import Loading from "../components/Loading";
-import { getEpisode, getLines, setReadingProgress } from "../lib/api";
+import { getEpisode, getLines, getScenes, setReadingProgress } from "../lib/api";
 import { useVoicevox } from "../lib/voicevox";
 
 export default function Reading() {
@@ -13,6 +13,14 @@ export default function Reading() {
   const qc = useQueryClient();
   const { data: ep } = useQuery({ queryKey: ["episode", epId], queryFn: () => getEpisode(epId) });
   const { data: lines } = useQuery({ queryKey: ["lines", epId], queryFn: () => getLines(epId) });
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const sceneIdx = params.get("scene") !== null ? Number(params.get("scene")) : null;
+  const { data: scenes } = useQuery({
+    queryKey: ["scenes", epId],
+    queryFn: () => getScenes(epId),
+    enabled: !!ep,
+  });
   const [showRuby, setShowRuby] = useState(true);
   const [showZh, setShowZh] = useState<Record<number, boolean>>({});
   const [focused, setFocused] = useState(0);
@@ -45,10 +53,43 @@ export default function Reading() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lines, focused, tts]);
 
+  useEffect(() => {
+    if (sceneIdx === null || !scenes || !lines) return;
+    const sc = scenes.find((s) => s.idx === sceneIdx);
+    if (!sc || sc.state === "locked" || sc.start_line_idx === null) return;
+    setFocused(sc.start_line_idx);
+    requestAnimationFrame(() => {
+      const ul = listRef.current;
+      const el = ul?.children?.[sc.start_line_idx!] as HTMLElement | undefined;
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [sceneIdx, scenes, lines]);
+
   if (!ep || !lines) return <Loading />;
+
+  const reviewedScene = sceneIdx !== null && scenes
+    ? scenes.find((s) => s.idx === sceneIdx) ?? null
+    : null;
+  const currentScene = scenes?.find((s) => s.state === "current") ?? null;
+  const showReviewBanner =
+    reviewedScene?.state === "done" && reviewedScene.end_line_idx !== null;
 
   return (
     <div className="space-y-5">
+      {showReviewBanner && (
+        <div className="card-padded bg-amber-50 border-amber-200 text-amber-800 text-sm flex items-center justify-between gap-3 py-2">
+          <span>
+            你在回看场景 {reviewedScene!.idx + 1} · 当前进度在场景 {(currentScene?.idx ?? -1) + 1}
+          </span>
+          <button
+            className="btn-ghost btn-sm text-amber-700"
+            onClick={() => {
+              if (!currentScene || currentScene.start_line_idx === null) return;
+              navigate(`/episodes/${epId}/reading?scene=${currentScene.idx}`, { replace: true });
+            }}
+          >回到当前 →</button>
+        </div>
+      )}
       <header className="flex items-baseline justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink-900">精读 · 第 {ep.number} 集</h1>

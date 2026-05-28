@@ -2,7 +2,7 @@ import json
 
 from sqlalchemy.orm import Session
 
-from app.models import Episode, GrammarPoint, Line, Vocab
+from app.models import Episode, GrammarPoint, Line, Scene, Vocab
 from app.services import llm
 from app.services.tokenizer import to_furigana
 
@@ -19,6 +19,57 @@ _SYSTEM = """你是日语教学助手。给定动漫台词，逐句产出面向�
              "pos": "词性", "jlpt_level": "N5..N1 或 null"}]
 }
 对 register_tag 为 rough/feminine/dialect 的句子，在 grammar_notes 里附一条现实礼貌场合的等价说法。"""
+
+
+_SCENE_SYSTEM = """你是动漫剧本场景切分助手。给定一集的全部台词，按对话聚集和角色切换切成 5–8 个场景（极少台词时 2–3 个也可）。
+只返回 JSON 对象，不要多余文字。结构：
+{"scenes": [{"title_zh": "5-10 字中文短标题", "start_idx": 整数, "end_idx": 整数}]}
+要求：覆盖全部 idx 无空隙、无重叠；start_idx <= end_idx；title_zh 非空。"""
+
+
+def _split_scenes(lines: list[Line]) -> list[dict]:
+    """调 LLM 切场景，返回 [{title_zh, start_idx, end_idx}] 列表（未校验）。"""
+    user = json.dumps({
+        "lines": [{"idx": ln.idx, "text": ln.text_jp, "speaker": ln.speaker}
+                  for ln in lines],
+    }, ensure_ascii=False)
+    result = llm.call_json(system=_SCENE_SYSTEM, user=user)
+    return result.get("scenes") or []
+
+
+def _validate_scenes(scenes: list[dict], total_lines: int) -> list[dict]:
+    """校验场景列表覆盖性。失败抛 ValueError；返回按 start_idx 排序后的列表。"""
+    if not scenes:
+        raise ValueError("切场景返回空列表")
+    ordered = sorted(scenes, key=lambda s: s.get("start_idx", -1))
+    for sc in ordered:
+        if not sc.get("title_zh"):
+            raise ValueError(f"场景缺少 title_zh: {sc}")
+        if sc.get("start_idx") is None or sc.get("end_idx") is None:
+            raise ValueError(f"场景缺少 idx: {sc}")
+        if sc["start_idx"] > sc["end_idx"]:
+            raise ValueError(f"场景 start_idx > end_idx: {sc}")
+    if ordered[0]["start_idx"] != 0:
+        raise ValueError(f"首场景必须从 idx=0 开始: {ordered[0]}")
+    if ordered[-1]["end_idx"] != total_lines - 1:
+        raise ValueError(
+            f"末场景必须到 idx={total_lines - 1}: {ordered[-1]}"
+        )
+    for prev, nxt in zip(ordered, ordered[1:]):
+        if nxt["start_idx"] != prev["end_idx"] + 1:
+            raise ValueError(
+                f"场景之间空隙或重叠: prev.end={prev['end_idx']}, next.start={nxt['start_idx']}"
+            )
+    return ordered
+
+
+def _write_scenes(session: Session, episode_id: int, scenes: list[dict]) -> None:
+    for idx, sc in enumerate(scenes):
+        session.add(Scene(
+            episode_id=episode_id, idx=idx, title_zh=sc["title_zh"],
+            start_line_idx=sc["start_idx"], end_line_idx=sc["end_idx"],
+            line_count=sc["end_idx"] - sc["start_idx"] + 1,
+        ))
 
 
 def _build_user(batch: list[Line], grammar_index: list[dict]) -> str:
@@ -63,6 +114,30 @@ def process_episode(session: Session, episode_id: int, batch_size: int = 15) -> 
         raise ValueError(f"episode {episode_id} 不存在")
     episode.status = "processing"
     session.commit()
+
+    if not episode.scenes_split:
+        all_lines = (
+            session.query(Line)
+            .filter_by(episode_id=episode_id)
+            .order_by(Line.idx)
+            .all()
+        )
+        try:
+            raw_scenes = _split_scenes(all_lines)
+            ordered = _validate_scenes(raw_scenes, episode.total_lines)
+            _write_scenes(session, episode_id, ordered)
+            episode.scenes_split = True
+            session.commit()
+        except Exception:
+            try:
+                session.rollback()
+                ep = session.get(Episode, episode_id)
+                if ep is not None:
+                    ep.status = "failed"
+                    session.commit()
+            except Exception:
+                pass
+            raise
 
     grammar_index = _grammar_index(session)
     pending = (
