@@ -67,28 +67,29 @@ export default function Reading() {
 
   if (!ep || !lines) return <Loading />;
 
+  const reviewedScene = sceneIdx !== null && scenes
+    ? scenes.find((s) => s.idx === sceneIdx) ?? null
+    : null;
+  const currentScene = scenes?.find((s) => s.state === "current") ?? null;
+  const showReviewBanner =
+    reviewedScene?.state === "done" && reviewedScene.end_line_idx !== null;
+
   return (
     <div className="space-y-5">
-      {sceneIdx !== null && scenes && ep && (() => {
-        const sc = scenes.find((s) => s.idx === sceneIdx);
-        if (!sc || sc.state !== "done" || sc.end_line_idx === null) return null;
-        const cur = scenes.find((s) => s.state === "current");
-        const curIdx = cur?.idx ?? -1;
-        return (
-          <div className="card-padded bg-amber-50 border-amber-200 text-amber-800 text-sm flex items-center justify-between gap-3 py-2">
-            <span>
-              你在回看场景 {sc.idx + 1} · 当前进度在场景 {curIdx + 1}
-            </span>
-            <button
-              className="btn-ghost btn-sm text-amber-700"
-              onClick={() => {
-                if (!cur || cur.start_line_idx === null) return;
-                navigate(`/episodes/${epId}/reading?scene=${cur.idx}`, { replace: true });
-              }}
-            >回到当前 →</button>
-          </div>
-        );
-      })()}
+      {showReviewBanner && (
+        <div className="card-padded bg-amber-50 border-amber-200 text-amber-800 text-sm flex items-center justify-between gap-3 py-2">
+          <span>
+            你在回看场景 {reviewedScene!.idx + 1} · 当前进度在场景 {(currentScene?.idx ?? -1) + 1}
+          </span>
+          <button
+            className="btn-ghost btn-sm text-amber-700"
+            onClick={() => {
+              if (!currentScene || currentScene.start_line_idx === null) return;
+              navigate(`/episodes/${epId}/reading?scene=${currentScene.idx}`, { replace: true });
+            }}
+          >回到当前 →</button>
+        </div>
+      )}
       <header className="flex items-baseline justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink-900">精读 · 第 {ep.number} 集</h1>

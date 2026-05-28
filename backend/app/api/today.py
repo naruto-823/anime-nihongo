@@ -45,6 +45,7 @@ def journey(db: Session = Depends(get_db)) -> dict:
 
     series_block = {
         "id": s.id, "title": s.title,
+        "anilist_status": s.anilist_status,
         "main_character": _pick_main_character(s),
     }
 

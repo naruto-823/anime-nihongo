@@ -14,12 +14,15 @@ export default function Today() {
     refetchInterval: (q) => {
       const d = q.state.data;
       if (!d) return false;
-      const epPending = d.current_episode &&
-        (d.current_episode.status === "processing" ||
-         d.current_episode.status === "importing");
-      const anilistPending = d.series?.main_character &&
-        !d.series.main_character.image_url;
-      return epPending ? 5000 : anilistPending ? 3000 : false;
+      const ep = d.current_episode;
+      if (ep && (ep.status === "processing" || ep.status === "importing")) {
+        return 5000;
+      }
+      // AniList: poll only while genuinely pending, cap ~10 attempts (≈30s)
+      if (d.series?.anilist_status === "pending" && q.state.dataUpdateCount < 11) {
+        return 3000;
+      }
+      return false;
     },
   });
 

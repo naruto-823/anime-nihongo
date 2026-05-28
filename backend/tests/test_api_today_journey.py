@@ -46,6 +46,7 @@ def test_journey_full_flow_with_main_character(client, db_session):
     db_session.commit()
 
     body = client.get("/api/today/journey").json()
+    assert body["series"]["anilist_status"] == "matched"
     assert body["series"]["main_character"]["name_jp"] == "後藤ひとり"
     assert body["series"]["main_character"]["image_url"] == "https://x/h.png"
     assert body["series"]["main_character"]["fallback_initial"] == "後"

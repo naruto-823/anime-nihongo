@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 import type { MainCharacter } from "../types";
 
@@ -12,17 +12,19 @@ type Props = {
 export default function CharacterHeader({
   seriesTitle, character, episodeLabel, rightSlot,
 }: Props) {
+  const [imgFailed, setImgFailed] = useState(false);
   const initial = character?.fallback_initial ?? seriesTitle.slice(0, 1) ?? "?";
   const displayName = character?.name_jp ?? character?.name_en;
+  const showImage = !!character?.image_url && !imgFailed;
 
   return (
     <div className="card-padded flex items-center gap-4">
-      {character?.image_url ? (
+      {showImage ? (
         <img
-          src={character.image_url}
+          src={character!.image_url!}
           alt={displayName ?? "character"}
           className="w-16 h-16 rounded-full object-cover border border-ink-200"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+          onError={() => setImgFailed(true)}
         />
       ) : (
         <div className="w-16 h-16 rounded-full bg-sakura-100 text-sakura-700 font-bold text-2xl ja flex items-center justify-center shrink-0">

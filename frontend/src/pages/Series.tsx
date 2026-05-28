@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import EmptyState from "../components/EmptyState";
 import { createSeries, generateDemoEpisode, importEpisodeFile, listSeries,
          refreshAnilist, setCurrentSeries } from "../lib/api";
+import type { Series } from "../types";
 
 export default function Series() {
   const qc = useQueryClient();
@@ -85,7 +86,7 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
     mutationFn: () => importEpisodeFile(seriesId, number, file!),
     onSuccess: () => {
       setFile(null); setError(null);
-      qc.invalidateQueries({ queryKey: ["today"] });
+      qc.invalidateQueries({ queryKey: ["journey"] });
     },
     onError: (e: Error) => setError(e.message),
   });
@@ -94,7 +95,7 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
     onSuccess: () => {
       setError(null);
       qc.invalidateQueries({ queryKey: ["series"] });
-      qc.invalidateQueries({ queryKey: ["today"] });
+      qc.invalidateQueries({ queryKey: ["journey"] });
     },
     onError: (e: Error) => setError(e.message),
   });
@@ -133,17 +134,18 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
   );
 }
 
-function SeriesAvatar({ series }: { series: import("../types").Series }) {
+function SeriesAvatar({ series }: { series: Series }) {
+  const [imgFailed, setImgFailed] = useState(false);
   const chars = series.characters ?? [];
   const main = chars.find((c) => c.image_url) ?? chars[0];
   const initial = main?.name_jp?.[0] ?? main?.name_en?.[0] ?? series.title[0] ?? "?";
-  if (main?.image_url) {
+  if (main?.image_url && !imgFailed) {
     return (
       <img
         src={main.image_url}
         alt={main.name_jp ?? main.name_en ?? series.title}
         className="w-10 h-10 rounded-full object-cover border border-ink-200 shrink-0"
-        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+        onError={() => setImgFailed(true)}
       />
     );
   }

@@ -54,11 +54,7 @@ export type MainCharacter = {
   fallback_initial: string;
 };
 
-export type SeriesWithAniList = Series & {
-  anilist_id: number | null;
-  anilist_status: AnilistStatus;
-  characters: Character[] | null;
-};
+export type SeriesWithAniList = Series;
 
 export type SceneState = "done" | "current" | "locked";
 
@@ -79,6 +75,7 @@ export type JourneyResponse = {
   series: {
     id: number;
     title: string;
+    anilist_status: AnilistStatus;
     main_character: MainCharacter | null;
   } | null;
   current_episode: {
