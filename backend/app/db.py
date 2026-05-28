@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from pathlib import Path
 
-from sqlalchemy import Engine, create_engine
+from sqlalchemy import Engine, create_engine, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 
@@ -34,9 +34,32 @@ _engine = make_engine(settings.database_url)
 SessionLocal = make_session_factory(_engine)
 
 
+def _add_column_if_missing(engine: Engine, table: str, column: str, ddl: str) -> None:
+    """幂等加列。SQLite 没 IF NOT EXISTS 的 ADD COLUMN，靠捕错来识别。"""
+    try:
+        with engine.begin() as conn:
+            conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}"))
+    except Exception as exc:  # noqa: BLE001
+        msg = str(exc).lower()
+        if "duplicate column" in msg or "already exists" in msg:
+            return
+        raise
+
+
+def _migrate_in_place(engine: Engine) -> None:
+    """补齐 create_all 不会处理的新增列。每次启动跑一次。"""
+    _add_column_if_missing(engine, "series", "anilist_id", "INTEGER")
+    _add_column_if_missing(engine, "series", "anilist_status",
+                           "VARCHAR DEFAULT 'pending'")
+    _add_column_if_missing(engine, "series", "characters", "JSON")
+    _add_column_if_missing(engine, "episode", "scenes_split",
+                           "BOOLEAN DEFAULT 0")
+
+
 def init_app_db() -> None:
-    """应用启动时建表。"""
+    """应用启动时建表 + 补列。"""
     init_db(_engine)
+    _migrate_in_place(_engine)
 
 
 def get_db() -> Iterator[Session]:
