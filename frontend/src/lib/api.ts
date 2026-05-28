@@ -1,5 +1,7 @@
 import type {
-  ConvTurn, Critique, DueItems, Episode, Grade, GrammarPoint, Line, Progress, Series, SpeakerCharacter, Today,
+  ConvTurn, Critique, DueItems, Episode, Grade, GrammarPoint,
+  JourneyResponse, Line, Progress, SceneNode, Series, SeriesWithAniList,
+  SpeakerCharacter,
 } from "../types";
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
@@ -36,8 +38,19 @@ export const generateDemoEpisode = (seriesId: number, number: number, lines_coun
     body: JSON.stringify({ series_id: seriesId, number, lines_count }),
   });
 
+// Journey / Today
+export const getJourney = () => http<JourneyResponse>("/api/today/journey");
+
+export const getSeries = (id: number) =>
+  http<SeriesWithAniList>(`/api/series/${id}`);
+
+export const refreshAnilist = (id: number) =>
+  http<SeriesWithAniList>(`/api/series/${id}/refresh-anilist`, { method: "POST" });
+
+export const getScenes = (episodeId: number) =>
+  http<SceneNode[]>(`/api/episodes/${episodeId}/scenes`);
+
 // Study
-export const getToday = () => http<Today>("/api/study/today");
 export const addVocabToSrs = (id: number) =>
   http<{ id: number; in_srs: true }>(`/api/study/vocab/${id}/add-srs`, { method: "POST" });
 export const addGrammarToSrs = (id: number) =>

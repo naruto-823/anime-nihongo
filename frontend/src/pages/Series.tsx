@@ -3,7 +3,8 @@ import { useState } from "react";
 
 import Loading from "../components/Loading";
 import EmptyState from "../components/EmptyState";
-import { createSeries, generateDemoEpisode, importEpisodeFile, listSeries, setCurrentSeries } from "../lib/api";
+import { createSeries, generateDemoEpisode, importEpisodeFile, listSeries,
+         refreshAnilist, setCurrentSeries } from "../lib/api";
 
 export default function Series() {
   const qc = useQueryClient();
@@ -47,17 +48,25 @@ export default function Series() {
         )}
         {data.map((s) => (
           <div key={s.id} className="card-padded card-hover">
-            <div className="flex items-center justify-between">
-              <div className="font-semibold text-ink-800 flex items-center gap-2">
-                {s.title}
-                {s.is_current && <span className="badge-sakura">当前</span>}
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <SeriesAvatar series={s} />
+                <div className="font-semibold text-ink-800 flex items-center gap-2 truncate">
+                  {s.title}
+                  {s.is_current && <span className="badge-sakura">当前</span>}
+                </div>
               </div>
-              {!s.is_current && (
-                <button
-                  onClick={() => setCurrent.mutate(s.id)}
-                  className="btn-ghost btn-sm"
-                >设为当前</button>
-              )}
+              <div className="flex items-center gap-2 shrink-0">
+                {(s.anilist_status === "not_found" || s.anilist_status === "failed") && (
+                  <RefreshAnilistButton seriesId={s.id} />
+                )}
+                {!s.is_current && (
+                  <button
+                    onClick={() => setCurrent.mutate(s.id)}
+                    className="btn-ghost btn-sm"
+                  >设为当前</button>
+                )}
+              </div>
             </div>
             <ImportEpisode seriesId={s.id} />
           </div>
@@ -121,5 +130,42 @@ function ImportEpisode({ seriesId }: { seriesId: number }) {
       {imp.isSuccess && <div className="text-emerald-700 text-xs">第 {number} 集已加工完成。</div>}
       {gen.isSuccess && <div className="text-emerald-700 text-xs">第 {number} 集（生成的示例）已加工完成。</div>}
     </div>
+  );
+}
+
+function SeriesAvatar({ series }: { series: import("../types").Series }) {
+  const chars = series.characters ?? [];
+  const main = chars.find((c) => c.image_url) ?? chars[0];
+  const initial = main?.name_jp?.[0] ?? main?.name_en?.[0] ?? series.title[0] ?? "?";
+  if (main?.image_url) {
+    return (
+      <img
+        src={main.image_url}
+        alt={main.name_jp ?? main.name_en ?? series.title}
+        className="w-10 h-10 rounded-full object-cover border border-ink-200 shrink-0"
+        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+      />
+    );
+  }
+  return (
+    <div className="w-10 h-10 rounded-full bg-sakura-100 text-sakura-700 font-bold ja flex items-center justify-center shrink-0">
+      {initial}
+    </div>
+  );
+}
+
+function RefreshAnilistButton({ seriesId }: { seriesId: number }) {
+  const qc = useQueryClient();
+  const m = useMutation({
+    mutationFn: () => refreshAnilist(seriesId),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["series"] }),
+  });
+  return (
+    <button
+      onClick={() => m.mutate()}
+      className="btn-ghost btn-sm"
+      disabled={m.isPending}
+      title="重新尝试 AniList 角色匹配"
+    >{m.isPending ? "匹配中…" : "重新匹配"}</button>
   );
 }

@@ -12,15 +12,6 @@ def _ready_episode(db_session):
     return ep, ln
 
 
-def test_today_returns_plan(client, db_session):
-    _ready_episode(db_session)
-    resp = client.get("/api/study/today")
-    assert resp.status_code == 200
-    body = resp.json()
-    assert "due" in body and "current_episode" in body and "streak" in body
-    assert body["current_episode"]["number"] == 1
-
-
 def test_add_vocab_to_srs(client, db_session):
     ep, ln = _ready_episode(db_session)
     v = Vocab(headword="猫", reading="ねこ", meaning_zh="猫", source_line_id=ln.id)

@@ -11,22 +11,6 @@ from app.services import session as sess
 router = APIRouter(prefix="/api/study", tags=["study"])
 
 
-@router.get("/today")
-def today(db: Session = Depends(get_db)) -> dict:
-    today_d = date.today()
-    ep = sess.current_episode(db)
-    return {
-        "due": sess.due_counts(db, today_d),
-        "current_episode": (
-            {"id": ep.id, "number": ep.number, "title": ep.title,
-             "read_position": ep.read_position, "total_lines": ep.total_lines,
-             "reading_done": ep.reading_done}
-            if ep else None
-        ),
-        "streak": sess.compute_streak(db, today_d),
-    }
-
-
 @router.post("/vocab/{vocab_id}/add-srs")
 def add_vocab(vocab_id: int, db: Session = Depends(get_db)) -> dict:
     v = db.get(Vocab, vocab_id)
