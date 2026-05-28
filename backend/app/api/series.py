@@ -78,6 +78,16 @@ def create_series(body: SeriesCreate, bg: BackgroundTasks,
     return _series_dict(s)
 
 
+@router.get("/search-jimaku")
+def search_jimaku(query: str) -> list[dict]:
+    if not settings.jimaku_api_token:
+        raise HTTPException(400, "未配置 JIMAKU_API_TOKEN")
+    try:
+        return JimakuClient(settings.jimaku_api_token).search_entries(query)
+    except JimakuError as exc:
+        raise HTTPException(502, str(exc)) from exc
+
+
 @router.get("/{series_id}")
 def get_series(series_id: int, db: Session = Depends(get_db)) -> dict:
     s = db.get(Series, series_id)
@@ -119,13 +129,3 @@ def refresh_anilist(series_id: int, db: Session = Depends(get_db)) -> dict:
         s.anilist_status = "matched"
     db.commit()
     return _series_dict(s)
-
-
-@router.get("/search-jimaku")
-def search_jimaku(query: str) -> list[dict]:
-    if not settings.jimaku_api_token:
-        raise HTTPException(400, "未配置 JIMAKU_API_TOKEN")
-    try:
-        return JimakuClient(settings.jimaku_api_token).search_entries(query)
-    except JimakuError as exc:
-        raise HTTPException(502, str(exc)) from exc

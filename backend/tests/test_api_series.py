@@ -90,3 +90,11 @@ def test_refresh_anilist_endpoint(client, db_session):
     assert resp.json()["anilist_status"] == "matched"
     db_session.expire_all()
     assert db_session.get(Series, s.id).anilist_id == 1
+
+
+def test_search_jimaku_route_not_shadowed_by_series_id(client, db_session):
+    # /search-jimaku must be matched before /{series_id:int}.
+    # Without a token it returns 400; the bug would make it 422 (int parse).
+    resp = client.get("/api/series/search-jimaku", params={"query": "x"})
+    assert resp.status_code != 422
+    assert resp.status_code in (200, 400, 502)
