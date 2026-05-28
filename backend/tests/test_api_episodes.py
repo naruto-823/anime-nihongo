@@ -6,8 +6,19 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def test_import_file_creates_episode(client, db_session, monkeypatch):
+    import json as _json
     from tests.test_pipeline import _fake_llm
-    monkeypatch.setattr(pipeline.llm, "call_json", _fake_llm)
+
+    _calls = {"n": 0}
+
+    def _scene_aware_llm(system, user, model=None, max_tokens=8000):
+        _calls["n"] += 1
+        if _calls["n"] == 1:
+            # Scene-split call — return two scenes covering 2 lines
+            return {"scenes": [{"title_zh": "場面", "start_idx": 0, "end_idx": 1}]}
+        return _fake_llm(system, user, model, max_tokens)
+
+    monkeypatch.setattr(pipeline.llm, "call_json", _scene_aware_llm)
 
     sid = client.post("/api/series", json={"title": "测试番"}).json()["id"]
     with open(FIXTURES / "sample.srt", "rb") as f:
@@ -44,6 +55,9 @@ def test_generate_demo(client, db_session, monkeypatch):
                 {"speaker": "A", "text": "おはよう"},
                 {"speaker": "B", "text": "元気か？"},
             ]}
+        if call_count["n"] == 2:
+            # Scene-split call — return one scene covering 2 lines
+            return {"scenes": [{"title_zh": "場面", "start_idx": 0, "end_idx": 1}]}
         return _fake_llm(system, user, model, max_tokens)
 
     monkeypatch.setattr(llm_mod, "call_json", demo_then_pipeline_llm)
