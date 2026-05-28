@@ -77,7 +77,7 @@ export default function Today() {
         <div className="card-padded border-rose-200 bg-rose-50 text-rose-800 text-sm">
           本集加工失败。请到番剧库重新触发导入。
         </div>
-      ) : ep.read_position >= ep.total_lines ? (
+      ) : ep.total_lines > 0 && ep.read_position >= ep.total_lines ? (
         <div className="card-padded border-emerald-200 bg-emerald-50 text-emerald-800 text-sm">
           本集已读完 · <Link to="/series" className="underline">开始下一集 →</Link>
         </div>

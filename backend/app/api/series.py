@@ -63,6 +63,13 @@ def _run_anilist_lookup(series_id: int, title: str) -> None:
         db.commit()
     except Exception:  # noqa: BLE001
         logger.exception("AniList background task crashed for series %s", series_id)
+        try:
+            s = db.get(Series, series_id)
+            if s is not None and s.anilist_status == "pending":
+                s.anilist_status = "failed"
+                db.commit()
+        except Exception:  # noqa: BLE001
+            pass
     finally:
         db.close()
 

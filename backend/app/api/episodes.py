@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+from app.api._scene import build_scene_list
 from app.config import settings
 from app.db import get_db
-from app.api._scene import build_scene_list
 from app.models import Episode, Line, Series
 from app.services import llm, pipeline
 from app.services.jimaku import JimakuClient, JimakuError
