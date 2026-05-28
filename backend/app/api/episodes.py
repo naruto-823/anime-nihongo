@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.db import get_db
-from app.models import Episode, Line, Series
+from app.models import Episode, Line, Scene, Series
 from app.services import llm, pipeline
 from app.services.jimaku import JimakuClient, JimakuError
 from app.services.subtitles import parse_subtitle
@@ -143,3 +143,52 @@ def get_lines(episode_id: int, db: Session = Depends(get_db)) -> list[dict]:
         raise HTTPException(404, "剧集不存在")
     lines = db.query(Line).filter_by(episode_id=episode_id).order_by(Line.idx).all()
     return [_line_dict(ln) for ln in lines]
+
+
+def _scene_state(scene: Scene, read_position: int) -> str:
+    if scene.end_line_idx < read_position:
+        return "done"
+    if scene.start_line_idx <= read_position <= scene.end_line_idx:
+        return "current"
+    return "locked"
+
+
+def _scene_dict(scene: Scene, state: str, preview: list[str] | None = None) -> dict:
+    if state == "locked":
+        return {"id": scene.id, "idx": scene.idx, "state": "locked",
+                "title_zh": None, "line_count": None,
+                "start_line_idx": None, "end_line_idx": None}
+    out = {
+        "id": scene.id, "idx": scene.idx, "state": state,
+        "title_zh": scene.title_zh, "line_count": scene.line_count,
+        "start_line_idx": scene.start_line_idx, "end_line_idx": scene.end_line_idx,
+    }
+    if state == "current" and preview is not None:
+        out["preview_lines"] = preview
+    return out
+
+
+@router.get("/{episode_id}/scenes")
+def get_scenes(episode_id: int, db: Session = Depends(get_db)) -> list[dict]:
+    ep = db.get(Episode, episode_id)
+    if ep is None:
+        raise HTTPException(404, "剧集不存在")
+    if not ep.scenes_split or ep.status != "ready":
+        return []
+    scenes = (
+        db.query(Scene).filter_by(episode_id=episode_id)
+        .order_by(Scene.idx).all()
+    )
+    out: list[dict] = []
+    for sc in scenes:
+        state = _scene_state(sc, ep.read_position)
+        preview = None
+        if state == "current":
+            lines = (
+                db.query(Line).filter_by(episode_id=episode_id)
+                .filter(Line.idx >= sc.start_line_idx, Line.idx <= sc.end_line_idx)
+                .order_by(Line.idx).limit(2).all()
+            )
+            preview = [ln.text_jp for ln in lines]
+        out.append(_scene_dict(sc, state, preview))
+    return out

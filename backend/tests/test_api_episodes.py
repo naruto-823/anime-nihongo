@@ -69,3 +69,47 @@ def test_generate_demo(client, db_session, monkeypatch):
     body = resp.json()
     assert body["status"] == "ready"
     assert body["total_lines"] == 2
+
+
+def test_scenes_endpoint_returns_three_states_with_redaction(client, db_session):
+    from app.models import Episode, Line, Scene, Series
+
+    s = Series(title="番"); db_session.add(s); db_session.commit()
+    ep = Episode(series_id=s.id, number=1, source="upload", status="ready",
+                 total_lines=30, read_position=15, scenes_split=True)
+    for i in range(30):
+        ep.lines.append(Line(idx=i, text_jp=f"行{i}", processed=True))
+    db_session.add(ep); db_session.commit()
+    db_session.add_all([
+        Scene(episode_id=ep.id, idx=0, title_zh="开场",
+              start_line_idx=0, end_line_idx=9, line_count=10),
+        Scene(episode_id=ep.id, idx=1, title_zh="冲突",
+              start_line_idx=10, end_line_idx=19, line_count=10),
+        Scene(episode_id=ep.id, idx=2, title_zh="结尾",
+              start_line_idx=20, end_line_idx=29, line_count=10),
+    ])
+    db_session.commit()
+
+    body = client.get(f"/api/episodes/{ep.id}/scenes").json()
+    assert len(body) == 3
+    assert body[0]["state"] == "done"
+    assert body[0]["title_zh"] == "开场"
+    assert body[1]["state"] == "current"
+    assert body[1]["preview_lines"] == ["行10", "行11"]
+    locked = body[2]
+    assert locked["state"] == "locked"
+    assert locked["title_zh"] is None
+    assert locked["line_count"] is None
+    assert locked["start_line_idx"] is None
+    assert locked["end_line_idx"] is None
+    assert locked["idx"] == 2
+
+
+def test_scenes_endpoint_returns_empty_when_not_split(client, db_session):
+    from app.models import Episode, Series
+
+    s = Series(title="A"); db_session.add(s); db_session.commit()
+    ep = Episode(series_id=s.id, number=1, source="upload", status="processing",
+                 total_lines=10, scenes_split=False)
+    db_session.add(ep); db_session.commit()
+    assert client.get(f"/api/episodes/{ep.id}/scenes").json() == []
