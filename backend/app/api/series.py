@@ -29,6 +29,16 @@ def _series_dict(s: Series) -> dict:
     }
 
 
+def _apply_anilist_result(s: Series, result: dict | None) -> None:
+    """把 AniList 查询结果写回 Series 行（不 commit）。"""
+    if result is None:
+        s.anilist_status = "not_found"
+    else:
+        s.anilist_id = result["anilist_id"]
+        s.characters = result["characters"]
+        s.anilist_status = "matched"
+
+
 def _run_anilist_lookup(series_id: int, title: str) -> None:
     """后台任务：拉 AniList 并写回 Series。绝不让异常逃出。
 
@@ -49,12 +59,7 @@ def _run_anilist_lookup(series_id: int, title: str) -> None:
         s = db.get(Series, series_id)
         if s is None:
             return
-        if result is None:
-            s.anilist_status = "not_found"
-        else:
-            s.anilist_id = result["anilist_id"]
-            s.characters = result["characters"]
-            s.anilist_status = "matched"
+        _apply_anilist_result(s, result)
         db.commit()
     except Exception:  # noqa: BLE001
         logger.exception("AniList background task crashed for series %s", series_id)
@@ -121,11 +126,6 @@ def refresh_anilist(series_id: int, db: Session = Depends(get_db)) -> dict:
         s.anilist_status = "failed"
         db.commit()
         return _series_dict(s)
-    if result is None:
-        s.anilist_status = "not_found"
-    else:
-        s.anilist_id = result["anilist_id"]
-        s.characters = result["characters"]
-        s.anilist_status = "matched"
+    _apply_anilist_result(s, result)
     db.commit()
     return _series_dict(s)

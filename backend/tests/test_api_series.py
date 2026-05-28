@@ -4,7 +4,8 @@ from app.models import Series
 
 
 def test_create_and_list_series(client, db_session):
-    resp = client.post("/api/series", json={"title": "鬼灭之刃"})
+    with patch("app.api.series.fetch_series_metadata", lambda t, http=None: None):
+        resp = client.post("/api/series", json={"title": "鬼灭之刃"})
     assert resp.status_code == 200
     body = resp.json()
     assert body["title"] == "鬼灭之刃"
@@ -17,8 +18,9 @@ def test_create_and_list_series(client, db_session):
 
 
 def test_set_current_series(client, db_session):
-    a = client.post("/api/series", json={"title": "A"}).json()["id"]
-    b = client.post("/api/series", json={"title": "B"}).json()["id"]
+    with patch("app.api.series.fetch_series_metadata", lambda t, http=None: None):
+        a = client.post("/api/series", json={"title": "A"}).json()["id"]
+        b = client.post("/api/series", json={"title": "B"}).json()["id"]
     client.post(f"/api/series/{a}/set-current")
     client.post(f"/api/series/{b}/set-current")
     rows = {s.id: s.is_current for s in db_session.query(Series).all()}
@@ -90,6 +92,19 @@ def test_refresh_anilist_endpoint(client, db_session):
     assert resp.json()["anilist_status"] == "matched"
     db_session.expire_all()
     assert db_session.get(Series, s.id).anilist_id == 1
+
+
+def test_refresh_anilist_error_marks_failed(client, db_session):
+    from app.services.anilist import AniListError
+    s = Series(title="A", anilist_status="matched"); db_session.add(s); db_session.commit()
+
+    def boom(title, http=None):
+        raise AniListError("down")
+
+    with patch("app.api.series.fetch_series_metadata", boom):
+        resp = client.post(f"/api/series/{s.id}/refresh-anilist")
+    assert resp.status_code == 200
+    assert resp.json()["anilist_status"] == "failed"
 
 
 def test_search_jimaku_route_not_shadowed_by_series_id(client, db_session):

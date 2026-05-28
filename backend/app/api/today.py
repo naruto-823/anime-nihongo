@@ -3,15 +3,15 @@ from datetime import date
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.api.episodes import _scene_dict, _scene_state
+from app.api._scene import build_scene_list
 from app.db import get_db
-from app.models import Line, Scene, Series
+from app.models import Series
 from app.services import session as sess
 
 router = APIRouter(prefix="/api/today", tags=["today"])
 
 
-def _pick_main_character(s: Series) -> dict | None:
+def _pick_main_character(s: Series) -> dict:
     """按 spec §5.5：始终返回 {name_jp, name_en, image_url, fallback_initial}。
     没匹配 character 时 name/image 为 null，fallback_initial 取 series.title 首字符。"""
     chars = s.characters or []
@@ -53,25 +53,9 @@ def journey(db: Session = Depends(get_db)) -> dict:
         return {"streak": streak, "due_total": due_total,
                 "series": series_block, "current_episode": None, "scenes": []}
 
-    scenes = (
-        db.query(Scene).filter_by(episode_id=ep.id)
-        .order_by(Scene.idx).all()
-    )
-    completed = sum(1 for sc in scenes if sc.end_line_idx < ep.read_position)
-
-    scene_out: list[dict] = []
-    for sc in scenes:
-        state = _scene_state(sc, ep.read_position)
-        preview = None
-        if state == "current":
-            lines = (
-                db.query(Line).filter_by(episode_id=ep.id)
-                .filter(Line.idx >= sc.start_line_idx,
-                        Line.idx <= sc.end_line_idx)
-                .order_by(Line.idx).limit(2).all()
-            )
-            preview = [ln.text_jp for ln in lines]
-        scene_out.append(_scene_dict(sc, state, preview))
+    scene_out = build_scene_list(db, ep.id, ep.read_position)
+    completed = sum(1 for sc in scene_out if sc["state"] == "done")
+    total_scenes = len(scene_out)
 
     return {
         "streak": streak, "due_total": due_total,
@@ -79,7 +63,7 @@ def journey(db: Session = Depends(get_db)) -> dict:
         "current_episode": {
             "id": ep.id, "number": ep.number, "title": ep.title,
             "read_position": ep.read_position, "total_lines": ep.total_lines,
-            "completed_scenes": completed, "total_scenes": len(scenes),
+            "completed_scenes": completed, "total_scenes": total_scenes,
             "status": ep.status,
         },
         "scenes": scene_out,
