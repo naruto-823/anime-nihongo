@@ -101,3 +101,35 @@ def test_make_vocab_question_always_returns():
 def test_make_grammar_question():
     target = G(1, "〜にあたって", "在…之际")
     assert make_grammar_question(target, _gpool() + [target], random.Random(0))["type"] == "grammar"
+
+
+# ── 修复 4: 选择题保证 4 个选项(I2) ─────────────────────────────────────────
+
+def _big_pool():
+    """≥6 个不同释义的 vocab 池。"""
+    return [V(i, f"词{i}", f"よみ{i}", f"释义{i}") for i in range(1, 10)]
+
+
+def _big_gpool():
+    """≥6 个不同含义的 grammar 池。"""
+    return [G(i, f"〜语法{i}", f"含义{i}") for i in range(1, 10)]
+
+
+def test_meaning_q_always_four_options():
+    """vocab_meaning_q 在充足池下恒为 4 个互不相同的选项。"""
+    pool = _big_pool()
+    for target in pool:
+        q = vocab_meaning_q(target, pool, random.Random(42))
+        assert len(q["options"]) == 4, f"期望 4 选项,实际 {len(q['options'])}"
+        assert len(set(q["options"])) == 4, "选项有重复"
+        assert q["answer"] in q["options"], "正确答案不在选项中"
+
+
+def test_grammar_q_always_four_options():
+    """grammar_meaning_q 在充足池下恒为 4 个互不相同的选项。"""
+    pool = _big_gpool()
+    for target in pool:
+        q = grammar_meaning_q(target, pool, random.Random(42))
+        assert len(q["options"]) == 4, f"期望 4 选项,实际 {len(q['options'])}"
+        assert len(set(q["options"])) == 4, "选项有重复"
+        assert q["answer"] in q["options"], "正确答案不在选项中"

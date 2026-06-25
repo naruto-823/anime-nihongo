@@ -19,10 +19,31 @@ def _assemble(correct, distractors, rng):
     return opts
 
 
+def _ensure_four(correct, distractors, pool, key, rng):
+    """确保 distractors 凑足 3 个不同值(与 correct 不同,互相不重复)。
+    充足池下必然达成;不足时尽力补齐。"""
+    need = 3 - len(distractors)
+    if need <= 0:
+        return distractors
+    seen = {correct, *distractors}
+    for item in pool:
+        if need <= 0:
+            break
+        v = key(item)
+        if v not in seen:
+            seen.add(v)
+            distractors.append(v)
+            need -= 1
+    return distractors
+
+
 def vocab_meaning_q(target, pool, rng) -> dict:
     others = [v for v in pool if v.id != target.id]
     rng.shuffle(others)
     distractors = _distractors(target, others, key=lambda v: v.meaning_zh)
+    if len(distractors) < 3:
+        distractors = _ensure_four(target.meaning_zh, distractors, others,
+                                   key=lambda v: v.meaning_zh, rng=rng)
     options = _assemble(target.meaning_zh, distractors, rng)
     return {
         "id": f"v{target.id}-meaning",
@@ -88,6 +109,11 @@ def grammar_meaning_q(target, pool, rng):
     others = [g for g in pool if g.id != target.id and g.explanation != target.explanation]
     rng.shuffle(others)
     distractors = _distractors(target, others, key=lambda g: g.explanation)
+    if len(distractors) < 3:
+        full_others = [g for g in pool if g.id != target.id]
+        rng.shuffle(full_others)
+        distractors = _ensure_four(target.explanation, distractors, full_others,
+                                   key=lambda g: g.explanation, rng=rng)
     options = _assemble(target.explanation, distractors, rng)
     return {
         "id": f"g{target.id}-grammar",
