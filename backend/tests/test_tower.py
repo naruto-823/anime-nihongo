@@ -194,3 +194,37 @@ def test_tower_map_multizone_level_unlock(db_session):
     m2 = tower.tower_map(db_session)
     n4_2 = next(lv for lv in m2["levels"] if lv["level"] == "N4")
     assert n4_2["unlocked"] is True, "zone0+zone1 Boss 均 cleared,N4 应解锁"
+
+
+# ── 修复 3: 语法番剧加成且状态判定不被自身改写污染(I5) ──────────────────────
+
+def test_grammar_anime_bonus_uses_original_status(db_session):
+    """语法番剧加成:原始 status=seen → xp=15;原始 status=locked → xp=10。
+    且加成判定在 status 被改为 learning 之前捕获原始值。
+    """
+    from app.models import GrammarPoint as GP
+    _seed_level(db_session, n_vocab=8, n_gram=0, level="N5")
+
+    # status=seen 的语法点 → 应享番剧加成
+    g_seen = GP(key="N5-seen", name="〜て(seen)", jlpt_level="N5",
+                explanation="连接", curated=True, status="seen")
+    # status=locked 的语法点 → 不享番剧加成
+    g_locked = GP(key="N5-locked", name="〜で(locked)", jlpt_level="N5",
+                  explanation="工具", curated=True, status="locked")
+    db_session.add_all([g_seen, g_locked])
+    db_session.commit()
+
+    results = [
+        {"item": {"kind": "grammar", "id": g_seen.id}, "correct": True},
+        {"item": {"kind": "grammar", "id": g_locked.id}, "correct": True},
+    ]
+    out = tower.submit_result(db_session, "N5", 0, 0, False, results)
+
+    # seen → 15 XP; locked → 10 XP; 合计 25
+    assert out["xp_gained"] == 25, f"期望 25 XP,实际 {out['xp_gained']}"
+
+    # 提交后两个 grammar 的 status 都应被改为 learning
+    db_session.refresh(g_seen)
+    db_session.refresh(g_locked)
+    assert g_seen.status == "learning"
+    assert g_locked.status == "learning"

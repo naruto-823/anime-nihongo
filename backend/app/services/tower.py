@@ -162,6 +162,8 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
         if obj is None:
             continue
         obj.in_srs = True
+        # 在修改 status 之前先捕获原始状态,用于番剧加成判定
+        original_grammar_status = getattr(obj, "status", None) if kind == "grammar" else None
         if kind == "grammar":
             obj.status = "learning"
         if not r["correct"]:
@@ -169,7 +171,11 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
         elif obj.due_date is None:
             obj.due_date = today
         if r["correct"]:
-            anime = kind == "vocab" and getattr(obj, "source_line_id", None) is not None
+            if kind == "vocab":
+                anime = getattr(obj, "source_line_id", None) is not None
+            else:
+                # 语法加成条件: 原始 status in {"seen", "learning"}
+                anime = original_grammar_status in {"seen", "learning"}
             xp_gained += round(XP_PER_CORRECT * (1.5 if anime else 1))
 
     tp = _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss)
