@@ -45,7 +45,10 @@ export default function Today() {
     <div className="flex flex-col items-end gap-1 text-xs shrink-0">
       <span className="badge-amber">🔥 {data.streak} 天</span>
       {data.due_total > 0 ? (
-        <Link to="/review" className="badge-brand hover:bg-brand-200">
+        <Link
+          to="/review"
+          className="badge bg-aidc-purpleLight text-aidc-purple hover:bg-aidc-purple/20 transition-colors"
+        >
           🧠 {data.due_total} 到期 →
         </Link>
       ) : (
@@ -74,11 +77,11 @@ export default function Today() {
           hint={<>去 <Link to="/series" className="text-brand-600 hover:underline">导入第一集 →</Link></>}
         />
       ) : ep.status === "failed" ? (
-        <div className="card-padded border-rose-200 bg-rose-50 text-rose-800 text-sm">
+        <div className="home-card p-6 border-rose-200 bg-rose-50 text-rose-800 text-sm">
           本集加工失败。请到番剧库重新触发导入。
         </div>
       ) : ep.total_lines > 0 && ep.read_position >= ep.total_lines ? (
-        <div className="card-padded border-emerald-200 bg-emerald-50 text-emerald-800 text-sm">
+        <div className="home-card p-6 border-emerald-200 bg-emerald-50 text-emerald-800 text-sm">
           本集已读完 · <Link to="/series" className="underline">开始下一集 →</Link>
         </div>
       ) : (

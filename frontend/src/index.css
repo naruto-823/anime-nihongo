@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  html { font-family: theme('fontFamily.sans'); color: theme('colors.ink.800'); }
-  body { background-color: theme('colors.ink.50'); }
+  /* AIDC 紫色主题：冷灰页底 #F0F2F5 + 正文 #333333，靠背景反差让卡片浮起 */
+  html { font-family: theme('fontFamily.sans'); color: #333333; }
+  body { background-color: #F0F2F5; }
   /* 日语段一律走 jp 字体 */
   .ja, ruby, rt { font-family: theme('fontFamily.jp'); }
   ruby rt { font-size: 0.55em; opacity: 0.65; font-weight: 400; }
@@ -12,15 +13,20 @@
 
 @layer components {
   .btn { @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg font-medium text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2; }
-  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-500 active:bg-brand-700; }
   .btn-secondary { @apply btn bg-white text-ink-700 border border-ink-200 hover:border-brand-300 hover:text-brand-700; }
   .btn-ghost { @apply btn text-ink-600 hover:bg-ink-100; }
   .btn-danger { @apply btn bg-rose-500 text-white hover:bg-rose-600; }
   .btn-sm { @apply px-2.5 py-1.5 text-xs; }
 
-  .card { @apply bg-white rounded-card border border-ink-200/70 shadow-card transition-shadow; }
+  .card { @apply bg-white rounded-aidc border border-ink-200/60 shadow-aidcL1 transition-shadow; }
   .card-hover { @apply hover:shadow-cardHover; }
   .card-padded { @apply card p-5; }
+
+  /* AIDC 首页卡片：16px 圆角 + AIDC L1 阴影 */
+  .home-card { @apply bg-white rounded-aidc border border-ink-200/60 shadow-aidcL1 transition-shadow; }
+  /* AIDC 主按钮：紫色三态 */
+  .btn-aidc { @apply btn bg-aidc-purple text-white hover:bg-aidc-purpleHover active:bg-aidc-purplePressed focus:ring-aidc-purple; }
 
   .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium; }
   .badge-brand { @apply badge bg-brand-100 text-brand-700; }
