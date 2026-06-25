@@ -22,4 +22,12 @@ describe("Quiz page", () => {
     fireEvent.click(screen.getByText("高中"));
     await waitFor(() => expect(screen.getAllByText(/本关结算|结算|XP/).length).toBeGreaterThan(0));
   });
+
+  it("result screen offers a way back to the tower", async () => {
+    wrap();
+    await waitFor(() => expect(screen.getByText("高校（こうこう）")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("高中"));
+    await waitFor(() => expect(screen.getByText("返回修炼塔")).toBeInTheDocument());
+    expect(screen.getByText("再来一次")).toBeInTheDocument();
+  });
 });

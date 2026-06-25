@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Loading from "../components/Loading";
 import { getTowerQuiz, submitQuiz } from "../lib/api";
@@ -8,6 +8,7 @@ import type { QuizQuestion, SubmitResult } from "../types";
 
 export default function Quiz() {
   const [sp] = useSearchParams();
+  const nav = useNavigate();
   const level = sp.get("level") ?? "N5";
   const zone = Number(sp.get("zone") ?? 0);
   const stage = Number(sp.get("stage") ?? 0);
@@ -26,6 +27,13 @@ export default function Quiz() {
 
   const questions = useMemo(() => data?.questions ?? [], [data]);
   const q = questions[idx];
+
+  function retry() {
+    setIdx(0);
+    setPicked(null);
+    setResults([]);
+    setResult(null);
+  }
 
   async function choose(opt: string) {
     if (picked || !q) return;
@@ -54,6 +62,10 @@ export default function Quiz() {
         <p className={result.passed ? "text-emerald-600" : "text-amber-600"}>
           {result.passed ? "通关!" : "未达标,再来一次"}
         </p>
+        <div className="flex gap-3 justify-center pt-4">
+          <button onClick={() => nav("/tower")} className="btn btn-primary">返回修炼塔</button>
+          <button onClick={retry} className="btn btn-secondary">再来一次</button>
+        </div>
       </div>
     );
   }
@@ -61,7 +73,10 @@ export default function Quiz() {
 
   return (
     <div className="max-w-md mx-auto space-y-6 py-6">
-      <div className="text-xs text-ink-400">第 {idx + 1} / {questions.length} 题</div>
+      <div className="flex items-center justify-between text-xs text-ink-400">
+        <button onClick={() => nav("/tower")} className="hover:text-brand-600">← 退出</button>
+        <span>第 {idx + 1} / {questions.length} 题</span>
+      </div>
       <div className="text-center">
         <div className="text-3xl font-bold text-ink-900 ja">{q.prompt}</div>
         {q.hint && <div className="text-sm text-ink-500 mt-2">{q.hint}</div>}
