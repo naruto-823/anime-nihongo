@@ -1,8 +1,11 @@
 import random
 from datetime import date
 
+import pytest
+
 from app.models import GrammarPoint, TowerProgress, Vocab
 from app.services import tower
+from app.services.tower import LockedStageError
 
 
 def _seed_level(db, n_vocab=20, n_gram=6, level="N5"):
@@ -118,3 +121,34 @@ def test_tower_map_unlocks_next_after_clear(db_session):
     m = tower.tower_map(db_session)
     n5 = next(lv for lv in m["levels"] if lv["level"] == "N5")
     assert n5["zones"][0]["stages"][1]["unlocked"] is True     # 第 1 关解锁
+
+
+# ── 修复 1: submit_result 校验关卡已解锁 ────────────────────────────────────
+
+def test_submit_rejects_locked_stage(db_session):
+    """zone0 stage0 默认解锁; stage1 未过 stage0 时应拒绝。"""
+    _seed_level(db_session, n_vocab=20, n_gram=6, level="N5")
+    vid = db_session.query(Vocab).first().id
+    results = [{"item": {"kind": "vocab", "id": vid}, "correct": True}]
+
+    # stage1 未解锁 -> 应抛 LockedStageError
+    with pytest.raises(LockedStageError):
+        tower.submit_result(db_session, "N5", 0, 1, False, results)
+
+    # 数据库无 TowerProgress 记录
+    count = db_session.query(TowerProgress).count()
+    assert count == 0
+
+    # 玩家 XP 仍为 0
+    from app.models import PlayerStats
+    p = db_session.get(PlayerStats, 1)
+    assert p is None or p.total_xp == 0
+
+
+def test_submit_unlocked_stage0_still_passes(db_session):
+    """stage0 (N5 zone0) 默认解锁,不应抛异常。"""
+    _seed_level(db_session, n_vocab=20, n_gram=6, level="N5")
+    vid = db_session.query(Vocab).first().id
+    results = [{"item": {"kind": "vocab", "id": vid}, "correct": True}]
+    out = tower.submit_result(db_session, "N5", 0, 0, False, results)
+    assert out["passed"] is True

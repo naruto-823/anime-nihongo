@@ -12,6 +12,10 @@ STAGE_GRAMMAR = 2
 STAGES_PER_ZONE = 5
 
 
+class LockedStageError(Exception):
+    """目标关卡未解锁,拒绝提交。"""
+
+
 def level_items(db, level):
     vocab = db.scalars(
         select(Vocab).where(Vocab.jlpt_level == level).order_by(Vocab.id)
@@ -69,6 +73,58 @@ STAGE_PASS = 0.6
 XP_PER_CORRECT = 10
 
 
+def _is_cleared(idx, level, zone_idx, stage_idx, is_boss):
+    tp = idx.get((level, zone_idx, stage_idx, is_boss))
+    return bool(tp and tp.cleared)
+
+
+def is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss) -> bool:
+    """判断给定关卡是否已解锁。规则与 tower_map 完全一致。"""
+    idx = _progress_index(db)
+
+    # N5 及各层第0区第0关默认解锁
+    level_idx = LEVELS.index(level) if level in LEVELS else -1
+    if level_idx < 0:
+        return False
+
+    # 层解锁:N5 始终解锁;否则上一层所有区 Boss 全 cleared
+    if level_idx == 0:
+        level_unlocked = True
+    else:
+        prev_level = LEVELS[level_idx - 1]
+        prev_vocab, _ = level_items(db, prev_level)
+        prev_stage_count = num_stages(len(prev_vocab))
+        prev_zone_count = num_zones(prev_stage_count)
+        level_unlocked = all(
+            _is_cleared(idx, prev_level, z, 0, True)
+            for z in range(prev_zone_count)
+        )
+
+    if not level_unlocked:
+        return False
+
+    # 区解锁:第0区 Boss 只要层解锁即可;后续区需上一区 Boss cleared
+    if zone_idx == 0:
+        zone_unlocked = True
+    else:
+        zone_unlocked = _is_cleared(idx, level, zone_idx - 1, 0, True)
+
+    if not zone_unlocked:
+        return False
+
+    if is_boss:
+        # Boss 解锁:该区5个小关全 cleared
+        return all(
+            _is_cleared(idx, level, zone_idx, s, False)
+            for s in range(STAGES_PER_ZONE)
+        )
+    else:
+        # 小关解锁:第0关直接解锁;后续关需上一关 cleared
+        if stage_idx == 0:
+            return True
+        return _is_cleared(idx, level, zone_idx, stage_idx - 1, False)
+
+
 def _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss):
     tp = db.query(TowerProgress).filter_by(
         level=level, zone_idx=zone_idx, stage_idx=stage_idx, is_boss=is_boss).one_or_none()
@@ -89,6 +145,8 @@ def _player(db):
 
 
 def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
+    if not is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss):
+        raise LockedStageError(f"关卡未解锁: {level} zone{zone_idx} stage{stage_idx} boss={is_boss}")
     today = today or _date.today()
     total = len(results)
     correct = sum(1 for r in results if r["correct"])

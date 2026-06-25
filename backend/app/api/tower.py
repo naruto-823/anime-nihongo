@@ -1,12 +1,13 @@
 import random
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models import PlayerStats
 from app.services import tower
+from app.services.tower import LockedStageError
 
 router = APIRouter(tags=["tower"])
 
@@ -57,4 +58,7 @@ class SubmitBody(BaseModel):
 def submit(body: SubmitBody, db: Session = Depends(get_db)) -> dict:
     results = [{"item": {"kind": r.item.kind, "id": r.item.id}, "correct": r.correct}
                for r in body.results]
-    return tower.submit_result(db, body.level, body.zone, body.stage, body.boss, results)
+    try:
+        return tower.submit_result(db, body.level, body.zone, body.stage, body.boss, results)
+    except LockedStageError:
+        raise HTTPException(status_code=403, detail="关卡未解锁")
