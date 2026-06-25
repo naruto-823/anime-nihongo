@@ -1,8 +1,12 @@
 from collections.abc import Iterator
 from pathlib import Path
 
-from sqlalchemy import Engine, create_engine, text
+from sqlalchemy import JSON, Engine, create_engine
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+
+# JSON 列:生产(postgres)用 JSONB,其余(测试 sqlite)用 JSON
+JSONB_OR_JSON = JSON().with_variant(JSONB, "postgresql")
 
 
 class Base(DeclarativeBase):
@@ -10,11 +14,14 @@ class Base(DeclarativeBase):
 
 
 def make_engine(url: str) -> Engine:
-    connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
-    if url.startswith("sqlite:///"):
-        db_path = Path(url.removeprefix("sqlite:///"))
-        db_path.parent.mkdir(parents=True, exist_ok=True)
-    return create_engine(url, connect_args=connect_args)
+    if url.startswith("sqlite"):
+        connect_args = {"check_same_thread": False}
+        if url.startswith("sqlite:///"):
+            db_path = Path(url.removeprefix("sqlite:///"))
+            db_path.parent.mkdir(parents=True, exist_ok=True)
+        return create_engine(url, connect_args=connect_args)
+    # PostgreSQL 等生产库:连接池 + 预检
+    return create_engine(url, pool_pre_ping=True, pool_size=5, max_overflow=10)
 
 
 def make_session_factory(engine: Engine) -> sessionmaker[Session]:
@@ -34,36 +41,18 @@ _engine = make_engine(settings.database_url)
 SessionLocal = make_session_factory(_engine)
 
 
-def _add_column_if_missing(engine: Engine, table: str, column: str, ddl: str) -> None:
-    """幂等加列。SQLite 没 IF NOT EXISTS 的 ADD COLUMN，靠捕错来识别。"""
-    try:
-        with engine.begin() as conn:
-            conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}"))
-    except Exception as exc:  # noqa: BLE001
-        msg = str(exc).lower()
-        if "duplicate column" in msg or "already exists" in msg:
-            return
-        raise
-
-
-def _migrate_in_place(engine: Engine) -> None:
-    """补齐 create_all 不会处理的新增列。每次启动跑一次。"""
-    _add_column_if_missing(engine, "series", "anilist_id", "INTEGER")
-    _add_column_if_missing(engine, "series", "anilist_status",
-                           "VARCHAR DEFAULT 'pending'")
-    _add_column_if_missing(engine, "series", "characters", "JSON")
-    _add_column_if_missing(engine, "episode", "scenes_split",
-                           "BOOLEAN DEFAULT 0")
-
-
 def init_app_db() -> None:
-    """应用启动时建表 + 补列。"""
-    init_db(_engine)
-    _migrate_in_place(_engine)
+    """应用启动时准备 schema。
+
+    sqlite(本地/测试便利):直接 create_all。
+    postgres(生产):schema 由 `alembic upgrade head`(容器 entrypoint)管理,此处不建表。
+    """
+    if _engine.dialect.name == "sqlite":
+        init_db(_engine)
 
 
 def get_db() -> Iterator[Session]:
-    """FastAPI 依赖：每请求一个会话。"""
+    """FastAPI 依赖:每请求一个会话。"""
     db = SessionLocal()
     try:
         yield db

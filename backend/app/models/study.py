@@ -1,10 +1,10 @@
 from datetime import date as _date
 from datetime import datetime
 
-from sqlalchemy import JSON, ForeignKey, UniqueConstraint, func
+from sqlalchemy import ForeignKey, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.db import Base
+from app.db import JSONB_OR_JSON, Base
 
 
 class Vocab(Base):
@@ -37,7 +37,7 @@ class GrammarPoint(Base):
     explanation: Mapped[str]
     curated: Mapped[bool] = mapped_column(default=False)
     status: Mapped[str] = mapped_column(default="locked")  # locked/seen/learning
-    quiz_cache: Mapped[list | None] = mapped_column(JSON, default=None)
+    quiz_cache: Mapped[list | None] = mapped_column(JSONB_OR_JSON, default=None)
     source_line_id: Mapped[int | None] = mapped_column(ForeignKey("line.id"))
     in_srs: Mapped[bool] = mapped_column(default=False)
     ease: Mapped[float] = mapped_column(default=2.5)
@@ -59,7 +59,7 @@ class DailySession(Base):
     grammar_reviewed: Mapped[int] = mapped_column(default=0)
     lines_read: Mapped[int] = mapped_column(default=0)
     conversation_turns: Mapped[int] = mapped_column(default=0)
-    summary: Mapped[dict | None] = mapped_column(JSON, default=None)
+    summary: Mapped[dict | None] = mapped_column(JSONB_OR_JSON, default=None)
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
 
@@ -67,4 +67,4 @@ class AppSetting(Base):
     __tablename__ = "app_setting"
 
     key: Mapped[str] = mapped_column(primary_key=True)
-    value: Mapped[dict] = mapped_column(JSON)
+    value: Mapped[dict] = mapped_column(JSONB_OR_JSON)

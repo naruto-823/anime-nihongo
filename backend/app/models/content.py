@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, ForeignKey, UniqueConstraint, func
+from sqlalchemy import ForeignKey, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.db import Base
+from app.db import JSONB_OR_JSON, Base
 
 
 class Series(Base):
@@ -17,7 +17,7 @@ class Series(Base):
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     anilist_id: Mapped[int | None] = mapped_column(default=None)
     anilist_status: Mapped[str] = mapped_column(default="pending")
-    characters: Mapped[list | None] = mapped_column(JSON, default=None)
+    characters: Mapped[list | None] = mapped_column(JSONB_OR_JSON, default=None)
 
     episodes: Mapped[list["Episode"]] = relationship(
         back_populates="series", cascade="all, delete-orphan"
@@ -61,11 +61,11 @@ class Line(Base):
     end_ms: Mapped[int | None]
     speaker: Mapped[str | None]
     text_jp: Mapped[str]
-    furigana: Mapped[list | None] = mapped_column(JSON, default=None)
+    furigana: Mapped[list | None] = mapped_column(JSONB_OR_JSON, default=None)
     translation_zh: Mapped[str | None]
-    grammar_notes: Mapped[list | None] = mapped_column(JSON, default=None)
+    grammar_notes: Mapped[list | None] = mapped_column(JSONB_OR_JSON, default=None)
     register_tag: Mapped[str | None]
-    grammar_point_keys: Mapped[list | None] = mapped_column(JSON, default=None)
+    grammar_point_keys: Mapped[list | None] = mapped_column(JSONB_OR_JSON, default=None)
     processed: Mapped[bool] = mapped_column(default=False)
 
     episode: Mapped["Episode"] = relationship(back_populates="lines")
