@@ -9,22 +9,23 @@ from app.services.tower import LockedStageError
 
 
 def _seed_level(db, n_vocab=20, n_gram=6, level="N5"):
+    prefix = level  # headword 前缀防止跨层冲突
     for i in range(n_vocab):
-        db.add(Vocab(headword=f"語{i}", reading=f"よ{i}", meaning_zh=f"义{i}",
-                     pos="名", jlpt_level=level))
+        db.add(Vocab(headword=f"{prefix}語{i}", reading=f"{prefix}よ{i}",
+                     meaning_zh=f"义{level}{i}", pos="名", jlpt_level=level))
     for i in range(n_gram):
-        db.add(GrammarPoint(key=f"{level}-g{i}", name=f"〜文法{i}",
-                            jlpt_level=level, explanation=f"含义{i}", curated=True))
+        db.add(GrammarPoint(key=f"{level}-g{i}", name=f"〜文法{level}{i}",
+                            jlpt_level=level, explanation=f"含义{level}{i}", curated=True))
     db.commit()
 
 
 def test_stage_slice_sizes(db_session):
     _seed_level(db_session, n_vocab=20, n_gram=6)
     v, g = tower.stage_items(db_session, "N5", 0, 0)
-    assert [x.headword for x in v] == [f"語{i}" for i in range(8)]
-    assert [x.name for x in g] == ["〜文法0", "〜文法1"]
+    assert [x.headword for x in v] == [f"N5語{i}" for i in range(8)]
+    assert [x.name for x in g] == ["〜文法N50", "〜文法N51"]
     v2, _ = tower.stage_items(db_session, "N5", 0, 1)
-    assert [x.headword for x in v2] == [f"語{i}" for i in range(8, 16)]
+    assert [x.headword for x in v2] == [f"N5語{i}" for i in range(8, 16)]
 
 
 def test_zone_items_unions_five_stages(db_session):
@@ -152,3 +153,44 @@ def test_submit_unlocked_stage0_still_passes(db_session):
     results = [{"item": {"kind": "vocab", "id": vid}, "correct": True}]
     out = tower.submit_result(db_session, "N5", 0, 0, False, results)
     assert out["passed"] is True
+
+
+# ── 修复 2: 跨层解锁稳健性(C1) ──────────────────────────────────────────────
+
+def _pass_stage(db_session, level, zone_idx, stage_idx, is_boss=False):
+    """辅助:用 vocab id=1 的结果让该关通过(accuracy=1.0)。"""
+    vocab = db_session.query(Vocab).filter_by(jlpt_level=level).first()
+    results = [{"item": {"kind": "vocab", "id": vocab.id}, "correct": True}]
+    tower.submit_result(db_session, level, zone_idx, stage_idx, is_boss, results)
+
+
+def test_tower_map_multizone_level_unlock(db_session):
+    """≥2 区的层: 仅当所有区 Boss 都 cleared 后下一层才解锁。
+    80 词 → num_stages=10 → num_zones=2(zone0:5关+Boss, zone1:5关+Boss)
+    """
+    _seed_level(db_session, n_vocab=80, n_gram=20, level="N5")
+    _seed_level(db_session, n_vocab=8, n_gram=2, level="N4")
+
+    # 通过 zone0 的全部5小关
+    for s in range(5):
+        _pass_stage(db_session, "N5", 0, s, False)
+
+    # 通过 zone0 Boss
+    _pass_stage(db_session, "N5", 0, 0, True)
+
+    # 此时 zone1 的 stage0 应解锁,但 N4 仍应锁定
+    m = tower.tower_map(db_session)
+    n5 = next(lv for lv in m["levels"] if lv["level"] == "N5")
+    assert n5["zones"][1]["stages"][0]["unlocked"] is True
+
+    n4 = next(lv for lv in m["levels"] if lv["level"] == "N4")
+    assert n4["unlocked"] is False, "仅 zone0 Boss 通过,N4 仍应锁定"
+
+    # 通过 zone1 全部5小关 + Boss
+    for s in range(5):
+        _pass_stage(db_session, "N5", 1, s, False)
+    _pass_stage(db_session, "N5", 1, 0, True)
+
+    m2 = tower.tower_map(db_session)
+    n4_2 = next(lv for lv in m2["levels"] if lv["level"] == "N4")
+    assert n4_2["unlocked"] is True, "zone0+zone1 Boss 均 cleared,N4 应解锁"

@@ -233,8 +233,8 @@ def tower_map(db):
             prev_zone_boss_done = cleared(level, z, 0, True)
         levels_out.append({"level": level, "unlocked": level_unlocked,
                            "zones": zones_out})
-        # 整层完成 = 最后一区 Boss 通过
-        prev_level_done = prev_zone_boss_done
+        # 整层完成 = 该层所有区的 Boss 均 cleared
+        prev_level_done = all(cleared(level, z, 0, True) for z in range(zone_count))
     return {"levels": levels_out}
 
 
