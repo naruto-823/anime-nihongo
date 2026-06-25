@@ -9,6 +9,7 @@ from app.grammar_loader import load_grammar_seed
 from app.models import Episode, Line, Series
 from app.services import pipeline
 from app.services.subtitles import parse_subtitle
+from app.vocab_loader import load_vocab_seed
 
 
 def import_episode_from_file(session: Session, series_title: str, number: int,
@@ -65,6 +66,7 @@ def main() -> None:
     session = make_session_factory(engine)()
     try:
         load_grammar_seed(session)
+        load_vocab_seed(session)
         if args.cmd == "import-episode":
             ep = import_episode_from_file(session, args.series, args.number, args.file)
             print(f"已导入 episode id={ep.id}，{ep.total_lines} 行。开始加工…")

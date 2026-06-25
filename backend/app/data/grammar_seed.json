@@ -1,267 +1,5330 @@
 [
-  {"key": "ni-atatte", "name": "〜にあたって", "jlpt_level": "N2", "explanation": "在…之际、面临…的时候（郑重）"},
-  {"key": "ni-oite", "name": "〜において", "jlpt_level": "N2", "explanation": "在…方面、在…场合"},
-  {"key": "wo-hajime", "name": "〜をはじめ", "jlpt_level": "N2", "explanation": "以…为首、…等等"},
-  {"key": "tsutsu-aru", "name": "〜つつある", "jlpt_level": "N2", "explanation": "正在逐渐…"},
-  {"key": "kano-you-da", "name": "〜かのようだ", "jlpt_level": "N2", "explanation": "仿佛、好像…一样"},
-  {"key": "bakari-ka", "name": "〜ばかりか", "jlpt_level": "N2", "explanation": "不仅…而且…"},
-  {"key": "dokoro-ka", "name": "〜どころか", "jlpt_level": "N2", "explanation": "别说…、岂止…反而…"},
-  {"key": "nimo-kakawarazu", "name": "〜にもかかわらず", "jlpt_level": "N2", "explanation": "尽管…却…"},
-  {"key": "koto-naku", "name": "〜ことなく", "jlpt_level": "N2", "explanation": "不…（地）、未曾…"},
-  {"key": "nuki-de", "name": "〜ぬきで", "jlpt_level": "N2", "explanation": "去掉…、省去…"},
-  {"key": "yara-yara", "name": "〜やら〜やら", "jlpt_level": "N2", "explanation": "又…又…（列举，含麻烦语气）"},
-  {"key": "age-suffix", "name": "〜げ", "jlpt_level": "N2", "explanation": "显得…的样子"},
-  {"key": "ageku", "name": "〜あげく", "jlpt_level": "N2", "explanation": "…的结果（多为不好结局）"},
-  {"key": "sue-ni", "name": "〜末に", "jlpt_level": "N2", "explanation": "经过…最终…"},
-  {"key": "shidai", "name": "〜次第", "jlpt_level": "N2", "explanation": "一…就立刻…；取决于…"},
-  {"key": "ue-de", "name": "〜上で", "jlpt_level": "N2", "explanation": "在…之后再…；在…方面"},
-  {"key": "uru-eru", "name": "〜得る", "jlpt_level": "N2", "explanation": "可能…、能够…"},
-  {"key": "kanenai", "name": "〜かねない", "jlpt_level": "N2", "explanation": "有可能…（不好的事）"},
-  {"key": "zaru-wo-enai", "name": "〜ざるを得ない", "jlpt_level": "N2", "explanation": "不得不…"},
-  {"key": "mai", "name": "〜まい", "jlpt_level": "N2", "explanation": "不会…吧、绝不…"},
-  {"key": "uchi-ni", "name": "〜うちに", "jlpt_level": "N2", "explanation": "趁…的时候；在…期间（不知不觉）"},
-  {"key": "okage-de", "name": "〜おかげで", "jlpt_level": "N2", "explanation": "多亏…、托…的福"},
-  {"key": "kiri", "name": "〜きり", "jlpt_level": "N2", "explanation": "只…、一…就再没…"},
-  {"key": "kuse-ni", "name": "〜くせに", "jlpt_level": "N2", "explanation": "明明…却…（带责备语气）"},
-  {"key": "koso", "name": "〜こそ", "jlpt_level": "N2", "explanation": "正是…、才…（强调）"},
-  {"key": "koto-da", "name": "〜ことだ", "jlpt_level": "N2", "explanation": "应该…、最好…（劝告）"},
-  {"key": "koto-kara", "name": "〜ことから", "jlpt_level": "N2", "explanation": "由于…、从…来看"},
-  {"key": "koto-dakara", "name": "〜ことだから", "jlpt_level": "N2", "explanation": "既然是…（理所当然地）"},
-  {"key": "koto-ni", "name": "〜ことに", "jlpt_level": "N2", "explanation": "令人感到…的是"},
-  {"key": "sae-ba", "name": "〜さえ〜ば", "jlpt_level": "N2", "explanation": "只要…就…"},
-  {"key": "ta-totan", "name": "〜たとたん", "jlpt_level": "N2", "explanation": "刚…就…（立即发生）"},
-  {"key": "tabi-ni", "name": "〜たびに", "jlpt_level": "N2", "explanation": "每当…就…"},
-  {"key": "darake", "name": "〜だらけ", "jlpt_level": "N2", "explanation": "满是…、全是…（负面）"},
-  {"key": "ppoi", "name": "〜っぽい", "jlpt_level": "N2", "explanation": "看起来像…、容易…"},
-  {"key": "tsutsu", "name": "〜つつ", "jlpt_level": "N2", "explanation": "一边…一边…；虽然…却…"},
-  {"key": "te-irai", "name": "〜て以来", "jlpt_level": "N2", "explanation": "自从…以来"},
-  {"key": "to-iu-mono-da", "name": "〜というものだ", "jlpt_level": "N2", "explanation": "这才叫做…（真正应有的状态）"},
-  {"key": "toori-ni", "name": "〜とおりに", "jlpt_level": "N2", "explanation": "按照…、照…那样"},
-  {"key": "tokoro-ni", "name": "〜ところに", "jlpt_level": "N2", "explanation": "正在…的时候（某事发生）"},
-  {"key": "to-shite-mo", "name": "〜としても", "jlpt_level": "N2", "explanation": "即使…也…"},
-  {"key": "to-tomo-ni", "name": "〜とともに", "jlpt_level": "N2", "explanation": "随着…；与…一起"},
-  {"key": "nai-koto-ni-wa", "name": "〜ないことには", "jlpt_level": "N2", "explanation": "不…的话就不能…"},
-  {"key": "nagara-mo", "name": "〜ながらも", "jlpt_level": "N2", "explanation": "虽然…但是…"},
-  {"key": "ni-kakete-wa", "name": "〜にかけては", "jlpt_level": "N2", "explanation": "在…方面（擅长）"},
-  {"key": "ni-kotaete", "name": "〜にこたえて", "jlpt_level": "N2", "explanation": "响应…、回应…"},
-  {"key": "ni-saishite", "name": "〜にさいして", "jlpt_level": "N2", "explanation": "在…之际（正式）"},
-  {"key": "ni-shitagatte", "name": "〜にしたがって", "jlpt_level": "N2", "explanation": "随着…、按照…"},
-  {"key": "ni-shite-wa", "name": "〜にしては", "jlpt_level": "N2", "explanation": "以…来说（出乎意料）"},
-  {"key": "ni-shiro", "name": "〜にしろ", "jlpt_level": "N2", "explanation": "不管…、即使是…"},
-  {"key": "ni-suginai", "name": "〜にすぎない", "jlpt_level": "N2", "explanation": "只不过是…、仅仅是…"},
-  {"key": "ni-sotte", "name": "〜にそって", "jlpt_level": "N2", "explanation": "沿着…、按照…"},
-  {"key": "ni-tsuke", "name": "〜につけ", "jlpt_level": "N2", "explanation": "每当…就…；不管是…还是…"},
-  {"key": "ni-tomonatte", "name": "〜にともなって", "jlpt_level": "N2", "explanation": "随着…、伴随着…"},
-  {"key": "ni-hoka-naranai", "name": "〜にほかならない", "jlpt_level": "N2", "explanation": "无非是…、正是…"},
-  {"key": "ni-motozuite", "name": "〜にもとづいて", "jlpt_level": "N2", "explanation": "根据…、基于…"},
-  {"key": "ni-yotte", "name": "〜によって", "jlpt_level": "N2", "explanation": "根据…、由于…、因…而异"},
-  {"key": "ni-watatte", "name": "〜にわたって", "jlpt_level": "N2", "explanation": "跨越…、遍及…（时间/范围）"},
-  {"key": "nuku", "name": "〜ぬく", "jlpt_level": "N2", "explanation": "彻底…、坚持到底…"},
-  {"key": "no-moto-de", "name": "〜のもとで", "jlpt_level": "N2", "explanation": "在…的基础上、在…的支持下"},
-  {"key": "bakari-ni", "name": "〜ばかりに", "jlpt_level": "N2", "explanation": "就因为…才…（不好的结果）"},
-  {"key": "wa-mochiron", "name": "〜はもちろん", "jlpt_level": "N2", "explanation": "…自不必说、当然…还有…"},
-  {"key": "hanmen", "name": "〜反面", "jlpt_level": "N2", "explanation": "另一方面…"},
-  {"key": "beki", "name": "〜べき", "jlpt_level": "N2", "explanation": "应该…、理应…"},
-  {"key": "hodo", "name": "〜ほど", "jlpt_level": "N2", "explanation": "越…越…；…程度；没有…那么"},
-  {"key": "mama", "name": "〜まま", "jlpt_level": "N2", "explanation": "就这样…、保持…的状态"},
-  {"key": "muki", "name": "〜向き", "jlpt_level": "N2", "explanation": "适合…、朝向…"},
-  {"key": "muke", "name": "〜向け", "jlpt_level": "N2", "explanation": "面向…、为了…"},
-  {"key": "mo-kamawazu", "name": "〜もかまわず", "jlpt_level": "N2", "explanation": "不顾…、不管…"},
-  {"key": "mono-ka", "name": "〜ものか", "jlpt_level": "N2", "explanation": "怎么可能…（反问、强烈否定）"},
-  {"key": "mono-ga-aru", "name": "〜ものがある", "jlpt_level": "N2", "explanation": "有…的一面、不禁感到…"},
-  {"key": "mono-da", "name": "〜ものだ", "jlpt_level": "N2", "explanation": "本应该…；以前常常…（回忆）"},
-  {"key": "mono-nara", "name": "〜ものなら", "jlpt_level": "N2", "explanation": "如果可能的话…；如果你敢…"},
-  {"key": "mono-no", "name": "〜ものの", "jlpt_level": "N2", "explanation": "虽然…但是…（转折）"},
-  {"key": "ya-ina-ya", "name": "〜やいなや", "jlpt_level": "N2", "explanation": "一…就立刻…（瞬间）"},
-  {"key": "wake-ga-nai", "name": "〜わけがない", "jlpt_level": "N2", "explanation": "不可能…、没有理由…"},
-  {"key": "wake-ni-wa-ikanai", "name": "〜わけにはいかない", "jlpt_level": "N2", "explanation": "不能…、不可以…（道义/习惯上）"},
-  {"key": "wo-komete", "name": "〜をこめて", "jlpt_level": "N2", "explanation": "含着…（感情）、带着…心意"},
-  {"key": "wo-tsuujite", "name": "〜をつうじて", "jlpt_level": "N2", "explanation": "通过…、贯穿整个…"},
-  {"key": "wo-towazu", "name": "〜をとわず", "jlpt_level": "N2", "explanation": "不论…、不管…"},
-  {"key": "wo-megutte", "name": "〜をめぐって", "jlpt_level": "N2", "explanation": "围绕…、关于…（纷争）"},
-  {"key": "wo-moto-ni", "name": "〜をもとに", "jlpt_level": "N2", "explanation": "以…为基础、根据…"},
-  {"key": "ni-totte", "name": "〜にとって", "jlpt_level": "N2", "explanation": "对…来说"},
-  {"key": "ni-kanshite", "name": "〜に関して", "jlpt_level": "N2", "explanation": "关于…"},
-  {"key": "ni-taishite", "name": "〜に対して", "jlpt_level": "N2", "explanation": "对于…；与…相反"},
-  {"key": "ni-kurabete", "name": "〜に比べて", "jlpt_level": "N2", "explanation": "与…相比"},
-  {"key": "ni-yoru-to", "name": "〜によると", "jlpt_level": "N2", "explanation": "根据…来说"},
-  {"key": "to-shite", "name": "〜として", "jlpt_level": "N2", "explanation": "作为…"},
-  {"key": "to-iu-koto-da", "name": "〜ということだ", "jlpt_level": "N2", "explanation": "据说…；也就是说…"},
-  {"key": "to-iu-yori", "name": "〜というより", "jlpt_level": "N2", "explanation": "与其说…不如说…"},
-  {"key": "noni", "name": "〜のに", "jlpt_level": "N2", "explanation": "可是…、明明…却…（遗憾/不满）"},
-  {"key": "kara-to-itte", "name": "〜からといって", "jlpt_level": "N2", "explanation": "不能因为…就…"},
-  {"key": "kara-ni-wa", "name": "〜からには", "jlpt_level": "N2", "explanation": "既然…就必须…"},
-  {"key": "dake-de-naku", "name": "〜だけでなく", "jlpt_level": "N2", "explanation": "不仅…而且…"},
-  {"key": "dake-ni", "name": "〜だけに", "jlpt_level": "N2", "explanation": "正因为…才…"},
-  {"key": "toki-ni-wa", "name": "〜ときには", "jlpt_level": "N2", "explanation": "有时候…"},
-  {"key": "ta-tokoro", "name": "〜たところ", "jlpt_level": "N2", "explanation": "…的结果、做了…之后（发现）"},
-  {"key": "ta-tokoro-de", "name": "〜たところで", "jlpt_level": "N2", "explanation": "即使…也没用"},
-  {"key": "te-koso", "name": "〜てこそ", "jlpt_level": "N2", "explanation": "正因为…才能…（强调条件）"},
-  {"key": "te-mo-ii", "name": "〜てもいい", "jlpt_level": "N2", "explanation": "可以…、…也无妨"},
-  {"key": "nai-de-wa-irarenai", "name": "〜ないではいられない", "jlpt_level": "N2", "explanation": "忍不住…、不由得…"},
-  {"key": "zu-ni-wa-irarenai", "name": "〜ずにはいられない", "jlpt_level": "N2", "explanation": "忍不住…、不由得…"},
-  {"key": "ni-kakawaru", "name": "〜にかかわる", "jlpt_level": "N2", "explanation": "关乎…、涉及…"},
-  {"key": "ni-mukatte", "name": "〜に向かって", "jlpt_level": "N2", "explanation": "朝着…方向"},
-  {"key": "wo-chushin-ni", "name": "〜を中心に", "jlpt_level": "N2", "explanation": "以…为中心"},
-  {"key": "kara-shite", "name": "〜からして", "jlpt_level": "N2", "explanation": "就连…（连最基本的…都）"},
-  {"key": "te-bakari-iru", "name": "〜てばかりいる", "jlpt_level": "N2", "explanation": "老是…、总是…"},
-  {"key": "kagiri-de-wa", "name": "〜かぎりでは", "jlpt_level": "N2", "explanation": "就…所知、在…范围内"},
-  {"key": "ni-kagitte", "name": "〜に限って", "jlpt_level": "N2", "explanation": "偏偏…、只有…（讽刺）"},
-  {"key": "ni-kagiri", "name": "〜に限り", "jlpt_level": "N2", "explanation": "仅限于…"},
-  {"key": "to-iu-to", "name": "〜というと", "jlpt_level": "N2", "explanation": "说到…、提到…"},
-  {"key": "to-iu-node", "name": "〜というので", "jlpt_level": "N2", "explanation": "因为据说…"},
-  {"key": "koto-ni-natte-iru", "name": "〜ことになっている", "jlpt_level": "N2", "explanation": "按规定…、预定…"},
-  {"key": "you-ni-naru", "name": "〜ようになる", "jlpt_level": "N2", "explanation": "变得…、渐渐…"},
-  {"key": "you-ni-suru", "name": "〜ようにする", "jlpt_level": "N2", "explanation": "努力做到…、注意…"},
-  {"key": "koto-ni-suru", "name": "〜ことにする", "jlpt_level": "N2", "explanation": "决定…"},
-  {"key": "koto-ni-naru", "name": "〜ことになる", "jlpt_level": "N2", "explanation": "将会…、结果变成…"},
-  {"key": "hazu-da", "name": "〜はずだ", "jlpt_level": "N2", "explanation": "理应…、按道理应该…"},
-  {"key": "hazu-ga-nai", "name": "〜はずがない", "jlpt_level": "N2", "explanation": "不可能…、绝不会…"},
-  {"key": "wake-da", "name": "〜わけだ", "jlpt_level": "N2", "explanation": "所以…、难怪…（解释原因）"},
-  {"key": "wake-de-wa-nai", "name": "〜わけではない", "jlpt_level": "N2", "explanation": "并不是…"},
-  {"key": "ni-chigai-nai", "name": "〜にちがいない", "jlpt_level": "N2", "explanation": "肯定是…、一定是…"},
-  {"key": "kamo-shirenai", "name": "〜かもしれない", "jlpt_level": "N2", "explanation": "也许…、说不定…"},
-  {"key": "to-sureba", "name": "〜とすれば", "jlpt_level": "N2", "explanation": "如果…的话（假设）"},
-  {"key": "to-suru-to", "name": "〜とすると", "jlpt_level": "N2", "explanation": "如果…的话（推测）"},
-  {"key": "ba-yokatta", "name": "〜ばよかった", "jlpt_level": "N2", "explanation": "（早知道）…就好了（后悔）"},
-  {"key": "nara-dewa", "name": "〜ならでは", "jlpt_level": "N2", "explanation": "只有…才有的（特色）"},
-  {"key": "ni-mo-kakawarazu-2", "name": "〜をものともせず", "jlpt_level": "N2", "explanation": "不把…放在眼里、不顾…（困难/逆境）"},
-  {"key": "to-iu-mono-no", "name": "〜というものの", "jlpt_level": "N2", "explanation": "虽然说…但实际上…"},
-  {"key": "te-shikata-ga-nai", "name": "〜てしかたがない", "jlpt_level": "N2", "explanation": "…得不得了、非常…"},
-  {"key": "te-tamaranai", "name": "〜てたまらない", "jlpt_level": "N2", "explanation": "…得受不了、极其…"},
-  {"key": "de-wa-nai-ka", "name": "〜ではないか", "jlpt_level": "N2", "explanation": "难道不是…吗（确认、感叹）"},
-  {"key": "kurai-nara", "name": "〜くらいなら", "jlpt_level": "N2", "explanation": "与其…还不如…"},
-  {"key": "ya-ina-ya-2", "name": "〜に先立って", "jlpt_level": "N2", "explanation": "在…之前（正式）"},
-  {"key": "no-ni-taishite", "name": "〜のに対して", "jlpt_level": "N2", "explanation": "与…相对、对比…"},
-  {"key": "saigo-ni", "name": "〜たが最後", "jlpt_level": "N2", "explanation": "一旦…就无法挽回"},
-  {"key": "te-hajimete", "name": "〜てはじめて", "jlpt_level": "N2", "explanation": "只有…才…（经历后才意识到）"},
-  {"key": "nari-ni", "name": "〜なりに", "jlpt_level": "N2", "explanation": "以自己的方式…、按照…"},
-  {"key": "gachida", "name": "〜がちだ", "jlpt_level": "N2", "explanation": "容易…、动不动就…（偏向负面）"},
-  {"key": "ki-mi-ga-aru", "name": "〜気味がある", "jlpt_level": "N2", "explanation": "有点…的倾向"},
-  {"key": "mi-ga-aru", "name": "〜みがある", "jlpt_level": "N2", "explanation": "有…的感觉"},
-  {"key": "wo-kake-ni", "name": "〜をかけに", "jlpt_level": "N2", "explanation": "以…为赌注"},
-  {"key": "te-kara-de-nai-to", "name": "〜てからでないと", "jlpt_level": "N2", "explanation": "不…之后就不能…"},
-  {"key": "ni-taisuru", "name": "〜に対する", "jlpt_level": "N2", "explanation": "对于…的（修饰名词）"},
-  {"key": "ni-okeru", "name": "〜における", "jlpt_level": "N2", "explanation": "在…中的（修饰名词）"},
-  {"key": "ni-yoru", "name": "〜による", "jlpt_level": "N2", "explanation": "根据…的（修饰名词）"},
-  {"key": "to-iu", "name": "〜という", "jlpt_level": "N2", "explanation": "叫做…、所谓的…"},
-  {"key": "to-itte-mo", "name": "〜といっても", "jlpt_level": "N2", "explanation": "虽说…但是…"},
-  {"key": "ni-ate-te", "name": "〜にあてて", "jlpt_level": "N2", "explanation": "写给…、寄给…（书信等）"},
-  {"key": "te-yaru", "name": "〜てやる", "jlpt_level": "N2", "explanation": "做给对方看（挑战/气愤）"},
-  {"key": "koto-wa-nai", "name": "〜ことはない", "jlpt_level": "N2", "explanation": "没有必要…、不必…"},
-  {"key": "ni-wa-ataranai", "name": "〜にはあたらない", "jlpt_level": "N2", "explanation": "不值得…、没必要…"},
-  {"key": "mono-demo-nai", "name": "〜ものでもない", "jlpt_level": "N2", "explanation": "并非不能…、也可以…"},
-  {"key": "dake-atte", "name": "〜だけあって", "jlpt_level": "N2", "explanation": "不愧是…、正因为是…"},
-  {"key": "bakari-da", "name": "〜ばかりだ", "jlpt_level": "N2", "explanation": "只会越来越…（向坏方向）"},
-  {"key": "ikura-te-mo", "name": "〜いくら〜ても", "jlpt_level": "N2", "explanation": "无论怎么…都…"},
-  {"key": "donna-ni-te-mo", "name": "〜どんなに〜ても", "jlpt_level": "N2", "explanation": "无论多么…也…"},
-  {"key": "tsui-de-ni", "name": "〜ついでに", "jlpt_level": "N2", "explanation": "顺便…"},
-  {"key": "ni-oujite", "name": "〜に応じて", "jlpt_level": "N2", "explanation": "根据…、按照…（因情况而异）"},
-  {"key": "wo-fumaete", "name": "〜を踏まえて", "jlpt_level": "N2", "explanation": "基于…、以…为基础"},
-  {"key": "wo-te-ni", "name": "〜を手に", "jlpt_level": "N2", "explanation": "以…为依托、凭借着…"},
-  {"key": "naze-nara", "name": "〜なぜなら", "jlpt_level": "N2", "explanation": "因为…（解释原因）"},
-  {"key": "sono-kekka", "name": "〜その結果", "jlpt_level": "N2", "explanation": "其结果是…"},
-  {"key": "kekkyoku", "name": "〜結局", "jlpt_level": "N2", "explanation": "最终…、结果还是…"},
-  {"key": "atto-iu-ma-ni", "name": "〜あっという間に", "jlpt_level": "N2", "explanation": "转眼间…、一眨眼就…"},
-  {"key": "ni-sokushite", "name": "〜に即して", "jlpt_level": "N2", "explanation": "根据…、忠实于…"},
-  {"key": "wo-kaishite", "name": "〜を介して", "jlpt_level": "N2", "explanation": "通过…（中间媒介）"},
-  {"key": "kara-mite", "name": "〜から見て", "jlpt_level": "N2", "explanation": "从…来看"},
-  {"key": "kara-sureba", "name": "〜からすれば", "jlpt_level": "N2", "explanation": "从…角度来说"},
-  {"key": "ni-suru-to", "name": "〜にすると", "jlpt_level": "N2", "explanation": "换算成…、折合…"},
-  {"key": "koso-are", "name": "〜こそあれ", "jlpt_level": "N2", "explanation": "虽有…但没有…"},
-  {"key": "ni-atte-mo", "name": "〜にあっても", "jlpt_level": "N2", "explanation": "即使在…的情况下"},
-  {"key": "te-nao", "name": "〜てなお", "jlpt_level": "N2", "explanation": "即使…也依然…"},
-  {"key": "kara-koso", "name": "〜からこそ", "jlpt_level": "N2", "explanation": "正因为…才…（强调原因）"},
-  {"key": "to-ii-to-ii", "name": "〜といい〜といい", "jlpt_level": "N2", "explanation": "不管是…还是…（两方面都）"},
-  {"key": "ni-mo", "name": "〜にも", "jlpt_level": "N2", "explanation": "也…（附加）"},
-  {"key": "de-aru-ijou", "name": "〜である以上", "jlpt_level": "N2", "explanation": "既然是…就必须…"},
-  {"key": "wo-kikaini-shite", "name": "〜を機会に", "jlpt_level": "N2", "explanation": "以…为契机、趁着…机会"},
-  {"key": "wo-sakaini", "name": "〜を境に", "jlpt_level": "N2", "explanation": "以…为界、从…开始"},
-  {"key": "ni-ataishite", "name": "〜に値して", "jlpt_level": "N2", "explanation": "值得…"},
-  {"key": "n-da-kara", "name": "〜んだから", "jlpt_level": "N2", "explanation": "因为…（解释理由，带感情）"},
-  {"key": "no-dewa-nai-ka", "name": "〜のではないか", "jlpt_level": "N2", "explanation": "不是…吗（推测/质疑）"},
-  {"key": "you-da-na", "name": "〜ようだな", "jlpt_level": "N2", "explanation": "看来是…（确认推测）"},
-  {"key": "to-miru-to", "name": "〜と見ると", "jlpt_level": "N2", "explanation": "一发现…就…"},
-  {"key": "de-aru-mono-no", "name": "〜であるものの", "jlpt_level": "N2", "explanation": "虽然是…但是…"},
-  {"key": "to-wa-ie", "name": "〜とはいえ", "jlpt_level": "N2", "explanation": "虽然说…但是…（书面）"},
-  {"key": "ue-kara-miru-to", "name": "〜上から見ると", "jlpt_level": "N2", "explanation": "从…角度来看"},
-  {"key": "toki-wa", "name": "〜ときは", "jlpt_level": "N2", "explanation": "在…时候"},
-  {"key": "yo-sono-mono", "name": "〜よそのもの", "jlpt_level": "N2", "explanation": "局外之事"},
-  {"key": "ni-mo-tomonawazu", "name": "〜にもとまらず", "jlpt_level": "N2", "explanation": "不限于…"},
-  {"key": "ni-mo-naku", "name": "〜にもなく", "jlpt_level": "N2", "explanation": "不像平时那样…"},
-  {"key": "de-nai-to-sureba", "name": "〜でないとすれば", "jlpt_level": "N2", "explanation": "如果不是…的话"},
-  {"key": "to-narou-to", "name": "〜となろうと", "jlpt_level": "N2", "explanation": "不论变成…"},
-  {"key": "ka-to-iu-to", "name": "〜かというと", "jlpt_level": "N2", "explanation": "要说是否…（接着解释）"},
-  {"key": "ni-yotte-wa", "name": "〜によっては", "jlpt_level": "N2", "explanation": "有时也会…、视情况而定"},
-  {"key": "te-nite", "name": "〜にて", "jlpt_level": "N2", "explanation": "在…（正式、书面表达）"},
-  {"key": "ka-dou-ka", "name": "〜かどうか", "jlpt_level": "N2", "explanation": "是否…、…还是不…"},
-  {"key": "ni-oki-nai", "name": "〜を置いて", "jlpt_level": "N2", "explanation": "除了…（别无他选）"},
-  {"key": "tte-iu-no-wa", "name": "〜っていうのは", "jlpt_level": "N2", "explanation": "所谓的…是指…"},
-  {"key": "kurai-mono-da", "name": "〜くらいのものだ", "jlpt_level": "N2", "explanation": "只有…才…（唯一）"},
-  {"key": "nari-tomo", "name": "〜なりとも", "jlpt_level": "N2", "explanation": "哪怕是一点点…"},
-  {"key": "tachi-itte-mo", "name": "〜にしても〜にしても", "jlpt_level": "N2", "explanation": "不管是…还是…（两种情况都一样）"},
-  {"key": "koto-to-te", "name": "〜こととて", "jlpt_level": "N2", "explanation": "因为…（古风/书面）"},
-  {"key": "de-koso-aru", "name": "〜でこそある", "jlpt_level": "N2", "explanation": "正是…（强调判断）"},
-  {"key": "mo-sara-nari", "name": "〜もさることながら", "jlpt_level": "N2", "explanation": "…固然不用说，更…"},
-  {"key": "wo-shite", "name": "〜をして", "jlpt_level": "N2", "explanation": "让…做、令…（使役）"},
-  {"key": "hazu-dato", "name": "〜はずだった", "jlpt_level": "N2", "explanation": "本来应该…（结果没有）"},
-  {"key": "sae-sureba", "name": "〜さえすれば", "jlpt_level": "N2", "explanation": "只要…就好了"},
-  {"key": "n-jyanai-ka", "name": "〜んじゃないか", "jlpt_level": "N2", "explanation": "不就是…吗（口语推测）"},
-  {"key": "ni-ataisuru", "name": "〜に値する", "jlpt_level": "N2", "explanation": "值得…"},
-  {"key": "kanerumono", "name": "〜かねる", "jlpt_level": "N2", "explanation": "难以…、不便…"},
-  {"key": "nomi-narazu", "name": "〜のみならず", "jlpt_level": "N2", "explanation": "不仅…而且…（书面）"},
-  {"key": "teiru-tokoro", "name": "〜ているところ", "jlpt_level": "N2", "explanation": "正在…的时候"},
-  {"key": "ta-bakari", "name": "〜たばかり", "jlpt_level": "N2", "explanation": "刚刚…"},
-  {"key": "te-hoshii", "name": "〜てほしい", "jlpt_level": "N2", "explanation": "希望（别人）…"},
-  {"key": "ni-iru", "name": "〜にいる", "jlpt_level": "N2", "explanation": "存在于…（人/动物）"},
-  {"key": "de-iru", "name": "〜でいる", "jlpt_level": "N2", "explanation": "保持…的状态"},
-  {"key": "wo-toshite", "name": "〜を通して", "jlpt_level": "N2", "explanation": "通过…；贯穿整个…"},
-  {"key": "te-iku", "name": "〜ていく", "jlpt_level": "N2", "explanation": "逐渐…（向远方/未来变化）"},
-  {"key": "te-kuru", "name": "〜てくる", "jlpt_level": "N2", "explanation": "逐渐…（到现在的变化）"},
-  {"key": "kanarazu-shimo", "name": "〜必ずしも〜ない", "jlpt_level": "N2", "explanation": "未必…、不一定…"},
-  {"key": "taiou-shite", "name": "〜に対応して", "jlpt_level": "N2", "explanation": "对应…、配合…"},
-
-  {"key": "atte-no", "name": "〜あっての", "jlpt_level": "N1", "explanation": "有了…才有…、以…为前提"},
-  {"key": "ikan-de", "name": "〜いかんで", "jlpt_level": "N1", "explanation": "根据…、视…而定"},
-  {"key": "you-ga-mai-ga", "name": "〜うが〜まいが", "jlpt_level": "N1", "explanation": "不管是否…都…"},
-  {"key": "kagiri-da", "name": "〜かぎりだ", "jlpt_level": "N1", "explanation": "非常…（感情强烈，极限感）"},
-  {"key": "katawara", "name": "〜かたわら", "jlpt_level": "N1", "explanation": "一边…同时也…（两件事并行）"},
-  {"key": "gatera", "name": "〜がてら", "jlpt_level": "N1", "explanation": "顺便…、借着…机会"},
-  {"key": "ga-hayai-ka", "name": "〜がはやいか", "jlpt_level": "N1", "explanation": "刚…就立刻…（瞬间行动）"},
-  {"key": "kirai-ga-aru", "name": "〜きらいがある", "jlpt_level": "N1", "explanation": "有…的倾向（略带负面）"},
-  {"key": "zukume", "name": "〜ずくめ", "jlpt_level": "N1", "explanation": "全是…、清一色都是…"},
-  {"key": "soba-kara", "name": "〜そばから", "jlpt_level": "N1", "explanation": "一…就…（反复失效）"},
-  {"key": "tari-tomo", "name": "〜たりとも", "jlpt_level": "N1", "explanation": "哪怕是一…也…（强调最小单位）"},
-  {"key": "de-are", "name": "〜であれ", "jlpt_level": "N1", "explanation": "不论是…（都一样）"},
-  {"key": "te-yamanai", "name": "〜てやまない", "jlpt_level": "N1", "explanation": "…个不停、一直…（深切感情）"},
-  {"key": "to-atte", "name": "〜とあって", "jlpt_level": "N1", "explanation": "正因为是…（特殊情况）"},
-  {"key": "to-ie-domo", "name": "〜といえども", "jlpt_level": "N1", "explanation": "即使是…也…（书面）"},
-  {"key": "to-kitara", "name": "〜ときたら", "jlpt_level": "N1", "explanation": "说到…（抱怨、不满）"},
-  {"key": "tokoro-wo", "name": "〜ところを", "jlpt_level": "N1", "explanation": "正当…的时候（被打扰/被发现）"},
-  {"key": "to-mo-naku", "name": "〜ともなく", "jlpt_level": "N1", "explanation": "不知不觉地…、漫不经心地…"},
-  {"key": "to-mo-naru-to", "name": "〜ともなると", "jlpt_level": "N1", "explanation": "一旦到了…的地步（自然会…）"},
-  {"key": "nai-made-mo", "name": "〜ないまでも", "jlpt_level": "N1", "explanation": "即使不能…至少也…"},
-  {"key": "nara-dewa-no", "name": "〜ならではの", "jlpt_level": "N1", "explanation": "只有…才有的（独特性）"},
-  {"key": "nari-2", "name": "〜なり", "jlpt_level": "N1", "explanation": "一…就（立刻）…；（名词）…也好…也好"},
-  {"key": "ni-atte", "name": "〜にあって", "jlpt_level": "N1", "explanation": "在…的情况下（特殊环境）"},
-  {"key": "ni-katakunai", "name": "〜にかたくない", "jlpt_level": "N1", "explanation": "不难…（想象等）"},
-  {"key": "ni-taeru", "name": "〜にたえる", "jlpt_level": "N1", "explanation": "经得起…、值得…；忍受…"},
-  {"key": "ni-shite", "name": "〜にして", "jlpt_level": "N1", "explanation": "就在…时；即便是…也"},
-  {"key": "ni-hikikaete", "name": "〜にひきかえ", "jlpt_level": "N1", "explanation": "与…相反、与…形成对比"},
-  {"key": "no-itari", "name": "〜の至り", "jlpt_level": "N1", "explanation": "极其…（感激/惭愧等极限表达）"},
-  {"key": "wa-oroka", "name": "〜はおろか", "jlpt_level": "N1", "explanation": "别说…、连…都…"},
-  {"key": "majiki", "name": "〜まじき", "jlpt_level": "N1", "explanation": "不应有的…（对身份/立场来说）"},
-  {"key": "wo-yoso-ni", "name": "〜をよそに", "jlpt_level": "N1", "explanation": "不顾…、无视…"},
-  {"key": "ikan-ni-yoru", "name": "〜いかんによる", "jlpt_level": "N1", "explanation": "取决于…"},
-  {"key": "you-ga-you-de-mo", "name": "〜ようが〜まいが", "jlpt_level": "N1", "explanation": "不管…与否（意志强调）"},
-  {"key": "wo-koto-to-shite", "name": "〜をことにして", "jlpt_level": "N1", "explanation": "以…为事（专门做某事）"},
-  {"key": "beku-shite", "name": "〜べくして", "jlpt_level": "N1", "explanation": "理所当然地…（必然结果）"},
-  {"key": "koto-to-nare-ba", "name": "〜こととなれば", "jlpt_level": "N1", "explanation": "若是…的话（假定重大事件）"},
-  {"key": "ni-itatte-wa", "name": "〜に至っては", "jlpt_level": "N1", "explanation": "甚至…（程度极端的例子）"},
-  {"key": "wo-kagiri-ni", "name": "〜を限りに", "jlpt_level": "N1", "explanation": "以…为最后、从…开始不再…"},
-  {"key": "to-tari-to-mo", "name": "〜としたって", "jlpt_level": "N1", "explanation": "即使…（口语假设）"},
-  {"key": "de-mo-areba", "name": "〜ともあれ", "jlpt_level": "N1", "explanation": "不管怎样…（先搁置疑虑）"},
-  {"key": "ni-yoru-naku", "name": "〜によらず", "jlpt_level": "N1", "explanation": "不依赖…、不管…"},
-  {"key": "no-moto-to-natte", "name": "〜の元となって", "jlpt_level": "N1", "explanation": "成为…的根源"},
-  {"key": "koto-mo-arou-ni", "name": "〜ことも有ろうに", "jlpt_level": "N1", "explanation": "偏偏要…（抱怨时机不对）"}
+ {
+  "key": "ni-atatte",
+  "name": "〜にあたって",
+  "jlpt_level": "N2",
+  "explanation": "在…之际、面临…的时候（郑重）"
+ },
+ {
+  "key": "ni-oite",
+  "name": "〜において",
+  "jlpt_level": "N2",
+  "explanation": "在…方面、在…场合"
+ },
+ {
+  "key": "wo-hajime",
+  "name": "〜をはじめ",
+  "jlpt_level": "N2",
+  "explanation": "以…为首、…等等"
+ },
+ {
+  "key": "tsutsu-aru",
+  "name": "〜つつある",
+  "jlpt_level": "N2",
+  "explanation": "正在逐渐…"
+ },
+ {
+  "key": "kano-you-da",
+  "name": "〜かのようだ",
+  "jlpt_level": "N2",
+  "explanation": "仿佛、好像…一样"
+ },
+ {
+  "key": "bakari-ka",
+  "name": "〜ばかりか",
+  "jlpt_level": "N2",
+  "explanation": "不仅…而且…"
+ },
+ {
+  "key": "dokoro-ka",
+  "name": "〜どころか",
+  "jlpt_level": "N2",
+  "explanation": "别说…、岂止…反而…"
+ },
+ {
+  "key": "nimo-kakawarazu",
+  "name": "〜にもかかわらず",
+  "jlpt_level": "N2",
+  "explanation": "尽管…却…"
+ },
+ {
+  "key": "koto-naku",
+  "name": "〜ことなく",
+  "jlpt_level": "N2",
+  "explanation": "不…（地）、未曾…"
+ },
+ {
+  "key": "nuki-de",
+  "name": "〜ぬきで",
+  "jlpt_level": "N2",
+  "explanation": "去掉…、省去…"
+ },
+ {
+  "key": "yara-yara",
+  "name": "〜やら〜やら",
+  "jlpt_level": "N2",
+  "explanation": "又…又…（列举，含麻烦语气）"
+ },
+ {
+  "key": "age-suffix",
+  "name": "〜げ",
+  "jlpt_level": "N2",
+  "explanation": "显得…的样子"
+ },
+ {
+  "key": "ageku",
+  "name": "〜あげく",
+  "jlpt_level": "N2",
+  "explanation": "…的结果（多为不好结局）"
+ },
+ {
+  "key": "sue-ni",
+  "name": "〜末に",
+  "jlpt_level": "N2",
+  "explanation": "经过…最终…"
+ },
+ {
+  "key": "shidai",
+  "name": "〜次第",
+  "jlpt_level": "N2",
+  "explanation": "一…就立刻…；取决于…"
+ },
+ {
+  "key": "ue-de",
+  "name": "〜上で",
+  "jlpt_level": "N2",
+  "explanation": "在…之后再…；在…方面"
+ },
+ {
+  "key": "uru-eru",
+  "name": "〜得る",
+  "jlpt_level": "N2",
+  "explanation": "可能…、能够…"
+ },
+ {
+  "key": "kanenai",
+  "name": "〜かねない",
+  "jlpt_level": "N2",
+  "explanation": "有可能…（不好的事）"
+ },
+ {
+  "key": "zaru-wo-enai",
+  "name": "〜ざるを得ない",
+  "jlpt_level": "N2",
+  "explanation": "不得不…"
+ },
+ {
+  "key": "mai",
+  "name": "〜まい",
+  "jlpt_level": "N2",
+  "explanation": "不会…吧、绝不…"
+ },
+ {
+  "key": "uchi-ni",
+  "name": "〜うちに",
+  "jlpt_level": "N2",
+  "explanation": "趁…的时候；在…期间（不知不觉）"
+ },
+ {
+  "key": "okage-de",
+  "name": "〜おかげで",
+  "jlpt_level": "N2",
+  "explanation": "多亏…、托…的福"
+ },
+ {
+  "key": "kiri",
+  "name": "〜きり",
+  "jlpt_level": "N2",
+  "explanation": "只…、一…就再没…"
+ },
+ {
+  "key": "kuse-ni",
+  "name": "〜くせに",
+  "jlpt_level": "N2",
+  "explanation": "明明…却…（带责备语气）"
+ },
+ {
+  "key": "koso",
+  "name": "〜こそ",
+  "jlpt_level": "N2",
+  "explanation": "正是…、才…（强调）"
+ },
+ {
+  "key": "koto-da",
+  "name": "〜ことだ",
+  "jlpt_level": "N2",
+  "explanation": "应该…、最好…（劝告）"
+ },
+ {
+  "key": "koto-kara",
+  "name": "〜ことから",
+  "jlpt_level": "N2",
+  "explanation": "由于…、从…来看"
+ },
+ {
+  "key": "koto-dakara",
+  "name": "〜ことだから",
+  "jlpt_level": "N2",
+  "explanation": "既然是…（理所当然地）"
+ },
+ {
+  "key": "koto-ni",
+  "name": "〜ことに",
+  "jlpt_level": "N2",
+  "explanation": "令人感到…的是"
+ },
+ {
+  "key": "sae-ba",
+  "name": "〜さえ〜ば",
+  "jlpt_level": "N2",
+  "explanation": "只要…就…"
+ },
+ {
+  "key": "ta-totan",
+  "name": "〜たとたん",
+  "jlpt_level": "N2",
+  "explanation": "刚…就…（立即发生）"
+ },
+ {
+  "key": "tabi-ni",
+  "name": "〜たびに",
+  "jlpt_level": "N2",
+  "explanation": "每当…就…"
+ },
+ {
+  "key": "darake",
+  "name": "〜だらけ",
+  "jlpt_level": "N2",
+  "explanation": "满是…、全是…（负面）"
+ },
+ {
+  "key": "ppoi",
+  "name": "〜っぽい",
+  "jlpt_level": "N2",
+  "explanation": "看起来像…、容易…"
+ },
+ {
+  "key": "tsutsu",
+  "name": "〜つつ",
+  "jlpt_level": "N2",
+  "explanation": "一边…一边…；虽然…却…"
+ },
+ {
+  "key": "te-irai",
+  "name": "〜て以来",
+  "jlpt_level": "N2",
+  "explanation": "自从…以来"
+ },
+ {
+  "key": "to-iu-mono-da",
+  "name": "〜というものだ",
+  "jlpt_level": "N2",
+  "explanation": "这才叫做…（真正应有的状态）"
+ },
+ {
+  "key": "toori-ni",
+  "name": "〜とおりに",
+  "jlpt_level": "N2",
+  "explanation": "按照…、照…那样"
+ },
+ {
+  "key": "tokoro-ni",
+  "name": "〜ところに",
+  "jlpt_level": "N2",
+  "explanation": "正在…的时候（某事发生）"
+ },
+ {
+  "key": "to-shite-mo",
+  "name": "〜としても",
+  "jlpt_level": "N2",
+  "explanation": "即使…也…"
+ },
+ {
+  "key": "to-tomo-ni",
+  "name": "〜とともに",
+  "jlpt_level": "N2",
+  "explanation": "随着…；与…一起"
+ },
+ {
+  "key": "nai-koto-ni-wa",
+  "name": "〜ないことには",
+  "jlpt_level": "N2",
+  "explanation": "不…的话就不能…"
+ },
+ {
+  "key": "nagara-mo",
+  "name": "〜ながらも",
+  "jlpt_level": "N2",
+  "explanation": "虽然…但是…"
+ },
+ {
+  "key": "ni-kakete-wa",
+  "name": "〜にかけては",
+  "jlpt_level": "N2",
+  "explanation": "在…方面（擅长）"
+ },
+ {
+  "key": "ni-kotaete",
+  "name": "〜にこたえて",
+  "jlpt_level": "N2",
+  "explanation": "响应…、回应…"
+ },
+ {
+  "key": "ni-saishite",
+  "name": "〜にさいして",
+  "jlpt_level": "N2",
+  "explanation": "在…之际（正式）"
+ },
+ {
+  "key": "ni-shitagatte",
+  "name": "〜にしたがって",
+  "jlpt_level": "N2",
+  "explanation": "随着…、按照…"
+ },
+ {
+  "key": "ni-shite-wa",
+  "name": "〜にしては",
+  "jlpt_level": "N2",
+  "explanation": "以…来说（出乎意料）"
+ },
+ {
+  "key": "ni-shiro",
+  "name": "〜にしろ",
+  "jlpt_level": "N2",
+  "explanation": "不管…、即使是…"
+ },
+ {
+  "key": "ni-suginai",
+  "name": "〜にすぎない",
+  "jlpt_level": "N2",
+  "explanation": "只不过是…、仅仅是…"
+ },
+ {
+  "key": "ni-sotte",
+  "name": "〜にそって",
+  "jlpt_level": "N2",
+  "explanation": "沿着…、按照…"
+ },
+ {
+  "key": "ni-tsuke",
+  "name": "〜につけ",
+  "jlpt_level": "N2",
+  "explanation": "每当…就…；不管是…还是…"
+ },
+ {
+  "key": "ni-tomonatte",
+  "name": "〜にともなって",
+  "jlpt_level": "N2",
+  "explanation": "随着…、伴随着…"
+ },
+ {
+  "key": "ni-hoka-naranai",
+  "name": "〜にほかならない",
+  "jlpt_level": "N2",
+  "explanation": "无非是…、正是…"
+ },
+ {
+  "key": "ni-motozuite",
+  "name": "〜にもとづいて",
+  "jlpt_level": "N2",
+  "explanation": "根据…、基于…"
+ },
+ {
+  "key": "ni-yotte",
+  "name": "〜によって",
+  "jlpt_level": "N2",
+  "explanation": "根据…、由于…、因…而异"
+ },
+ {
+  "key": "ni-watatte",
+  "name": "〜にわたって",
+  "jlpt_level": "N2",
+  "explanation": "跨越…、遍及…（时间/范围）"
+ },
+ {
+  "key": "nuku",
+  "name": "〜ぬく",
+  "jlpt_level": "N2",
+  "explanation": "彻底…、坚持到底…"
+ },
+ {
+  "key": "no-moto-de",
+  "name": "〜のもとで",
+  "jlpt_level": "N2",
+  "explanation": "在…的基础上、在…的支持下"
+ },
+ {
+  "key": "bakari-ni",
+  "name": "〜ばかりに",
+  "jlpt_level": "N2",
+  "explanation": "就因为…才…（不好的结果）"
+ },
+ {
+  "key": "wa-mochiron",
+  "name": "〜はもちろん",
+  "jlpt_level": "N2",
+  "explanation": "…自不必说、当然…还有…"
+ },
+ {
+  "key": "hanmen",
+  "name": "〜反面",
+  "jlpt_level": "N2",
+  "explanation": "另一方面…"
+ },
+ {
+  "key": "beki",
+  "name": "〜べき",
+  "jlpt_level": "N2",
+  "explanation": "应该…、理应…"
+ },
+ {
+  "key": "hodo",
+  "name": "〜ほど",
+  "jlpt_level": "N2",
+  "explanation": "越…越…；…程度；没有…那么"
+ },
+ {
+  "key": "mama",
+  "name": "〜まま",
+  "jlpt_level": "N2",
+  "explanation": "就这样…、保持…的状态"
+ },
+ {
+  "key": "muki",
+  "name": "〜向き",
+  "jlpt_level": "N2",
+  "explanation": "适合…、朝向…"
+ },
+ {
+  "key": "muke",
+  "name": "〜向け",
+  "jlpt_level": "N2",
+  "explanation": "面向…、为了…"
+ },
+ {
+  "key": "mo-kamawazu",
+  "name": "〜もかまわず",
+  "jlpt_level": "N2",
+  "explanation": "不顾…、不管…"
+ },
+ {
+  "key": "mono-ka",
+  "name": "〜ものか",
+  "jlpt_level": "N2",
+  "explanation": "怎么可能…（反问、强烈否定）"
+ },
+ {
+  "key": "mono-ga-aru",
+  "name": "〜ものがある",
+  "jlpt_level": "N2",
+  "explanation": "有…的一面、不禁感到…"
+ },
+ {
+  "key": "mono-da",
+  "name": "〜ものだ",
+  "jlpt_level": "N2",
+  "explanation": "本应该…；以前常常…（回忆）"
+ },
+ {
+  "key": "mono-nara",
+  "name": "〜ものなら",
+  "jlpt_level": "N2",
+  "explanation": "如果可能的话…；如果你敢…"
+ },
+ {
+  "key": "mono-no",
+  "name": "〜ものの",
+  "jlpt_level": "N2",
+  "explanation": "虽然…但是…（转折）"
+ },
+ {
+  "key": "ya-ina-ya",
+  "name": "〜やいなや",
+  "jlpt_level": "N2",
+  "explanation": "一…就立刻…（瞬间）"
+ },
+ {
+  "key": "wake-ga-nai",
+  "name": "〜わけがない",
+  "jlpt_level": "N2",
+  "explanation": "不可能…、没有理由…"
+ },
+ {
+  "key": "wake-ni-wa-ikanai",
+  "name": "〜わけにはいかない",
+  "jlpt_level": "N2",
+  "explanation": "不能…、不可以…（道义/习惯上）"
+ },
+ {
+  "key": "wo-komete",
+  "name": "〜をこめて",
+  "jlpt_level": "N2",
+  "explanation": "含着…（感情）、带着…心意"
+ },
+ {
+  "key": "wo-tsuujite",
+  "name": "〜をつうじて",
+  "jlpt_level": "N2",
+  "explanation": "通过…、贯穿整个…"
+ },
+ {
+  "key": "wo-towazu",
+  "name": "〜をとわず",
+  "jlpt_level": "N2",
+  "explanation": "不论…、不管…"
+ },
+ {
+  "key": "wo-megutte",
+  "name": "〜をめぐって",
+  "jlpt_level": "N2",
+  "explanation": "围绕…、关于…（纷争）"
+ },
+ {
+  "key": "wo-moto-ni",
+  "name": "〜をもとに",
+  "jlpt_level": "N2",
+  "explanation": "以…为基础、根据…"
+ },
+ {
+  "key": "ni-totte",
+  "name": "〜にとって",
+  "jlpt_level": "N2",
+  "explanation": "对…来说"
+ },
+ {
+  "key": "ni-kanshite",
+  "name": "〜に関して",
+  "jlpt_level": "N2",
+  "explanation": "关于…"
+ },
+ {
+  "key": "ni-taishite",
+  "name": "〜に対して",
+  "jlpt_level": "N2",
+  "explanation": "对于…；与…相反"
+ },
+ {
+  "key": "ni-kurabete",
+  "name": "〜に比べて",
+  "jlpt_level": "N2",
+  "explanation": "与…相比"
+ },
+ {
+  "key": "ni-yoru-to",
+  "name": "〜によると",
+  "jlpt_level": "N2",
+  "explanation": "根据…来说"
+ },
+ {
+  "key": "to-shite",
+  "name": "〜として",
+  "jlpt_level": "N2",
+  "explanation": "作为…"
+ },
+ {
+  "key": "to-iu-koto-da",
+  "name": "〜ということだ",
+  "jlpt_level": "N2",
+  "explanation": "据说…；也就是说…"
+ },
+ {
+  "key": "to-iu-yori",
+  "name": "〜というより",
+  "jlpt_level": "N2",
+  "explanation": "与其说…不如说…"
+ },
+ {
+  "key": "noni",
+  "name": "〜のに",
+  "jlpt_level": "N2",
+  "explanation": "可是…、明明…却…（遗憾/不满）"
+ },
+ {
+  "key": "kara-to-itte",
+  "name": "〜からといって",
+  "jlpt_level": "N2",
+  "explanation": "不能因为…就…"
+ },
+ {
+  "key": "kara-ni-wa",
+  "name": "〜からには",
+  "jlpt_level": "N2",
+  "explanation": "既然…就必须…"
+ },
+ {
+  "key": "dake-de-naku",
+  "name": "〜だけでなく",
+  "jlpt_level": "N2",
+  "explanation": "不仅…而且…"
+ },
+ {
+  "key": "dake-ni",
+  "name": "〜だけに",
+  "jlpt_level": "N2",
+  "explanation": "正因为…才…"
+ },
+ {
+  "key": "toki-ni-wa",
+  "name": "〜ときには",
+  "jlpt_level": "N2",
+  "explanation": "有时候…"
+ },
+ {
+  "key": "ta-tokoro",
+  "name": "〜たところ",
+  "jlpt_level": "N2",
+  "explanation": "…的结果、做了…之后（发现）"
+ },
+ {
+  "key": "ta-tokoro-de",
+  "name": "〜たところで",
+  "jlpt_level": "N2",
+  "explanation": "即使…也没用"
+ },
+ {
+  "key": "te-koso",
+  "name": "〜てこそ",
+  "jlpt_level": "N2",
+  "explanation": "正因为…才能…（强调条件）"
+ },
+ {
+  "key": "te-mo-ii",
+  "name": "〜てもいい",
+  "jlpt_level": "N2",
+  "explanation": "可以…、…也无妨"
+ },
+ {
+  "key": "nai-de-wa-irarenai",
+  "name": "〜ないではいられない",
+  "jlpt_level": "N2",
+  "explanation": "忍不住…、不由得…"
+ },
+ {
+  "key": "zu-ni-wa-irarenai",
+  "name": "〜ずにはいられない",
+  "jlpt_level": "N2",
+  "explanation": "忍不住…、不由得…"
+ },
+ {
+  "key": "ni-kakawaru",
+  "name": "〜にかかわる",
+  "jlpt_level": "N2",
+  "explanation": "关乎…、涉及…"
+ },
+ {
+  "key": "ni-mukatte",
+  "name": "〜に向かって",
+  "jlpt_level": "N2",
+  "explanation": "朝着…方向"
+ },
+ {
+  "key": "wo-chushin-ni",
+  "name": "〜を中心に",
+  "jlpt_level": "N2",
+  "explanation": "以…为中心"
+ },
+ {
+  "key": "kara-shite",
+  "name": "〜からして",
+  "jlpt_level": "N2",
+  "explanation": "就连…（连最基本的…都）"
+ },
+ {
+  "key": "te-bakari-iru",
+  "name": "〜てばかりいる",
+  "jlpt_level": "N2",
+  "explanation": "老是…、总是…"
+ },
+ {
+  "key": "kagiri-de-wa",
+  "name": "〜かぎりでは",
+  "jlpt_level": "N2",
+  "explanation": "就…所知、在…范围内"
+ },
+ {
+  "key": "ni-kagitte",
+  "name": "〜に限って",
+  "jlpt_level": "N2",
+  "explanation": "偏偏…、只有…（讽刺）"
+ },
+ {
+  "key": "ni-kagiri",
+  "name": "〜に限り",
+  "jlpt_level": "N2",
+  "explanation": "仅限于…"
+ },
+ {
+  "key": "to-iu-to",
+  "name": "〜というと",
+  "jlpt_level": "N2",
+  "explanation": "说到…、提到…"
+ },
+ {
+  "key": "to-iu-node",
+  "name": "〜というので",
+  "jlpt_level": "N2",
+  "explanation": "因为据说…"
+ },
+ {
+  "key": "koto-ni-natte-iru",
+  "name": "〜ことになっている",
+  "jlpt_level": "N2",
+  "explanation": "按规定…、预定…"
+ },
+ {
+  "key": "you-ni-naru",
+  "name": "〜ようになる",
+  "jlpt_level": "N2",
+  "explanation": "变得…、渐渐…"
+ },
+ {
+  "key": "you-ni-suru",
+  "name": "〜ようにする",
+  "jlpt_level": "N2",
+  "explanation": "努力做到…、注意…"
+ },
+ {
+  "key": "koto-ni-suru",
+  "name": "〜ことにする",
+  "jlpt_level": "N2",
+  "explanation": "决定…"
+ },
+ {
+  "key": "koto-ni-naru",
+  "name": "〜ことになる",
+  "jlpt_level": "N2",
+  "explanation": "将会…、结果变成…"
+ },
+ {
+  "key": "hazu-da",
+  "name": "〜はずだ",
+  "jlpt_level": "N2",
+  "explanation": "理应…、按道理应该…"
+ },
+ {
+  "key": "hazu-ga-nai",
+  "name": "〜はずがない",
+  "jlpt_level": "N2",
+  "explanation": "不可能…、绝不会…"
+ },
+ {
+  "key": "wake-da",
+  "name": "〜わけだ",
+  "jlpt_level": "N2",
+  "explanation": "所以…、难怪…（解释原因）"
+ },
+ {
+  "key": "wake-de-wa-nai",
+  "name": "〜わけではない",
+  "jlpt_level": "N2",
+  "explanation": "并不是…"
+ },
+ {
+  "key": "ni-chigai-nai",
+  "name": "〜にちがいない",
+  "jlpt_level": "N2",
+  "explanation": "肯定是…、一定是…"
+ },
+ {
+  "key": "kamo-shirenai",
+  "name": "〜かもしれない",
+  "jlpt_level": "N2",
+  "explanation": "也许…、说不定…"
+ },
+ {
+  "key": "to-sureba",
+  "name": "〜とすれば",
+  "jlpt_level": "N2",
+  "explanation": "如果…的话（假设）"
+ },
+ {
+  "key": "to-suru-to",
+  "name": "〜とすると",
+  "jlpt_level": "N2",
+  "explanation": "如果…的话（推测）"
+ },
+ {
+  "key": "ba-yokatta",
+  "name": "〜ばよかった",
+  "jlpt_level": "N2",
+  "explanation": "（早知道）…就好了（后悔）"
+ },
+ {
+  "key": "nara-dewa",
+  "name": "〜ならでは",
+  "jlpt_level": "N2",
+  "explanation": "只有…才有的（特色）"
+ },
+ {
+  "key": "ni-mo-kakawarazu-2",
+  "name": "〜をものともせず",
+  "jlpt_level": "N2",
+  "explanation": "不把…放在眼里、不顾…（困难/逆境）"
+ },
+ {
+  "key": "to-iu-mono-no",
+  "name": "〜というものの",
+  "jlpt_level": "N2",
+  "explanation": "虽然说…但实际上…"
+ },
+ {
+  "key": "te-shikata-ga-nai",
+  "name": "〜てしかたがない",
+  "jlpt_level": "N2",
+  "explanation": "…得不得了、非常…"
+ },
+ {
+  "key": "te-tamaranai",
+  "name": "〜てたまらない",
+  "jlpt_level": "N2",
+  "explanation": "…得受不了、极其…"
+ },
+ {
+  "key": "de-wa-nai-ka",
+  "name": "〜ではないか",
+  "jlpt_level": "N2",
+  "explanation": "难道不是…吗（确认、感叹）"
+ },
+ {
+  "key": "kurai-nara",
+  "name": "〜くらいなら",
+  "jlpt_level": "N2",
+  "explanation": "与其…还不如…"
+ },
+ {
+  "key": "ya-ina-ya-2",
+  "name": "〜に先立って",
+  "jlpt_level": "N2",
+  "explanation": "在…之前（正式）"
+ },
+ {
+  "key": "no-ni-taishite",
+  "name": "〜のに対して",
+  "jlpt_level": "N2",
+  "explanation": "与…相对、对比…"
+ },
+ {
+  "key": "saigo-ni",
+  "name": "〜たが最後",
+  "jlpt_level": "N2",
+  "explanation": "一旦…就无法挽回"
+ },
+ {
+  "key": "te-hajimete",
+  "name": "〜てはじめて",
+  "jlpt_level": "N2",
+  "explanation": "只有…才…（经历后才意识到）"
+ },
+ {
+  "key": "nari-ni",
+  "name": "〜なりに",
+  "jlpt_level": "N2",
+  "explanation": "以自己的方式…、按照…"
+ },
+ {
+  "key": "gachida",
+  "name": "〜がちだ",
+  "jlpt_level": "N2",
+  "explanation": "容易…、动不动就…（偏向负面）"
+ },
+ {
+  "key": "ki-mi-ga-aru",
+  "name": "〜気味がある",
+  "jlpt_level": "N2",
+  "explanation": "有点…的倾向"
+ },
+ {
+  "key": "mi-ga-aru",
+  "name": "〜みがある",
+  "jlpt_level": "N2",
+  "explanation": "有…的感觉"
+ },
+ {
+  "key": "wo-kake-ni",
+  "name": "〜をかけに",
+  "jlpt_level": "N2",
+  "explanation": "以…为赌注"
+ },
+ {
+  "key": "te-kara-de-nai-to",
+  "name": "〜てからでないと",
+  "jlpt_level": "N2",
+  "explanation": "不…之后就不能…"
+ },
+ {
+  "key": "ni-taisuru",
+  "name": "〜に対する",
+  "jlpt_level": "N2",
+  "explanation": "对于…的（修饰名词）"
+ },
+ {
+  "key": "ni-okeru",
+  "name": "〜における",
+  "jlpt_level": "N2",
+  "explanation": "在…中的（修饰名词）"
+ },
+ {
+  "key": "ni-yoru",
+  "name": "〜による",
+  "jlpt_level": "N2",
+  "explanation": "根据…的（修饰名词）"
+ },
+ {
+  "key": "to-iu",
+  "name": "〜という",
+  "jlpt_level": "N2",
+  "explanation": "叫做…、所谓的…"
+ },
+ {
+  "key": "to-itte-mo",
+  "name": "〜といっても",
+  "jlpt_level": "N2",
+  "explanation": "虽说…但是…"
+ },
+ {
+  "key": "ni-ate-te",
+  "name": "〜にあてて",
+  "jlpt_level": "N2",
+  "explanation": "写给…、寄给…（书信等）"
+ },
+ {
+  "key": "te-yaru",
+  "name": "〜てやる",
+  "jlpt_level": "N2",
+  "explanation": "做给对方看（挑战/气愤）"
+ },
+ {
+  "key": "koto-wa-nai",
+  "name": "〜ことはない",
+  "jlpt_level": "N2",
+  "explanation": "没有必要…、不必…"
+ },
+ {
+  "key": "ni-wa-ataranai",
+  "name": "〜にはあたらない",
+  "jlpt_level": "N2",
+  "explanation": "不值得…、没必要…"
+ },
+ {
+  "key": "mono-demo-nai",
+  "name": "〜ものでもない",
+  "jlpt_level": "N2",
+  "explanation": "并非不能…、也可以…"
+ },
+ {
+  "key": "dake-atte",
+  "name": "〜だけあって",
+  "jlpt_level": "N2",
+  "explanation": "不愧是…、正因为是…"
+ },
+ {
+  "key": "bakari-da",
+  "name": "〜ばかりだ",
+  "jlpt_level": "N2",
+  "explanation": "只会越来越…（向坏方向）"
+ },
+ {
+  "key": "ikura-te-mo",
+  "name": "〜いくら〜ても",
+  "jlpt_level": "N2",
+  "explanation": "无论怎么…都…"
+ },
+ {
+  "key": "donna-ni-te-mo",
+  "name": "〜どんなに〜ても",
+  "jlpt_level": "N2",
+  "explanation": "无论多么…也…"
+ },
+ {
+  "key": "tsui-de-ni",
+  "name": "〜ついでに",
+  "jlpt_level": "N2",
+  "explanation": "顺便…"
+ },
+ {
+  "key": "ni-oujite",
+  "name": "〜に応じて",
+  "jlpt_level": "N2",
+  "explanation": "根据…、按照…（因情况而异）"
+ },
+ {
+  "key": "wo-fumaete",
+  "name": "〜を踏まえて",
+  "jlpt_level": "N2",
+  "explanation": "基于…、以…为基础"
+ },
+ {
+  "key": "wo-te-ni",
+  "name": "〜を手に",
+  "jlpt_level": "N2",
+  "explanation": "以…为依托、凭借着…"
+ },
+ {
+  "key": "naze-nara",
+  "name": "〜なぜなら",
+  "jlpt_level": "N2",
+  "explanation": "因为…（解释原因）"
+ },
+ {
+  "key": "sono-kekka",
+  "name": "〜その結果",
+  "jlpt_level": "N2",
+  "explanation": "其结果是…"
+ },
+ {
+  "key": "kekkyoku",
+  "name": "〜結局",
+  "jlpt_level": "N2",
+  "explanation": "最终…、结果还是…"
+ },
+ {
+  "key": "atto-iu-ma-ni",
+  "name": "〜あっという間に",
+  "jlpt_level": "N2",
+  "explanation": "转眼间…、一眨眼就…"
+ },
+ {
+  "key": "ni-sokushite",
+  "name": "〜に即して",
+  "jlpt_level": "N2",
+  "explanation": "根据…、忠实于…"
+ },
+ {
+  "key": "wo-kaishite",
+  "name": "〜を介して",
+  "jlpt_level": "N2",
+  "explanation": "通过…（中间媒介）"
+ },
+ {
+  "key": "kara-mite",
+  "name": "〜から見て",
+  "jlpt_level": "N2",
+  "explanation": "从…来看"
+ },
+ {
+  "key": "kara-sureba",
+  "name": "〜からすれば",
+  "jlpt_level": "N2",
+  "explanation": "从…角度来说"
+ },
+ {
+  "key": "ni-suru-to",
+  "name": "〜にすると",
+  "jlpt_level": "N2",
+  "explanation": "换算成…、折合…"
+ },
+ {
+  "key": "koso-are",
+  "name": "〜こそあれ",
+  "jlpt_level": "N2",
+  "explanation": "虽有…但没有…"
+ },
+ {
+  "key": "ni-atte-mo",
+  "name": "〜にあっても",
+  "jlpt_level": "N2",
+  "explanation": "即使在…的情况下"
+ },
+ {
+  "key": "te-nao",
+  "name": "〜てなお",
+  "jlpt_level": "N2",
+  "explanation": "即使…也依然…"
+ },
+ {
+  "key": "kara-koso",
+  "name": "〜からこそ",
+  "jlpt_level": "N2",
+  "explanation": "正因为…才…（强调原因）"
+ },
+ {
+  "key": "to-ii-to-ii",
+  "name": "〜といい〜といい",
+  "jlpt_level": "N2",
+  "explanation": "不管是…还是…（两方面都）"
+ },
+ {
+  "key": "ni-mo",
+  "name": "〜にも",
+  "jlpt_level": "N2",
+  "explanation": "也…（附加）"
+ },
+ {
+  "key": "de-aru-ijou",
+  "name": "〜である以上",
+  "jlpt_level": "N2",
+  "explanation": "既然是…就必须…"
+ },
+ {
+  "key": "wo-kikaini-shite",
+  "name": "〜を機会に",
+  "jlpt_level": "N2",
+  "explanation": "以…为契机、趁着…机会"
+ },
+ {
+  "key": "wo-sakaini",
+  "name": "〜を境に",
+  "jlpt_level": "N2",
+  "explanation": "以…为界、从…开始"
+ },
+ {
+  "key": "ni-ataishite",
+  "name": "〜に値して",
+  "jlpt_level": "N2",
+  "explanation": "值得…"
+ },
+ {
+  "key": "n-da-kara",
+  "name": "〜んだから",
+  "jlpt_level": "N2",
+  "explanation": "因为…（解释理由，带感情）"
+ },
+ {
+  "key": "no-dewa-nai-ka",
+  "name": "〜のではないか",
+  "jlpt_level": "N2",
+  "explanation": "不是…吗（推测/质疑）"
+ },
+ {
+  "key": "you-da-na",
+  "name": "〜ようだな",
+  "jlpt_level": "N2",
+  "explanation": "看来是…（确认推测）"
+ },
+ {
+  "key": "to-miru-to",
+  "name": "〜と見ると",
+  "jlpt_level": "N2",
+  "explanation": "一发现…就…"
+ },
+ {
+  "key": "de-aru-mono-no",
+  "name": "〜であるものの",
+  "jlpt_level": "N2",
+  "explanation": "虽然是…但是…"
+ },
+ {
+  "key": "to-wa-ie",
+  "name": "〜とはいえ",
+  "jlpt_level": "N2",
+  "explanation": "虽然说…但是…（书面）"
+ },
+ {
+  "key": "ue-kara-miru-to",
+  "name": "〜上から見ると",
+  "jlpt_level": "N2",
+  "explanation": "从…角度来看"
+ },
+ {
+  "key": "toki-wa",
+  "name": "〜ときは",
+  "jlpt_level": "N2",
+  "explanation": "在…时候"
+ },
+ {
+  "key": "yo-sono-mono",
+  "name": "〜よそのもの",
+  "jlpt_level": "N2",
+  "explanation": "局外之事"
+ },
+ {
+  "key": "ni-mo-tomonawazu",
+  "name": "〜にもとまらず",
+  "jlpt_level": "N2",
+  "explanation": "不限于…"
+ },
+ {
+  "key": "ni-mo-naku",
+  "name": "〜にもなく",
+  "jlpt_level": "N2",
+  "explanation": "不像平时那样…"
+ },
+ {
+  "key": "de-nai-to-sureba",
+  "name": "〜でないとすれば",
+  "jlpt_level": "N2",
+  "explanation": "如果不是…的话"
+ },
+ {
+  "key": "to-narou-to",
+  "name": "〜となろうと",
+  "jlpt_level": "N2",
+  "explanation": "不论变成…"
+ },
+ {
+  "key": "ka-to-iu-to",
+  "name": "〜かというと",
+  "jlpt_level": "N2",
+  "explanation": "要说是否…（接着解释）"
+ },
+ {
+  "key": "ni-yotte-wa",
+  "name": "〜によっては",
+  "jlpt_level": "N2",
+  "explanation": "有时也会…、视情况而定"
+ },
+ {
+  "key": "te-nite",
+  "name": "〜にて",
+  "jlpt_level": "N2",
+  "explanation": "在…（正式、书面表达）"
+ },
+ {
+  "key": "ka-dou-ka",
+  "name": "〜かどうか",
+  "jlpt_level": "N2",
+  "explanation": "是否…、…还是不…"
+ },
+ {
+  "key": "ni-oki-nai",
+  "name": "〜を置いて",
+  "jlpt_level": "N2",
+  "explanation": "除了…（别无他选）"
+ },
+ {
+  "key": "tte-iu-no-wa",
+  "name": "〜っていうのは",
+  "jlpt_level": "N2",
+  "explanation": "所谓的…是指…"
+ },
+ {
+  "key": "kurai-mono-da",
+  "name": "〜くらいのものだ",
+  "jlpt_level": "N2",
+  "explanation": "只有…才…（唯一）"
+ },
+ {
+  "key": "nari-tomo",
+  "name": "〜なりとも",
+  "jlpt_level": "N2",
+  "explanation": "哪怕是一点点…"
+ },
+ {
+  "key": "tachi-itte-mo",
+  "name": "〜にしても〜にしても",
+  "jlpt_level": "N2",
+  "explanation": "不管是…还是…（两种情况都一样）"
+ },
+ {
+  "key": "koto-to-te",
+  "name": "〜こととて",
+  "jlpt_level": "N2",
+  "explanation": "因为…（古风/书面）"
+ },
+ {
+  "key": "de-koso-aru",
+  "name": "〜でこそある",
+  "jlpt_level": "N2",
+  "explanation": "正是…（强调判断）"
+ },
+ {
+  "key": "mo-sara-nari",
+  "name": "〜もさることながら",
+  "jlpt_level": "N2",
+  "explanation": "…固然不用说，更…"
+ },
+ {
+  "key": "wo-shite",
+  "name": "〜をして",
+  "jlpt_level": "N2",
+  "explanation": "让…做、令…（使役）"
+ },
+ {
+  "key": "hazu-dato",
+  "name": "〜はずだった",
+  "jlpt_level": "N2",
+  "explanation": "本来应该…（结果没有）"
+ },
+ {
+  "key": "sae-sureba",
+  "name": "〜さえすれば",
+  "jlpt_level": "N2",
+  "explanation": "只要…就好了"
+ },
+ {
+  "key": "n-jyanai-ka",
+  "name": "〜んじゃないか",
+  "jlpt_level": "N2",
+  "explanation": "不就是…吗（口语推测）"
+ },
+ {
+  "key": "ni-ataisuru",
+  "name": "〜に値する",
+  "jlpt_level": "N2",
+  "explanation": "值得…"
+ },
+ {
+  "key": "kanerumono",
+  "name": "〜かねる",
+  "jlpt_level": "N2",
+  "explanation": "难以…、不便…"
+ },
+ {
+  "key": "nomi-narazu",
+  "name": "〜のみならず",
+  "jlpt_level": "N2",
+  "explanation": "不仅…而且…（书面）"
+ },
+ {
+  "key": "teiru-tokoro",
+  "name": "〜ているところ",
+  "jlpt_level": "N2",
+  "explanation": "正在…的时候"
+ },
+ {
+  "key": "ta-bakari",
+  "name": "〜たばかり",
+  "jlpt_level": "N2",
+  "explanation": "刚刚…"
+ },
+ {
+  "key": "te-hoshii",
+  "name": "〜てほしい",
+  "jlpt_level": "N2",
+  "explanation": "希望（别人）…"
+ },
+ {
+  "key": "ni-iru",
+  "name": "〜にいる",
+  "jlpt_level": "N2",
+  "explanation": "存在于…（人/动物）"
+ },
+ {
+  "key": "de-iru",
+  "name": "〜でいる",
+  "jlpt_level": "N2",
+  "explanation": "保持…的状态"
+ },
+ {
+  "key": "wo-toshite",
+  "name": "〜を通して",
+  "jlpt_level": "N2",
+  "explanation": "通过…；贯穿整个…"
+ },
+ {
+  "key": "te-iku",
+  "name": "〜ていく",
+  "jlpt_level": "N2",
+  "explanation": "逐渐…（向远方/未来变化）"
+ },
+ {
+  "key": "te-kuru",
+  "name": "〜てくる",
+  "jlpt_level": "N2",
+  "explanation": "逐渐…（到现在的变化）"
+ },
+ {
+  "key": "kanarazu-shimo",
+  "name": "〜必ずしも〜ない",
+  "jlpt_level": "N2",
+  "explanation": "未必…、不一定…"
+ },
+ {
+  "key": "taiou-shite",
+  "name": "〜に対応して",
+  "jlpt_level": "N2",
+  "explanation": "对应…、配合…"
+ },
+ {
+  "key": "atte-no",
+  "name": "〜あっての",
+  "jlpt_level": "N1",
+  "explanation": "有了…才有…、以…为前提"
+ },
+ {
+  "key": "ikan-de",
+  "name": "〜いかんで",
+  "jlpt_level": "N1",
+  "explanation": "根据…、视…而定"
+ },
+ {
+  "key": "you-ga-mai-ga",
+  "name": "〜うが〜まいが",
+  "jlpt_level": "N1",
+  "explanation": "不管是否…都…"
+ },
+ {
+  "key": "kagiri-da",
+  "name": "〜かぎりだ",
+  "jlpt_level": "N1",
+  "explanation": "非常…（感情强烈，极限感）"
+ },
+ {
+  "key": "katawara",
+  "name": "〜かたわら",
+  "jlpt_level": "N1",
+  "explanation": "一边…同时也…（两件事并行）"
+ },
+ {
+  "key": "gatera",
+  "name": "〜がてら",
+  "jlpt_level": "N1",
+  "explanation": "顺便…、借着…机会"
+ },
+ {
+  "key": "ga-hayai-ka",
+  "name": "〜がはやいか",
+  "jlpt_level": "N1",
+  "explanation": "刚…就立刻…（瞬间行动）"
+ },
+ {
+  "key": "kirai-ga-aru",
+  "name": "〜きらいがある",
+  "jlpt_level": "N1",
+  "explanation": "有…的倾向（略带负面）"
+ },
+ {
+  "key": "zukume",
+  "name": "〜ずくめ",
+  "jlpt_level": "N1",
+  "explanation": "全是…、清一色都是…"
+ },
+ {
+  "key": "soba-kara",
+  "name": "〜そばから",
+  "jlpt_level": "N1",
+  "explanation": "一…就…（反复失效）"
+ },
+ {
+  "key": "tari-tomo",
+  "name": "〜たりとも",
+  "jlpt_level": "N1",
+  "explanation": "哪怕是一…也…（强调最小单位）"
+ },
+ {
+  "key": "de-are",
+  "name": "〜であれ",
+  "jlpt_level": "N1",
+  "explanation": "不论是…（都一样）"
+ },
+ {
+  "key": "te-yamanai",
+  "name": "〜てやまない",
+  "jlpt_level": "N1",
+  "explanation": "…个不停、一直…（深切感情）"
+ },
+ {
+  "key": "to-atte",
+  "name": "〜とあって",
+  "jlpt_level": "N1",
+  "explanation": "正因为是…（特殊情况）"
+ },
+ {
+  "key": "to-ie-domo",
+  "name": "〜といえども",
+  "jlpt_level": "N1",
+  "explanation": "即使是…也…（书面）"
+ },
+ {
+  "key": "to-kitara",
+  "name": "〜ときたら",
+  "jlpt_level": "N1",
+  "explanation": "说到…（抱怨、不满）"
+ },
+ {
+  "key": "tokoro-wo",
+  "name": "〜ところを",
+  "jlpt_level": "N1",
+  "explanation": "正当…的时候（被打扰/被发现）"
+ },
+ {
+  "key": "to-mo-naku",
+  "name": "〜ともなく",
+  "jlpt_level": "N1",
+  "explanation": "不知不觉地…、漫不经心地…"
+ },
+ {
+  "key": "to-mo-naru-to",
+  "name": "〜ともなると",
+  "jlpt_level": "N1",
+  "explanation": "一旦到了…的地步（自然会…）"
+ },
+ {
+  "key": "nai-made-mo",
+  "name": "〜ないまでも",
+  "jlpt_level": "N1",
+  "explanation": "即使不能…至少也…"
+ },
+ {
+  "key": "nara-dewa-no",
+  "name": "〜ならではの",
+  "jlpt_level": "N1",
+  "explanation": "只有…才有的（独特性）"
+ },
+ {
+  "key": "nari-2",
+  "name": "〜なり",
+  "jlpt_level": "N1",
+  "explanation": "一…就（立刻）…；（名词）…也好…也好"
+ },
+ {
+  "key": "ni-atte",
+  "name": "〜にあって",
+  "jlpt_level": "N1",
+  "explanation": "在…的情况下（特殊环境）"
+ },
+ {
+  "key": "ni-katakunai",
+  "name": "〜にかたくない",
+  "jlpt_level": "N1",
+  "explanation": "不难…（想象等）"
+ },
+ {
+  "key": "ni-taeru",
+  "name": "〜にたえる",
+  "jlpt_level": "N1",
+  "explanation": "经得起…、值得…；忍受…"
+ },
+ {
+  "key": "ni-shite",
+  "name": "〜にして",
+  "jlpt_level": "N1",
+  "explanation": "就在…时；即便是…也"
+ },
+ {
+  "key": "ni-hikikaete",
+  "name": "〜にひきかえ",
+  "jlpt_level": "N1",
+  "explanation": "与…相反、与…形成对比"
+ },
+ {
+  "key": "no-itari",
+  "name": "〜の至り",
+  "jlpt_level": "N1",
+  "explanation": "极其…（感激/惭愧等极限表达）"
+ },
+ {
+  "key": "wa-oroka",
+  "name": "〜はおろか",
+  "jlpt_level": "N1",
+  "explanation": "别说…、连…都…"
+ },
+ {
+  "key": "majiki",
+  "name": "〜まじき",
+  "jlpt_level": "N1",
+  "explanation": "不应有的…（对身份/立场来说）"
+ },
+ {
+  "key": "wo-yoso-ni",
+  "name": "〜をよそに",
+  "jlpt_level": "N1",
+  "explanation": "不顾…、无视…"
+ },
+ {
+  "key": "ikan-ni-yoru",
+  "name": "〜いかんによる",
+  "jlpt_level": "N1",
+  "explanation": "取决于…"
+ },
+ {
+  "key": "you-ga-you-de-mo",
+  "name": "〜ようが〜まいが",
+  "jlpt_level": "N1",
+  "explanation": "不管…与否（意志强调）"
+ },
+ {
+  "key": "wo-koto-to-shite",
+  "name": "〜をことにして",
+  "jlpt_level": "N1",
+  "explanation": "以…为事（专门做某事）"
+ },
+ {
+  "key": "beku-shite",
+  "name": "〜べくして",
+  "jlpt_level": "N1",
+  "explanation": "理所当然地…（必然结果）"
+ },
+ {
+  "key": "koto-to-nare-ba",
+  "name": "〜こととなれば",
+  "jlpt_level": "N1",
+  "explanation": "若是…的话（假定重大事件）"
+ },
+ {
+  "key": "ni-itatte-wa",
+  "name": "〜に至っては",
+  "jlpt_level": "N1",
+  "explanation": "甚至…（程度极端的例子）"
+ },
+ {
+  "key": "wo-kagiri-ni",
+  "name": "〜を限りに",
+  "jlpt_level": "N1",
+  "explanation": "以…为最后、从…开始不再…"
+ },
+ {
+  "key": "to-tari-to-mo",
+  "name": "〜としたって",
+  "jlpt_level": "N1",
+  "explanation": "即使…（口语假设）"
+ },
+ {
+  "key": "de-mo-areba",
+  "name": "〜ともあれ",
+  "jlpt_level": "N1",
+  "explanation": "不管怎样…（先搁置疑虑）"
+ },
+ {
+  "key": "ni-yoru-naku",
+  "name": "〜によらず",
+  "jlpt_level": "N1",
+  "explanation": "不依赖…、不管…"
+ },
+ {
+  "key": "no-moto-to-natte",
+  "name": "〜の元となって",
+  "jlpt_level": "N1",
+  "explanation": "成为…的根源"
+ },
+ {
+  "key": "koto-mo-arou-ni",
+  "name": "〜ことも有ろうに",
+  "jlpt_level": "N1",
+  "explanation": "偏偏要…（抱怨时机不对）"
+ },
+ {
+  "key": "jlpt-ba5f67ca56db",
+  "name": "～以外の何ものでもない",
+  "jlpt_level": "N1",
+  "explanation": "表示强调，“不是别的，正是……”"
+ },
+ {
+  "key": "jlpt-633bd20d4e83",
+  "name": "～いかんで/いかんでは/いかんによっては/いかんにかかっている/いかんだ",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的关联，根据前项不同，后项会采取相应措施。“取决于……”“根据……”。 表示前后两项的关联，前项会如何取决于后项。“……（会怎样），要看…”“取决于……”"
+ },
+ {
+  "key": "jlpt-ddefebd44a5f",
+  "name": "～いかんにかかわらず/いかんによらず/いかんをとわず",
+  "jlpt_level": "N1",
+  "explanation": "表示不论前项如何，后项都不改变。“不管……（如何）”“不论……（如何）”"
+ },
+ {
+  "key": "jlpt-0b10a5e7f82d",
+  "name": "いざ～となると/いざ～となれば/いざ～となったら",
+  "jlpt_level": "N1",
+  "explanation": "表示假设，“一旦真的要……的话，就会……”。 “一旦发生问题……”“一旦有情况……”“万一……”“到了关键时刻，就会……”“一旦……就会”"
+ },
+ {
+  "key": "jlpt-b952abfd5483",
+  "name": "今ひとつ～（ない）",
+  "jlpt_level": "N1",
+  "explanation": "表示评价，“还差一点”“还有欠缺”"
+ },
+ {
+  "key": "jlpt-c1e1f5a3231a",
+  "name": "言わずもがな",
+  "jlpt_level": "N1",
+  "explanation": "“不应该说的……”“不说为妙的……”。 表示前后两项的关联，不仅前项，后项也是同样。“……自不必说，……（也）”"
+ },
+ {
+  "key": "jlpt-0a55e0e659d4",
+  "name": "～（よ）うが/（よ）うと",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，无论前项如何，后项都不会有太大变化。“无论……都……”“即使……也……”“不管……也……”"
+ },
+ {
+  "key": "jlpt-99f9fb169dd4",
+  "name": "～（よ）うが～（よ）うが/（よ）うと～（よ）うと",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，“无论……也好，……也好，都……”"
+ },
+ {
+  "key": "jlpt-eb87d844dfc6",
+  "name": "～（よ）うが～まいが/（よ）うと～まいと",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，无论前项做或不做，结果都不会改变（后项都成立）。“无论是……还是……”“无论是否……都……”"
+ },
+ {
+  "key": "jlpt-42892df0cf8a",
+  "name": "～（よ）うとも/くとも",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，无论前项如何，或者不管前项到了什么程度，后项都不会有改变。“无论……都……”“即使……也……”“不管……也……”"
+ },
+ {
+  "key": "jlpt-1d8e6061590d",
+  "name": "～（よ）うにも～ない",
+  "jlpt_level": "N1",
+  "explanation": "表示无法做到某事，“即使想……也不能……”“即使想……也没办法……”"
+ },
+ {
+  "key": "jlpt-9659d583e0fd",
+  "name": "～か否か",
+  "jlpt_level": "N1",
+  "explanation": "“是否……”"
+ },
+ {
+  "key": "jlpt-d12fbe52bafe",
+  "name": "～限りだ",
+  "jlpt_level": "N1",
+  "explanation": "表示一种强烈的感情，“无比……”“非常……”“……极了”"
+ },
+ {
+  "key": "jlpt-040d25febc01",
+  "name": "～が最後/たら最後",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件，“一旦……就……”"
+ },
+ {
+  "key": "jlpt-cba7e004f40e",
+  "name": "～かたがた",
+  "jlpt_level": "N1",
+  "explanation": "表示某个行为同时具有两个目的，“顺便……”"
+ },
+ {
+  "key": "jlpt-4c739f35fb99",
+  "name": "～が早いか",
+  "jlpt_level": "N1",
+  "explanation": "表示前项动作发生后紧接着进行下一个动作，或在某个瞬间发生了什么情况。“刚刚……就……”"
+ },
+ {
+  "key": "jlpt-ab441ee12d46",
+  "name": "～からある/からする/からの",
+  "jlpt_level": "N1",
+  "explanation": "表示强调，强调大、多、重、长等。“足有……”“竟有……”“多达……”“高达……”“重达……”"
+ },
+ {
+  "key": "jlpt-79eca65e388e",
+  "name": "～嫌いがある",
+  "jlpt_level": "N1",
+  "explanation": "表示倾向、特征，“有……的倾向”“有点……”"
+ },
+ {
+  "key": "jlpt-d37db1349748",
+  "name": "～極まる/極まりない",
+  "jlpt_level": "N1",
+  "explanation": "表示说话人很强烈的语气，“极其……”“非常……”"
+ },
+ {
+  "key": "jlpt-eca8e639e69c",
+  "name": "～ごとき/ごとく/ごとし",
+  "jlpt_level": "N1",
+  "explanation": "表示比喻、举例，“像……一样”“如……”“就像……”。 表示一种语气，“……之类的（又怎能……呢）”“……等（怎么能够……呢）”"
+ },
+ {
+  "key": "jlpt-0c065ee9a7e8",
+  "name": "～ことだし",
+  "jlpt_level": "N1",
+  "explanation": "用来陈述其中的一个理由，“也因为……”"
+ },
+ {
+  "key": "jlpt-76f297a4d50b",
+  "name": "～ことなしに",
+  "jlpt_level": "N1",
+  "explanation": "表示假定的条件，如果没有前项就很难有后项。“如果不……就（不能）……”“如果没有……就（无法）……”。 表示附带关系，“没有……就……”。表示在没有做某件事的状态下，就进行了后项的"
+ },
+ {
+  "key": "jlpt-a4773e8f787c",
+  "name": "～ことのないよう",
+  "jlpt_level": "N1",
+  "explanation": "表示目的，为了防止出现前项的情况应当采取措施。“为了不要……，（应该）……”"
+ },
+ {
+  "key": "jlpt-1ac1136875eb",
+  "name": "～こともあって",
+  "jlpt_level": "N1",
+  "explanation": "表示其中的一个原因，“也是由于……”“再加上……的原因”"
+ },
+ {
+  "key": "jlpt-2a62c5d588af",
+  "name": "～始末だ",
+  "jlpt_level": "N1",
+  "explanation": "表示结果，“最终（沦落到）……”“到了……的地步”"
+ },
+ {
+  "key": "jlpt-37ec90fe48c0",
+  "name": "～ずじまいだ",
+  "jlpt_level": "N1",
+  "explanation": "表示结果，“最终未能……”“结果还是没能……”"
+ },
+ {
+  "key": "jlpt-b82d38b94cdd",
+  "name": "～ずにはおかない/ないではおかない",
+  "jlpt_level": "N1",
+  "explanation": "表示对事情的评价或者一种强烈的意志。“肯定会使……”“必然会引起……”“一定会让……”"
+ },
+ {
+  "key": "jlpt-b38760d5d5da",
+  "name": "～ずにはすまない/ないではすまない",
+  "jlpt_level": "N1",
+  "explanation": "表示从自己的责任感、周围的情况、社会性的常识等方面考虑，必须要做某事。“一定要……”“不……的话（心里过意不去）”“不……的话说不过去”"
+ },
+ {
+  "key": "jlpt-7f642a798614",
+  "name": "～術がない",
+  "jlpt_level": "N1",
+  "explanation": "表示无可奈何、没有任何办法。“没有办法做到……”"
+ },
+ {
+  "key": "jlpt-8b446170965e",
+  "name": "～（で）すら",
+  "jlpt_level": "N1",
+  "explanation": "表示强调，“甚至……”“连……”"
+ },
+ {
+  "key": "jlpt-b4651ee96e65",
+  "name": "～そびれる",
+  "jlpt_level": "N1",
+  "explanation": "表示结果，由于某种原因错过了做某事，或者未能完成某事。“错过机会最终没能……”"
+ },
+ {
+  "key": "jlpt-7648b5e30f22",
+  "name": "（ひとり）～だけでなく/のみならず",
+  "jlpt_level": "N1",
+  "explanation": "表示不限定，不仅前项，后项也如此。“不仅……（而且）……”"
+ },
+ {
+  "key": "jlpt-3188090652b3",
+  "name": "～だけましだ",
+  "jlpt_level": "N1",
+  "explanation": "“幸好……”“好在……”"
+ },
+ {
+  "key": "jlpt-bb3bfdb08868",
+  "name": "ただ～のみだ",
+  "jlpt_level": "N1",
+  "explanation": "表示限定，“只能……”“只好是……”"
+ },
+ {
+  "key": "jlpt-099b35ffe64c",
+  "name": "～だに",
+  "jlpt_level": "N1",
+  "explanation": "表示强调，“就连……”“压根（没）……”“连……都……”"
+ },
+ {
+  "key": "jlpt-7bf23b1fdc5e",
+  "name": "～ためしがない",
+  "jlpt_level": "N1",
+  "explanation": "表示从未做过某事或者未曾有过某种经历。“从来没有……”“不曾……”"
+ },
+ {
+  "key": "jlpt-5352d51f6cdc",
+  "name": "～たらきりがない/ばきりがない",
+  "jlpt_level": "N1",
+  "explanation": "表示“若是……的话，就没完没了”“一旦……，就没完没了”"
+ },
+ {
+  "key": "jlpt-6519c36faf52",
+  "name": "～たる/たるもの",
+  "jlpt_level": "N1",
+  "explanation": "表示对某种特殊身份或者从事某种职业的人的要求和希望。“作为……，（应该）……”"
+ },
+ {
+  "key": "jlpt-d21ee7dc401d",
+  "name": "～であれ/であろうと",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，无论前项如何，后项都不改变。“无论……如何，都（不）……”“不管……怎样，都（不）……”"
+ },
+ {
+  "key": "jlpt-47b87e995891",
+  "name": "～であれ～であれ/～であろうと～であろうと/～だろうが～だろうが",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，无论前项如何，后项的要求都是一样的。“无论是……还是……，都……”"
+ },
+ {
+  "key": "jlpt-64c2e2b9c95a",
+  "name": "～てからというもの",
+  "jlpt_level": "N1",
+  "explanation": "表示自从某件事情发生后，后项发生了很大的变化。“自从……之后”"
+ },
+ {
+  "key": "jlpt-f6b239955bae",
+  "name": "～てしかるべきだ",
+  "jlpt_level": "N1",
+  "explanation": "表示做某事本是理所应当的，但是目前的状态却不是如此。“理应……”“应当……”"
+ },
+ {
+  "key": "jlpt-25680be2f623",
+  "name": "～でなくてなんだろう",
+  "jlpt_level": "N1",
+  "explanation": "表示强调，“不是……又是什么呢”“这就是……”"
+ },
+ {
+  "key": "jlpt-7db3ba9649f7",
+  "name": "～ではあるまいし/じゃあるまいし",
+  "jlpt_level": "N1",
+  "explanation": "表示原因、理由，“又不是……（所以没必要）……”"
+ },
+ {
+  "key": "jlpt-4772303166c0",
+  "name": "～てはかなわない",
+  "jlpt_level": "N1",
+  "explanation": "强调主观的一种情绪、感受，“……的话，让人受不了”“如果……的话，就没有办法了”"
+ },
+ {
+  "key": "jlpt-23697b606776",
+  "name": "～ては～ては",
+  "jlpt_level": "N1",
+  "explanation": "表示动作或者现象的重复出现，“……又……，……又……”"
+ },
+ {
+  "key": "jlpt-c76053eb3613",
+  "name": "～て憚らない",
+  "jlpt_level": "N1",
+  "explanation": "用来描述他人的言论，“公然断言……”“毫不顾忌……”“肆无忌惮地说……”"
+ },
+ {
+  "key": "jlpt-23d72a5d5ee8",
+  "name": "～てはやりきれない",
+  "jlpt_level": "N1",
+  "explanation": "强调主观的感受和情绪，表示某事让人无法忍受、无法接受，“……的话，让人受不了”“……的话，接受不了”"
+ },
+ {
+  "key": "jlpt-c90030ac6b7c",
+  "name": "～てまで",
+  "jlpt_level": "N1",
+  "explanation": "表示程度。“甚至不惜……”。为达到某种目的，甚至不惜做出超乎寻常的事情"
+ },
+ {
+  "key": "jlpt-f953880c9d40",
+  "name": "～ても差し支えない",
+  "jlpt_level": "N1",
+  "explanation": "表示不影响、没有妨碍。“即使……也没有关系”"
+ },
+ {
+  "key": "jlpt-198f9dfc094b",
+  "name": "～でもしたら",
+  "jlpt_level": "N1",
+  "explanation": "表示假设，“一旦……的话，就会……”、“如果……就（糟了）……”"
+ },
+ {
+  "key": "jlpt-fd8184cdb571",
+  "name": "～ても知らない",
+  "jlpt_level": "N1",
+  "explanation": "“如果（你）继续……的话，我可不管了”“如果再……的话，可就……”"
+ },
+ {
+  "key": "jlpt-52b5b059a29c",
+  "name": "～でもって",
+  "jlpt_level": "N1",
+  "explanation": "表示手段和方法，“用……”“以……”“凭借……”"
+ },
+ {
+  "key": "jlpt-84b7c30d2a6d",
+  "name": "～てもどうにもならない/てもどうなるものでもない",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，即使做了前项也解决不了问题。“即使……也无济于事”"
+ },
+ {
+  "key": "jlpt-95fb5ddf7743",
+  "name": "～てもともとだ",
+  "jlpt_level": "N1",
+  "explanation": "表示内心的一种想法，“……的话也无所谓”“原本也没有抱太大希望……”"
+ },
+ {
+  "key": "jlpt-16cf76b347be",
+  "name": "～でも何でもない/くも何ともない",
+  "jlpt_level": "N1",
+  "explanation": "表示强烈的否定，“一点也不……”“根本不……”“什么都不……”"
+ },
+ {
+  "key": "jlpt-bbd494e52421",
+  "name": "～ても始まらない",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，多指前项的动作没有太大意义。“即使……也无济于事”"
+ },
+ {
+  "key": "jlpt-812f2d1ba559",
+  "name": "～と（が）相まって/も相まって",
+  "jlpt_level": "N1",
+  "explanation": "表示附加关系，两个因素相互作用，使得状态和效果更加明显。“A和B相辅相成、相互作用，（使得）……（更加）”"
+ },
+ {
+  "key": "jlpt-ed021b085c71",
+  "name": "～とあっては",
+  "jlpt_level": "N1",
+  "explanation": "表示假设，用来描述某种特别的情况，“若是……的话，就会……”。后项叙述在那种状态下应该采取的行动或者发生的事情"
+ },
+ {
+  "key": "jlpt-3a283ec18f75",
+  "name": "～とあれば",
+  "jlpt_level": "N1",
+  "explanation": "表示假设，如果为了前项的事情，可以尽最大努力或者既然前项如此，就不得不做后项的事情。“如果是……”“既然是……就（不得不）……”"
+ },
+ {
+  "key": "jlpt-4ec8ee040820",
+  "name": "～というか～というか",
+  "jlpt_level": "N1",
+  "explanation": "表示对人或事情的评价，“不知道该说是……好呢，还是说是……好呢，总之……”“是……呢，还是……呢，总之……”"
+ },
+ {
+  "key": "jlpt-0dd7a7ed32c0",
+  "name": "～というところだ/といったところだ",
+  "jlpt_level": "N1",
+  "explanation": "表示界限、范围，“大概是……”“大致上……”“最多不过是……”"
+ },
+ {
+  "key": "jlpt-8f039f7d741a",
+  "name": "～というもの",
+  "jlpt_level": "N1",
+  "explanation": "描述最近很长的一段时间内一直处于某种状态，“这段时间以来……”"
+ },
+ {
+  "key": "jlpt-af7cdb677c6a",
+  "name": "～と言えなくもない",
+  "jlpt_level": "N1",
+  "explanation": "表示消极的肯定，有某种可能性或者可以那样评价。“也可以说是……”“也能说是……”"
+ },
+ {
+  "key": "jlpt-23f981ce2345",
+  "name": "～といったらありはしない/といったらありゃしない/といったらない/ったらない/ったらありゃしない",
+  "jlpt_level": "N1",
+  "explanation": "用来强调心情或者描述一种状态，“……极了”“没有比……更……”。 “极其……”“非常……”“无比……”，是 「といったらありゃしない」 的口语形式"
+ },
+ {
+  "key": "jlpt-32bc7335213b",
+  "name": "～といって～ない/といった～ない",
+  "jlpt_level": "N1",
+  "explanation": "“并没有特别值得一提的……”"
+ },
+ {
+  "key": "jlpt-cda650f0c0ad",
+  "name": "～といわず～といわず",
+  "jlpt_level": "N1",
+  "explanation": "表示列举，其中A和B是两个具有代表性的事物，暗示其他的也是如此。“不论……还是……”“……也好……也好”"
+ },
+ {
+  "key": "jlpt-6a7f57098a3b",
+  "name": "～と（は）打って変わって",
+  "jlpt_level": "N1",
+  "explanation": "表示和过去相比发生了根本性的变化，而且这种变化大多在短时间内发生，让人惊讶。与过去形成鲜明的对比。“和……截然不同”“和……大不一样”"
+ },
+ {
+  "key": "jlpt-eb965884512f",
+  "name": "～（か）と思いきや",
+  "jlpt_level": "N1",
+  "explanation": "表达一种惊讶、意外的语气。“原以为……但出乎意料的是……”“本来以为……却……”“刚刚……就……”"
+ },
+ {
+  "key": "jlpt-a8d51c424bb0",
+  "name": "～としたことが",
+  "jlpt_level": "N1",
+  "explanation": "用来批评某人做了一些与其自身能力不符的事情或者用来自嘲、自我批评。“像……那样的人，（竟然）……”“作为……却……”"
+ },
+ {
+  "key": "jlpt-5758a5654cee",
+  "name": "～としたって/としたところで/にしたところで/にしたって",
+  "jlpt_level": "N1",
+  "explanation": "表示让步转折，即使在前项的条件下，后项也不成立。“即使……也……”“就算……也……”"
+ },
+ {
+  "key": "jlpt-d008734ec222",
+  "name": "～として～ない",
+  "jlpt_level": "N1",
+  "explanation": "表示全面否定，“没有（一人）……”“没有（一个）……”“没有（一天）……”“没有（一刻）……”“从来没有……过”"
+ },
+ {
+  "key": "jlpt-bca2c3ff1fe1",
+  "name": "～とて",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件的逆接，“即使……也不例外”“即使是……也……”“甚至……”“就连……”。 表示假定条件的逆接，无论前项怎样，后项的原则都是一样的。“即使……也……”“即便……也……”"
+ },
+ {
+  "key": "jlpt-7216e996607e",
+  "name": "～とは/なんて",
+  "jlpt_level": "N1",
+  "explanation": "表示出现意外的情况时的惊讶、意外的语气。“居然……”"
+ },
+ {
+  "key": "jlpt-59a413365270",
+  "name": "～とはいうものの/とは言い条",
+  "jlpt_level": "N1",
+  "explanation": "表示让步转折，承认前项，但是后项的事态仍然没有改变。“虽说……但是……”"
+ },
+ {
+  "key": "jlpt-cac737a14890",
+  "name": "～とばかりに",
+  "jlpt_level": "N1",
+  "explanation": "用来描述对方的动作、神态、表情等。“像……的样子”“几乎就要……似的”"
+ },
+ {
+  "key": "jlpt-c4eb1257158f",
+  "name": "～とまではいかないが/とまではいかないとしても",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的对比，就算达不到前项的程度，但是至少会做到后项的事情。“虽然达不到……的程度，但是（至少）……”"
+ },
+ {
+  "key": "jlpt-af76c52fce1e",
+  "name": "～とまでは言わないが/とまでは言わないとしても",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的对比，就算不要求做到前项，但是至少应该要做后项。“即使不说……但至少……”"
+ },
+ {
+  "key": "jlpt-9de52d39e533",
+  "name": "～ともあろうものが",
+  "jlpt_level": "N1",
+  "explanation": "表示有一定社会地位、职位或者身份的人做出了与其身份、地位不符合的事情。“身为……竟然……”“是那样身份的人，却……”"
+ },
+ {
+  "key": "jlpt-a1d0bb977e4d",
+  "name": "～ともなく/ともなしに",
+  "jlpt_level": "N1",
+  "explanation": "表示无意间做某事的时候，突然发现了意外的、新的情况。“漫不经心地……”“无意识地……”"
+ },
+ {
+  "key": "jlpt-ca46671299bd",
+  "name": "～ともなると/ともなれば",
+  "jlpt_level": "N1",
+  "explanation": "表示评价的角度，“一到……的时候”“一旦……的话”"
+ },
+ {
+  "key": "jlpt-94b8369c6e44",
+  "name": "～と/に～を重ねて",
+  "jlpt_level": "N1",
+  "explanation": "“反复……”“屡次……”“历经……”。表示经过反复尝试终于得到了某种来之不易的结果"
+ },
+ {
+  "key": "jlpt-682c7d9a3658",
+  "name": "～ないではない/ないでもない",
+  "jlpt_level": "N1",
+  "explanation": "表示前项所提及的事情也是有可能的，但是往往很难实现。“并不是不……”“并非是……”“不是不……”"
+ },
+ {
+  "key": "jlpt-9929d30627d6",
+  "name": "～ないものでもない",
+  "jlpt_level": "N1",
+  "explanation": "表示在某个前提条件下，后项也有可能成立。“不是不……”“未必不……”“有可能……”"
+ },
+ {
+  "key": "jlpt-7e127e23a9c6",
+  "name": "～ながらに/ながらの",
+  "jlpt_level": "N1",
+  "explanation": "表示状态，“保持……的状态”“一边……一边……”"
+ },
+ {
+  "key": "jlpt-6bcc45b5f7b5",
+  "name": "～なくして（は）",
+  "jlpt_level": "N1",
+  "explanation": "表示假设，“如果没有……，就（不能）……”"
+ },
+ {
+  "key": "jlpt-9bc5e0913a81",
+  "name": "～なくはない/なくもない",
+  "jlpt_level": "N1",
+  "explanation": "表示前项的事情也是有可能的或者前项的动作行为也是成立的。“也有可能……”“也不是不……”"
+ },
+ {
+  "key": "jlpt-6429fad4bb30",
+  "name": "～なしに/なしには/なしでは",
+  "jlpt_level": "N1",
+  "explanation": "表示假定，“如果没有……就不能……”。 表示附带关系，“没有……的状态下，就……”"
+ },
+ {
+  "key": "jlpt-053cf6f39c61",
+  "name": "～ならいざしらず",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的比较。“如果……的话，另当别论，但是……的话（就很严重了）”“如果……的话，还情有可原，但是……（是不能允许的）”"
+ },
+ {
+  "key": "jlpt-aa76180ef897",
+  "name": "～ならでは/ならではの",
+  "jlpt_level": "N1",
+  "explanation": "多用于强调地方的特色、某人独有的才能、某个群体、某个区域所独有的特征等。“只有……才具备的……”“……独特的……”"
+ },
+ {
+  "key": "jlpt-619466e68f73",
+  "name": "～なり～なり",
+  "jlpt_level": "N1",
+  "explanation": "表示列举，“……也好，……也好”“可以……或者……”"
+ },
+ {
+  "key": "jlpt-404963b94863",
+  "name": "～なりに/なりの",
+  "jlpt_level": "N1",
+  "explanation": "表示判断的立场，“以……（某人）自己的方式”“与……相应的”“与……相符的”"
+ },
+ {
+  "key": "jlpt-19ed5402a13c",
+  "name": "～に値する/に値しない",
+  "jlpt_level": "N1",
+  "explanation": "表示值不值得做某事。“值得……”“不值得……”"
+ },
+ {
+  "key": "jlpt-e7e749208bee",
+  "name": "～に（は）あたらない",
+  "jlpt_level": "N1",
+  "explanation": "表示没有必要做某事。“不必……”“用不着……”"
+ },
+ {
+  "key": "jlpt-1b0d514e1591",
+  "name": "～にあって（は）/にあっても",
+  "jlpt_level": "N1",
+  "explanation": "描述某种场合、时间、情况，“处于……”“在……之下”"
+ },
+ {
+  "key": "jlpt-878dd6d1cedb",
+  "name": "～に至って/に至る/に至っては/に至っても",
+  "jlpt_level": "N1",
+  "explanation": "表示程度、结果、范围等。“到……为止”。 表示顺接，“既然事情已经到了……的地步”。 “提到……”“谈到……”，用于引出话题。 表示逆接，即使到了某个极端的阶段，仍然（没有）改变"
+ },
+ {
+  "key": "jlpt-78eb5fb665a5",
+  "name": "～に至るまで",
+  "jlpt_level": "N1",
+  "explanation": "表示程度、范围等。“从……到……”“甚至连……也……”“以至于……”"
+ },
+ {
+  "key": "jlpt-4325e4dc70f6",
+  "name": "～に負うところが多い/に負うところが大きい",
+  "jlpt_level": "N1",
+  "explanation": "表示承蒙某人某事的恩惠，“得益于……”“多亏了……”"
+ },
+ {
+  "key": "jlpt-5139356a3e2a",
+  "name": "～におかれましては",
+  "jlpt_level": "N1",
+  "explanation": "提示前项的人或事，“关于……”“至于……”"
+ },
+ {
+  "key": "jlpt-5eee96b3f122",
+  "name": "～に（は）及ばない",
+  "jlpt_level": "N1",
+  "explanation": "表示没有必要做某事，“不必……”“没必要……”。 表示无法企及、无法达到某种程度或者比不上前项。“比不上……”“不及……”"
+ },
+ {
+  "key": "jlpt-fbcf2dfcb142",
+  "name": "～に欠かせない/が欠かせない",
+  "jlpt_level": "N1",
+  "explanation": "“在……方面不可或缺的”“必不可少的”"
+ },
+ {
+  "key": "jlpt-fbd77bf4c1ce",
+  "name": "～にかかったら/にかかっては/にかかると",
+  "jlpt_level": "N1",
+  "explanation": "提示主语，“说到……”“提到……”"
+ },
+ {
+  "key": "jlpt-0a6bb6859f06",
+  "name": "～にかかっている",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的关联，后项会产生什么样的结果，全凭前项的条件。“取决于……”“全凭……”"
+ },
+ {
+  "key": "jlpt-0a130d0f14fe",
+  "name": "～に限ったことではない",
+  "jlpt_level": "N1",
+  "explanation": "“不是……所独有的问题”"
+ },
+ {
+  "key": "jlpt-48d0dda59b4c",
+  "name": "～にかこつけて",
+  "jlpt_level": "N1",
+  "explanation": "“以……为托词”“以……为借口”"
+ },
+ {
+  "key": "jlpt-9fc6338371fe",
+  "name": "～にかまけて",
+  "jlpt_level": "N1",
+  "explanation": "“忙于……”"
+ },
+ {
+  "key": "jlpt-0eed02c7a76d",
+  "name": "～に越したことはない",
+  "jlpt_level": "N1",
+  "explanation": "“最好是……”“莫过于……”“……的话就再好不过了”。多用在表示一些常识性的东西或者认为是理所当然的事情"
+ },
+ {
+  "key": "jlpt-f339a8f72f42",
+  "name": "～に如くはない",
+  "jlpt_level": "N1",
+  "explanation": "“不如……”“最好……”"
+ },
+ {
+  "key": "jlpt-1ae02fc57d31",
+  "name": "～に忍びない",
+  "jlpt_level": "N1",
+  "explanation": "表示对于某件事情难以忍受或者觉得很痛心。“不忍心……”“不堪……”"
+ },
+ {
+  "key": "jlpt-10065145e7a0",
+  "name": "～に準じ/に準じて/に準じる",
+  "jlpt_level": "N1",
+  "explanation": "表示以前项的规格和标准处理后项事情。“以……为标准”“按照……对待”"
+ },
+ {
+  "key": "jlpt-954a41b3aa5c",
+  "name": "～に即して/に即した/に則して/に則した",
+  "jlpt_level": "N1",
+  "explanation": "表示根据、依据。“按照……”“依据……”。表示规矩、规则时，常写作 「に則して」 「に則した」"
+ },
+ {
+  "key": "jlpt-9eb0d8fb8116",
+  "name": "～にたえる/にたえない",
+  "jlpt_level": "N1",
+  "explanation": "表示前项的某事、某物具有一定的价值，“值得……”。 表示评价，“无法……”“不值得……”。 表示一种情感，“非常……”“极其……”"
+ },
+ {
+  "key": "jlpt-ea43b51366f5",
+  "name": "～に足りる/に足る",
+  "jlpt_level": "N1",
+  "explanation": "表示评价，某事、某物达到了某种程度或者要求。“值得……”“足以……”"
+ },
+ {
+  "key": "jlpt-db8443217d87",
+  "name": "～に足りない/に足らない",
+  "jlpt_level": "N1",
+  "explanation": "表示评价，某事、某物不足以那样去做。“不值得……”“不足以……”"
+ },
+ {
+  "key": "jlpt-58fc043d3cd5",
+  "name": "～に照らして",
+  "jlpt_level": "N1",
+  "explanation": "表示动作、行为的依据，“依照……”“对照……”"
+ },
+ {
+  "key": "jlpt-3c32242a19d5",
+  "name": "～にとどまらず",
+  "jlpt_level": "N1",
+  "explanation": "“不仅停留在……而且（还波及）……”。表示不仅限定在某项范围内，甚至还涉及其他的地域和空间"
+ },
+ {
+  "key": "jlpt-51356b9d93b4",
+  "name": "～に則って",
+  "jlpt_level": "N1",
+  "explanation": "表示动作、行为的依据，“依据……”“按照……”“效法……”“遵照……”"
+ },
+ {
+  "key": "jlpt-6ef71e9539a2",
+  "name": "～には無理がある",
+  "jlpt_level": "N1",
+  "explanation": "“……方面有不合理的地方”“……有行不通的地方”“……方面有不切合实际的地方”"
+ },
+ {
+  "key": "jlpt-791caf98b522",
+  "name": "～にひきかえ/にひきかえて",
+  "jlpt_level": "N1",
+  "explanation": "表示对比，“与……相反”“与……不同”"
+ },
+ {
+  "key": "jlpt-8d464e8b3877",
+  "name": "～にもほどがある",
+  "jlpt_level": "N1",
+  "explanation": "用于告诫对方做事情要适可而止或者表示“实在太过分”的语气。“……也应该有个度”“……也应该有分寸”"
+ },
+ {
+  "key": "jlpt-f95e9442e91d",
+  "name": "～にも増して",
+  "jlpt_level": "N1",
+  "explanation": "“比……更加……”“超过……”"
+ },
+ {
+  "key": "jlpt-929a3a9efe4e",
+  "name": "～によるところが大きい",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的关联，某件事情在很大程度上依赖后项，跟后项有密不可分的关系。“得益于……”“多亏了……”“主要依赖于……”“原因在于……”"
+ },
+ {
+  "key": "jlpt-b94753ea3812",
+  "name": "～の至りだ",
+  "jlpt_level": "N1",
+  "explanation": "表示达到极致、处于最高状态的语气，“非常……”“……至极”。多用一些固定搭配"
+ },
+ {
+  "key": "jlpt-9d8e5e977a25",
+  "name": "～の極みだ",
+  "jlpt_level": "N1",
+  "explanation": "表示程度达到了极限，“极其……”“……至极”“没有比……更……”"
+ },
+ {
+  "key": "jlpt-59d861241825",
+  "name": "～のなんの",
+  "jlpt_level": "N1",
+  "explanation": "列举其中一个有代表性的言论，“又是说……又是说什么的”“说这说那的”"
+ },
+ {
+  "key": "jlpt-e6a0ded2a05f",
+  "name": "（ただ）～のみならず/のみか",
+  "jlpt_level": "N1",
+  "explanation": "表示不限定，不仅前项，后项也是如此。“不仅……”“不只……”"
+ },
+ {
+  "key": "jlpt-10e4fb2998ae",
+  "name": "～ばこそ",
+  "jlpt_level": "N1",
+  "explanation": "强调原因，正因为前项才有了后项的结果或者正因为前项才做了后项的事情。“正因为……才……”"
+ },
+ {
+  "key": "jlpt-affbda8a8328",
+  "name": "～はさておき/はさておいて",
+  "jlpt_level": "N1",
+  "explanation": "表示其他的事情暂时先放一放，先处理最重要的问题。“其他的事情暂且不论，首先……”"
+ },
+ {
+  "key": "jlpt-06c76fd3886e",
+  "name": "～弾み",
+  "jlpt_level": "N1",
+  "explanation": "“在……的时候”“刚一……就……”"
+ },
+ {
+  "key": "jlpt-bcbefd6e7b86",
+  "name": "～はそっちのけで/をそっちのけで",
+  "jlpt_level": "N1",
+  "explanation": "表示把本应该做的事情放在一边，而去做其他事情。“抛开……不管”“不顾……”"
+ },
+ {
+  "key": "jlpt-5d36d9c65fe1",
+  "name": "～ばそれまでだ",
+  "jlpt_level": "N1",
+  "explanation": "表示假定条件，“……的话，也就完了”“……的话，也就没有意义了”"
+ },
+ {
+  "key": "jlpt-851e075ecf23",
+  "name": "～羽目になる/羽目に陥る",
+  "jlpt_level": "N1",
+  "explanation": "表示因为某种原因，使某人或者某事陷入了困境之中。“落到……地步”“陷入……境地”"
+ },
+ {
+  "key": "jlpt-b2be23a9b9db",
+  "name": "～べからず/べからざる",
+  "jlpt_level": "N1",
+  "explanation": "表示禁止，“禁止……”“不要……”。 表示禁止，“不应该做的……”"
+ },
+ {
+  "key": "jlpt-f46ab911a359",
+  "name": "～べく",
+  "jlpt_level": "N1",
+  "explanation": "表示目的，“为了……”“想要……”"
+ },
+ {
+  "key": "jlpt-48657737c8ac",
+  "name": "～べくもない",
+  "jlpt_level": "N1",
+  "explanation": "表示否定，“做不到……”“不可能……”"
+ },
+ {
+  "key": "jlpt-a10e768c9277",
+  "name": "～までして",
+  "jlpt_level": "N1",
+  "explanation": "表示一些极端的行为，“甚至到了……的地步”“不惜……”"
+ },
+ {
+  "key": "jlpt-2588625f8614",
+  "name": "～までだ/までのことだ",
+  "jlpt_level": "N1",
+  "explanation": "表示程度轻，“只不过……罢了”“只是……而已”。 表示别无选择，“只好……”“只有……”"
+ },
+ {
+  "key": "jlpt-816842373a2d",
+  "name": "～までもなく/までもない",
+  "jlpt_level": "N1",
+  "explanation": "“没有必要……”“用不着……”"
+ },
+ {
+  "key": "jlpt-a24441946de1",
+  "name": "～まみれ",
+  "jlpt_level": "N1",
+  "explanation": "表示状态，“全是……”“满是……”“浑身都是……”"
+ },
+ {
+  "key": "jlpt-947909c45a58",
+  "name": "～めく",
+  "jlpt_level": "N1",
+  "explanation": "表示某种状态和特征，“带有……的气息”“变成……的样子”“有一点……的感觉”"
+ },
+ {
+  "key": "jlpt-32d2f88c7257",
+  "name": "～も顧みず/を顧みず",
+  "jlpt_level": "N1",
+  "explanation": "表示不顾某种危险性，坚持做某事。“不顾……”“不管……”"
+ },
+ {
+  "key": "jlpt-205b09620db6",
+  "name": "～も同然だ/も同然の",
+  "jlpt_level": "N1",
+  "explanation": "“几乎等同于……”“几乎跟……一样”"
+ },
+ {
+  "key": "jlpt-7e75c65f1ad0",
+  "name": "～ものと思われる",
+  "jlpt_level": "N1",
+  "explanation": "表示大多数人的看法，“在大家看来……”“人们一般认为……”"
+ },
+ {
+  "key": "jlpt-fb43d42edeb1",
+  "name": "～ものを",
+  "jlpt_level": "N1",
+  "explanation": "表示对已经发生的事情的一种假设，“要是……就好了”“早知道……就好了”"
+ },
+ {
+  "key": "jlpt-3ed2c736a4ef",
+  "name": "～や/や否や",
+  "jlpt_level": "N1",
+  "explanation": "表示前项的动作结束后，后项的动作紧接着发生，或者马上发生什么事情。“刚刚……立刻……”“几乎与此同时……”"
+ },
+ {
+  "key": "jlpt-7729cfe05b92",
+  "name": "～矢先に",
+  "jlpt_level": "N1",
+  "explanation": "“正要……的时候”“正当……的时候”"
+ },
+ {
+  "key": "jlpt-097d39a14397",
+  "name": "～やしない/はしない",
+  "jlpt_level": "N1",
+  "explanation": "“不是……”“不会……”"
+ },
+ {
+  "key": "jlpt-132c4ea1a97a",
+  "name": "やれ～やれ～",
+  "jlpt_level": "N1",
+  "explanation": "表示列举，“什么……啦，什么……啦”"
+ },
+ {
+  "key": "jlpt-48f9f03c4b46",
+  "name": "～（が）ゆえ（に）/ゆえの",
+  "jlpt_level": "N1",
+  "explanation": "表示原因、理由，“由于……”“因为……”"
+ },
+ {
+  "key": "jlpt-625a6ba592ac",
+  "name": "～ようによっては",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的关联，前项的方式、方法、观点不同，后项的结果也不一样。“要看怎么……”“取决于……（的方法）”“根据……的方式”"
+ },
+ {
+  "key": "jlpt-5737ebbec776",
+  "name": "～をおいて",
+  "jlpt_level": "N1",
+  "explanation": "表示限定，“除了……之外，（没有）……”"
+ },
+ {
+  "key": "jlpt-8a8acfb97462",
+  "name": "～を押して/を押し切って",
+  "jlpt_level": "N1",
+  "explanation": "表示克服困难，或者不顾大家的反对坚持做某事。“不顾……的反对”“冒着……”"
+ },
+ {
+  "key": "jlpt-df94779f9375",
+  "name": "～を皮切りに（して）",
+  "jlpt_level": "N1",
+  "explanation": "表示以某项活动、某事为开端相继发生了类似的事情，“以……为开端”"
+ },
+ {
+  "key": "jlpt-08bd0ba1c6b9",
+  "name": "～を機に",
+  "jlpt_level": "N1",
+  "explanation": "表示前后两项的关联，“以……为契机”“借……的机会”"
+ },
+ {
+  "key": "jlpt-ee2b38608a36",
+  "name": "～を禁じ得ない",
+  "jlpt_level": "N1",
+  "explanation": "强调一种感情、情绪，“不禁……”“忍不住……”"
+ },
+ {
+  "key": "jlpt-86331cefa9da",
+  "name": "～を蔑ろにする",
+  "jlpt_level": "N1",
+  "explanation": "“轻视……”“瞧不起……”“把……不当一回事”"
+ },
+ {
+  "key": "jlpt-673cafe88779",
+  "name": "～をなおざりにして",
+  "jlpt_level": "N1",
+  "explanation": "表示随便应付某事，不认真的意思。“轻视……”“忽视……”"
+ },
+ {
+  "key": "jlpt-6675e68ec8a9",
+  "name": "～を控え/を控えて/を控えた",
+  "jlpt_level": "N1",
+  "explanation": "“面临……”“……即将来临之际”"
+ },
+ {
+  "key": "jlpt-615d5c9faac8",
+  "name": "～を踏まえ/を踏まえて",
+  "jlpt_level": "N1",
+  "explanation": "“依据……”“根据……”“立足于……”“考虑到……”"
+ },
+ {
+  "key": "jlpt-7af1303c748c",
+  "name": "～を振り出しに",
+  "jlpt_level": "N1",
+  "explanation": "“以……为开端”“以……为起点”"
+ },
+ {
+  "key": "jlpt-404bf729e26a",
+  "name": "～を経て",
+  "jlpt_level": "N1",
+  "explanation": "“经过……”“通过……”"
+ },
+ {
+  "key": "jlpt-79a7fb834176",
+  "name": "～をもって/をもちまして",
+  "jlpt_level": "N1",
+  "explanation": "表示时间的开始、结束，“以……（为起始点）”“于……开始”“于……结束”。 表示手段、方式、状态等，“以……”“凭借……”“带着……”"
+ },
+ {
+  "key": "jlpt-7b03dc616cd9",
+  "name": "～をものともせずに",
+  "jlpt_level": "N1",
+  "explanation": "表示克服困难，坚持做某事。“克服困难……”“不顾……”"
+ },
+ {
+  "key": "jlpt-b7b5b87779a5",
+  "name": "～を余儀なくさせる",
+  "jlpt_level": "N1",
+  "explanation": "表示使役，前项事态的发生，迫使后项不得不改变。“迫使……”“迫使……不得不……”"
+ },
+ {
+  "key": "jlpt-649929cc58cd",
+  "name": "～を余儀なくされる",
+  "jlpt_level": "N1",
+  "explanation": "表示被动，某人或者某事因为突发状况，被迫改变。“被迫……”"
+ },
+ {
+  "key": "jlpt-63c4a91e35da",
+  "name": "～んがため（に）/んがための",
+  "jlpt_level": "N1",
+  "explanation": "表示积极的目的，“为了……”"
+ },
+ {
+  "key": "jlpt-569b513e87a3",
+  "name": "～んじゃなかった",
+  "jlpt_level": "N1",
+  "explanation": "“不该……的”“早知道就不……了”"
+ },
+ {
+  "key": "jlpt-f92167e80e50",
+  "name": "～んだって/んですって",
+  "jlpt_level": "N1",
+  "explanation": "表示传闻、转述，“据说……”"
+ },
+ {
+  "key": "jlpt-c9c9cc89b9a7",
+  "name": "～んばかりに/んばかりの/んばかりだ",
+  "jlpt_level": "N1",
+  "explanation": "表示样态，“几乎显出……的样子”“几乎就要……”"
+ },
+ {
+  "key": "jlpt-c5536263ba6d",
+  "name": "～あげく（に）",
+  "jlpt_level": "N2",
+  "explanation": "表示结果，“最后……”"
+ },
+ {
+  "key": "jlpt-cd138c48e65f",
+  "name": "～あまり（に）",
+  "jlpt_level": "N2",
+  "explanation": "表示由于程度过甚，导致（了）某种结果。“由于过度……因而……”"
+ },
+ {
+  "key": "jlpt-e5a5c1685a53",
+  "name": "～以上（は）",
+  "jlpt_level": "N2",
+  "explanation": "前项表示确定的事实，“既然……就……”"
+ },
+ {
+  "key": "jlpt-e39322db811c",
+  "name": "～上は",
+  "jlpt_level": "N2",
+  "explanation": "前项表示既定的事实，“既然……就……”"
+ },
+ {
+  "key": "jlpt-1c8e03b096a2",
+  "name": "～（よ）うではないか/（よ）うじゃないか",
+  "jlpt_level": "N2",
+  "explanation": "表示建议或劝诱，“让我们……吧”"
+ },
+ {
+  "key": "jlpt-dab71b1d5b39",
+  "name": "～得る/得ない",
+  "jlpt_level": "N2",
+  "explanation": "表示可能性，“能……”。 表示没有某种可能性，“不可能……”"
+ },
+ {
+  "key": "jlpt-b7da25108e63",
+  "name": "～甲斐があって/甲斐がある/甲斐がない/甲斐もなく",
+  "jlpt_level": "N2",
+  "explanation": "“有……的价值、回报”“没有白……”"
+ },
+ {
+  "key": "jlpt-52fe22569547",
+  "name": "～がきっかけで/がきっかけになって/をきっかけに（して）/をきっかけとして",
+  "jlpt_level": "N2",
+  "explanation": "“以……为契机、机会”"
+ },
+ {
+  "key": "jlpt-4d12eb91e27e",
+  "name": "～限り（は）/限りでは",
+  "jlpt_level": "N2",
+  "explanation": "表示最大限度，“尽量……”“竭尽……”。 表示条件，“只要……就……”。 表示在某个限定的范围之内，“据……所知”“据……调查”等"
+ },
+ {
+  "key": "jlpt-2bcdd7233ac0",
+  "name": "～が契機で/が契機になって/を契機に（して）/を契機として",
+  "jlpt_level": "N2",
+  "explanation": "“以……为契机、机会”"
+ },
+ {
+  "key": "jlpt-094fecc20243",
+  "name": "～かけだ/かける",
+  "jlpt_level": "N2",
+  "explanation": "表示某动作开始后还没有结束，“没……完”“……做到一半”"
+ },
+ {
+  "key": "jlpt-9859a8191009",
+  "name": "～かというと/かといえば",
+  "jlpt_level": "N2",
+  "explanation": "“至于是否……”“是不是……就……”"
+ },
+ {
+  "key": "jlpt-7b0464f8e65a",
+  "name": "～かと思えば",
+  "jlpt_level": "N2",
+  "explanation": "“原以为……却……”。 表示并列，“既……又……”"
+ },
+ {
+  "key": "jlpt-8e783bdd6633",
+  "name": "～か～ないかのうちに",
+  "jlpt_level": "N2",
+  "explanation": "表示两件事情几乎同时发生，“刚……就……”“还没……就……”"
+ },
+ {
+  "key": "jlpt-251e00009737",
+  "name": "～かねる/かねない",
+  "jlpt_level": "N2",
+  "explanation": "“很难……”“难以……”。 表示可能，“有可能……”"
+ },
+ {
+  "key": "jlpt-6f57bf3be052",
+  "name": "～からいいようなものの",
+  "jlpt_level": "N2",
+  "explanation": "“（因为……）幸好（这次）……”"
+ },
+ {
+  "key": "jlpt-8ff0f0d7e29e",
+  "name": "～代わりに",
+  "jlpt_level": "N2",
+  "explanation": "表示代替，交换。 表示事物相反的两面，“虽然……但是……”"
+ },
+ {
+  "key": "jlpt-b7ac6ebe6862",
+  "name": "～気味",
+  "jlpt_level": "N2",
+  "explanation": "表示倾向，程度，“稍微……”“有点儿……”"
+ },
+ {
+  "key": "jlpt-5896effbac0a",
+  "name": "～きり/きりだ",
+  "jlpt_level": "N2",
+  "explanation": "表示限定，“只有……”。 表示前项发生以后，就再也没有发生后项。“一……就再没……”"
+ },
+ {
+  "key": "jlpt-743000dfded3",
+  "name": "～ごとに",
+  "jlpt_level": "N2",
+  "explanation": "“每……”“每当……”"
+ },
+ {
+  "key": "jlpt-cbbfc10da530",
+  "name": "～ことにはならない",
+  "jlpt_level": "N2",
+  "explanation": "“不能当作……”“不能算作……”"
+ },
+ {
+  "key": "jlpt-6d7706dbc0c2",
+  "name": "～ことは～が",
+  "jlpt_level": "N2",
+  "explanation": "表示让步，“……是……，但……”"
+ },
+ {
+  "key": "jlpt-def05ef52e4d",
+  "name": "～際は/際に（は）",
+  "jlpt_level": "N2",
+  "explanation": "“在……时候”；“借……时机”"
+ },
+ {
+  "key": "jlpt-2538ebe41713",
+  "name": "～次第/次第だ/次第で（は）",
+  "jlpt_level": "N2",
+  "explanation": "表示前项刚一实现，马上就进行后项，“一……就（会）……”。 表示原委、情况。 表示根据，“取决于……”“要看……来定”"
+ },
+ {
+  "key": "jlpt-8cab38aeada8",
+  "name": "～末（に）",
+  "jlpt_level": "N2",
+  "explanation": "表示结果，“经过……最后……”"
+ },
+ {
+  "key": "jlpt-794865bdfcdc",
+  "name": "～ずにすむ/ないですむ/なくてすむ",
+  "jlpt_level": "N2",
+  "explanation": "“不……（也可以解决）”“不用……就可以了”"
+ },
+ {
+  "key": "jlpt-640ca6937da3",
+  "name": "～ずにはいられない/ないではいられない",
+  "jlpt_level": "N2",
+  "explanation": "表示迫切的心情，“不得不……”“不能不……”"
+ },
+ {
+  "key": "jlpt-4b0789f894ad",
+  "name": "～たいばかりに/ほしいばかりに",
+  "jlpt_level": "N2",
+  "explanation": "表示原因，“就是因为想……”"
+ },
+ {
+  "key": "jlpt-5720bf8addc8",
+  "name": "～だけあって/だけに/だけのことはある",
+  "jlpt_level": "N2",
+  "explanation": "“与……相称”“不愧是……”；“到底没白……”。 “正因为……更加……”。 “正因为……反倒……”"
+ },
+ {
+  "key": "jlpt-fe6c4cdbfa28",
+  "name": "～たところが",
+  "jlpt_level": "N2",
+  "explanation": "表示逆接，“然而……”“虽然……可是……”"
+ },
+ {
+  "key": "jlpt-8bc8d34e6a33",
+  "name": "～たとたん（に）",
+  "jlpt_level": "N2",
+  "explanation": "“一……就……”“刚……就……”"
+ },
+ {
+  "key": "jlpt-cf76c4de67b5",
+  "name": "～っこない",
+  "jlpt_level": "N2",
+  "explanation": "表示强烈的否定，“不可能……”"
+ },
+ {
+  "key": "jlpt-af43d33eab71",
+  "name": "～つつ（も）",
+  "jlpt_level": "N2",
+  "explanation": "表示两个动作同时进行，“一边……一边……”。 表示逆接，“虽然……但是……”"
+ },
+ {
+  "key": "jlpt-44e3c3c9e116",
+  "name": "～っぱなし",
+  "jlpt_level": "N2",
+  "explanation": "前面"
+ },
+ {
+  "key": "jlpt-6561adc013ae",
+  "name": "～てからでないと/てからでなければ",
+  "jlpt_level": "N2",
+  "explanation": "表示如果不先做前项，就无法做后项。“如果不先……就……”"
+ },
+ {
+  "key": "jlpt-11a4dba1e72d",
+  "name": "～てでも",
+  "jlpt_level": "N2",
+  "explanation": "表示采取强硬的手段，“就是……也要……”"
+ },
+ {
+  "key": "jlpt-3c0a2bbce062",
+  "name": "～（の）ではあるまいか",
+  "jlpt_level": "N2",
+  "explanation": "“不是……吗”“难道不是……”“会不会……”"
+ },
+ {
+  "key": "jlpt-270eeaad46fa",
+  "name": "～てはいられない",
+  "jlpt_level": "N2",
+  "explanation": "“不能……”"
+ },
+ {
+  "key": "jlpt-256693e73916",
+  "name": "～てばかりはいられない/てばかりもいられない",
+  "jlpt_level": "N2",
+  "explanation": "表示不能总是以某种状态继续下去，“（也）不能总是……”"
+ },
+ {
+  "key": "jlpt-b36ca5d65064",
+  "name": "～ではすまされない",
+  "jlpt_level": "N2",
+  "explanation": "“如果……的话，是不能解决问题的”“如果……的话，是不行的”"
+ },
+ {
+  "key": "jlpt-63fc416d244f",
+  "name": "～というものではない/というものでもない",
+  "jlpt_level": "N2",
+  "explanation": "表示否定，“并非……”"
+ },
+ {
+  "key": "jlpt-828f5d2bae38",
+  "name": "～といっても過言ではない/といっても言い過ぎではない",
+  "jlpt_level": "N2",
+  "explanation": "表示评价，“即便……说也不为过”"
+ },
+ {
+  "key": "jlpt-c51a968b17c8",
+  "name": "～（か）と思うと/（か）と思ったら",
+  "jlpt_level": "N2",
+  "explanation": "表示事情几乎同时发生，“刚……就……”。 表示结果与说话人预想的相反，“原以为……却……”"
+ },
+ {
+  "key": "jlpt-4f7f43071f7a",
+  "name": "～とか",
+  "jlpt_level": "N2",
+  "explanation": "表示不确定，“说是……什么的”。 表示不确定的传闻，“好像听说……”。 表示听到的理由，“说是因为……什么的”"
+ },
+ {
+  "key": "jlpt-df8a13332263",
+  "name": "～ところだった",
+  "jlpt_level": "N2",
+  "explanation": "“差一点就……”“险些……”"
+ },
+ {
+  "key": "jlpt-c876280df56c",
+  "name": "～どころではない",
+  "jlpt_level": "N2",
+  "explanation": "表示不是做某事的场合，“不是……的时候”“哪能……”"
+ },
+ {
+  "key": "jlpt-0a52056317e2",
+  "name": "～ところに/ところへ",
+  "jlpt_level": "N2",
+  "explanation": "“正当……的时候”"
+ },
+ {
+  "key": "jlpt-520a96f4ee17",
+  "name": "～ところを/ところを見ると",
+  "jlpt_level": "N2",
+  "explanation": "“正当……的时候”。 “从……来看”"
+ },
+ {
+  "key": "jlpt-af0689ecb8d7",
+  "name": "～としか言いようがない",
+  "jlpt_level": "N2",
+  "explanation": "表示强调，“只能说是……”"
+ },
+ {
+  "key": "jlpt-0b246396022b",
+  "name": "～としたら/とすれば/とすると",
+  "jlpt_level": "N2",
+  "explanation": "表示假设，“如果……”"
+ },
+ {
+  "key": "jlpt-4f18079dfd9f",
+  "name": "～とは限らない",
+  "jlpt_level": "N2",
+  "explanation": "“不见得……”“未必……”"
+ },
+ {
+  "key": "jlpt-d269b62890d3",
+  "name": "～ない限り",
+  "jlpt_level": "N2",
+  "explanation": "“只要不……，就……”“除非……否则就……”"
+ },
+ {
+  "key": "jlpt-b37039229796",
+  "name": "～ないことはない/ないこともない",
+  "jlpt_level": "N2",
+  "explanation": "表示有某种可能性，“不是不……”“有可能……”"
+ },
+ {
+  "key": "jlpt-5594c8dde51b",
+  "name": "～ながら（も）",
+  "jlpt_level": "N2",
+  "explanation": "表示逆接，“虽然……但是……”"
+ },
+ {
+  "key": "jlpt-0441a52de811",
+  "name": "～ならともかく",
+  "jlpt_level": "N2",
+  "explanation": "“如果是……则另当别论”"
+ },
+ {
+  "key": "jlpt-abdf0ca1de3a",
+  "name": "～にあたって/にあたり",
+  "jlpt_level": "N2",
+  "explanation": "表示在某个重要的时刻，“值此……之际”“在……的时候”"
+ },
+ {
+  "key": "jlpt-38606d2c5a87",
+  "name": "～に応じて（は）/に応じ",
+  "jlpt_level": "N2",
+  "explanation": "“根据……”“按照……”"
+ },
+ {
+  "key": "jlpt-90968ecf5a5b",
+  "name": "～に（は）かかわらず/に（は）かかわりなく",
+  "jlpt_level": "N2",
+  "explanation": "“不管……”“无论……”"
+ },
+ {
+  "key": "jlpt-2503f481f6cd",
+  "name": "～に限って/に限り",
+  "jlpt_level": "N2",
+  "explanation": "表示限定，“只限于……”“只有……”。 “唯独……”“偏偏……”"
+ },
+ {
+  "key": "jlpt-09423f90432a",
+  "name": "～に限らず",
+  "jlpt_level": "N2",
+  "explanation": "“不仅……而且……”"
+ },
+ {
+  "key": "jlpt-071752877e32",
+  "name": "～に限る",
+  "jlpt_level": "N2",
+  "explanation": "“最好是……”"
+ },
+ {
+  "key": "jlpt-8e467a0c3c98",
+  "name": "～にかけては/にかけても",
+  "jlpt_level": "N2",
+  "explanation": "“在……方面”"
+ },
+ {
+  "key": "jlpt-2b84af615cca",
+  "name": "～に決まっている",
+  "jlpt_level": "N2",
+  "explanation": "表示比较确切的推测，“一定……”“肯定……”"
+ },
+ {
+  "key": "jlpt-0d26ee406f6a",
+  "name": "～に加えて/に加え",
+  "jlpt_level": "N2",
+  "explanation": "表示添加，“加上……”“而且……”"
+ },
+ {
+  "key": "jlpt-8255351a8af5",
+  "name": "～に応えて/に応え",
+  "jlpt_level": "N2",
+  "explanation": "表示响应，报答，“响应……”“应……”"
+ },
+ {
+  "key": "jlpt-c9a01a9f36e5",
+  "name": "～に際して/に際し",
+  "jlpt_level": "N2",
+  "explanation": "“当……之际”“在……的时候”"
+ },
+ {
+  "key": "jlpt-d5e8c713839b",
+  "name": "～に先立って/に先立ち",
+  "jlpt_level": "N2",
+  "explanation": "表示时间上的先后，“在……之前”“先于……”"
+ },
+ {
+  "key": "jlpt-ec3a3008e4fe",
+  "name": "～に従って/に従い",
+  "jlpt_level": "N2",
+  "explanation": "“按照……”“根据……”。 “随着……”"
+ },
+ {
+  "key": "jlpt-963802b40b7d",
+  "name": "～にしたら/にすれば/にしても",
+  "jlpt_level": "N2",
+  "explanation": "表示立场，“从……立场来看”“在……看来”"
+ },
+ {
+  "key": "jlpt-de9cb1b726d9",
+  "name": "～にしろ/にせよ/にしても",
+  "jlpt_level": "N2",
+  "explanation": "表示让步，“即使……”“无论……”。 “无论……还是……”"
+ },
+ {
+  "key": "jlpt-81d5a68b91ae",
+  "name": "～に過ぎない",
+  "jlpt_level": "N2",
+  "explanation": "“只不过……而已”"
+ },
+ {
+  "key": "jlpt-45eb2312ba45",
+  "name": "～に相違ない",
+  "jlpt_level": "N2",
+  "explanation": "表示断定，“一定……”“肯定……”"
+ },
+ {
+  "key": "jlpt-1bbc6ea3ccbd",
+  "name": "～に沿って/に沿い",
+  "jlpt_level": "N2",
+  "explanation": "“沿着……”；“按照……”"
+ },
+ {
+  "key": "jlpt-bf9d4206934c",
+  "name": "～に違いない",
+  "jlpt_level": "N2",
+  "explanation": "表示断定，“一定……”“肯定……”"
+ },
+ {
+  "key": "jlpt-d277bb69ee72",
+  "name": "～につき",
+  "jlpt_level": "N2",
+  "explanation": "“每……”。 表示原因，“因为……”"
+ },
+ {
+  "key": "jlpt-37aee9973cbd",
+  "name": "～につけ/につけては/につけても",
+  "jlpt_level": "N2",
+  "explanation": "“每当……就……”。 “不论……还是……都……”"
+ },
+ {
+  "key": "jlpt-dbae4d5fd797",
+  "name": "～に伴って/に伴い",
+  "jlpt_level": "N2",
+  "explanation": "表示伴随，“随着……”"
+ },
+ {
+  "key": "jlpt-03bb9e3611c9",
+  "name": "～に反して/に反し",
+  "jlpt_level": "N2",
+  "explanation": "“与……相反”"
+ },
+ {
+  "key": "jlpt-c58464d2d180",
+  "name": "～に基づいて/に基づき",
+  "jlpt_level": "N2",
+  "explanation": "表示根据，“按照……”“根据……”"
+ },
+ {
+  "key": "jlpt-9fd3b7eff8f1",
+  "name": "～にわたって/にわたり",
+  "jlpt_level": "N2",
+  "explanation": "表示时间和空间的范围，“涉及……”“一直……”"
+ },
+ {
+  "key": "jlpt-48906bced05f",
+  "name": "～抜きで/抜きに/を抜きにして/は抜きにして",
+  "jlpt_level": "N2",
+  "explanation": "“省去……”“去掉……”"
+ },
+ {
+  "key": "jlpt-95694d31a596",
+  "name": "～抜きでは/抜きには/を抜きにしては",
+  "jlpt_level": "N2",
+  "explanation": "“省去……的话”“（如果）没有……就不……”"
+ },
+ {
+  "key": "jlpt-90f69b7e6467",
+  "name": "～抜く",
+  "jlpt_level": "N2",
+  "explanation": "表示将某个动作做完，“……到底”“一直……”"
+ },
+ {
+  "key": "jlpt-fc8c6dfad415",
+  "name": "～のもとで/のもとに/の名のもとに",
+  "jlpt_level": "N2",
+  "explanation": "表示范围，“在……下”。 “以……为名”“在……的名义之下”"
+ },
+ {
+  "key": "jlpt-de6f71faf49d",
+  "name": "～はともかく（として）",
+  "jlpt_level": "N2",
+  "explanation": "“……暂且不谈”“先不说……”"
+ },
+ {
+  "key": "jlpt-d116dacb50dd",
+  "name": "～は別として",
+  "jlpt_level": "N2",
+  "explanation": "“……另当别论”“……暂且不论”"
+ },
+ {
+  "key": "jlpt-cf8ecbc7f21d",
+  "name": "～はもちろん/はもとより",
+  "jlpt_level": "N2",
+  "explanation": "“……自不必说”“不用说……”"
+ },
+ {
+  "key": "jlpt-4474cf773330",
+  "name": "～反面/半面",
+  "jlpt_level": "N2",
+  "explanation": "“另一方面……”"
+ },
+ {
+  "key": "jlpt-c812ec4147b7",
+  "name": "～ほか（は）ない/よりほか（は）ない/ほかしかたがない",
+  "jlpt_level": "N2",
+  "explanation": "表示不得已做某事，“只有……”“只好……”"
+ },
+ {
+  "key": "jlpt-5042b953c7c6",
+  "name": "～まい/まいか",
+  "jlpt_level": "N2",
+  "explanation": "表示否定的意志，“不想……”“不会……”。 表示否定的推测，“不会……吧”“也许不……”"
+ },
+ {
+  "key": "jlpt-cde43f21df3e",
+  "name": "～まま（に）",
+  "jlpt_level": "N2",
+  "explanation": "表示随心所欲，“任凭……”“听凭……”。 表示任凭别人摆布，“任凭……”"
+ },
+ {
+  "key": "jlpt-ec4c4fec9b05",
+  "name": "～も当然だ",
+  "jlpt_level": "N2",
+  "explanation": "“……也是理所当然的”"
+ },
+ {
+  "key": "jlpt-fba8f959c00d",
+  "name": "～も～なら～も～だ",
+  "jlpt_level": "N2",
+  "explanation": "表示双方都不好，都不像样"
+ },
+ {
+  "key": "jlpt-30442e98545d",
+  "name": "～ものか/もんか",
+  "jlpt_level": "N2",
+  "explanation": "表示强烈的否定，“怎么会……呢”“不会……”"
+ },
+ {
+  "key": "jlpt-94aee1f8d3f9",
+  "name": "～ものだから",
+  "jlpt_level": "N2",
+  "explanation": "表示原因，“因为……”"
+ },
+ {
+  "key": "jlpt-0c3f57935ba1",
+  "name": "～ものではない",
+  "jlpt_level": "N2",
+  "explanation": "表示从道德、社会常识出发，给予忠告和劝说，“不应该……”“不要……”"
+ },
+ {
+  "key": "jlpt-13960b76e93e",
+  "name": "～も～ば～も",
+  "jlpt_level": "N2",
+  "explanation": "“既……又……”"
+ },
+ {
+  "key": "jlpt-1d2562202189",
+  "name": "～ようで",
+  "jlpt_level": "N2",
+  "explanation": "“看上去好像……，但……”"
+ },
+ {
+  "key": "jlpt-a2d554944472",
+  "name": "～ようでは",
+  "jlpt_level": "N2",
+  "explanation": "表示假设，“如果……的话，那就……”"
+ },
+ {
+  "key": "jlpt-4f8b55151a97",
+  "name": "～ようなら（ば）/ようだったら/ようであれば",
+  "jlpt_level": "N2",
+  "explanation": "表示假定，“如果……”"
+ },
+ {
+  "key": "jlpt-eba8b796a312",
+  "name": "～わりに（は）",
+  "jlpt_level": "N2",
+  "explanation": "表示比较的基准，“虽然……但是……”；“比起……”"
+ },
+ {
+  "key": "jlpt-be103420c967",
+  "name": "～をかねて",
+  "jlpt_level": "N2",
+  "explanation": "“兼有……的目的”“顺带着……”"
+ },
+ {
+  "key": "jlpt-aad33bb098c4",
+  "name": "～を中心に（して）/を中心として",
+  "jlpt_level": "N2",
+  "explanation": "“以……为中心”“把……作为重点”"
+ },
+ {
+  "key": "jlpt-6ed8379055a1",
+  "name": "～を通じて/を通して",
+  "jlpt_level": "N2",
+  "explanation": "表示整个范围。 表示中介或手段，“通过……”"
+ },
+ {
+  "key": "jlpt-76982a813d7e",
+  "name": "～を問わず/は問わず",
+  "jlpt_level": "N2",
+  "explanation": "“无论……”“不管……”"
+ },
+ {
+  "key": "jlpt-a257aabfc928",
+  "name": "～を除いて（は）/を除き",
+  "jlpt_level": "N2",
+  "explanation": "“除……之外”"
+ },
+ {
+  "key": "jlpt-e400425f3522",
+  "name": "～をめぐって/をめぐり",
+  "jlpt_level": "N2",
+  "explanation": "“围绕……”"
+ },
+ {
+  "key": "jlpt-c841a936d63b",
+  "name": "～をもとに（して）",
+  "jlpt_level": "N2",
+  "explanation": "“以……为基础”“以……为依据”"
+ },
+ {
+  "key": "jlpt-0a34419e9601",
+  "name": "お/ご～いただけませんか",
+  "jlpt_level": "N2",
+  "explanation": "“能否请您……”，表示礼貌地请求对方为自己一方做某事"
+ },
+ {
+  "key": "jlpt-b39fbcff4dbc",
+  "name": "お/ご～願えませんか",
+  "jlpt_level": "N2",
+  "explanation": "礼貌地请求对方做某事"
+ },
+ {
+  "key": "jlpt-97362d920db7",
+  "name": "お/ご～申し上げる",
+  "jlpt_level": "N2",
+  "explanation": "比 「お/ご～する/いたす」 更谦恭的表达方式"
+ },
+ {
+  "key": "jlpt-82bbfed92fc8",
+  "name": "～（さ）せていただけませんか",
+  "jlpt_level": "N2",
+  "explanation": "“能否允许我……”“请让我……”，表示请求上级或者长辈允许自己做某事"
+ },
+ {
+  "key": "jlpt-80c2a8a7c1a6",
+  "name": "～（さ）せてやっていただけませんか",
+  "jlpt_level": "N2",
+  "explanation": "表示委婉的请求，“能否让……做呢？”"
+ },
+ {
+  "key": "jlpt-28c6957fbf05",
+  "name": "～ていただけるとありがたいんですが",
+  "jlpt_level": "N2",
+  "explanation": "“如果能……那就实在太好了。”"
+ },
+ {
+  "key": "jlpt-47c77e6f84b1",
+  "name": "～間",
+  "jlpt_level": "N3",
+  "explanation": "“在……期间，一直……”。表示在某一段时间里某种动作或状态一直在持续着，谓语是持续动词"
+ },
+ {
+  "key": "jlpt-2e314e374f95",
+  "name": "～間に",
+  "jlpt_level": "N3",
+  "explanation": "“在……期间，做了……”。表示在持续的某一点或一段时间里发生了某个动作，谓语是瞬间性动词"
+ },
+ {
+  "key": "jlpt-4804a504edb1",
+  "name": "～あがる",
+  "jlpt_level": "N3",
+  "explanation": "“……完成了”“……好了”，表示动作的完成"
+ },
+ {
+  "key": "jlpt-629eb0ae1fc9",
+  "name": "～いい/よい",
+  "jlpt_level": "N3",
+  "explanation": "“容易……”“易于……”。表示某个动作做起来很容易、很舒畅。反义的表达为「～にくい」"
+ },
+ {
+  "key": "jlpt-b0168b836b43",
+  "name": "～一方（で）",
+  "jlpt_level": "N3",
+  "explanation": "“一方面……，另一方面……”；“……的同时……”。表示同一主语的不同方面"
+ },
+ {
+  "key": "jlpt-68c9c777574b",
+  "name": "～一方だ",
+  "jlpt_level": "N3",
+  "explanation": "“不断地……”“越来越……”。表示某种事态朝着某个方向不断地发展"
+ },
+ {
+  "key": "jlpt-6d568a389183",
+  "name": "～上で（の）",
+  "jlpt_level": "N3",
+  "explanation": "“在……之后”"
+ },
+ {
+  "key": "jlpt-0d5564582881",
+  "name": "～上で（は）/上での",
+  "jlpt_level": "N3",
+  "explanation": "“在……方面”“在……上”。表示在某个范围、某个方面或某种场合等"
+ },
+ {
+  "key": "jlpt-806f3282e084",
+  "name": "～上に",
+  "jlpt_level": "N3",
+  "explanation": "“不仅……而且……”。表示添加、累加。「～ 上 （に）」 意思相当于「～だけでなく」"
+ },
+ {
+  "key": "jlpt-0f3fa3633135",
+  "name": "～うちは",
+  "jlpt_level": "N3",
+  "explanation": "“在……的时候”。表示在某时期内一直做某件事情或一直处于某个状态"
+ },
+ {
+  "key": "jlpt-bf8b07a8ccc6",
+  "name": "～おかげで/おかげだ",
+  "jlpt_level": "N3",
+  "explanation": "“多亏……才……”“托……的福”。表示由于某种原因产生了好的结果"
+ },
+ {
+  "key": "jlpt-2d824f30937e",
+  "name": "～おきに",
+  "jlpt_level": "N3",
+  "explanation": "“每隔……”。表示时间或距离的间隔"
+ },
+ {
+  "key": "jlpt-d3c7a040d6f4",
+  "name": "～恐れがある",
+  "jlpt_level": "N3",
+  "explanation": "“有可能……”“恐怕要……”。表示有可能产生某种不良后果"
+ },
+ {
+  "key": "jlpt-3cec38fa149e",
+  "name": "～がかり",
+  "jlpt_level": "N3",
+  "explanation": "“花……”“用……”；“……一起”。表示某事花了很多人力或时间"
+ },
+ {
+  "key": "jlpt-77ff92bc2fd6",
+  "name": "～がたい",
+  "jlpt_level": "N3",
+  "explanation": "“难以……”“很难……”。表示主观上无法做某事，比较侧重于说话人的自我感觉。其活用和い形容词的活用一样"
+ },
+ {
+  "key": "jlpt-40834aad1356",
+  "name": "～か何か",
+  "jlpt_level": "N3",
+  "explanation": "“……什么的”“……之类的”。表示不明确的指示"
+ },
+ {
+  "key": "jlpt-6514d97aa245",
+  "name": "～から言うと/から言えば/から言って",
+  "jlpt_level": "N3",
+  "explanation": "“从……来说”“从……来讲”。表示站在某立场可以得出某种看法、结论、判断"
+ },
+ {
+  "key": "jlpt-9989cf169b26",
+  "name": "～からすると/からすれば",
+  "jlpt_level": "N3",
+  "explanation": "“从……来看”“从……来衡量”。表示从某种角度来评价的话，可以得出某种结论、判断"
+ },
+ {
+  "key": "jlpt-e275d63969fc",
+  "name": "～から～にかけて",
+  "jlpt_level": "N3",
+  "explanation": "“从……到……”。表示时间、空间的大致范围"
+ },
+ {
+  "key": "jlpt-70ada99ca861",
+  "name": "～から見ると/から見れば/から見て",
+  "jlpt_level": "N3",
+  "explanation": "“从……来看”。表示站在某立场上可以得出某种看法、结论、判断"
+ },
+ {
+  "key": "jlpt-ae869ceb2bc7",
+  "name": "～きる/きれる/きれない",
+  "jlpt_level": "N3",
+  "explanation": "“……完”。表示把某动作做完"
+ },
+ {
+  "key": "jlpt-affaff0aa3c4",
+  "name": "～くらい/ぐらい",
+  "jlpt_level": "N3",
+  "explanation": "“……得……”“简直……”。表示程度"
+ },
+ {
+  "key": "jlpt-a61f45bc6f51",
+  "name": "～こと",
+  "jlpt_level": "N3",
+  "explanation": "“要……”“不要……”。表示命令"
+ },
+ {
+  "key": "jlpt-f9d7be43e32d",
+  "name": "～ことか",
+  "jlpt_level": "N3",
+  "explanation": "“多么……啊”。表示感叹或惊讶的心情。经常会与「どんなに/どれほど/どれだけ/なんと」 等词呼应使用"
+ },
+ {
+  "key": "jlpt-3ccb10ec3fdd",
+  "name": "～ことになっている/こととなっている",
+  "jlpt_level": "N3",
+  "explanation": "“预定……”；“规定……”。表示计划、惯例、规章制度等"
+ },
+ {
+  "key": "jlpt-4d29d13c76a2",
+  "name": "～ことはない/こともない",
+  "jlpt_level": "N3",
+  "explanation": "“不必……”“用不着……”。表示没必要做某事"
+ },
+ {
+  "key": "jlpt-2535aa1502ae",
+  "name": "～最中に",
+  "jlpt_level": "N3",
+  "explanation": "“正在……的时候”。表示某个动作正在进行中"
+ },
+ {
+  "key": "jlpt-719f57eebd4b",
+  "name": "～さえ",
+  "jlpt_level": "N3",
+  "explanation": "“甚至……”“连……都……”。表示举出一个极端的例子，从而类推其他事物"
+ },
+ {
+  "key": "jlpt-a937153ff726",
+  "name": "～じゃん/じゃない/じゃないの/じゃないか",
+  "jlpt_level": "N3",
+  "explanation": "“不（是）……吗？”，表示反问的语气，是「～ではない/ではないの/ではないか」 等句型更为口语化的表达方式。其中「～じゃん」 男女均可使用；「～じゃない/じゃないの」 多是女"
+ },
+ {
+  "key": "jlpt-af767b7e4ae0",
+  "name": "～上",
+  "jlpt_level": "N3",
+  "explanation": "“在……上”“……方面”。表示在某个范围、某个方面、某种立场"
+ },
+ {
+  "key": "jlpt-59ea7eb83a03",
+  "name": "～ずとも",
+  "jlpt_level": "N3",
+  "explanation": "“即使不……也……”"
+ },
+ {
+  "key": "jlpt-9e9103d9580b",
+  "name": "～（は）する/（も）する",
+  "jlpt_level": "N3",
+  "explanation": "“花费……”“用了……”，表示经过的时间或者花费的费用"
+ },
+ {
+  "key": "jlpt-9a7444ba179c",
+  "name": "～せいで/せいだ/せいか",
+  "jlpt_level": "N3",
+  "explanation": "“都怪……”“因为……”；“大概是因为……吧”。表示因为前项的缘故，造成了后项不好的结果。说话人的责怪、遗憾的语气较强"
+ },
+ {
+  "key": "jlpt-4cc73ef1a38d",
+  "name": "～そうにない/そうもない",
+  "jlpt_level": "N3",
+  "explanation": "“看样子不会……”。表示说话人根据周围的情况或事物的外观而作出的判断"
+ },
+ {
+  "key": "jlpt-84f3126ddf77",
+  "name": "～たきり～ない",
+  "jlpt_level": "N3",
+  "explanation": "“自从……之后，再也没有……”。表示自从前项的事发生之后，情况再也没有改变过"
+ },
+ {
+  "key": "jlpt-31cc9d58f607",
+  "name": "～だけでは",
+  "jlpt_level": "N3",
+  "explanation": "“光是……的话”，表示只做前项的事很难出现期待的结果"
+ },
+ {
+  "key": "jlpt-3d78bfc3f4bb",
+  "name": "～たことにする",
+  "jlpt_level": "N3",
+  "explanation": "“就当作……”"
+ },
+ {
+  "key": "jlpt-db58ebeb5c79",
+  "name": "～たって/だって",
+  "jlpt_level": "N3",
+  "explanation": "“即使……也……”，表示举出极端的事例，同时暗示其他就更不用说了"
+ },
+ {
+  "key": "jlpt-f2ec76322da5",
+  "name": "たとえ/たとい～ても",
+  "jlpt_level": "N3",
+  "explanation": "“即使……也……”。表示就算是前项成立，后项也不会受此影响"
+ },
+ {
+  "key": "jlpt-f19b7d0c48e0",
+  "name": "～たばかりだ",
+  "jlpt_level": "N3",
+  "explanation": "“刚刚……”，表示刚刚做完某个动作"
+ },
+ {
+  "key": "jlpt-9cf775f399b5",
+  "name": "～たび（に）",
+  "jlpt_level": "N3",
+  "explanation": "“每当……就……”"
+ },
+ {
+  "key": "jlpt-2ff04f97e995",
+  "name": "～たまえ",
+  "jlpt_level": "N3",
+  "explanation": "表示轻微的命令"
+ },
+ {
+  "key": "jlpt-1f8768959455",
+  "name": "～たら/ったら",
+  "jlpt_level": "N3",
+  "explanation": "“说起……”“谈到……”。表示说明话题，带有说话人亲昵、取笑、告诫、责难等语气"
+ },
+ {
+  "key": "jlpt-7f50603823af",
+  "name": "～たらどうですか",
+  "jlpt_level": "N3",
+  "explanation": "“……那样做怎么样”。表示提议或劝诱"
+ },
+ {
+  "key": "jlpt-82504fe9dede",
+  "name": "～だろうか",
+  "jlpt_level": "N3",
+  "explanation": "“能……吗”；“会是……吗”。表示询问、推测、怀疑等"
+ },
+ {
+  "key": "jlpt-67a3a2196d59",
+  "name": "～っけ",
+  "jlpt_level": "N3",
+  "explanation": "“（是不是）……来着”，表示向对方确认或表示回忆"
+ },
+ {
+  "key": "jlpt-df7daba33631",
+  "name": "～って",
+  "jlpt_level": "N3",
+  "explanation": "“叫……的……”，表示称谓"
+ },
+ {
+  "key": "jlpt-9948b77bf620",
+  "name": "～つもり",
+  "jlpt_level": "N3",
+  "explanation": "“自以为……”，表示主语自己的想法"
+ },
+ {
+  "key": "jlpt-3b9b371a0941",
+  "name": "～で",
+  "jlpt_level": "N3",
+  "explanation": "“因为……”；“通过……”"
+ },
+ {
+  "key": "jlpt-e1f6122ddd18",
+  "name": "～てごらん",
+  "jlpt_level": "N3",
+  "explanation": "“请……试试”。表示说话人让对方尝试做某件事情"
+ },
+ {
+  "key": "jlpt-b003b0e9b470",
+  "name": "～てしかた（が）ない/てしようがない/てしょうがない",
+  "jlpt_level": "N3",
+  "explanation": "“……得不得了”“非常……”"
+ },
+ {
+  "key": "jlpt-86d20821986e",
+  "name": "～て済む/で済む",
+  "jlpt_level": "N3",
+  "explanation": "“……就解决了”“……就好办了”"
+ },
+ {
+  "key": "jlpt-1acdbd842551",
+  "name": "～てならない",
+  "jlpt_level": "N3",
+  "explanation": "“……得不得了”；“不由得……”。表示情不自禁地产生某种感情或感觉，连自己都控制不了"
+ },
+ {
+  "key": "jlpt-3d29ba284647",
+  "name": "～ては",
+  "jlpt_level": "N3",
+  "explanation": "“一……就……”"
+ },
+ {
+  "key": "jlpt-ccbc72bfcf70",
+  "name": "～（の）ではないか",
+  "jlpt_level": "N3",
+  "explanation": "“是不是……吗”“恐怕……吧”“或许……吧”。表示说话人的推测、判断、主张"
+ },
+ {
+  "key": "jlpt-b1ac402ae5cd",
+  "name": "～てはならない",
+  "jlpt_level": "N3",
+  "explanation": "“不能……”“不可以……”，表示禁止、训诫"
+ },
+ {
+  "key": "jlpt-084748b29dbd",
+  "name": "～てみせる",
+  "jlpt_level": "N3",
+  "explanation": "“做给……看”；“一定要……”"
+ },
+ {
+  "key": "jlpt-05acd4147e3b",
+  "name": "～てもしかたがない/てもしようがない",
+  "jlpt_level": "N3",
+  "explanation": "“即使……也没用”“即使……也无可奈何”"
+ },
+ {
+  "key": "jlpt-96099249174e",
+  "name": "～てやってくれないか",
+  "jlpt_level": "N3",
+  "explanation": "“可否给……做……”，请求对方为第三者做某事。第三者用“に”表示"
+ },
+ {
+  "key": "jlpt-5e2ea796cd21",
+  "name": "～てよかった/なくてよかった",
+  "jlpt_level": "N3",
+  "explanation": "“太好了……”；“没有做……太好了”。表示事情结束后的评价"
+ },
+ {
+  "key": "jlpt-9b1cb8249014",
+  "name": "～というと/といえば/といったら",
+  "jlpt_level": "N3",
+  "explanation": "“说起……”“谈到……”。表示提出话题，即提到某事马上就联想到别的事物"
+ },
+ {
+  "key": "jlpt-89c8eed0abeb",
+  "name": "～というのは/とは",
+  "jlpt_level": "N3",
+  "explanation": "“所谓的……”"
+ },
+ {
+  "key": "jlpt-915820b243b9",
+  "name": "～というほどではない/というほどでもない",
+  "jlpt_level": "N3",
+  "explanation": "“并没有达到……程度”"
+ },
+ {
+  "key": "jlpt-b6086fbd094f",
+  "name": "～というものは",
+  "jlpt_level": "N3",
+  "explanation": "“……这种东西”，表示一般性的叙述"
+ },
+ {
+  "key": "jlpt-87ecd129df86",
+  "name": "～（や）～といった",
+  "jlpt_level": "N3",
+  "explanation": "“……这样的……”，表示举例"
+ },
+ {
+  "key": "jlpt-d438f4de77cf",
+  "name": "～とおり（に）/とおりの/どおり（に）/どおりの",
+  "jlpt_level": "N3",
+  "explanation": "“如……那样”“按照……”"
+ },
+ {
+  "key": "jlpt-6dd66642b162",
+  "name": "～とされている",
+  "jlpt_level": "N3",
+  "explanation": "“被视为……”“人们认为……”。表示对于事情或结果的推断，多用于书面语"
+ },
+ {
+  "key": "jlpt-842323d3dd2c",
+  "name": "～として/としての/としても",
+  "jlpt_level": "N3",
+  "explanation": "“作为……”“作为……也……”，表示某种身份、资格或立场等"
+ },
+ {
+  "key": "jlpt-1e50d003ef03",
+  "name": "～と（は）反対に",
+  "jlpt_level": "N3",
+  "explanation": "“与……相反”"
+ },
+ {
+  "key": "jlpt-3983babebe5b",
+  "name": "～ないかな",
+  "jlpt_level": "N3",
+  "explanation": "“多希望……啊”"
+ },
+ {
+  "key": "jlpt-442e7ec90bb5",
+  "name": "～直す",
+  "jlpt_level": "N3",
+  "explanation": "“重新……”"
+ },
+ {
+  "key": "jlpt-9bfb44b667c0",
+  "name": "なにしろ～から",
+  "jlpt_level": "N3",
+  "explanation": "“因为……”"
+ },
+ {
+  "key": "jlpt-6e923cf40474",
+  "name": "～なんか/なんて",
+  "jlpt_level": "N3",
+  "explanation": "“……之类的”。表示列举"
+ },
+ {
+  "key": "jlpt-ef76d9ef59d3",
+  "name": "～において/における",
+  "jlpt_level": "N3",
+  "explanation": "“在……”“在……方面”，表示场合、时间、范围等意思"
+ },
+ {
+  "key": "jlpt-9bb76ce8d909",
+  "name": "～にかわって/にかわり",
+  "jlpt_level": "N3",
+  "explanation": "“代替……”"
+ },
+ {
+  "key": "jlpt-ab20d5f2a79e",
+  "name": "～に関して（は）/に関しても/に関する",
+  "jlpt_level": "N3",
+  "explanation": "“关于……”“有关……”，表示事物和行为所涉及的对象"
+ },
+ {
+  "key": "jlpt-93ea8bccb6a3",
+  "name": "～に比べ（て）/と比べ（て）",
+  "jlpt_level": "N3",
+  "explanation": "“和……相比”。表示比较"
+ },
+ {
+  "key": "jlpt-4e13ebe19d69",
+  "name": "～にしろ～にしろ/～にせよ～にせよ/～にしても～にしても",
+  "jlpt_level": "N3",
+  "explanation": "“无论是……还是……都……”"
+ },
+ {
+  "key": "jlpt-aaa4f5bc7843",
+  "name": "～に対して/に対する",
+  "jlpt_level": "N3",
+  "explanation": "“对……”。表示动作的对象"
+ },
+ {
+  "key": "jlpt-47a930cb26bc",
+  "name": "～について/についての",
+  "jlpt_level": "N3",
+  "explanation": "“关于……”"
+ },
+ {
+  "key": "jlpt-e49156aef20c",
+  "name": "～につれて/につれ",
+  "jlpt_level": "N3",
+  "explanation": "“随着……”"
+ },
+ {
+  "key": "jlpt-3cea7d5d001d",
+  "name": "～には",
+  "jlpt_level": "N3",
+  "explanation": "“要……（就得……）”，表示目的"
+ },
+ {
+  "key": "jlpt-e039ba38898b",
+  "name": "～によって/により/による",
+  "jlpt_level": "N3",
+  "explanation": "“因……（而）”“根据……（而）”。表示因前项不同而导致不同结果"
+ },
+ {
+  "key": "jlpt-a4cae5dd88e3",
+  "name": "～ぬ/ん",
+  "jlpt_level": "N3",
+  "explanation": "“不……”。表示否定"
+ },
+ {
+  "key": "jlpt-90b34b7ab984",
+  "name": "～ねばならない/ねばならぬ",
+  "jlpt_level": "N3",
+  "explanation": "“必须……”"
+ },
+ {
+  "key": "jlpt-359ebee169e2",
+  "name": "～の",
+  "jlpt_level": "N3",
+  "explanation": "表示疑问，“……吗”"
+ },
+ {
+  "key": "jlpt-c6f9ae41a596",
+  "name": "～の話では",
+  "jlpt_level": "N3",
+  "explanation": "“据……说”。表示传闻的根据、消息的来源"
+ },
+ {
+  "key": "jlpt-9b4a1a15c756",
+  "name": "～ば～ほど",
+  "jlpt_level": "N3",
+  "explanation": "“越……越……”"
+ },
+ {
+  "key": "jlpt-8295ed9b6ada",
+  "name": "～ばよかった/なければよかった",
+  "jlpt_level": "N3",
+  "explanation": "“要是……的话，就好了”；“要是不……就好了”。「～なければよかった」 在口语中可以说成「～なきゃよかった」"
+ },
+ {
+  "key": "jlpt-6ae8a2d86acc",
+  "name": "～ぶり",
+  "jlpt_level": "N3",
+  "explanation": "“经过……之后又……”"
+ },
+ {
+  "key": "jlpt-077f24b14540",
+  "name": "～べき/べきだ/べきではない",
+  "jlpt_level": "N3",
+  "explanation": "“应该……”；“不应该……”"
+ },
+ {
+  "key": "jlpt-b08555030d3b",
+  "name": "～向きだ/向きに/向きの",
+  "jlpt_level": "N3",
+  "explanation": "“适合于……”，表示适合于某对象"
+ },
+ {
+  "key": "jlpt-5595c7869c1f",
+  "name": "～向けだ/向けに/向けの",
+  "jlpt_level": "N3",
+  "explanation": "“面向……”“以……为对象”。表示针对的对象"
+ },
+ {
+  "key": "jlpt-c730a13f8f22",
+  "name": "～もの/もん",
+  "jlpt_level": "N3",
+  "explanation": "“因为……”。用于说明理由，陈述自己的观点"
+ },
+ {
+  "key": "jlpt-c554d3e38ce0",
+  "name": "～ようがない/ようもない",
+  "jlpt_level": "N3",
+  "explanation": "“无法……”“没有办法……”"
+ },
+ {
+  "key": "jlpt-1a9ed28e1d0a",
+  "name": "～ように",
+  "jlpt_level": "N3",
+  "explanation": "“希望……”“请……”"
+ },
+ {
+  "key": "jlpt-a40ce5a68ebc",
+  "name": "～ようになっている",
+  "jlpt_level": "N3",
+  "explanation": "表示正在发生某种变化"
+ },
+ {
+  "key": "jlpt-e27c4bcb8279",
+  "name": "～ように見える",
+  "jlpt_level": "N3",
+  "explanation": "“看上去像是……”，用于说话人根据自己所看到的情况进行判断"
+ },
+ {
+  "key": "jlpt-22ee8516b5b5",
+  "name": "～（ら）れる（自发态）",
+  "jlpt_level": "N3",
+  "explanation": "“不由得……”。表示心理自然而然地产生某种活动或变化"
+ },
+ {
+  "key": "jlpt-c7ebb0c5b0bd",
+  "name": "～わけがない/わけはない",
+  "jlpt_level": "N3",
+  "explanation": "“不可能……”“不会……”"
+ },
+ {
+  "key": "jlpt-68b49ea84b52",
+  "name": "～わけではない/わけでもない",
+  "jlpt_level": "N3",
+  "explanation": "“并不是……”。表示虽然并不全盘否定，但是有一部分是那样"
+ },
+ {
+  "key": "jlpt-e771a50f1d60",
+  "name": "～を込めて",
+  "jlpt_level": "N3",
+  "explanation": "“充满……”“怀着……”。表示某种感情倾注于某件事物之中"
+ },
+ {
+  "key": "jlpt-2866573fc4d6",
+  "name": "～を～として/とする/とした",
+  "jlpt_level": "N3",
+  "explanation": "“把……当作……”"
+ },
+ {
+  "key": "jlpt-95e0c430aa3c",
+  "name": "～をはじめ（として）/をはじめとする",
+  "jlpt_level": "N3",
+  "explanation": "“以……为首”“以……为代表”。表示前述事项在同类事物中最为重要，最具代表性"
+ },
+ {
+  "key": "jlpt-994eec4df6dc",
+  "name": "～んじゃない",
+  "jlpt_level": "N3",
+  "explanation": "“不是……吗？”。读升调，表示征求对方同意或反问、惊讶"
+ },
+ {
+  "key": "jlpt-84c0753f1b9a",
+  "name": "お/ご～です",
+  "jlpt_level": "N3",
+  "explanation": "尊他语的固定表达形式"
+ },
+ {
+  "key": "jlpt-22cb981d65d6",
+  "name": "お/ご～になれる",
+  "jlpt_level": "N3",
+  "explanation": "“您能够……”“您可以……”，尊他语的固定表达形式「お/ご～になる」 的可能形"
+ },
+ {
+  "key": "jlpt-b9fd49847857",
+  "name": "～ていらっしゃる/ておいでになる",
+  "jlpt_level": "N3",
+  "explanation": "是「～です/である/ている/てくる/ていく」 等句型的尊他语的表达方式"
+ },
+ {
+  "key": "jlpt-fdb5148e99a7",
+  "name": "お/ご～できる",
+  "jlpt_level": "N3",
+  "explanation": "“可以……”“能够……”，是自谦语的可能形的表达方式"
+ },
+ {
+  "key": "jlpt-19b852b14009",
+  "name": "お/ご～いただく",
+  "jlpt_level": "N3",
+  "explanation": "“承蒙您……”“承请您……”。是自谦用语的固定表达方式，表示对别人行为的感谢"
+ },
+ {
+  "key": "jlpt-4040c1f32f1e",
+  "name": "お/ご～願う",
+  "jlpt_level": "N3",
+  "explanation": "“能否请您……”，表示委婉的请求。常用「お/ご～ 願 えませんか/ 願 えないでしょうか」 的形式"
+ },
+ {
+  "key": "jlpt-4b86332ab714",
+  "name": "～ていただけますか",
+  "jlpt_level": "N3",
+  "explanation": "“请您……”。表示请求对方为自己做某事"
+ },
+ {
+  "key": "jlpt-210b92aab247",
+  "name": "～てもよろしいでしょうか",
+  "jlpt_level": "N3",
+  "explanation": "“……可以吗？”“……行吗？”。表示委婉的询问、请求"
+ },
+ {
+  "key": "jlpt-c5e58a6228cf",
+  "name": "～（さ）せていただく",
+  "jlpt_level": "N3",
+  "explanation": "“请让我……”“请允许我……”。自谦用语的固定表达形式，表示请求上级或者长辈允许自己做什么事情"
+ },
+ {
+  "key": "jlpt-d1f72bdb5bab",
+  "name": "敬语的特殊形式",
+  "jlpt_level": "N3",
+  "explanation": "敬语的特殊形式"
+ },
+ {
+  "key": "jlpt-3321dab58c01",
+  "name": "～ず（に）",
+  "jlpt_level": "N4",
+  "explanation": "“不……，没……”；“因为没有……而……”。表示对动作状态的否定或者表示原因"
+ },
+ {
+  "key": "jlpt-43b2d709a19f",
+  "name": "～たがる",
+  "jlpt_level": "N4",
+  "explanation": "“想要……”“愿意……”"
+ },
+ {
+  "key": "jlpt-8b7dc85d65c8",
+  "name": "～がる",
+  "jlpt_level": "N4",
+  "explanation": "“感到……”“觉得……”。表示第三人称的感情、感受"
+ },
+ {
+  "key": "jlpt-de9413113206",
+  "name": "～そうだ",
+  "jlpt_level": "N4",
+  "explanation": "“听说……”“据说……”。是传闻助动词"
+ },
+ {
+  "key": "jlpt-3f87a258a203",
+  "name": "～ようだ",
+  "jlpt_level": "N4",
+  "explanation": "“像……一样”“宛如……”。表示比喻"
+ },
+ {
+  "key": "jlpt-d2700511b540",
+  "name": "～らしい",
+  "jlpt_level": "N4",
+  "explanation": "“好像……”。表示根据各种客观情况、传闻做出可能性很高的推测、判断"
+ },
+ {
+  "key": "jlpt-8f6afe0c50a7",
+  "name": "～みたいだ",
+  "jlpt_level": "N4",
+  "explanation": "“好像……”“似乎……”。表示说话人通过分析自己所感知的信息做出的主观判断，多用于口语"
+ },
+ {
+  "key": "jlpt-e051acc35f31",
+  "name": "可能助动词「れる/られる」",
+  "jlpt_level": "N4",
+  "explanation": "“能……”“会……”“可以……”"
+ },
+ {
+  "key": "jlpt-6219be1c1975",
+  "name": "使役助动词「せる/させる」",
+  "jlpt_level": "N4",
+  "explanation": "“让……”“使……”"
+ },
+ {
+  "key": "jlpt-b487e851df4c",
+  "name": "被动助动词「れる/られる」",
+  "jlpt_level": "N4",
+  "explanation": "“被……”“受到……”。主语是人的直接被动句，动作的承受者用「は」 表示，动作的发出者用「に」 或「から」 表示"
+ },
+ {
+  "key": "jlpt-c0071d65a492",
+  "name": "使役被动助动词「される/させられる」",
+  "jlpt_level": "N4",
+  "explanation": "“被迫……”。强调主体并非出于自身意愿，而是迫于压力或无奈“不得不”做某事"
+ },
+ {
+  "key": "jlpt-d01e99898d38",
+  "name": "命令助动词「れ/ろ」",
+  "jlpt_level": "N4",
+  "explanation": "“去做……”"
+ },
+ {
+  "key": "jlpt-1a9e4f9937fb",
+  "name": "禁止助动词「な」",
+  "jlpt_level": "N4",
+  "explanation": "“不准……”"
+ },
+ {
+  "key": "jlpt-4103f14972f9",
+  "name": "～ておく/とく",
+  "jlpt_level": "N4",
+  "explanation": "“事先……”"
+ },
+ {
+  "key": "jlpt-78f5d6a61ee8",
+  "name": "～てしまう/ちゃう",
+  "jlpt_level": "N4",
+  "explanation": "“……完了”"
+ },
+ {
+  "key": "jlpt-5f256ec2fe2c",
+  "name": "～てみる",
+  "jlpt_level": "N4",
+  "explanation": "“试着……看”"
+ },
+ {
+  "key": "jlpt-fc5538cad0c6",
+  "name": "～もの",
+  "jlpt_level": "N4",
+  "explanation": "指代句中已经出现或者即将要提及的具体事物"
+ },
+ {
+  "key": "jlpt-22e495d07008",
+  "name": "～ということ",
+  "jlpt_level": "N4",
+  "explanation": "“……的是……”"
+ },
+ {
+  "key": "jlpt-842721fd5f3c",
+  "name": "～の/んです",
+  "jlpt_level": "N4",
+  "explanation": "“（原因）是……”，表示说明、强调。「～のだ」 用于解释说明前项事实、情况发生的原因、理由。用在疑问句中表示说话人要求对方做出某些说明。「～のだ」 是书面语，「～んだ」 是口"
+ },
+ {
+  "key": "jlpt-468c6e2642e6",
+  "name": "～てもかまわない",
+  "jlpt_level": "N4",
+  "explanation": "“……也行”“……也可以”。表示“不妨碍，无伤大雅”等意思"
+ },
+ {
+  "key": "jlpt-3b40e1f629aa",
+  "name": "～てはいけない",
+  "jlpt_level": "N4",
+  "explanation": "“不可以……”“不能……”"
+ },
+ {
+  "key": "jlpt-07755cf7c4d0",
+  "name": "～なければならない/なければいけない",
+  "jlpt_level": "N4",
+  "explanation": "“必须……”“不……是不行的”。表示从社会常识或事情本身性质来看，有某种义务或必要性"
+ },
+ {
+  "key": "jlpt-cf4ee114a5d1",
+  "name": "～なくてもいい",
+  "jlpt_level": "N4",
+  "explanation": "“不……也行”"
+ },
+ {
+  "key": "jlpt-0615708bf1c4",
+  "name": "～なくてはならない/なくてはいけない",
+  "jlpt_level": "N4",
+  "explanation": "“必须……”"
+ },
+ {
+  "key": "jlpt-faafba6e2f46",
+  "name": "～すぎる",
+  "jlpt_level": "N4",
+  "explanation": "“过于……”。表示某种行为或状态过度"
+ },
+ {
+  "key": "jlpt-667067d96668",
+  "name": "～だす",
+  "jlpt_level": "N4",
+  "explanation": "“开始……”"
+ },
+ {
+  "key": "jlpt-cadcf8a2a962",
+  "name": "～つづける",
+  "jlpt_level": "N4",
+  "explanation": "“持续……”。表示某个动作或事情已经开始尚未结束，正在维持某种状态"
+ },
+ {
+  "key": "jlpt-6d43689057be",
+  "name": "～やすい",
+  "jlpt_level": "N4",
+  "explanation": "“容易……”“易于……”。表示某个动作很容易做，或某件事情很容易实现"
+ },
+ {
+  "key": "jlpt-f14e4f77cc65",
+  "name": "～にくい",
+  "jlpt_level": "N4",
+  "explanation": "“难以……”“不容易……”。表示因为客观条件导致做某事很难"
+ },
+ {
+  "key": "jlpt-c26236c2e1be",
+  "name": "～方",
+  "jlpt_level": "N4",
+  "explanation": "“……的方法”"
+ },
+ {
+  "key": "jlpt-880beff92bce",
+  "name": "～さ",
+  "jlpt_level": "N4",
+  "explanation": "“……度”“……之大”。表示性质和状态的程度"
+ },
+ {
+  "key": "jlpt-7834331733de",
+  "name": "～うちに/ないうちに",
+  "jlpt_level": "N4",
+  "explanation": "“在……之内”“趁着……的时候”"
+ },
+ {
+  "key": "jlpt-ea88ed11ac08",
+  "name": "～ところ",
+  "jlpt_level": "N4",
+  "explanation": "“正要……”“正打算……”"
+ },
+ {
+  "key": "jlpt-183fd0c43551",
+  "name": "～ているところだ",
+  "jlpt_level": "N4",
+  "explanation": "“正在……”"
+ },
+ {
+  "key": "jlpt-6d27d142b869",
+  "name": "～たところだ",
+  "jlpt_level": "N4",
+  "explanation": "“刚刚……”。「～たところだ」 表示动作或变化刚刚结束的阶段"
+ },
+ {
+  "key": "jlpt-35ab5ba2b174",
+  "name": "～ばかり",
+  "jlpt_level": "N4",
+  "explanation": "“只……”“光是……”"
+ },
+ {
+  "key": "jlpt-a03ba67d0fea",
+  "name": "～てばかり",
+  "jlpt_level": "N4",
+  "explanation": "“总是……”“只……”“一个劲儿地……”"
+ },
+ {
+  "key": "jlpt-cffd994adcc9",
+  "name": "～までに",
+  "jlpt_level": "N4",
+  "explanation": "“到……为止”“在……之前”"
+ },
+ {
+  "key": "jlpt-142e26dab5d3",
+  "name": "～でも",
+  "jlpt_level": "N4",
+  "explanation": "“……之类的”"
+ },
+ {
+  "key": "jlpt-be23e9c72254",
+  "name": "疑问词＋か",
+  "jlpt_level": "N4",
+  "explanation": "“哪个……”“某……”。表示不确定"
+ },
+ {
+  "key": "jlpt-2defbc91290a",
+  "name": "疑问词＋も",
+  "jlpt_level": "N4",
+  "explanation": "“都（不）……”。用于否定句中表示全盘否定"
+ },
+ {
+  "key": "jlpt-7d606c8aa06e",
+  "name": "～または",
+  "jlpt_level": "N4",
+  "explanation": "意为“或者”"
+ },
+ {
+  "key": "jlpt-7e22e78ba45d",
+  "name": "～たり/～たり～たり",
+  "jlpt_level": "N4",
+  "explanation": "“有时……有时……”“又……又……”。列举两个或两个以上的动作，暗示还有其他同类动作。若前后是两个意思对立的动词，则表示动作的反复进行"
+ },
+ {
+  "key": "jlpt-2db60dfd6c76",
+  "name": "～し/～し～し",
+  "jlpt_level": "N4",
+  "explanation": "“既……又……”"
+ },
+ {
+  "key": "jlpt-bcc35dc5bfc4",
+  "name": "～ほど～ない",
+  "jlpt_level": "N4",
+  "explanation": "“没有……那么……”“不如……”。后续否定，表示比较的基准"
+ },
+ {
+  "key": "jlpt-0dc524de8d24",
+  "name": "～より",
+  "jlpt_level": "N4",
+  "explanation": "“比……”。用于两者之间的比较"
+ },
+ {
+  "key": "jlpt-c21861960417",
+  "name": "～のうち",
+  "jlpt_level": "N4",
+  "explanation": "「～のうち」 意为“在……之中”“……当中”"
+ },
+ {
+  "key": "jlpt-15e1670ca559",
+  "name": "必ず",
+  "jlpt_level": "N4",
+  "explanation": "「 必 ず」 意为“一定，必须，务必”"
+ },
+ {
+  "key": "jlpt-e5e54c646555",
+  "name": "～つもりだ",
+  "jlpt_level": "N4",
+  "explanation": "“打算……”"
+ },
+ {
+  "key": "jlpt-8ad69f153f37",
+  "name": "～たつもりで",
+  "jlpt_level": "N4",
+  "explanation": "“就算是……”“当作……一样”。表示虽然实际上没那样，权当是那样"
+ },
+ {
+  "key": "jlpt-45f12f827679",
+  "name": "～はずだ/はずがない",
+  "jlpt_level": "N4",
+  "explanation": "“理应……”“应该……”。表示说话人根据事物的一般常理或发展趋势进行推断、预测"
+ },
+ {
+  "key": "jlpt-345c9764e68c",
+  "name": "～たら",
+  "jlpt_level": "N4",
+  "explanation": "“如果……的话”，表示假定条件。经常和助词「もし」 （假如）搭配使用"
+ },
+ {
+  "key": "jlpt-11f72191193e",
+  "name": "～なら",
+  "jlpt_level": "N4",
+  "explanation": "“如果……的话”。表示假定条件，后项一般是说话人的判断或决定"
+ },
+ {
+  "key": "jlpt-d607db23d70c",
+  "name": "～ば",
+  "jlpt_level": "N4",
+  "explanation": "“如果……的话”“假如……的话”。表示假定"
+ },
+ {
+  "key": "jlpt-a5401f0cb256",
+  "name": "～と",
+  "jlpt_level": "N4",
+  "explanation": "“一……就……”，表示必然的恒定条件或习惯"
+ },
+ {
+  "key": "jlpt-bb9774b9d6bc",
+  "name": "もし",
+  "jlpt_level": "N4",
+  "explanation": "“如果……”"
+ },
+ {
+  "key": "jlpt-a941e325ed8b",
+  "name": "もし～ても",
+  "jlpt_level": "N4",
+  "explanation": "“就算……”"
+ },
+ {
+  "key": "jlpt-6c409ef9c65f",
+  "name": "～といい",
+  "jlpt_level": "N4",
+  "explanation": "“……的话就好了”。表示愿望"
+ },
+ {
+  "key": "jlpt-79392ad95722",
+  "name": "～ため（に）",
+  "jlpt_level": "N4",
+  "explanation": "“由于……”“因为……”。表示客观原因"
+ },
+ {
+  "key": "jlpt-6647f8ae6517",
+  "name": "～よう（に）",
+  "jlpt_level": "N4",
+  "explanation": "“为了……”，表示目的"
+ },
+ {
+  "key": "jlpt-366c12426c83",
+  "name": "～（よ）うとする",
+  "jlpt_level": "N4",
+  "explanation": "“打算……”“想要……”"
+ },
+ {
+  "key": "jlpt-7f3616a1de29",
+  "name": "～ではなく",
+  "jlpt_level": "N4",
+  "explanation": "「～ではなく」 意为“不是……（而是……）”"
+ },
+ {
+  "key": "jlpt-bf22df8bad1b",
+  "name": "～かわりに",
+  "jlpt_level": "N4",
+  "explanation": "“代替……”"
+ },
+ {
+  "key": "jlpt-de8226e80e13",
+  "name": "ちっとも～ない",
+  "jlpt_level": "N4",
+  "explanation": "“一点也不……”"
+ },
+ {
+  "key": "jlpt-85ab943d5d13",
+  "name": "おもに",
+  "jlpt_level": "N4",
+  "explanation": "“主要”"
+ },
+ {
+  "key": "jlpt-058cb56e8274",
+  "name": "～ないで",
+  "jlpt_level": "N4",
+  "explanation": "“不……而……”“没……就……”"
+ },
+ {
+  "key": "jlpt-5b91e11e2534",
+  "name": "～なくて",
+  "jlpt_level": "N4",
+  "explanation": "“不……”“没……”"
+ },
+ {
+  "key": "jlpt-3fb2c49034b1",
+  "name": "～によると/によれば",
+  "jlpt_level": "N4",
+  "explanation": "“根据……”。表示传闻的出处或消息的来源等"
+ },
+ {
+  "key": "jlpt-62e4cefcf272",
+  "name": "～がする",
+  "jlpt_level": "N4",
+  "explanation": "“感觉到……”"
+ },
+ {
+  "key": "jlpt-6c27d23ac61c",
+  "name": "～か～ないか",
+  "jlpt_level": "N4",
+  "explanation": "“做……还是不做……”"
+ },
+ {
+  "key": "jlpt-c525ebae79c4",
+  "name": "～だい/かい",
+  "jlpt_level": "N4",
+  "explanation": "表示疑问。其中「～だい」 需与疑问词搭配使用"
+ },
+ {
+  "key": "jlpt-dc869c1aca03",
+  "name": "～ことがある",
+  "jlpt_level": "N4",
+  "explanation": "“有过……”。表示曾经有过某种经历，或曾经出现过某种现象"
+ },
+ {
+  "key": "jlpt-bbc56cd39445",
+  "name": "～ことができる",
+  "jlpt_level": "N4",
+  "explanation": "“可以……”“能……”“会……”。表示某种能力或可能性"
+ },
+ {
+  "key": "jlpt-4065c0a84741",
+  "name": "～（よ）うと思う",
+  "jlpt_level": "N4",
+  "explanation": "“我想……”“我打算……”。表示说话人的打算或计划"
+ },
+ {
+  "key": "jlpt-9afc72cbf308",
+  "name": "あげる/さしあげる",
+  "jlpt_level": "N4",
+  "explanation": "“给……”，“送上……”"
+ },
+ {
+  "key": "jlpt-b0b807455da9",
+  "name": "～てあげる/てさしあげる",
+  "jlpt_level": "N4",
+  "explanation": "“帮别人……”；“为您……”"
+ },
+ {
+  "key": "jlpt-371bbbd56517",
+  "name": "もらう/いただく",
+  "jlpt_level": "N4",
+  "explanation": "“得到……”"
+ },
+ {
+  "key": "jlpt-98344ab49d0b",
+  "name": "～てもらう/ていただく",
+  "jlpt_level": "N4",
+  "explanation": "“请……做……”，表示某人为自己或己方的人做某事。授予者用「に」 或「から」 表示"
+ },
+ {
+  "key": "jlpt-b3ebe7f02265",
+  "name": "くれる/くださる",
+  "jlpt_level": "N4",
+  "explanation": "“给……”"
+ },
+ {
+  "key": "jlpt-8fee945d631c",
+  "name": "～てくれる/てくださる",
+  "jlpt_level": "N4",
+  "explanation": "“给我（们）做……”"
+ },
+ {
+  "key": "jlpt-bf56def6de18",
+  "name": "やる",
+  "jlpt_level": "N4",
+  "explanation": "“给……”"
+ },
+ {
+  "key": "jlpt-41dbfde53dce",
+  "name": "～てちょうだい",
+  "jlpt_level": "N4",
+  "explanation": "“请……”"
+ },
+ {
+  "key": "jlpt-acbaa91458b1",
+  "name": "～（さ）せてください/（さ）せないでください",
+  "jlpt_level": "N4",
+  "explanation": "“请让……”；“请不要让……”"
+ },
+ {
+  "key": "jlpt-673dd8c9ba0e",
+  "name": "いらっしゃる",
+  "jlpt_level": "N4",
+  "explanation": "“在”“去”“来”"
+ },
+ {
+  "key": "jlpt-67b8f246147d",
+  "name": "見える/お見えになる",
+  "jlpt_level": "N4",
+  "explanation": "“来”"
+ },
+ {
+  "key": "jlpt-29209fe68cac",
+  "name": "おいでになる",
+  "jlpt_level": "N4",
+  "explanation": "“来”“去”“在”"
+ },
+ {
+  "key": "jlpt-a86db995bd68",
+  "name": "お越しになる",
+  "jlpt_level": "N4",
+  "explanation": "“来”"
+ },
+ {
+  "key": "jlpt-7a313aedc9d0",
+  "name": "おっしゃる",
+  "jlpt_level": "N4",
+  "explanation": "“说”"
+ },
+ {
+  "key": "jlpt-113380b833e9",
+  "name": "ご存知です",
+  "jlpt_level": "N4",
+  "explanation": "“知道”"
+ },
+ {
+  "key": "jlpt-6b4066c9ec86",
+  "name": "ご覧になる",
+  "jlpt_level": "N4",
+  "explanation": "“看”“阅读”"
+ },
+ {
+  "key": "jlpt-9387c633072f",
+  "name": "ご覧ください",
+  "jlpt_level": "N4",
+  "explanation": "“请看”"
+ },
+ {
+  "key": "jlpt-a81d6a9d8704",
+  "name": "召す",
+  "jlpt_level": "N4",
+  "explanation": "“吃”“喝”“穿”"
+ },
+ {
+  "key": "jlpt-3e2dbebb9583",
+  "name": "召し上がる",
+  "jlpt_level": "N4",
+  "explanation": "“吃”“喝”"
+ },
+ {
+  "key": "jlpt-6cae6e606140",
+  "name": "お/ご～なさる",
+  "jlpt_level": "N4",
+  "explanation": "用法比「お/ご～になる」 陈旧"
+ },
+ {
+  "key": "jlpt-eb1fc1db394a",
+  "name": "お/ご～になる",
+  "jlpt_level": "N4",
+  "explanation": "对动作主体的尊敬"
+ },
+ {
+  "key": "jlpt-7d875374b058",
+  "name": "お/ご～ください",
+  "jlpt_level": "N4",
+  "explanation": "请求别人做某事的尊敬说法"
+ },
+ {
+  "key": "jlpt-11ec3dabc632",
+  "name": "敬语助动词「れる/られる」",
+  "jlpt_level": "N4",
+  "explanation": "尊他语的固定表达形式"
+ },
+ {
+  "key": "jlpt-918adefbe713",
+  "name": "いたす",
+  "jlpt_level": "N4",
+  "explanation": "“做”"
+ },
+ {
+  "key": "jlpt-281fdc1510bc",
+  "name": "おる",
+  "jlpt_level": "N4",
+  "explanation": "“在”"
+ },
+ {
+  "key": "jlpt-0743fe4f230c",
+  "name": "参る",
+  "jlpt_level": "N4",
+  "explanation": "“来”“去”"
+ },
+ {
+  "key": "jlpt-61f4f3a849cd",
+  "name": "申す",
+  "jlpt_level": "N4",
+  "explanation": "“说”"
+ },
+ {
+  "key": "jlpt-3835d43e0c1c",
+  "name": "申し上げる",
+  "jlpt_level": "N4",
+  "explanation": "“致以……”；“说”"
+ },
+ {
+  "key": "jlpt-7fcda44a208a",
+  "name": "存じている",
+  "jlpt_level": "N4",
+  "explanation": "“知道”"
+ },
+ {
+  "key": "jlpt-6af36bd2be48",
+  "name": "存じあげる",
+  "jlpt_level": "N4",
+  "explanation": "“知道”"
+ },
+ {
+  "key": "jlpt-2814d9a854ce",
+  "name": "お目にかかる",
+  "jlpt_level": "N4",
+  "explanation": "“见到”"
+ },
+ {
+  "key": "jlpt-fb4334399d07",
+  "name": "ご覧いただく",
+  "jlpt_level": "N4",
+  "explanation": "“请……看……”"
+ },
+ {
+  "key": "jlpt-61ebbecd0cf7",
+  "name": "拝見する",
+  "jlpt_level": "N4",
+  "explanation": "“看”"
+ },
+ {
+  "key": "jlpt-7ae82cbcc27a",
+  "name": "拝借する",
+  "jlpt_level": "N4",
+  "explanation": "“借”"
+ },
+ {
+  "key": "jlpt-d2bf6b7f7e40",
+  "name": "うかがう",
+  "jlpt_level": "N4",
+  "explanation": "“问”；“造访”"
+ },
+ {
+  "key": "jlpt-b8739eee5cbc",
+  "name": "承る",
+  "jlpt_level": "N4",
+  "explanation": "“接受”；“听”"
+ },
+ {
+  "key": "jlpt-69f23f73f560",
+  "name": "お/ご～する",
+  "jlpt_level": "N4",
+  "explanation": "表示动作主体的自谦"
+ },
+ {
+  "key": "jlpt-05f739d89164",
+  "name": "お/ご～いたす",
+  "jlpt_level": "N4",
+  "explanation": "表示动作主体的自谦"
+ },
+ {
+  "key": "jlpt-af82d7df986b",
+  "name": "～ておる",
+  "jlpt_level": "N4",
+  "explanation": "“正在……”"
+ },
+ {
+  "key": "jlpt-cd9709534510",
+  "name": "ございます",
+  "jlpt_level": "N4",
+  "explanation": "「ございます」 是「ある」 的礼貌语"
+ },
+ {
+  "key": "jlpt-03859021e32b",
+  "name": "～でございます",
+  "jlpt_level": "N4",
+  "explanation": "「～でございます」 是「～だ/です/である」 的礼貌语"
+ },
+ {
+  "key": "jlpt-ba152b7e7c05",
+  "name": "名词1＋は＋名词2＋です/ではありません",
+  "jlpt_level": "N5",
+  "explanation": "此句型是名词谓语句的敬体形的现在时，表示对主语作出肯定或者否定的判断，相当于汉语的“……是……”或者“……不是……”。名词2是对名词1作出的解释或说明的具体内容。肯定形句末是「です"
+ },
+ {
+  "key": "jlpt-500a430faf4b",
+  "name": "名词1＋は＋名词2＋でした/ではありませんでした",
+  "jlpt_level": "N5",
+  "explanation": "此句型是句型1的过去时。「です」 的过去时是「でした」 ，「ではありません」 的过去时是「ではありませんでした」"
+ },
+ {
+  "key": "jlpt-20c97be93f92",
+  "name": "名词1＋は＋名词2＋だ/ではない",
+  "jlpt_level": "N5",
+  "explanation": "此句型是与句型1对应的简体形，「です」 简体形为「だ」 ，「ではありません」 简体形为「ではない」"
+ },
+ {
+  "key": "jlpt-8e94b774178d",
+  "name": "名词1＋は＋名词2＋だった/ではなかった",
+  "jlpt_level": "N5",
+  "explanation": "此句型是与句型2对应的普通体，是句型3对应的过去时。「だ」 的过去时为「だった」 ，「ではない」 的过去时为「ではなかった」"
+ },
+ {
+  "key": "jlpt-6600eab529af",
+  "name": "名词1＋は＋名词2＋ですか/でしたか",
+  "jlpt_level": "N5",
+  "explanation": "此句型是疑问句，相当于汉语的“……是……吗？”。肯定回答用「はい」 起句，否定回答用「いいえ」 起句"
+ },
+ {
+  "key": "jlpt-e0539dc9e247",
+  "name": "名词1＋は＋名词2＋で、名词3です",
+  "jlpt_level": "N5",
+  "explanation": "「で」 用来连接两个内容相关的名词句"
+ },
+ {
+  "key": "jlpt-91f6cbb726fd",
+  "name": "これ、それ、あれ、どれ",
+  "jlpt_level": "N5",
+  "explanation": "指示事物的指示代词。；「これ」 ，“这个”，近称，指离说话人近的物品或事物。；「それ」 ，“那个”，中称，指离听话人近的物品或事物。；「あれ」 ，“那个”，远称，指离听话人和"
+ },
+ {
+  "key": "jlpt-f60d5097584b",
+  "name": "この、その、あの、どの",
+  "jlpt_level": "N5",
+  "explanation": "这四个词均为连体词，后续名词可指定物品或事物。；「この＋名词」 ，“这个……”，近称，指离说话人近的物品或事物。；「その＋名词」 ，“那个……”，中称，指离听话人近的物品或事物"
+ },
+ {
+  "key": "jlpt-1d2365b906cf",
+  "name": "ここ、そこ、あそこ、どこ",
+  "jlpt_level": "N5",
+  "explanation": "这一组词用来指示位置、场所。；「ここ」 ，“这儿、这里”，近称，指离说话人近的位置、场所。；「そこ」 ，“那儿、那里”，中称，指离听话人近的位置、场所。；「あそこ」 ，“那儿"
+ },
+ {
+  "key": "jlpt-757a72ddd05f",
+  "name": "こう、そう、ああ、どう",
+  "jlpt_level": "N5",
+  "explanation": "表示方式，方法。；「こう＋动词」 ，“这样……”“如此……”，用于与说话人相关的事情。；「そう＋动词」 ，“那样……”，用于与听话人相关的事情。；「ああ＋动词」 ，“那样……"
+ },
+ {
+  "key": "jlpt-8f4cef992ad1",
+  "name": "こちら、そちら、あちら、どちら",
+  "jlpt_level": "N5",
+  "explanation": "可以和「これ、それ、あれ、どれ」 一样指示物品；也可以和「ここ、そこ、あそこ、どこ」 一样指示场所；还可以用来指示人物、公司、商店等，是较为礼貌的表达方式"
+ },
+ {
+  "key": "jlpt-4b350ab07df2",
+  "name": "こんな、そんな、あんな、どんな",
+  "jlpt_level": "N5",
+  "explanation": "表示从某一类事物中选择其中之一，意思是“这种……”“那种……”“哪种……”"
+ },
+ {
+  "key": "jlpt-46cdc495c484",
+  "name": "基数词",
+  "jlpt_level": "N5",
+  "explanation": "基数词是单纯用以计数的数词，表示事物的具体数量。十以内的基数词的读法有音读和训读两种，十以上采取音读的读法。；读法；①十以内的训读；一 つ 二 つ 三 つ 四"
+ },
+ {
+  "key": "jlpt-0cc3b6e58333",
+  "name": "序数词",
+  "jlpt_level": "N5",
+  "explanation": "序数词是表示事物顺序的数词。序数词一般由基数词前加表示顺序的接头词「 第 」 等，或其后加表示顺序的接尾词「 番 」 「 目 」 等构成。；读法；第 一 （第"
+ },
+ {
+  "key": "jlpt-dfd58ade1ccd",
+  "name": "常用助数词",
+  "jlpt_level": "N5",
+  "explanation": "助数词是表示事物计量名称的数词，也就是中文中通常所称的量词。基数词一般借助于助数词，才能准确地表达事物的数量。；读法；①基数词与助数词结合的读法；②常用助数词表"
+ },
+ {
+  "key": "jlpt-6aa605bfc85f",
+  "name": "常用数量的读法",
+  "jlpt_level": "N5",
+  "explanation": "常用数量的读法"
+ },
+ {
+  "key": "jlpt-c535a550c708",
+  "name": "三类动词的区分",
+  "jlpt_level": "N5",
+  "explanation": "根据动词词尾的活用变形，可以把动词分为Ⅰ类动词（五段动词）、Ⅱ类动词（一段动词）、Ⅲ类动词（サ变动词/カ变动词）三种类型。；Ⅰ类动词，词尾是「う、く、ぐ、す、つ、ぬ、ぶ、む、る」"
+ },
+ {
+  "key": "jlpt-9db10245525f",
+  "name": "自动词和他动词",
+  "jlpt_level": "N5",
+  "explanation": "根据动词是否需要宾语，日语动词又可以分为自动词和他动词。自动词表示自发的、不掺杂主观意图的动作、行为，一般情况下格助词要用「が」 ；他动词需要宾语才能完整地表达主语的动作或作用，"
+ },
+ {
+  "key": "jlpt-9dd1990a1edb",
+  "name": "动词「ます形」及敬体形",
+  "jlpt_level": "N5",
+  "explanation": "动词后面加「ます」 为礼貌用语。一般和认识不久的人或者长辈、上司等说话时，要用敬体形。「ます」 对应的过去时为「ました」 ，否定形为「ません」 ，过去时否定形为「ませんでし"
+ },
+ {
+  "key": "jlpt-1553440b6072",
+  "name": "动词「て形」",
+  "jlpt_level": "N5",
+  "explanation": "表示动作或状态同时进行"
+ },
+ {
+  "key": "jlpt-6502ff49c13c",
+  "name": "动词「た形」",
+  "jlpt_level": "N5",
+  "explanation": "从表格中可以看出，动词「た形」 变形规则与「て形」 完全相同。动词「た形」 为动词的过去时，表示过去的时态或者动作的完了。动词「た形」 是与动词「ました形」 对应的普通形"
+ },
+ {
+  "key": "jlpt-ace7e5985f8a",
+  "name": "动词「ない形」",
+  "jlpt_level": "N5",
+  "explanation": "动词的「ない形」 表示动词的现在时否定形，其对应的过去时否定形为「なかった」 ，分别与敬体形中的「ません」 和「ませんでした」 对应。参照上述表格可以知道，Ⅱ类动词以及Ⅲ类"
+ },
+ {
+  "key": "jlpt-dbdb808d8718",
+  "name": "动词敬体形和普通形",
+  "jlpt_level": "N5",
+  "explanation": "上面介绍了动词的敬体形和普通形。敬体形一般用于交流的双方还不太熟悉，或者当对方是应该尊敬的人（如长辈、上司等）的场合，普通形多用于亲人、朋友之间的对话。日文书信中多用敬体形，而一般"
+ },
+ {
+  "key": "jlpt-fdb567ffcf4f",
+  "name": "する",
+  "jlpt_level": "N5",
+  "explanation": "以「をする」 形式接在表示动作或行为的名词之后，意为“做……”"
+ },
+ {
+  "key": "jlpt-7a70f6e05875",
+  "name": "できる",
+  "jlpt_level": "N5",
+  "explanation": "「できる」 意为“可以做到”，表示能力"
+ },
+ {
+  "key": "jlpt-b8345a61530e",
+  "name": "ある",
+  "jlpt_level": "N5",
+  "explanation": "「ある」 表示存在"
+ },
+ {
+  "key": "jlpt-bb9d44f87035",
+  "name": "いる",
+  "jlpt_level": "N5",
+  "explanation": "「いる」 表示存在"
+ },
+ {
+  "key": "jlpt-0889b41c76bc",
+  "name": "な形容词普通形",
+  "jlpt_level": "N5",
+  "explanation": "な形容词又叫作形容动词，基本构成为「な形容词词干＋だ（词尾）」 ，可以充当普通形句子的谓语部分，其过去时为「な形容词词干＋だった」 。其对应的现在时否定形为「な形容词词干＋では"
+ },
+ {
+  "key": "jlpt-45ede489e5d1",
+  "name": "な形容词敬体形",
+  "jlpt_level": "N5",
+  "explanation": "上面介绍了な形容词的普通形，而与之对应的敬体形的现在时和过去时的肯定形分别为「な形容词词干＋です」 和「な形容词词干＋でした」 。现在时否定形有两种，即「な形容词词干＋ではあり"
+ },
+ {
+  "key": "jlpt-14e801f30ac2",
+  "name": "な形容词＋名词",
+  "jlpt_level": "N5",
+  "explanation": "な形容词修饰名词的时候，要把词尾的「だ」 改为「な」 ，再接名词"
+ },
+ {
+  "key": "jlpt-d604f3818074",
+  "name": "な形容词「て形」",
+  "jlpt_level": "N5",
+  "explanation": "な 形容词在句中表示并列或者中顿的时候，要把词尾的「だ」 变成「で」"
+ },
+ {
+  "key": "jlpt-3f8fe55a520c",
+  "name": "な形容词＋动词",
+  "jlpt_level": "N5",
+  "explanation": "な 形容词修饰动词的时候，要把词尾的「だ」 变成「に」 ，再接动词。这种用法又可以称作な 形容词的副词用法"
+ },
+ {
+  "key": "jlpt-c5c21f712b46",
+  "name": "い形容词普通形",
+  "jlpt_level": "N5",
+  "explanation": "い 形容词基本构成为「い形容词词干＋い（词尾）」 ，可以直接充当简体形句子的谓语部分，其过去时要把词尾「い」 变成「かった」 ，即变成「い形容词词干＋かった」 的形式。其"
+ },
+ {
+  "key": "jlpt-c8d27094b714",
+  "name": "い形容词敬体形",
+  "jlpt_level": "N5",
+  "explanation": "上面介绍了い 形容词的普通形，而与之对应的敬体形的现在时和过去时的肯定形分别为「い形容词词干＋い＋です」 和「い形容词词干＋かった＋です」 ；现在时否定形有两种，即「い形容词"
+ },
+ {
+  "key": "jlpt-0616256c1c22",
+  "name": "い形容词＋名词",
+  "jlpt_level": "N5",
+  "explanation": "い 形容词修饰名词的时候，直接"
+ },
+ {
+  "key": "jlpt-a8ce5a902323",
+  "name": "い形容词「て形」",
+  "jlpt_level": "N5",
+  "explanation": "い 形容词用来表示同一事物的各种性质、特征时，「て」 前后的词语属于并列或递进的关系。词尾「い」 变成「く」 再加「て」 ，即「い形容词词干＋く＋て」"
+ },
+ {
+  "key": "jlpt-ea8d1a36fd3d",
+  "name": "い形容词＋动词",
+  "jlpt_level": "N5",
+  "explanation": "い 形容词修饰动词的时候，要把词尾的「い」 变成「く」 ，再接动词。这种用法可以称作い 形容词的副词用法"
+ },
+ {
+  "key": "jlpt-6b44c9ee1d20",
+  "name": "いくつ",
+  "jlpt_level": "N5",
+  "explanation": "可以用于询问小东西的个数，意为“几个，多少”；还可以用于询问年龄，此用法和「 何 歳 」 类似"
+ },
+ {
+  "key": "jlpt-c36f889c171f",
+  "name": "いつ",
+  "jlpt_level": "N5",
+  "explanation": "用来询问时间，意为“什么时候”。「いつか」 可以表示不确定的日子"
+ },
+ {
+  "key": "jlpt-617865d2dc58",
+  "name": "誰/どの人/どなた/どの方",
+  "jlpt_level": "N5",
+  "explanation": "相当于汉语的“谁”，用于说话人不认识或者不明确第三者是谁的场合。从敬意程度看，「 誰 」 最低。「どの 人 」 「どなた」 带有敬意，为礼貌用语。「どの 方 」"
+ },
+ {
+  "key": "jlpt-45a404c6cf1b",
+  "name": "どう/いかが",
+  "jlpt_level": "N5",
+  "explanation": "用来询问对方的想法或事物的性质、状态等，回答中多会出现形容词对其进行说明。意为“……怎么样”"
+ },
+ {
+  "key": "jlpt-b1d5897db09e",
+  "name": "どのぐらい/どれぐらい",
+  "jlpt_level": "N5",
+  "explanation": "可以用来询问时间、距离、程度、具体数量等，意为“多久……”“……多远”等"
+ },
+ {
+  "key": "jlpt-ffd4e49ee67f",
+  "name": "何",
+  "jlpt_level": "N5",
+  "explanation": "用来向对方询问自己不了解的内容、情况等，意为“什么”。；①读「なに」 的场合：；一般「何」 后续「が」 「を」 「から」 「まで」 「も」 「は」 「より」 时。；②读「なん"
+ },
+ {
+  "key": "jlpt-fc8b95156007",
+  "name": "なぜ/どうして/なんで",
+  "jlpt_level": "N5",
+  "explanation": "用于询问原因、理由的疑问词。意为“为什么……”"
+ },
+ {
+  "key": "jlpt-2f9adf3c122e",
+  "name": "が",
+  "jlpt_level": "N5",
+  "explanation": "表示逆接，即后项内容与前项预想的结果不符"
+ },
+ {
+  "key": "jlpt-0dbdaf807f47",
+  "name": "から",
+  "jlpt_level": "N5",
+  "explanation": "表示空间、场所的起点"
+ },
+ {
+  "key": "jlpt-8b63626ad336",
+  "name": "に",
+  "jlpt_level": "N5",
+  "explanation": "表示事物存在或者静态的动作、作用的场所"
+ },
+ {
+  "key": "jlpt-40346ed000e4",
+  "name": "へ",
+  "jlpt_level": "N5",
+  "explanation": "动作、作用的方向或目的地"
+ },
+ {
+  "key": "jlpt-ff113c150980",
+  "name": "まで",
+  "jlpt_level": "N5",
+  "explanation": "“到……”。表示动作、作用的时间或场所的终点"
+ },
+ {
+  "key": "jlpt-96ac23a7525c",
+  "name": "を",
+  "jlpt_level": "N5",
+  "explanation": "表示动作所涉及的对象，即通常所说的宾语"
+ },
+ {
+  "key": "jlpt-3cb21c442c12",
+  "name": "～や",
+  "jlpt_level": "N5",
+  "explanation": "“……和……”“……或……”。表示对代表性事物的部分列举，暗示还有其他。构成句型为「～や（～や）（～など）」 ，只列举两个事物时，后面的「～や」 和「～など」 可以省略。；例"
+ },
+ {
+  "key": "jlpt-b19ca85e627a",
+  "name": "～か",
+  "jlpt_level": "N5",
+  "explanation": "表示从2个或者3个事物中选取一个，表示选择"
+ },
+ {
+  "key": "jlpt-ac50f83054ad",
+  "name": "～も",
+  "jlpt_level": "N5",
+  "explanation": "“……也……”“……都……”，表示同类事物的列举或叠加"
+ },
+ {
+  "key": "jlpt-b7a83b3be2f3",
+  "name": "は",
+  "jlpt_level": "N5",
+  "explanation": "「は」 用来提示主题，并对主题进行说明和判断"
+ },
+ {
+  "key": "jlpt-08a27da73845",
+  "name": "～しか～ない",
+  "jlpt_level": "N5",
+  "explanation": "“只有……”，表示限定"
+ },
+ {
+  "key": "jlpt-05f4e1a04fce",
+  "name": "～だけ",
+  "jlpt_level": "N5",
+  "explanation": "“只有”，表示限定"
+ },
+ {
+  "key": "jlpt-efe313b78570",
+  "name": "～など",
+  "jlpt_level": "N5",
+  "explanation": "“……等等”。用于列举，暗示除此之外还有其他事物存在。经常和「や」 一起使用，构成「～や～など」 的句型"
+ },
+ {
+  "key": "jlpt-31311dd16408",
+  "name": "ても/でも",
+  "jlpt_level": "N5",
+  "explanation": "“但是……”。「でも」 作为"
+ },
+ {
+  "key": "jlpt-e4a9ff060e38",
+  "name": "けれども/けど/けれど",
+  "jlpt_level": "N5",
+  "explanation": "“但是……”“可是……”"
+ },
+ {
+  "key": "jlpt-9aff52197af1",
+  "name": "しかし",
+  "jlpt_level": "N5",
+  "explanation": "“但是……”“不过……”，表示转折"
+ },
+ {
+  "key": "jlpt-d3020db010bf",
+  "name": "～ので",
+  "jlpt_level": "N5",
+  "explanation": "“因为……”“由于……”，表示客观的原因、理由。语气比「から」 委婉"
+ },
+ {
+  "key": "jlpt-c534b2589478",
+  "name": "て/で",
+  "jlpt_level": "N5",
+  "explanation": "表示中顿"
+ },
+ {
+  "key": "jlpt-2ec369f90a76",
+  "name": "～ながら",
+  "jlpt_level": "N5",
+  "explanation": "“一边……，一边……”。表示进行某项动作、行为的同时，进行另一项动作、行为"
+ },
+ {
+  "key": "jlpt-f2d09a185dea",
+  "name": "それに",
+  "jlpt_level": "N5",
+  "explanation": "“而且……”“还有……”"
+ },
+ {
+  "key": "jlpt-0efe29af135d",
+  "name": "それとも",
+  "jlpt_level": "N5",
+  "explanation": "“是……还是……？”，连接两个疑问句"
+ },
+ {
+  "key": "jlpt-ff75e6bba317",
+  "name": "それから",
+  "jlpt_level": "N5",
+  "explanation": "“然后……”。表示前项动作结束之后，接着做后项的事情"
+ },
+ {
+  "key": "jlpt-199449986933",
+  "name": "ところで",
+  "jlpt_level": "N5",
+  "explanation": "“对了……”“话说……”"
+ },
+ {
+  "key": "jlpt-212f50e4a73f",
+  "name": "それで",
+  "jlpt_level": "N5",
+  "explanation": "“所以……”“因此……”"
+ },
+ {
+  "key": "jlpt-448d36c51ab4",
+  "name": "ね",
+  "jlpt_level": "N5",
+  "explanation": "可以用来表示轻微的感叹或者征求对方的同意，还可以用来表示叮嘱"
+ },
+ {
+  "key": "jlpt-66cb79a0064b",
+  "name": "よ",
+  "jlpt_level": "N5",
+  "explanation": "用于提醒对方或向对方提出自己的主张，句末用「よ」 来加强语气"
+ },
+ {
+  "key": "jlpt-95ae7ce6fb03",
+  "name": "わ",
+  "jlpt_level": "N5",
+  "explanation": "向对方表示自己的判断、决心"
+ },
+ {
+  "key": "jlpt-4f1c37273f31",
+  "name": "かな/かしら",
+  "jlpt_level": "N5",
+  "explanation": "“……吗？”"
+ },
+ {
+  "key": "jlpt-ba905c3b62da",
+  "name": "时间＋すぎ/まえ",
+  "jlpt_level": "N5",
+  "explanation": "「すぎ/まえ」 接在表示时间的词后面，表示时间上的偏差。「すぎ」 表示过了参照时间，「まえ」 表示还没到参照时间"
+ },
+ {
+  "key": "jlpt-ffa21841aebc",
+  "name": "～たち/がた",
+  "jlpt_level": "N5",
+  "explanation": "“……们”。「たち/がた」 接在人称词或表示称谓的名词后面，表示复数"
+ },
+ {
+  "key": "jlpt-aed1dfbc3170",
+  "name": "～中",
+  "jlpt_level": "N5",
+  "explanation": "①读作「ちゅう」 的场合：；接在一定时间内可以持续的动作性名词后，表示动作正在进行中；；接在表示时间、空间的词语之后，表示“之内、之中”的意思。；②读作「じゅう」 的场合：；接"
+ },
+ {
+  "key": "jlpt-465afe3c1185",
+  "name": "～人",
+  "jlpt_level": "N5",
+  "explanation": "「にん」 的前面多接数词，而「じん」 的前面大多接国名或地名，「ひと」 通常单独使用"
+ },
+ {
+  "key": "jlpt-01223c50e349",
+  "name": "～ずつ",
+  "jlpt_level": "N5",
+  "explanation": "“每……”；“一点一点地……”"
+ },
+ {
+  "key": "jlpt-c109d6f526ce",
+  "name": "とても",
+  "jlpt_level": "N5",
+  "explanation": "后面接肯定表达，意为“非常……”"
+ },
+ {
+  "key": "jlpt-c765a4f32d8d",
+  "name": "あまり",
+  "jlpt_level": "N5",
+  "explanation": "后面接肯定表达，意为“非常……”“太……”"
+ },
+ {
+  "key": "jlpt-7f174275bc7c",
+  "name": "少し",
+  "jlpt_level": "N5",
+  "explanation": "“稍微，暂时；不远，一点”，表示程度轻"
+ },
+ {
+  "key": "jlpt-cfb529dfa066",
+  "name": "ぜんぜん",
+  "jlpt_level": "N5",
+  "explanation": "「ぜんぜん」 后接否定表达，表示完全否定。意为“完全（不）……”“根本（不）……”"
+ },
+ {
+  "key": "jlpt-ed0fd887429c",
+  "name": "ほとんど",
+  "jlpt_level": "N5",
+  "explanation": "作为副词使用，可以表示“大体上”“差不多”的意思，也可以表示“差一点儿……”“几乎……”的意思"
+ },
+ {
+  "key": "jlpt-03b57a3d2dbd",
+  "name": "いつも",
+  "jlpt_level": "N5",
+  "explanation": "“经常，总是”，表示一般的状态或习惯等"
+ },
+ {
+  "key": "jlpt-cf30ffebe805",
+  "name": "どうぞ",
+  "jlpt_level": "N5",
+  "explanation": "“请……”"
+ },
+ {
+  "key": "jlpt-99480d793877",
+  "name": "やっと",
+  "jlpt_level": "N5",
+  "explanation": "“终于……”"
+ },
+ {
+  "key": "jlpt-6696449e6d93",
+  "name": "ぜひ",
+  "jlpt_level": "N5",
+  "explanation": "“务必……”“一定……”"
+ },
+ {
+  "key": "jlpt-20ce7c097615",
+  "name": "そろそろ",
+  "jlpt_level": "N5",
+  "explanation": "“差不多该……”"
+ },
+ {
+  "key": "jlpt-761e12ba5056",
+  "name": "～をください",
+  "jlpt_level": "N5",
+  "explanation": "“给我……”“我要……”。表示向他人索取或购买某物"
+ },
+ {
+  "key": "jlpt-28fae9ccf74a",
+  "name": "～てください/ないでください",
+  "jlpt_level": "N5",
+  "explanation": "“请（不要）……”。表示面对面的请求、命令或指示对方做某事或者不做某事"
+ },
+ {
+  "key": "jlpt-33ffd54741dd",
+  "name": "～てくださいませんか/ないでくださいませんか",
+  "jlpt_level": "N5",
+  "explanation": "“能否请您……”"
+ },
+ {
+  "key": "jlpt-79572bc48e56",
+  "name": "～ませんか",
+  "jlpt_level": "N5",
+  "explanation": "可以用于委婉的建议、劝诱，意为“一起做……好吗？”表示疑问时，意为“（你）不……吗？”"
+ },
+ {
+  "key": "jlpt-e8ba27604d29",
+  "name": "～ましょうか",
+  "jlpt_level": "N5",
+  "explanation": "“一起……吧”，用于邀请对方做某事"
+ },
+ {
+  "key": "jlpt-d9741ed2067b",
+  "name": "～ましょう",
+  "jlpt_level": "N5",
+  "explanation": "“……吧”，用于邀请、建议对方做某事。语气比「～ましょうか」 强烈"
+ },
+ {
+  "key": "jlpt-530d347b235d",
+  "name": "～たい",
+  "jlpt_level": "N5",
+  "explanation": "“（我）想……”。表示第一人称的愿望、想法"
+ },
+ {
+  "key": "jlpt-968276456421",
+  "name": "～がほしい",
+  "jlpt_level": "N5",
+  "explanation": "表示第一人称想要得到某种东西的愿望"
+ },
+ {
+  "key": "jlpt-5871ccf00fb7",
+  "name": "～だろう/でしょう",
+  "jlpt_level": "N5",
+  "explanation": "常和确信程度不高的「たぶん」 「おそらく」 等副词呼应使用，表示说话人的主观推测。和确信程度较高的「 必 ず」 「きっと」 等副词呼应使用，表示说话人较为肯定的判断"
+ },
+ {
+  "key": "jlpt-c05fc0e62d84",
+  "name": "～にする/くする",
+  "jlpt_level": "N5",
+  "explanation": "表示人为的改变、改造，使其达到期望的结果"
+ },
+ {
+  "key": "jlpt-3dc9c3333187",
+  "name": "～になる/くなる",
+  "jlpt_level": "N5",
+  "explanation": "表示事物自然而然变化的结果"
+ },
+ {
+  "key": "jlpt-92cf53035463",
+  "name": "～ている",
+  "jlpt_level": "N5",
+  "explanation": "“（正）在……”。表示动作正在进行，或者表示平时反复进行的某种习惯性行为"
+ },
+ {
+  "key": "jlpt-532a11d82884",
+  "name": "～てある",
+  "jlpt_level": "N5",
+  "explanation": "“……着”。表示有目的性地完成某项动作、行为后，其结果或状态依旧保留"
+ },
+ {
+  "key": "jlpt-d10ff269519d",
+  "name": "もう～",
+  "jlpt_level": "N5",
+  "explanation": "“已经……了”。后面接动词「た形」 ，表示动作的完了"
+ },
+ {
+  "key": "jlpt-f687bb8eb526",
+  "name": "まだ～",
+  "jlpt_level": "N5",
+  "explanation": "“还……”。后面接肯定表达，表示某状态到目前为止还持续着或某动作到现在还在继续"
+ },
+ {
+  "key": "jlpt-78d7a2b96109",
+  "name": "～ほうが～",
+  "jlpt_level": "N5",
+  "explanation": "“还是……比较……”"
+ },
+ {
+  "key": "jlpt-2a14b6ae9942",
+  "name": "～前に",
+  "jlpt_level": "N5",
+  "explanation": "表示做前项动作之前，先把后项的动作做完"
+ },
+ {
+  "key": "jlpt-a1d536b01410",
+  "name": "～とき",
+  "jlpt_level": "N5",
+  "explanation": "“在……的时候”"
+ },
+ {
+  "key": "jlpt-8d61271f35bc",
+  "name": "場合",
+  "jlpt_level": "N5",
+  "explanation": "“在……情况下”，后项大多为采取相应措施或对策的句子"
+ },
+ {
+  "key": "jlpt-eaea2449dd26",
+  "name": "～てから",
+  "jlpt_level": "N5",
+  "explanation": "表示前后两个动作发生时间的既定性，即一定是先发生前项，接着出现后项"
+ },
+ {
+  "key": "jlpt-3417431f8cf7",
+  "name": "～あとで",
+  "jlpt_level": "N5",
+  "explanation": "表示做完一件事情后做另外一件事，用于客观地叙述事情发生的顺序。强调在前项发生之后进行后项的动作，行为"
+ },
+ {
+  "key": "jlpt-d163e360ae03",
+  "name": "～ほかに（は）",
+  "jlpt_level": "N5",
+  "explanation": "“除了……以外”"
+ },
+ {
+  "key": "jlpt-f7f1b7918774",
+  "name": "～と～とどちらが～か",
+  "jlpt_level": "N5",
+  "explanation": "“……和……哪个……？”"
+ },
+ {
+  "key": "jlpt-437df7c50248",
+  "name": "～で～がいちばん～",
+  "jlpt_level": "N5",
+  "explanation": "“在……当中，……是最……的”"
+ }
 ]

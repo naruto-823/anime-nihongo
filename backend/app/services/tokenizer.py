@@ -27,6 +27,31 @@ def _canonical_reading(form: str) -> str:
     return _kata_to_hira(kata)
 
 
+def verb_conjugation_group(word: str) -> str | None:
+    """用 sudachi 判定动词活用类别:五段/一段/サ变/カ变;非动词返回 None。
+
+    用于 pos 缺少类别数字(裸「動詞」)时回退判定。
+    """
+    if not word:
+        return None
+    toks = _tokenizer().tokenize(word, SplitMode.C)
+    if not toks:
+        return None
+    pos = toks[-1].part_of_speech()
+    if pos[0] != "動詞":
+        return None
+    ctype = pos[4]
+    if "サ行変格" in ctype:
+        return "サ变"
+    if "カ行変格" in ctype:
+        return "カ变"
+    if "五段" in ctype:
+        return "五段"
+    if "一段" in ctype:
+        return "一段"
+    return None
+
+
 def to_furigana(text: str) -> list[dict]:
     """把文本切成段：含汉字的段为 {"t": 表层, "r": 平假名读音}，纯假名为 {"t": 表层}。"""
     segs: list[dict] = []
