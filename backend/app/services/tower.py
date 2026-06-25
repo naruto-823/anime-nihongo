@@ -131,6 +131,55 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
             "xp_gained": xp_gained, "total_xp": player.total_xp}
 
 
+def _progress_index(db):
+    idx = {}
+    for tp in db.query(TowerProgress).all():
+        idx[(tp.level, tp.zone_idx, tp.stage_idx, tp.is_boss)] = tp
+    return idx
+
+
+def tower_map(db):
+    idx = _progress_index(db)
+
+    def cell(level, zone, stage, is_boss, unlocked):
+        tp = idx.get((level, zone, stage, is_boss))
+        return {"stage_idx": stage, "is_boss": is_boss, "unlocked": unlocked,
+                "cleared": bool(tp and tp.cleared), "stars": (tp.stars if tp else 0)}
+
+    def cleared(level, zone, stage, is_boss):
+        tp = idx.get((level, zone, stage, is_boss))
+        return bool(tp and tp.cleared)
+
+    levels_out = []
+    prev_level_done = True
+    for level in LEVELS:
+        vocab, _ = level_items(db, level)
+        stage_count = num_stages(len(vocab))
+        zone_count = num_zones(stage_count)
+        level_unlocked = prev_level_done
+        zones_out = []
+        prev_zone_boss_done = True
+        for z in range(zone_count):
+            zone_unlocked = level_unlocked and prev_zone_boss_done
+            stages_out = []
+            prev_stage_done = True
+            for s in range(STAGES_PER_ZONE):
+                unlocked = zone_unlocked and prev_stage_done
+                stages_out.append(cell(level, z, s, False, unlocked))
+                prev_stage_done = cleared(level, z, s, False)
+            all_stages_done = all(cleared(level, z, s, False)
+                                  for s in range(STAGES_PER_ZONE))
+            boss_unlocked = zone_unlocked and all_stages_done
+            stages_out.append(cell(level, z, 0, True, boss_unlocked))
+            zones_out.append({"zone_idx": z, "stages": stages_out})
+            prev_zone_boss_done = cleared(level, z, 0, True)
+        levels_out.append({"level": level, "unlocked": level_unlocked,
+                           "zones": zones_out})
+        # 整层完成 = 最后一区 Boss 通过
+        prev_level_done = prev_zone_boss_done
+    return {"levels": levels_out}
+
+
 def build_quiz(db, level, zone_idx, stage_idx, is_boss, rng):
     vocab_pool, grammar_pool = level_items(db, level)
     if is_boss:

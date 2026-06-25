@@ -97,3 +97,26 @@ def test_submit_keeps_best_and_anime_bonus(db_session):
     tp = db_session.query(TowerProgress).filter_by(level="N5", zone_idx=0,
                                                    stage_idx=0, is_boss=False).one()
     assert tp.stars == 3 and tp.best_accuracy == 1.0 and tp.attempts == 2
+
+
+def test_tower_map_initial_locks(db_session):
+    _seed_level(db_session, n_vocab=60, n_gram=20, level="N5")   # 1 区 5 关 + Boss
+    m = tower.tower_map(db_session)
+    n5 = next(lv for lv in m["levels"] if lv["level"] == "N5")
+    assert n5["unlocked"] is True
+    stage0 = n5["zones"][0]["stages"][0]
+    assert stage0["unlocked"] is True and stage0["stage_idx"] == 0
+    stage1 = n5["zones"][0]["stages"][1]
+    assert stage1["unlocked"] is False           # 未过第 0 关
+    n4 = next(lv for lv in m["levels"] if lv["level"] == "N4")
+    assert n4["unlocked"] is False
+
+
+def test_tower_map_unlocks_next_after_clear(db_session):
+    _seed_level(db_session, n_vocab=60, n_gram=20, level="N5")
+    tower.submit_result(db_session, "N5", 0, 0, False,
+                        [{"item": {"kind": "vocab",
+                          "id": db_session.query(Vocab).first().id}, "correct": True}])
+    m = tower.tower_map(db_session)
+    n5 = next(lv for lv in m["levels"] if lv["level"] == "N5")
+    assert n5["zones"][0]["stages"][1]["unlocked"] is True     # 第 1 关解锁
