@@ -180,7 +180,7 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
 
     tp = _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss)
     tp.attempts += 1
-    if accuracy >= tp.best_accuracy:
+    if accuracy > tp.best_accuracy:
         tp.best_accuracy = accuracy
         tp.stars = stars
     if passed:

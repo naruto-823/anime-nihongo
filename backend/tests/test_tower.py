@@ -196,6 +196,36 @@ def test_tower_map_multizone_level_unlock(db_session):
     assert n4_2["unlocked"] is True, "zone0+zone1 Boss 均 cleared,N4 应解锁"
 
 
+# ── 修复 5: best_accuracy 用严格大于(I4) ────────────────────────────────────
+
+def test_best_accuracy_strict_greater_equal_does_not_overwrite(db_session):
+    """等分(accuracy == best_accuracy)时不应重写 stars。"""
+    _seed_level(db_session, n_vocab=8, n_gram=0, level="N5")
+    vid = db_session.query(Vocab).first().id
+
+    # 第一次提交 1/1 = 100% accuracy, 3 stars
+    out1 = tower.submit_result(db_session, "N5", 0, 0, False,
+                               [{"item": {"kind": "vocab", "id": vid}, "correct": True}])
+    assert out1["stars"] == 3
+
+    tp = db_session.query(TowerProgress).filter_by(level="N5", zone_idx=0,
+                                                   stage_idx=0, is_boss=False).one()
+    assert tp.stars == 3 and tp.best_accuracy == 1.0
+
+    # 手动将 stars 改为某个值,模拟「等分不应覆盖」的场景
+    # 实际上 3 stars == 3 stars 不能区分;改为先提交 3 stars,再降 stars=1 后提交同分
+    # 直接测: 提交与 best 相同 accuracy 时,stars 不变
+    tp.stars = 1  # 手动修改 stars 为 1(模拟数据)
+    db_session.commit()
+
+    # 再次提交相同 accuracy(1/1=100%)——等分,严格大于时不更新,stars 应保持为 1
+    tower.submit_result(db_session, "N5", 0, 0, False,
+                        [{"item": {"kind": "vocab", "id": vid}, "correct": True}])
+    db_session.refresh(tp)
+    assert tp.stars == 1, "等分时 stars 不应被覆盖(严格大于才更新)"
+    assert tp.best_accuracy == 1.0
+
+
 # ── 修复 3: 语法番剧加成且状态判定不被自身改写污染(I5) ──────────────────────
 
 def test_grammar_anime_bonus_uses_original_status(db_session):
