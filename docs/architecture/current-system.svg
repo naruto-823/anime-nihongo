@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 1080" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .band   { rx:14; ry:14; opacity:0.55; }
+    .blab   { font-size:15px; font-weight:700; }
+    .box    { rx:8; ry:8; stroke-width:1.5; }
+    .t      { font-size:12.5px; fill:#0f172a; }
+    .tb     { font-size:12.5px; fill:#0f172a; font-weight:600; }
+    .ts     { font-size:11px; fill:#475569; }
+    .arrow  { stroke:#334155; stroke-width:1.6; marker-end:url(#ah); fill:none; }
+    .alab   { font-size:11px; fill:#334155; }
+    .warn   { font-size:11.5px; fill:#b91c1c; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1320" height="1080" fill="#f8fafc"/>
+  <text x="660" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">追番日语 — 当前系统架构</text>
+  <text x="660" y="54" text-anchor="middle" font-size="12" fill="#64748b">单机 · SQLite · 无用户概念(生产化前)</text>
+
+  <!-- ===== FRONTEND ===== -->
+  <rect class="band" x="24" y="70" width="1272" height="170" fill="#bae6fd"/>
+  <text class="blab" x="40" y="92" fill="#075985">① 前端  Browser · React 18 + TS + Vite + react-query + react-router + Tailwind</text>
+  <!-- pages row 1 -->
+  <g>
+    <rect class="box" x="40"  y="104" width="120" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="100" y="122" text-anchor="middle">Today 今天</text><text class="ts" x="100" y="137" text-anchor="middle">番剧旅程</text>
+    <rect class="box" x="168" y="104" width="120" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="228" y="122" text-anchor="middle">Series 番剧库</text><text class="ts" x="228" y="137" text-anchor="middle">AniList</text>
+    <rect class="box" x="296" y="104" width="120" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="356" y="122" text-anchor="middle">Reading 精读</text><text class="ts" x="356" y="137" text-anchor="middle">假名/翻译</text>
+    <rect class="box" x="424" y="104" width="130" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="489" y="122" text-anchor="middle">Conversation</text><text class="ts" x="489" y="137" text-anchor="middle">对话练习</text>
+    <rect class="box" x="562" y="104" width="110" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="617" y="122" text-anchor="middle">Review</text><text class="ts" x="617" y="137" text-anchor="middle">SRS 复习</text>
+    <rect class="box" x="680" y="104" width="150" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="755" y="122" text-anchor="middle">词库 (Grammar)</text><text class="ts" x="755" y="137" text-anchor="middle">词汇·活用·语法</text>
+    <rect class="box" x="838" y="104" width="110" height="40" fill="#dbeafe" stroke="#2563eb"/><text class="tb" x="893" y="122" text-anchor="middle">Tower</text><text class="ts" x="893" y="137" text-anchor="middle">修炼塔地图</text>
+    <rect class="box" x="956" y="104" width="110" height="40" fill="#dbeafe" stroke="#2563eb"/><text class="tb" x="1011" y="122" text-anchor="middle">Quiz</text><text class="ts" x="1011" y="137" text-anchor="middle">闯关答题</text>
+    <rect class="box" x="1074" y="104" width="100" height="40" fill="#e0f2fe" stroke="#0284c7"/><text class="tb" x="1124" y="122" text-anchor="middle">Progress</text><text class="ts" x="1124" y="137" text-anchor="middle">进度</text>
+  </g>
+  <!-- support row -->
+  <g>
+    <rect class="box" x="40"  y="156" width="220" height="34" fill="#f0f9ff" stroke="#7dd3fc"/><text class="t" x="50" y="177">lib/api.ts(fetch 封装 /api/*)</text>
+    <rect class="box" x="272" y="156" width="300" height="34" fill="#f0f9ff" stroke="#7dd3fc"/><text class="t" x="282" y="177">components: Layout导航 · SceneTimeline · Furigana</text>
+    <rect class="box" x="584" y="156" width="300" height="34" fill="#f0f9ff" stroke="#7dd3fc"/><text class="t" x="594" y="177">speech.ts / voicevox.ts(浏览器&amp;VOICEVOX 发音)</text>
+    <rect class="box" x="896" y="156" width="278" height="34" fill="#f0f9ff" stroke="#7dd3fc"/><text class="t" x="906" y="177">VocabDetail 活用表 · SpeakerPicker</text>
+  </g>
+
+  <!-- arrow FE->API -->
+  <path class="arrow" d="M660,240 L660,286"/>
+  <text class="alab" x="668" y="266">HTTP /api/*　dev: Vite 5173 →代理→ 8000 / prod: 后端静态托管 dist</text>
+
+  <!-- ===== API ===== -->
+  <rect class="band" x="24" y="288" width="1272" height="96" fill="#ddd6fe"/>
+  <text class="blab" x="40" y="310" fill="#5b21b6">② FastAPI (uvicorn :8000)　app/main.py — startup: 建表 + 幂等灌种子</text>
+  <g font-size="12">
+    <rect class="box" x="40"  y="322" width="92"  height="50" fill="#ede9fe" stroke="#7c3aed"/><text class="t" x="86" y="343" text-anchor="middle">series</text><text class="t" x="86" y="360" text-anchor="middle">episodes</text>
+    <rect class="box" x="140" y="322" width="80"  height="50" fill="#ede9fe" stroke="#7c3aed"/><text class="t" x="180" y="343" text-anchor="middle">study</text><text class="t" x="180" y="360" text-anchor="middle">srs</text>
+    <rect class="box" x="228" y="322" width="100" height="50" fill="#ede9fe" stroke="#7c3aed"/><text class="t" x="278" y="343" text-anchor="middle">grammar</text><text class="t" x="278" y="360" text-anchor="middle">conversation</text>
+    <rect class="box" x="336" y="322" width="92"  height="50" fill="#ede9fe" stroke="#7c3aed"/><text class="t" x="382" y="343" text-anchor="middle">progress</text><text class="t" x="382" y="360" text-anchor="middle">today · tts</text>
+    <rect class="box" x="436" y="322" width="150" height="50" fill="#ddd6fe" stroke="#6d28d9"/><text class="tb" x="511" y="343" text-anchor="middle">vocab</text><text class="ts" x="511" y="360" text-anchor="middle">列表/筛选/详情活用</text>
+    <rect class="box" x="594" y="322" width="160" height="50" fill="#ddd6fe" stroke="#6d28d9"/><text class="tb" x="674" y="343" text-anchor="middle">tower</text><text class="ts" x="674" y="360" text-anchor="middle">地图/取题/交卷/玩家</text>
+    <text class="ts" x="780" y="352">11 个路由模块</text>
+  </g>
+
+  <!-- arrow API->SVC -->
+  <path class="arrow" d="M660,384 L660,420"/>
+  <text class="alab" x="668" y="406">调用 services</text>
+
+  <!-- ===== SERVICES ===== -->
+  <rect class="band" x="24" y="422" width="1272" height="248" fill="#bbf7d0"/>
+  <text class="blab" x="40" y="444" fill="#166534">③ services/  业务逻辑</text>
+
+  <!-- pipeline highlighted -->
+  <rect class="box" x="40" y="456" width="600" height="74" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="52" y="476">pipeline — 加工一集</text>
+  <text class="t"  x="52" y="496">subtitles 解析 → tokenizer(SudachiPy 分词/假名)</text>
+  <text class="t"  x="52" y="514">→ llm(翻译/语法标注)→ 场景切分 → 落库 Line/Scene</text>
+
+  <g>
+    <rect class="box" x="652" y="456" width="150" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="662" y="477">jimaku(字幕API)</text>
+    <rect class="box" x="652" y="496" width="150" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="662" y="517">anilist(番剧元数据)</text>
+    <rect class="box" x="814" y="456" width="170" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="824" y="477">conversation(对话+点评)</text>
+    <rect class="box" x="814" y="496" width="170" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="824" y="517">grammar_quiz(LLM出题+缓存)</text>
+    <rect class="box" x="996" y="456" width="150" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="1006" y="477">srs(SM-2 复习)</text>
+    <rect class="box" x="996" y="496" width="150" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="1006" y="517">session(streak)</text>
+  </g>
+
+  <!-- tower stack subgroup -->
+  <rect x="40" y="544" width="600" height="112" rx="10" ry="10" fill="#bfdbfe" opacity="0.5"/>
+  <text class="tb" x="52" y="562" fill="#1d4ed8">修炼塔栈</text>
+  <rect class="box" x="52"  y="570" width="280" height="34" fill="#eff6ff" stroke="#3b82f6"/><text class="t" x="62" y="591">tower(布局/出题/评星/交卷+SRS打通/解锁)</text>
+  <rect class="box" x="344" y="570" width="284" height="34" fill="#eff6ff" stroke="#3b82f6"/><text class="t" x="354" y="591">quiz_bank(词义/读音/活用/语法 4 题型)</text>
+  <rect class="box" x="52"  y="612" width="280" height="34" fill="#eff6ff" stroke="#3b82f6"/><text class="t" x="62" y="633">conjugation(活用引擎: 五段/一段/サ变/カ变)</text>
+  <rect class="box" x="344" y="612" width="284" height="34" fill="#eff6ff" stroke="#3b82f6"/><text class="t" x="354" y="633">jpos(词性归一化)</text>
+
+  <rect class="box" x="652" y="544" width="494" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="662" y="565">grammar_loader / vocab_loader — 启动幂等灌 seed JSON</text>
+  <rect class="box" x="652" y="588" width="240" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="662" y="609">subtitles(srt/ass 解析)</text>
+  <rect class="box" x="904" y="588" width="242" height="34" fill="#f0fdf4" stroke="#4ade80"/><text class="t" x="914" y="609">llm(Anthropic 协议封装)</text>
+
+  <!-- arrows to data/external -->
+  <path class="arrow" d="M330,670 L330,712"/>
+  <text class="alab" x="338" y="696">SQLAlchemy 2.0 ORM</text>
+  <path class="arrow" d="M1000,670 L1000,712"/>
+  <text class="alab" x="1008" y="696">httpx 外呼</text>
+
+  <!-- ===== DATA ===== -->
+  <rect class="band" x="24" y="714" width="650" height="346" fill="#fde68a"/>
+  <text class="blab" x="40" y="736" fill="#92400e">④ models/ → SQLite　data/anime-nihongo.db</text>
+  <rect class="box" x="40" y="748" width="610" height="86" fill="#fffbeb" stroke="#d97706"/>
+  <text class="tb" x="52" y="768">表(10):</text>
+  <text class="t"  x="52" y="787">Series · Episode · Line · Scene　|　Vocab · GrammarPoint</text>
+  <text class="t"  x="52" y="806">DailySession · AppSetting　|　TowerProgress · PlayerStats</text>
+  <text class="ts" x="52" y="824">JSON 列: furigana / characters / quiz_cache / summary / value</text>
+
+  <rect class="box" x="40" y="846" width="610" height="42" fill="#fef9c3" stroke="#ca8a04"/>
+  <text class="t" x="52" y="864">种子: app/data/vocab_seed.json(10,613 词)</text>
+  <text class="t" x="52" y="881">　　　app/data/grammar_seed.json(888 语法)</text>
+
+  <!-- warnings -->
+  <rect x="40" y="900" width="610" height="148" rx="10" ry="10" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+  <text class="tb" x="52" y="922" fill="#b91c1c">⚠️ 生产化要解决的痛点</text>
+  <text class="warn" x="52" y="944">• SRS 状态(in_srs/ease/due_date)直接长在 Vocab/GrammarPoint 行上</text>
+  <text class="warn" x="64" y="961">→ 全局共享,多用户隔离的障碍(后续子项目)</text>
+  <text class="warn" x="52" y="983">• 无用户概念;PlayerStats 单行 id=1 → 登录子项目要解决</text>
+  <text class="warn" x="52" y="1005">• 迁移靠 create_all + 手写加列 hack(捕 SQLite 报错)</text>
+  <text class="warn" x="64" y="1022">→ 非生产级,本次换 Postgres + Alembic</text>
+
+  <!-- ===== EXTERNAL ===== -->
+  <rect class="band" x="690" y="714" width="606" height="346" fill="#fbcfe8"/>
+  <text class="blab" x="706" y="736" fill="#9d174d">⑤ 外部服务</text>
+  <rect class="box" x="706" y="750" width="574" height="56" fill="#fdf2f8" stroke="#db2777"/>
+  <text class="tb" x="718" y="772">fox AI 网关(Anthropic 原生协议)</text>
+  <text class="ts" x="718" y="792">ANTHROPIC_BASE_URL → 翻译 / 语法标注 / 对话点评 / 出题</text>
+  <rect class="box" x="706" y="818" width="280" height="48" fill="#fdf2f8" stroke="#db2777"/>
+  <text class="tb" x="718" y="838">Jimaku 字幕 API</text><text class="ts" x="718" y="856">日语字幕下载</text>
+  <rect class="box" x="1000" y="818" width="280" height="48" fill="#fdf2f8" stroke="#db2777"/>
+  <text class="tb" x="1012" y="838">AniList GraphQL</text><text class="ts" x="1012" y="856">番剧元数据/角色</text>
+  <rect class="box" x="706" y="878" width="574" height="48" fill="#fdf2f8" stroke="#db2777"/>
+  <text class="tb" x="718" y="898">VOICEVOX 本地 TTS  :50021</text><text class="ts" x="718" y="916">日语语音合成(本地启动)</text>
+
+  <!-- key flows note -->
+  <rect class="box" x="706" y="938" width="574" height="110" fill="#fff1f2" stroke="#fb7185"/>
+  <text class="tb" x="718" y="958" fill="#9f1239">关键数据流</text>
+  <text class="ts" x="718" y="977">1. 追番精读: 导入→pipeline(Sudachi+LLM+切场景)→Line/Scene→前端渲染</text>
+  <text class="ts" x="718" y="996">2. 学习闭环: 场景抽词/语法 + seed → SRS 复习 / 语法测验</text>
+  <text class="ts" x="718" y="1015">3. 修炼塔: tower 按级切关 → quiz_bank(含活用题)出题</text>
+  <text class="ts" x="730" y="1033">→ 交卷 submit_result 评星/XP/写回 SRS</text>
+</svg>
