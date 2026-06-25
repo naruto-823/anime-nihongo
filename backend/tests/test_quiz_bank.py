@@ -12,8 +12,12 @@ from app.services.quiz_bank import (
 
 class V:
     def __init__(self, id, headword, reading, meaning_zh, pos="名", source_line_id=None):
-        self.id = id; self.headword = headword; self.reading = reading
-        self.meaning_zh = meaning_zh; self.pos = pos; self.source_line_id = source_line_id
+        self.id = id
+        self.headword = headword
+        self.reading = reading
+        self.meaning_zh = meaning_zh
+        self.pos = pos
+        self.source_line_id = source_line_id
 
 
 def _pool():
@@ -69,7 +73,9 @@ def test_vocab_conjugation_q_none_for_noun():
 
 class G:
     def __init__(self, id, name, explanation):
-        self.id = id; self.name = name; self.explanation = explanation
+        self.id = id
+        self.name = name
+        self.explanation = explanation
 
 
 def _gpool():
