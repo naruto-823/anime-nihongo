@@ -1,8 +1,9 @@
+from datetime import date as _date
 from math import ceil
 
 from sqlalchemy import select
 
-from app.models import GrammarPoint, Vocab
+from app.models import GrammarPoint, PlayerStats, TowerProgress, Vocab
 from app.services.quiz_bank import make_grammar_question, make_vocab_question
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
@@ -61,6 +62,73 @@ def stars_for(accuracy: float) -> int:
     if accuracy >= 0.6:
         return 1
     return 0
+
+
+BOSS_PASS = 0.8
+STAGE_PASS = 0.6
+XP_PER_CORRECT = 10
+
+
+def _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss):
+    tp = db.query(TowerProgress).filter_by(
+        level=level, zone_idx=zone_idx, stage_idx=stage_idx, is_boss=is_boss).one_or_none()
+    if tp is None:
+        tp = TowerProgress(level=level, zone_idx=zone_idx, stage_idx=stage_idx,
+                           is_boss=is_boss, cleared=False, stars=0,
+                           best_accuracy=0.0, attempts=0)
+        db.add(tp)
+    return tp
+
+
+def _player(db):
+    p = db.get(PlayerStats, 1)
+    if p is None:
+        p = PlayerStats(id=1, total_xp=0, player_level=1)
+        db.add(p)
+    return p
+
+
+def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
+    today = today or _date.today()
+    total = len(results)
+    correct = sum(1 for r in results if r["correct"])
+    accuracy = correct / total if total else 0.0
+    stars = stars_for(accuracy)
+    passed = accuracy >= (BOSS_PASS if is_boss else STAGE_PASS)
+
+    xp_gained = 0
+    for r in results:
+        kind, iid = r["item"]["kind"], r["item"]["id"]
+        model = Vocab if kind == "vocab" else GrammarPoint
+        obj = db.get(model, iid)
+        if obj is None:
+            continue
+        obj.in_srs = True
+        if kind == "grammar":
+            obj.status = "learning"
+        if not r["correct"]:
+            obj.due_date = today
+        elif obj.due_date is None:
+            obj.due_date = today
+        if r["correct"]:
+            anime = kind == "vocab" and getattr(obj, "source_line_id", None) is not None
+            xp_gained += round(XP_PER_CORRECT * (1.5 if anime else 1))
+
+    tp = _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss)
+    tp.attempts += 1
+    if accuracy >= tp.best_accuracy:
+        tp.best_accuracy = accuracy
+        tp.stars = stars
+    if passed:
+        tp.cleared = True
+
+    player = _player(db)
+    player.total_xp += xp_gained
+    player.player_level = 1 + player.total_xp // 500     # 每 500 XP 升 1 级
+
+    db.commit()
+    return {"stars": stars, "accuracy": accuracy, "passed": passed,
+            "xp_gained": xp_gained, "total_xp": player.total_xp}
 
 
 def build_quiz(db, level, zone_idx, stage_idx, is_boss, rng):
