@@ -32,3 +32,12 @@ def test_downgrade_base_drops_tables(tmp_path):
     command.downgrade(cfg, "base")
     insp = inspect(create_engine(f"sqlite:///{db}"))
     assert "vocab" not in set(insp.get_table_names())
+
+
+def test_pg_trgm_migration_is_noop_on_sqlite(tmp_path):
+    db = tmp_path / "m.db"
+    cfg = _cfg(db)
+    command.upgrade(cfg, "head")        # 含 0002,sqlite 下应 no-op 不报错
+    command.downgrade(cfg, "0001_initial")
+    insp = inspect(create_engine(f"sqlite:///{db}"))
+    assert "vocab" in set(insp.get_table_names())   # 表仍在(只回退索引迁移)
