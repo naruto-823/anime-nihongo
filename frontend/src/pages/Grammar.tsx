@@ -1,9 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 import Loading from "../components/Loading";
+import VocabBrowser from "../components/VocabBrowser";
 import { getChecklist } from "../lib/api";
 
+type Tab = "vocab" | "grammar";
+
 export default function Grammar() {
+  const [tab, setTab] = useState<Tab>("vocab");
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-ink-900 mr-2">词库</h1>
+        <SubTab active={tab === "vocab"} onClick={() => setTab("vocab")}>📖 词汇</SubTab>
+        <SubTab active={tab === "grammar"} onClick={() => setTab("grammar")}>📚 语法</SubTab>
+      </div>
+      {tab === "vocab" ? <VocabBrowser /> : <GrammarChecklist />}
+    </div>
+  );
+}
+
+function SubTab({ active, onClick, children }: {
+  active: boolean; onClick: () => void; children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`text-sm rounded-lg px-3 py-1.5 font-medium transition-colors ${
+        active ? "bg-brand-600 text-white" : "text-ink-500 hover:bg-ink-100"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function GrammarChecklist() {
   const { data, isLoading } = useQuery({
     queryKey: ["grammar-checklist"], queryFn: getChecklist,
   });
@@ -12,7 +46,6 @@ export default function Grammar() {
   const levels = Object.keys(data).sort();
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-ink-900">语法清单</h1>
       {levels.map((lv) => {
         const pts = data[lv];
         const mastered = pts.filter((p) => p.mastered).length;
