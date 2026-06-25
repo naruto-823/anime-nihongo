@@ -5,10 +5,11 @@ import SpeakerPicker from "./SpeakerPicker";
 const MAIN_NAV = [
   { to: "/", label: "今天", end: true, icon: "🔥" },
   { to: "/series", label: "我的番剧库", icon: "📺" },
+  { to: "/tower", label: "修炼塔", icon: "🗼" },
 ];
 
 const SECONDARY_NAV = [
-  { to: "/grammar", label: "语法", icon: "📚" },
+  { to: "/grammar", label: "词库", icon: "📖" },
   { to: "/progress", label: "进度", icon: "📈" },
 ];
 

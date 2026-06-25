@@ -4,10 +4,12 @@ import Layout from "./components/Layout";
 import Conversation from "./pages/Conversation";
 import Grammar from "./pages/Grammar";
 import Progress from "./pages/Progress";
+import Quiz from "./pages/Quiz";
 import Reading from "./pages/Reading";
 import Review from "./pages/Review";
 import Series from "./pages/Series";
 import Today from "./pages/Today";
+import Tower from "./pages/Tower";
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="review" element={<Review />} />
         <Route path="grammar" element={<Grammar />} />
         <Route path="progress" element={<Progress />} />
+        <Route path="tower" element={<Tower />} />
+        <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
