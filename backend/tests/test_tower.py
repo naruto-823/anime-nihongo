@@ -1,6 +1,7 @@
 import random
+from datetime import date
 
-from app.models import GrammarPoint, Vocab
+from app.models import GrammarPoint, TowerProgress, Vocab
 from app.services import tower
 
 
@@ -50,17 +51,13 @@ def test_build_quiz_boss_is_bigger(db_session):
     assert len(qs) >= 15
 
 
-from datetime import date  # noqa: E402
-
-from app.models import GrammarPoint, PlayerStats, TowerProgress, Vocab  # noqa: E402,F401
-
-
 def test_submit_updates_progress_xp_and_srs(db_session):
     v = Vocab(headword="飲む", reading="のむ", meaning_zh="喝", pos="他動1",
               jlpt_level="N5", source_line_id=None)
     g = GrammarPoint(key="N5-g0", name="〜て", jlpt_level="N5",
                      explanation="表示", curated=True)
-    db_session.add_all([v, g]); db_session.commit()
+    db_session.add_all([v, g])
+    db_session.commit()
 
     results = [
         {"item": {"kind": "vocab", "id": v.id}, "correct": True},
@@ -85,7 +82,8 @@ def test_submit_updates_progress_xp_and_srs(db_session):
 def test_submit_keeps_best_and_anime_bonus(db_session):
     v = Vocab(headword="猫", reading="ねこ", meaning_zh="猫", pos="名",
               jlpt_level="N5", source_line_id=999)        # 番剧词
-    db_session.add(v); db_session.commit()
+    db_session.add(v)
+    db_session.commit()
     results = [{"item": {"kind": "vocab", "id": v.id}, "correct": True}]
     out = tower.submit_result(db_session, "N5", 0, 0, False, results, today=date(2026, 6, 25))
     assert out["xp_gained"] == 15            # 10 × 1.5 番剧加成
