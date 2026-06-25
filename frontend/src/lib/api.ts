@@ -1,7 +1,7 @@
 import type {
   ConvTurn, Critique, DueItems, Episode, Grade, GrammarPoint,
-  JourneyResponse, Line, Progress, SceneNode, Series, SeriesWithAniList,
-  SpeakerCharacter,
+  JourneyResponse, Line, Progress, QuizQuestion, SceneNode, Series, SeriesWithAniList,
+  SpeakerCharacter, SubmitResult, TowerMap, VocabDetail, VocabListResponse,
 } from "../types";
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
@@ -78,6 +78,23 @@ export const getQuiz = (grammarId: number) =>
   http<{ question: string; options: string[]; answer: string; explain: string }>(
     `/api/grammar/${grammarId}/quiz`);
 
+// Vocab
+export const getVocab = (params: {
+  level?: string; q?: string; pos?: string; limit?: number; offset?: number;
+}) => {
+  const sp = new URLSearchParams();
+  if (params.level) sp.set("level", params.level);
+  if (params.q) sp.set("q", params.q);
+  if (params.pos) sp.set("pos", params.pos);
+  if (params.limit != null) sp.set("limit", String(params.limit));
+  if (params.offset != null) sp.set("offset", String(params.offset));
+  const qs = sp.toString();
+  return http<VocabListResponse>(`/api/vocab${qs ? `?${qs}` : ""}`);
+};
+
+export const getVocabDetail = (id: number) =>
+  http<VocabDetail>(`/api/vocab/${id}`);
+
 // Conversation
 export const conversationTurn = (body: {
   episode_id: number; character?: string; history: ConvTurn[]; user_text: string;
@@ -98,3 +115,15 @@ export const getProgress = () => http<Progress>("/api/progress");
 // TTS (VOICEVOX)
 export const getSpeakers = () =>
   http<SpeakerCharacter[]>("/api/tts/speakers");
+
+// Tower
+export const getTower = () => http<TowerMap>("/api/tower");
+export const getTowerQuiz = (p: { level: string; zone: number; stage: number; boss?: boolean }) =>
+  http<{ questions: QuizQuestion[] }>(
+    `/api/tower/quiz?level=${p.level}&zone=${p.zone}&stage=${p.stage}&boss=${p.boss ? 1 : 0}`);
+export const submitQuiz = (body: {
+  level: string; zone: number; stage: number; boss: boolean;
+  results: { item: { kind: string; id: number }; correct: boolean }[];
+}) => http<SubmitResult>("/api/tower/submit",
+  { method: "POST", body: JSON.stringify(body) });
+export const getPlayer = () => http<{ total_xp: number; player_level: number }>("/api/player");

@@ -40,6 +40,31 @@ export type GrammarPoint = {
   in_srs: boolean; mastered: boolean;
 };
 
+export type VocabItem = {
+  id: number; headword: string; reading: string; meaning_zh: string;
+  pos: string | null; pos_tags: string[]; jlpt_level: string; in_srs: boolean;
+};
+
+export type VocabListResponse = {
+  total: number;
+  counts: Record<string, number>;
+  items: VocabItem[];
+};
+
+export type ConjugationForm = {
+  key: string; label: string; kana: string; surface: string;
+};
+
+export type Conjugation = {
+  type: "verb" | "i-adj" | "na-adj";
+  group: string;
+  forms: ConjugationForm[];
+};
+
+export type VocabDetail = VocabItem & {
+  conjugation: Conjugation | null;
+};
+
 export type DueItems = {
   vocab: { id: number; headword: string; reading: string;
            meaning_zh: string; pos: string | null; context: string | null }[];
@@ -120,4 +145,23 @@ export type SpeakerCharacter = {
   name: string;
   speaker_uuid: string;
   styles: SpeakerStyle[];
+};
+
+export type QuizQuestion = {
+  id: string; type: "meaning" | "reading" | "conjugation" | "grammar";
+  prompt: string; hint: string | null; options: string[]; answer: string;
+  item: { kind: "vocab" | "grammar"; id: number };
+};
+
+export type TowerStage = {
+  stage_idx: number; is_boss: boolean; unlocked: boolean;
+  cleared: boolean; stars: number;
+};
+export type TowerZone = { zone_idx: number; stages: TowerStage[] };
+export type TowerLevel = { level: string; unlocked: boolean; zones: TowerZone[] };
+export type TowerMap = { levels: TowerLevel[] };
+
+export type SubmitResult = {
+  stars: number; accuracy: number; passed: boolean;
+  xp_gained: number; total_xp: number;
 };
