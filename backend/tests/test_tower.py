@@ -27,3 +27,24 @@ def test_zone_items_unions_five_stages(db_session):
     _seed_level(db_session, n_vocab=60, n_gram=20)
     v, g = tower.zone_items(db_session, "N5", 0)
     assert len(v) == 40 and len(g) == 10        # 5 关 × (8 词 + 2 语法)
+
+
+def test_stars_for_thresholds():
+    assert tower.stars_for(1.0) == 3
+    assert tower.stars_for(0.8) == 2
+    assert tower.stars_for(0.6) == 1
+    assert tower.stars_for(0.59) == 0
+
+
+def test_build_quiz_stage_has_questions(db_session):
+    _seed_level(db_session, n_vocab=20, n_gram=6)
+    qs = tower.build_quiz(db_session, "N5", 0, 0, False, random.Random(1))
+    assert len(qs) == 10                       # 8 词 + 2 语法
+    assert all(q["answer"] in q["options"] for q in qs)
+    assert {q["item"]["kind"] for q in qs} == {"vocab", "grammar"}
+
+
+def test_build_quiz_boss_is_bigger(db_session):
+    _seed_level(db_session, n_vocab=60, n_gram=20)
+    qs = tower.build_quiz(db_session, "N5", 0, 0, True, random.Random(1))
+    assert len(qs) >= 15

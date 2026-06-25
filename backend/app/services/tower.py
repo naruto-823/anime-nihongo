@@ -3,6 +3,7 @@ from math import ceil
 from sqlalchemy import select
 
 from app.models import GrammarPoint, Vocab
+from app.services.quiz_bank import make_grammar_question, make_vocab_question
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
 STAGE_VOCAB = 8
@@ -47,3 +48,33 @@ def zone_items(db, level, zone_idx):
         vs.extend(v)
         gs.extend(g)
     return vs, gs
+
+
+BOSS_MAX_Q = 20
+
+
+def stars_for(accuracy: float) -> int:
+    if accuracy >= 1.0:
+        return 3
+    if accuracy >= 0.8:
+        return 2
+    if accuracy >= 0.6:
+        return 1
+    return 0
+
+
+def build_quiz(db, level, zone_idx, stage_idx, is_boss, rng):
+    vocab_pool, grammar_pool = level_items(db, level)
+    if is_boss:
+        vs, gs = zone_items(db, level, zone_idx)
+    else:
+        vs, gs = stage_items(db, level, zone_idx, stage_idx)
+    questions = []
+    for v in vs:
+        questions.append(make_vocab_question(v, vocab_pool, rng))
+    for g in gs:
+        questions.append(make_grammar_question(g, grammar_pool, rng))
+    rng.shuffle(questions)
+    if is_boss:
+        questions = questions[:BOSS_MAX_Q]
+    return questions
