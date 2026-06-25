@@ -1,6 +1,6 @@
 import random
 
-from app.services.quiz_bank import vocab_meaning_q
+from app.services.quiz_bank import vocab_meaning_q, vocab_reading_q
 
 
 class V:
@@ -24,3 +24,18 @@ def test_vocab_meaning_q_basic():
     assert len(q["options"]) == 4
     assert len(set(q["options"])) == 4          # 无重复
     assert q["item"] == {"kind": "vocab", "id": 1}
+
+
+def test_vocab_reading_q_basic():
+    target = V(1, "高校", "こうこう", "高中")
+    rng = random.Random(0)
+    q = vocab_reading_q(target, _pool() + [target], rng)
+    assert q["type"] == "reading"
+    assert q["prompt"] == "高校"
+    assert q["answer"] == "こうこう"
+    assert q["answer"] in q["options"] and len(q["options"]) == 4
+
+
+def test_vocab_reading_q_none_when_kana_only():
+    target = V(1, "ラーメン", "ラーメン", "拉面")
+    assert vocab_reading_q(target, _pool(), random.Random(0)) is None
