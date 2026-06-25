@@ -1,6 +1,13 @@
 import random
 
-from app.services.quiz_bank import vocab_conjugation_q, vocab_meaning_q, vocab_reading_q
+from app.services.quiz_bank import (
+    grammar_meaning_q,
+    make_grammar_question,
+    make_vocab_question,
+    vocab_conjugation_q,
+    vocab_meaning_q,
+    vocab_reading_q,
+)
 
 
 class V:
@@ -58,3 +65,33 @@ def test_vocab_conjugation_q_godan():
 def test_vocab_conjugation_q_none_for_noun():
     target = V(1, "天気", "てんき", "天气", pos="名")
     assert vocab_conjugation_q(target, random.Random(0)) is None
+
+
+class G:
+    def __init__(self, id, name, explanation):
+        self.id = id; self.name = name; self.explanation = explanation
+
+
+def _gpool():
+    return [G(i, f"〜语法{i}", f"含义{i}") for i in range(1, 8)]
+
+
+def test_grammar_meaning_q():
+    target = G(1, "〜にあたって", "在…之际")
+    q = grammar_meaning_q(target, _gpool() + [target], random.Random(0))
+    assert q["type"] == "grammar"
+    assert q["prompt"] == "〜にあたって"
+    assert q["answer"] == "在…之际" and len(q["options"]) == 4
+    assert q["item"] == {"kind": "grammar", "id": 1}
+
+
+def test_make_vocab_question_always_returns():
+    target = V(1, "天気", "てんき", "天气", pos="名")   # 仅 meaning 可用
+    q = make_vocab_question(target, _pool() + [target], random.Random(0))
+    assert q["type"] in {"meaning", "reading", "conjugation"}
+    assert q["item"]["kind"] == "vocab"
+
+
+def test_make_grammar_question():
+    target = G(1, "〜にあたって", "在…之际")
+    assert make_grammar_question(target, _gpool() + [target], random.Random(0))["type"] == "grammar"
