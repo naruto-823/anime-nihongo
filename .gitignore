@@ -29,3 +29,7 @@ dist/
 # 编辑器 / 系统
 .DS_Store
 *.swp
+
+# 子代理执行 scratch / 临时
+.superpowers/
+.tmp-*
