@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.db import SessionLocal, init_app_db
 from app.grammar_loader import load_grammar_seed
+from app.vocab_loader import load_vocab_seed
 
 
 def create_app() -> FastAPI:
@@ -24,6 +25,7 @@ def create_app() -> FastAPI:
         db = SessionLocal()
         try:
             load_grammar_seed(db)
+            load_vocab_seed(db)
         finally:
             db.close()
 
@@ -32,10 +34,20 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     from app.api import (
-        conversation, episodes, grammar, progress, series, srs, study, today, tts,
+        conversation,
+        episodes,
+        grammar,
+        progress,
+        series,
+        srs,
+        study,
+        today,
+        tower,
+        tts,
+        vocab,
     )
     for module in (series, episodes, study, srs, grammar, conversation,
-                   progress, today, tts):
+                   progress, today, tower, tts, vocab):
         app.include_router(module.router)
 
     frontend_dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
