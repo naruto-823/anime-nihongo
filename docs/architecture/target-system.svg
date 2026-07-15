@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1380 1240" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .band  { rx:14; ry:14; opacity:0.5; }
+    .blab  { font-size:15px; font-weight:700; }
+    .box   { rx:8; ry:8; stroke-width:1.5; }
+    .nw    { stroke-width:2; }            /* 新增/重构,描边加粗 */
+    .tb    { font-size:12.5px; fill:#0f172a; font-weight:600; }
+    .t     { font-size:11.5px; fill:#1e293b; }
+    .ts    { font-size:10.5px; fill:#475569; }
+    .own   { font-size:10.5px; fill:#7c2d12; font-style:italic; }
+    .arrow { stroke:#334155; stroke-width:1.6; marker-end:url(#ah); fill:none; }
+    .alab  { font-size:10.5px; fill:#334155; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1380" height="1240" fill="#f8fafc"/>
+  <text x="690" y="32" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">追番日语 — 目标生产架构</text>
+  <text x="690" y="52" text-anchor="middle" font-size="12" fill="#64748b">数据归属 · 状态边界 · 任务调度 · 外部依赖治理 · 可观测性</text>
+  <!-- legend -->
+  <rect class="box nw" x="1086" y="20" width="14" height="14" fill="#dcfce7" stroke="#16a34a"/><text class="ts" x="1104" y="31">绿=本轮新增/重构</text>
+  <rect class="box" x="1232" y="20" width="14" height="14" fill="#eef2f7" stroke="#94a3b8"/><text class="ts" x="1250" y="31">灰=现有</text>
+
+  <!-- ① FRONTEND -->
+  <rect class="band" x="24" y="64" width="1200" height="96" fill="#bae6fd"/>
+  <text class="blab" x="40" y="86" fill="#075985">① 前端  React SPA</text>
+  <rect class="box nw" x="40" y="98" width="220" height="48" fill="#dcfce7" stroke="#16a34a"/><text class="tb" x="50" y="118">登录 / 注册</text><text class="ts" x="50" y="135">JWT 存 localStorage</text>
+  <rect class="box" x="272" y="98" width="640" height="48" fill="#e0f2fe" stroke="#0284c7"/><text class="t" x="284" y="118">今天 · 番剧库 · 精读 · 对话 · 复习 · 词库 · 修炼塔 · 进度 · 答题</text><text class="ts" x="284" y="135">请求带 Authorization: Bearer &lt;jwt&gt;</text>
+  <rect class="box" x="924" y="98" width="288" height="48" fill="#e0f2fe" stroke="#0284c7"/><text class="t" x="936" y="118">lib/api.ts(注入 token)</text><text class="ts" x="936" y="135">401 → 跳登录</text>
+
+  <!-- ② API + AUTH -->
+  <rect class="band" x="24" y="172" width="1200" height="92" fill="#ddd6fe"/>
+  <text class="blab" x="40" y="194" fill="#5b21b6">② API 层(FastAPI) — 路由瘦,鉴权前置</text>
+  <rect class="box nw" x="40" y="206" width="300" height="46" fill="#dcfce7" stroke="#16a34a"/><text class="tb" x="50" y="225">Auth 中间件 / 依赖</text><text class="ts" x="50" y="242">校验 JWT → current_user;trace_id 注入</text>
+  <rect class="box" x="352" y="206" width="860" height="46" fill="#ede9fe" stroke="#7c3aed"/><text class="t" x="362" y="225">routers: auth · series · episodes · study · srs · grammar · vocab · tower · conversation · today · progress · tts</text><text class="ts" x="362" y="242">每个受保护路由注入 current_user;长任务只「建 job」并返回 job_id</text>
+
+  <path class="arrow" d="M690,264 L690,292"/>
+
+  <!-- ③ BACKEND LAYERS -->
+  <rect class="band" x="24" y="296" width="1200" height="226" fill="#bbf7d0"/>
+  <text class="blab" x="40" y="318" fill="#166534">③ 后端分层 — 职责边界清晰(谁拥有事务 / 谁写库 / 谁外呼 / 谁跑长任务)</text>
+
+  <rect class="box" x="40" y="330" width="280" height="180" fill="#f0fdf4" stroke="#22c55e"/>
+  <text class="tb" x="52" y="350">Domain 业务层</text>
+  <text class="own" x="52" y="367">只编排,不直接写库/外呼</text>
+  <text class="t" x="52" y="388">pipeline 编排器</text>
+  <text class="t" x="52" y="406">tower · srs · quiz_bank</text>
+  <text class="t" x="52" y="424">conjugation · jpos</text>
+  <text class="t" x="52" y="442">conversation · grammar_quiz</text>
+  <text class="ts" x="52" y="466">纯逻辑、可单测</text>
+
+  <rect class="box nw" x="332" y="330" width="280" height="180" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="344" y="350">Repository 层 ✚</text>
+  <text class="own" x="344" y="367">拥有事务 + 写库 + 幂等</text>
+  <text class="t" x="344" y="388">user_repo</text>
+  <text class="t" x="344" y="406">learning_repo(user-scoped)</text>
+  <text class="t" x="344" y="424">content_repo</text>
+  <text class="t" x="344" y="442">generation_repo</text>
+  <text class="t" x="344" y="460">job_repo</text>
+  <text class="ts" x="344" y="482">唯一持有 DB Session 的层</text>
+
+  <rect class="box nw" x="624" y="330" width="280" height="180" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="636" y="350">Integration Client 层 ✚</text>
+  <text class="own" x="636" y="367">拥有外呼治理</text>
+  <text class="t" x="636" y="388">anthropic_client(LLM)</text>
+  <text class="t" x="636" y="406">jimaku_client · anilist_client</text>
+  <text class="t" x="636" y="424">voicevox_client</text>
+  <text class="ts" x="636" y="448">timeout · retry · 缓存</text>
+  <text class="ts" x="636" y="466">降级 · 成本/耗时记录</text>
+  <text class="ts" x="636" y="484">(熔断/限流: 有负载再加)</text>
+
+  <rect class="box nw" x="916" y="330" width="296" height="180" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="928" y="350">Job Worker ✚</text>
+  <text class="own" x="928" y="367">长任务状态机</text>
+  <text class="t" x="928" y="388">轮询 jobs 表(单 worker 起步)</text>
+  <text class="t" x="928" y="406">pipeline 步骤化:</text>
+  <text class="ts" x="940" y="424">解析→分词→翻译→切场景→落库</text>
+  <text class="t" x="928" y="446">幂等键 · 重试 · 失败原因</text>
+  <text class="t" x="928" y="464">可回放 · 补偿</text>
+  <text class="ts" x="928" y="486">量大再换队列(Celery/RQ)</text>
+
+  <path class="arrow" d="M472,510 L472,556"/><text class="alab" x="480" y="538">SQLAlchemy(仅 Repository)</text>
+  <path class="arrow" d="M764,510 L764,556"/><text class="alab" x="772" y="538">httpx(仅 Client)</text>
+  <path class="arrow" d="M1064,510 L1064,556"/><text class="alab" x="1018" y="538">读写 jobs/产物</text>
+
+  <!-- ④ DATA MODEL -->
+  <rect class="band" x="24" y="560" width="800" height="430" fill="#fde68a"/>
+  <text class="blab" x="40" y="582" fill="#92400e">④ PostgreSQL 数据模型 — 按业务分层(JSONB · pg_trgm)</text>
+
+  <rect class="box nw" x="40" y="594" width="370" height="70" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="52" y="613">用户 ✚</text>
+  <text class="t" x="52" y="632">User(id, username, pwd_hash, created_at)</text>
+  <text class="ts" x="52" y="652">bcrypt 哈希;一切 user-scoped 的锚点</text>
+
+  <rect class="box" x="424" y="594" width="376" height="70" fill="#fffbeb" stroke="#d97706"/>
+  <text class="tb" x="436" y="613">内容资产(全局)</text>
+  <text class="t" x="436" y="632">Series · Episode · Line(原文) · Scene</text>
+  <text class="ts" x="436" y="652">不可变事实;与用户无关</text>
+
+  <rect class="box" x="40" y="672" width="370" height="68" fill="#fffbeb" stroke="#d97706"/>
+  <text class="tb" x="52" y="691">全局知识资产</text>
+  <text class="t" x="52" y="710">Vocab · GrammarPoint(纯知识)</text>
+  <text class="ts" x="52" y="730">★ 去掉 SRS 字段 → 仅词义/读音/活用/语法</text>
+
+  <rect class="box nw" x="424" y="672" width="376" height="68" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="436" y="691">学习状态(user-scoped)✚/重构</text>
+  <text class="t" x="436" y="710">UserVocabSrs · UserGrammarSrs</text>
+  <text class="ts" x="436" y="730">TowerProgress · PlayerStats · DailySession 均加 user_id</text>
+
+  <rect class="box nw" x="40" y="748" width="370" height="76" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="52" y="767">生成产物 版本化 ✚</text>
+  <text class="t" x="52" y="786">GenerationRecord</text>
+  <text class="ts" x="52" y="804">prompt_version · model · source_hash</text>
+  <text class="ts" x="52" y="820">输入快照 · 输出 · token/cost · 人工修正版</text>
+
+  <rect class="box nw" x="424" y="748" width="376" height="76" fill="#dcfce7" stroke="#16a34a"/>
+  <text class="tb" x="436" y="767">任务 ✚</text>
+  <text class="t" x="436" y="786">Job(id, type, state, idempotency_key,</text>
+  <text class="t" x="436" y="804">     attempts, last_error, payload, result)</text>
+  <text class="ts" x="436" y="820">状态机:queued→running→done/failed</text>
+
+  <rect class="box" x="40" y="832" width="760" height="64" fill="#fef9c3" stroke="#ca8a04"/>
+  <text class="tb" x="52" y="851">练习记录 / 行为日志(预留)</text>
+  <text class="ts" x="52" y="870">QuizAttempt · EventLog —— 先留埋点位,分析管线后做(YAGNI)</text>
+  <text class="ts" x="52" y="887">Alembic 版本化迁移;迁移即「加 user_id + 拆 SRS」一次切干净</text>
+
+  <rect class="box" x="40" y="904" width="760" height="74" fill="#fff7ed" stroke="#ea580c"/>
+  <text class="tb" x="52" y="923">关系要点</text>
+  <text class="ts" x="52" y="942">Line.翻译/语法注 → 引用 GenerationRecord(可追溯、可重生)</text>
+  <text class="ts" x="52" y="960">UserVocabSrs(user_id, vocab_id) → Vocab;复习记录可做学情分析</text>
+
+  <!-- ⑤ EXTERNAL governed -->
+  <rect class="band" x="836" y="560" width="520" height="200" fill="#fbcfe8"/>
+  <text class="blab" x="852" y="582" fill="#9d174d">⑤ 外部依赖(经 Client 层治理)</text>
+  <rect class="box" x="852" y="594" width="490" height="38" fill="#fdf2f8" stroke="#db2777"/><text class="t" x="864" y="617">Anthropic / fox 网关(LLM)— 经 anthropic_client</text>
+  <rect class="box" x="852" y="638" width="490" height="34" fill="#fdf2f8" stroke="#db2777"/><text class="t" x="864" y="659">Jimaku 字幕 · AniList 元数据 — 强缓存+版本化</text>
+  <rect class="box" x="852" y="678" width="490" height="34" fill="#fdf2f8" stroke="#db2777"/><text class="t" x="864" y="699">VOICEVOX TTS(host.docker.internal:50021)</text>
+  <text class="ts" x="852" y="732">治理统一在 Client 层:超时/重试/缓存/降级/成本——</text>
+  <text class="ts" x="852" y="748">不再是图里「一根 httpx 线」</text>
+
+  <!-- ⑥ OBSERVABILITY -->
+  <rect class="band nw" x="836" y="772" width="520" height="206" fill="#cbd5e1"/>
+  <text class="blab" x="852" y="794" fill="#334155">⑥ 可观测性 / 运维面 ✚(早做,便宜难补)</text>
+  <rect class="box" x="852" y="806" width="240" height="44" fill="#f1f5f9" stroke="#64748b"/><text class="t" x="862" y="824">trace_id 贯穿请求→job</text><text class="ts" x="862" y="840">structured log</text>
+  <rect class="box" x="1104" y="806" width="238" height="44" fill="#f1f5f9" stroke="#64748b"/><text class="t" x="1114" y="824">Job 失败表 / 重试次数</text><text class="ts" x="1114" y="840">线上半成品可查</text>
+  <rect class="box" x="852" y="856" width="240" height="44" fill="#f1f5f9" stroke="#64748b"/><text class="t" x="862" y="874">外呼耗时 / 错误分布</text><text class="ts" x="862" y="890">按 client 维度</text>
+  <rect class="box" x="1104" y="856" width="238" height="44" fill="#f1f5f9" stroke="#64748b"/><text class="t" x="1114" y="874">LLM token / 成本统计</text><text class="ts" x="1114" y="890">按 model/功能</text>
+  <text class="ts" x="852" y="924">指标先落库/日志,够用就行;APM/分布式追踪等有规模再上。</text>
+
+  <!-- containers note -->
+  <rect class="box" x="852" y="938" width="490" height="34" fill="#eef2f7" stroke="#94a3b8"/>
+  <text class="ts" x="862" y="959">容器:app + db(+ worker)  ·  Alembic 迁移随 entrypoint</text>
+
+  <!-- ROADMAP -->
+  <rect class="box" x="40" y="998" width="1302" height="210" rx="12" ry="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text class="tb" x="56" y="1022" font-size="14">落地路线(按「返工风险 × 当前需要」排序)</text>
+  <text class="t" x="56" y="1048">① ✅ PostgreSQL + Alembic(已完成,待合并+容器冒烟)</text>
+  <text class="t" x="56" y="1072">② 用户模型 + JWT + 学习状态 user-scoped 化 —— 一次迁移切干净(合并原「登录」与「数据隔离」,避免二次迁移)← 下一步</text>
+  <text class="t" x="56" y="1096">③ pipeline → 异步 Job 系统(状态机/幂等/重试/回放)+ 外呼收进 Client 治理层</text>
+  <text class="t" x="56" y="1120">④ LLM 生成产物版本化(GenerationRecord + 缓存)</text>
+  <text class="t" x="56" y="1144">⑤ 可观测性最小集(trace_id + structured log + job 失败表 + LLM 成本)—— 与 ③④ 并行夹带</text>
+  <text class="ts" x="56" y="1174">YAGNI 边界:熔断/限流、消息队列、行为日志数仓 —— 等真实负载/用户再上,先用 Postgres 表 + 单 worker 起步。</text>
+  <text class="ts" x="56" y="1194">核心判断:危险的不是功能不够,而是「能跑」掩盖状态与任务边界;②③ 是把债一次性还清的关键两刀。</text>
+</svg>

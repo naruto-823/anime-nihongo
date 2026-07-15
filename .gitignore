@@ -33,3 +33,6 @@ dist/
 # 子代理执行 scratch / 临时
 .superpowers/
 .tmp-*
+
+# Aroon code generation tracking
+.aroon/
