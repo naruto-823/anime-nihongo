@@ -1,3 +1,10 @@
+narutoooo.com {
+    root * /srv
+    try_files {path} /index.html
+    file_server
+    encode zstd gzip
+}
+
 api.narutoooo.com {
     reverse_proxy app:8000
     encode zstd gzip
