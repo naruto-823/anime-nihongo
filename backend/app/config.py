@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     # VOICEVOX 本地 TTS 引擎
     voicevox_url: str = "http://localhost:50021"
 
+    # 用户会话（生产环境必须覆盖）
+    jwt_secret: str = "dev-change-me"
+    require_auth: bool = False
+
     def validate_ai(self) -> bool:
         return bool(self.anthropic_api_key and self.anthropic_api_key != "your_key")
 

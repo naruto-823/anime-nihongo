@@ -14,7 +14,7 @@ def create_app() -> FastAPI:
     app = FastAPI(title="追番日语 API")
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:5173"],
+        allow_origins=["http://localhost:5173", "http://localhost:3000", "https://narutoooo.com"],
         allow_methods=["*"],
         allow_headers=["*"],
     )
@@ -34,6 +34,7 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     from app.api import (
+        auth,
         conversation,
         episodes,
         grammar,
@@ -46,7 +47,7 @@ def create_app() -> FastAPI:
         tts,
         vocab,
     )
-    for module in (series, episodes, study, srs, grammar, conversation,
+    for module in (auth, series, episodes, study, srs, grammar, conversation,
                    progress, today, tower, tts, vocab):
         app.include_router(module.router)
 

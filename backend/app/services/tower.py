@@ -78,9 +78,9 @@ def _is_cleared(idx, level, zone_idx, stage_idx, is_boss):
     return bool(tp and tp.cleared)
 
 
-def is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss) -> bool:
+def is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss, user_id=1) -> bool:
     """判断给定关卡是否已解锁。规则与 tower_map 完全一致。"""
-    idx = _progress_index(db)
+    idx = _progress_index(db, user_id)
 
     # N5 及各层第0区第0关默认解锁
     level_idx = LEVELS.index(level) if level in LEVELS else -1
@@ -125,27 +125,28 @@ def is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss) -> bool:
         return _is_cleared(idx, level, zone_idx, stage_idx - 1, False)
 
 
-def _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss):
+def _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss, user_id=1):
     tp = db.query(TowerProgress).filter_by(
-        level=level, zone_idx=zone_idx, stage_idx=stage_idx, is_boss=is_boss).one_or_none()
+        user_id=user_id, level=level, zone_idx=zone_idx,
+        stage_idx=stage_idx, is_boss=is_boss).one_or_none()
     if tp is None:
-        tp = TowerProgress(level=level, zone_idx=zone_idx, stage_idx=stage_idx,
+        tp = TowerProgress(user_id=user_id, level=level, zone_idx=zone_idx, stage_idx=stage_idx,
                            is_boss=is_boss, cleared=False, stars=0,
                            best_accuracy=0.0, attempts=0)
         db.add(tp)
     return tp
 
 
-def _player(db):
-    p = db.get(PlayerStats, 1)
+def _player(db, user_id=1):
+    p = db.get(PlayerStats, user_id)
     if p is None:
-        p = PlayerStats(id=1, total_xp=0, player_level=1)
+        p = PlayerStats(id=user_id, total_xp=0, player_level=1)
         db.add(p)
     return p
 
 
-def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
-    if not is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss):
+def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None, user_id=1):
+    if not is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss, user_id):
         raise LockedStageError(f"关卡未解锁: {level} zone{zone_idx} stage{stage_idx} boss={is_boss}")
     today = today or _date.today()
     total = len(results)
@@ -178,7 +179,7 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
                 anime = original_grammar_status in {"seen", "learning"}
             xp_gained += round(XP_PER_CORRECT * (1.5 if anime else 1))
 
-    tp = _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss)
+    tp = _get_or_create_progress(db, level, zone_idx, stage_idx, is_boss, user_id)
     tp.attempts += 1
     if accuracy > tp.best_accuracy:
         tp.best_accuracy = accuracy
@@ -186,7 +187,7 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
     if passed:
         tp.cleared = True
 
-    player = _player(db)
+    player = _player(db, user_id)
     player.total_xp += xp_gained
     player.player_level = 1 + player.total_xp // 500     # 每 500 XP 升 1 级
 
@@ -195,15 +196,15 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None):
             "xp_gained": xp_gained, "total_xp": player.total_xp}
 
 
-def _progress_index(db):
+def _progress_index(db, user_id=1):
     idx = {}
-    for tp in db.query(TowerProgress).all():
+    for tp in db.query(TowerProgress).filter_by(user_id=user_id).all():
         idx[(tp.level, tp.zone_idx, tp.stage_idx, tp.is_boss)] = tp
     return idx
 
 
-def tower_map(db):
-    idx = _progress_index(db)
+def tower_map(db, user_id=1):
+    idx = _progress_index(db, user_id)
 
     def cell(level, zone, stage, is_boss, unlocked):
         tp = idx.get((level, zone, stage, is_boss))

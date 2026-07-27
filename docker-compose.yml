@@ -16,7 +16,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: backend/Dockerfile
+      dockerfile: backend/Dockerfile.api
     depends_on:
       db:
         condition: service_healthy
@@ -28,10 +28,26 @@ services:
       ANTHROPIC_MODEL_LIGHT: ${ANTHROPIC_MODEL_LIGHT:-claude-haiku-4-5-20251001}
       JIMAKU_API_TOKEN: ${JIMAKU_API_TOKEN:-}
       VOICEVOX_URL: ${VOICEVOX_URL:-http://host.docker.internal:50021}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
+      REQUIRE_AUTH: "true"
     ports:
       - "8000:8000"
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
 volumes:
   pgdata:
+  caddy_data:
+  caddy_config:
