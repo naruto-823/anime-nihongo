@@ -61,6 +61,7 @@ jobs:
             git reset --hard origin/main
             sudo docker compose build
             sudo docker compose up -d --remove-orphans
+            sudo docker compose restart caddy
             for attempt in $(seq 1 30); do
               if sudo docker compose exec -T app python -c \
                 "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health').read()"; then
@@ -73,4 +74,13 @@ jobs:
           REMOTE
 
       - name: Public health check
-        run: curl --fail --retry 10 --retry-delay 3 https://api.narutoooo.com/api/health
+        run: |
+          curl --fail --retry 10 --retry-delay 3 https://api.narutoooo.com/api/health
+          curl --fail --retry 20 --retry-delay 5 https://narutoooo.com/
+
+      - name: Show gateway logs on failure
+        if: failure()
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'cd "$HOME/anime-nihongo" && sudo docker compose logs --tail=150 caddy'
