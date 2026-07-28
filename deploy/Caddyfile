@@ -14,3 +14,18 @@ influencer.narutoooo.com, influencer.47.242.92.136.sslip.io {
     reverse_proxy host.docker.internal:5180
     encode zstd gzip
 }
+
+trading.narutoooo.com, trading.47.242.92.136.sslip.io {
+    encode zstd gzip
+
+    handle /api/health {
+        reverse_proxy host.docker.internal:8081
+    }
+
+    handle {
+        basic_auth {
+            {$TRADING_BASIC_AUTH_USER} {$TRADING_BASIC_AUTH_HASH}
+        }
+        reverse_proxy host.docker.internal:8081
+    }
+}
