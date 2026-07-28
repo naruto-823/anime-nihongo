@@ -53,5 +53,7 @@ jobs:
             done
             sudo sshd -t
             sudo systemctl reload ssh || sudo systemctl reload sshd
+            sudo sshd -T -C user=deploy,host=localhost,addr=127.0.0.1 | grep -E '^(pubkeyauthentication|authorizedkeysfile|allowusers|allowgroups|denyusers|denygroups|strictmodes) '
+            sudo journalctl -u ssh -n 100 --no-pager | grep 'deploy' | tail -n 10 || true
             printf 'macro deploy user ready\n'
           REMOTE
