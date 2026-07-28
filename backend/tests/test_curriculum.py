@@ -3,6 +3,7 @@ import random
 from app.models import CurriculumItem, GrammarPoint, UserItemMastery, Vocab
 from app.services import tower
 from app.services.curriculum import (
+    backfill_legacy_mastery,
     coverage_report,
     record_mastery,
     sync_curriculum,
@@ -67,3 +68,19 @@ def test_submission_records_per_user_dimension_evidence(db_session):
     report = coverage_report(db_session, 1)
     assert report["totals"]["practiced_dimensions"] == 1
     assert report["totals"]["mastered_dimensions"] == 1
+
+
+def test_legacy_progress_becomes_practiced_not_fake_mastery(db_session):
+    from app.models import UserVocabProgress
+
+    _seed(db_session)
+    vocab = db_session.query(Vocab).first()
+    db_session.add(UserVocabProgress(user_id=1, vocab_id=vocab.id, in_srs=True,
+                                     reps=0, lapses=0))
+    db_session.commit()
+    assert backfill_legacy_mastery(db_session) == 1
+    assert backfill_legacy_mastery(db_session) == 0
+    evidence = db_session.query(UserItemMastery).one()
+    assert evidence.attempts == 1
+    assert evidence.correct == 0
+    assert evidence.mastery == 0.0

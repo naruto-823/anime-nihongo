@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.db import SessionLocal, init_app_db
 from app.grammar_loader import load_grammar_seed
-from app.services.curriculum import sync_curriculum
+from app.services.curriculum import backfill_legacy_mastery, sync_curriculum
 from app.vocab_loader import load_vocab_seed
 
 
@@ -29,6 +29,7 @@ def create_app() -> FastAPI:
             load_grammar_seed(db)
             load_vocab_seed(db)
             sync_curriculum(db)
+            backfill_legacy_mastery(db)
         finally:
             db.close()
 

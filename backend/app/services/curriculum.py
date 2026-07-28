@@ -3,7 +3,14 @@ from datetime import datetime, timezone
 
 from sqlalchemy import select
 
-from app.models import CurriculumItem, GrammarPoint, UserItemMastery, Vocab
+from app.models import (
+    CurriculumItem,
+    GrammarPoint,
+    UserGrammarProgress,
+    UserItemMastery,
+    UserVocabProgress,
+    Vocab,
+)
 from app.services.conjugation import conjugate
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
@@ -62,6 +69,44 @@ def sync_curriculum(db) -> int:
                 for key, value in values.items():
                     setattr(row, key, value)
                 changed += 1
+    if changed:
+        db.commit()
+    return changed
+
+
+def backfill_legacy_mastery(db) -> int:
+    """Preserve pre-ledger study history without inventing mastered answers.
+
+    Old progress rows prove that an item was encountered, but not which quiz
+    answer was correct. They therefore become meaning-practice evidence; real
+    mastery continues to be earned by answering dimension-aware questions.
+    """
+    existing = {(row.user_id, row.item_type, row.item_id, row.dimension)
+                for row in db.scalars(select(UserItemMastery)).all()}
+    changed = 0
+    sources = (
+        ("vocab", db.scalars(select(UserVocabProgress)).all(), "vocab_id"),
+        ("grammar", db.scalars(select(UserGrammarProgress)).all(), "grammar_id"),
+    )
+    for kind, rows, item_field in sources:
+        for progress in rows:
+            key = (progress.user_id, kind, getattr(progress, item_field), "meaning")
+            if key in existing:
+                continue
+            attempts = max(1, progress.reps + progress.lapses)
+            correct = min(progress.reps, attempts)
+            db.add(UserItemMastery(
+                user_id=progress.user_id,
+                item_type=kind,
+                item_id=getattr(progress, item_field),
+                dimension="meaning",
+                attempts=attempts,
+                correct=correct,
+                mastery=correct / attempts,
+                last_seen_at=progress.last_reviewed,
+            ))
+            existing.add(key)
+            changed += 1
     if changed:
         db.commit()
     return changed
