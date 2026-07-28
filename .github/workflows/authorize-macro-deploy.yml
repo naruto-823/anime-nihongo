@@ -24,11 +24,10 @@ jobs:
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          MACRO_PUBLIC_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOAT0s3xJDD5hG7yiS6b0BzpBhOW3uti7mjgyJchgAo github-actions-macro-influencer
         run: |
-          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' -- "$MACRO_PUBLIC_KEY" <<'REMOTE'
+          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' <<'REMOTE'
             set -euo pipefail
-            public_key="$1"
+            public_key='ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOAT0s3xJDD5hG7yiS6b0BzpBhOW3uti7mjgyJchgAo github-actions-macro-influencer'
             if ! id deploy >/dev/null 2>&1; then
               sudo useradd --create-home --shell /bin/bash deploy
             fi
@@ -41,6 +40,7 @@ jobs:
             sudo usermod -aG "$current_groups" deploy
             sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
             sudo touch /home/deploy/.ssh/authorized_keys
+            sudo sed -i '/^ssh-ed25519$/d' /home/deploy/.ssh/authorized_keys
             if ! sudo grep -qxF "$public_key" /home/deploy/.ssh/authorized_keys; then
               printf '%s\n' "$public_key" | sudo tee -a /home/deploy/.ssh/authorized_keys >/dev/null
             fi
