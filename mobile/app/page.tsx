@@ -10,6 +10,10 @@ type Level = { level: string; unlocked: boolean; zones: Zone[] };
 type TowerMap = { levels: Level[] };
 type Question = { id: string; prompt: string; hint: string | null; options: string[]; answer: string; item: { kind: string; id: number } };
 type Player = { total_xp: number; player_level: number };
+type Tab = "tower" | "vocab" | "review" | "profile";
+type VocabItem = { id: number; headword: string; reading: string; meaning_zh: string; jlpt_level: string | null };
+type DueItem = { id: number; headword?: string; reading?: string; meaning_zh?: string; name?: string; explanation?: string };
+type DueData = { vocab: DueItem[]; grammar: DueItem[] };
 
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const legacyToken = typeof window === "undefined" ? null : localStorage.getItem("nihongo-token");
@@ -50,6 +54,9 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
+  const [activeTab, setActiveTab] = useState<Tab>("tower");
+  const [vocabItems, setVocabItems] = useState<VocabItem[]>([]);
+  const [due, setDue] = useState<DueData>({ vocab: [], grammar: [] });
 
   async function loadGame() {
     setLoading(true); setError("");
@@ -75,6 +82,25 @@ export default function Home() {
     const timer = window.setTimeout(() => void loadGame(), 0);
     return () => window.clearTimeout(timer);
   }, [user]);
+
+  useEffect(() => {
+    if (!user || activeTab === "tower" || activeTab === "profile") return;
+    const timer = window.setTimeout(() => {
+      setLoading(true); setError("");
+      const request = activeTab === "vocab"
+        ? api<{ items: VocabItem[] }>("/api/vocab?level=N5&limit=100").then((data) => setVocabItems(data.items))
+        : api<DueData>("/api/srs/due").then(setDue);
+      void request.catch((e) => setError(e instanceof Error ? e.message : "加载失败")).finally(() => setLoading(false));
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [activeTab, user]);
+
+  async function reviewItem(itemType: "vocab" | "grammar", itemId: number, grade: "again" | "good") {
+    try {
+      await api("/api/srs/review", { method: "POST", body: JSON.stringify({ item_type: itemType, item_id: itemId, grade }) });
+      setDue(await api<DueData>("/api/srs/due"));
+    } catch (e) { setError(e instanceof Error ? e.message : "复习提交失败"); }
+  }
 
   async function authenticate() {
     setError("");
@@ -129,15 +155,19 @@ export default function Home() {
   return <main className="app-shell">
     <header className="hero"><div className="topline"><span className="eyebrow">追番日语</span><button className="user-pill" onClick={logout}>{user} · 退出</button></div><div className="hero-copy"><div><p>修炼塔 · {level?.level ?? "N5"}</p><h1>忍者之路</h1></div><div className="streak"><b>{player?.player_level ?? 1}</b><span>忍者等级</span></div></div><div className="xp-row"><span>Lv. {player?.player_level ?? 1}</span><span>{player?.total_xp ?? 0} XP</span></div><div className="xp-track"><i style={{ width: `${xpProgress}%` }} /></div></header>
     {error && <div className="global-error">{error}<button onClick={() => setError("")}>×</button></div>}
-    <section className="level-tabs">{tower?.levels.map((item, index) => <button key={item.level} disabled={!item.unlocked} className={index === activeLevel ? "active" : ""} onClick={() => setActiveLevel(index)}>{item.unlocked ? item.level : `🔒 ${item.level}`}</button>)}</section>
+    {activeTab === "tower" && <><section className="level-tabs">{tower?.levels.map((item, index) => <button key={item.level} disabled={!item.unlocked} className={index === activeLevel ? "active" : ""} onClick={() => setActiveLevel(index)}>{item.unlocked ? item.level : `🔒 ${item.level}`}</button>)}</section>
     <section className="map" aria-label="修炼塔关卡地图">
       <div className="chapter"><span>壹</span><div><b>{level?.level ?? "N5"} · 基础修炼</b><small>每关题目来自独立词汇与语法题库</small></div></div><div className="path" />
       {level?.zones.flatMap((zone) => zone.stages.map((stage, index) => {
         const [name, jp] = stageName(stage); const current = stage.unlocked && !stage.cleared; const row = zone.zone_idx * 6 + index;
         return <article className={`stage-row ${row % 2 ? "right" : "left"}`} key={`${zone.zone_idx}-${stage.stage_idx}-${stage.is_boss}`}><button className={`stage-node ${stage.cleared ? "done" : ""} ${current ? "current" : ""} ${!stage.unlocked ? "locked" : ""} ${stage.is_boss ? "boss" : ""}`} onClick={() => stage.unlocked && setSelected({ stage, zone: zone.zone_idx })}><span>{stage.is_boss ? "鬼" : stage.cleared ? "✓" : !stage.unlocked ? "鎖" : stage.stage_idx + 1}</span></button><div className="stage-copy"><b>{name}</b><small>{jp}</small>{stage.cleared && <div className="stars">{"★".repeat(stage.stars)}{"☆".repeat(3 - stage.stars)}</div>}{current && <i>可挑战</i>}</div></article>;
       }))}
-    </section>
-    <nav className="bottom-nav"><button className="active"><span>塔</span>修炼</button><button><span>巻</span>词卷</button><button><span>火</span>复习</button><button><span>人</span>我的</button></nav>
+    </section></>}
+    {activeTab === "vocab" && <section className="tab-page"><div className="tab-heading"><p>忍术卷轴</p><h2>N5 词卷</h2><span>共 {vocabItems.length} 个基础词汇</span></div><div className="vocab-list">{vocabItems.map((item) => <article key={item.id}><div><b>{item.headword}</b><small>{item.reading}</small></div><strong>{item.meaning_zh}</strong><em>{item.jlpt_level}</em></article>)}</div></section>}
+    {activeTab === "review" && <section className="tab-page"><div className="tab-heading"><p>今日复习</p><h2>火之修行</h2><span>{due.vocab.length + due.grammar.length} 项等待复习</span></div>{due.vocab.length + due.grammar.length === 0 ? <div className="empty-state"><i>火</i><b>今日修行完成</b><span>去修炼塔挑战新关卡吧</span></div> : <div className="review-list">{due.vocab.map((item) => <article key={`v-${item.id}`}><div><b>{item.headword}</b><small>{item.reading} · {item.meaning_zh}</small></div><div><button onClick={() => reviewItem("vocab", item.id, "again")}>再练</button><button onClick={() => reviewItem("vocab", item.id, "good")}>记住了</button></div></article>)}{due.grammar.map((item) => <article key={`g-${item.id}`}><div><b>{item.name}</b><small>{item.explanation}</small></div><div><button onClick={() => reviewItem("grammar", item.id, "again")}>再练</button><button onClick={() => reviewItem("grammar", item.id, "good")}>记住了</button></div></article>)}</div>}</section>}
+    {activeTab === "profile" && <section className="tab-page"><div className="tab-heading"><p>忍者档案</p><h2>{user}</h2><span>你的修炼数据已在所有设备同步</span></div><div className="profile-grid"><article><small>忍者等级</small><b>Lv. {player?.player_level ?? 1}</b></article><article><small>总经验</small><b>{player?.total_xp ?? 0} XP</b></article></div><button className="profile-logout" onClick={logout}>退出当前账号</button></section>}
+    {loading && activeTab !== "tower" && <div className="tab-loading">卷轴展开中…</div>}
+    <nav className="bottom-nav" aria-label="主导航"><button className={activeTab === "tower" ? "active" : ""} onClick={() => setActiveTab("tower")}><span>塔</span>修炼</button><button className={activeTab === "vocab" ? "active" : ""} onClick={() => setActiveTab("vocab")}><span>巻</span>词卷</button><button className={activeTab === "review" ? "active" : ""} onClick={() => setActiveTab("review")}><span>火</span>复习</button><button className={activeTab === "profile" ? "active" : ""} onClick={() => setActiveTab("profile")}><span>人</span>我的</button></nav>
     {selected && <div className="backdrop" onClick={() => setSelected(null)}><section className="stage-sheet" onClick={(e) => e.stopPropagation()}><div className="sheet-grip" /><div className={`sheet-icon ${selected.stage.is_boss ? "boss" : "normal"}`}>{selected.stage.is_boss ? "鬼" : selected.stage.stage_idx + 1}</div><p>{level?.level} · 第 {selected.zone + 1} 区</p><h2>{stageName(selected.stage)[0]}</h2><span className="jp">{stageName(selected.stage)[1]}</span><div className="reward"><span>本关题库</span><b>{selected.stage.is_boss ? "区域综合" : "专属词汇 + 语法"}</b></div><button className="primary" onClick={beginQuiz}>开始修炼 <span>→</span></button></section></div>}
     {quiz && <section className="quiz-screen">{!result ? <><header><button onClick={() => setQuiz(false)}>×</button><div className="quiz-progress"><i style={{ width: `${questions.length ? ((question + 1) / questions.length) * 100 : 0}%` }} /></div><span>{question + 1}/{questions.length}</span></header>{questions[question] && <div className="quiz-body"><p className="question-type">选择正确答案</p><h2>{questions[question].prompt}</h2><span className="hint">{questions[question].hint}</span><div className="answers">{questions[question].options.map((option, index) => { const state = picked ? option === questions[question].answer ? "correct" : option === picked ? "wrong" : "muted" : ""; return <button className={state} key={option} onClick={() => choose(option)} disabled={!!picked}><i>{String.fromCharCode(65 + index)}</i><span>{option}</span>{state === "correct" && <b>✓</b>}{state === "wrong" && <b>×</b>}</button>; })}</div></div>}</> : <div className="result"><div className="sunburst"><span>忍</span></div><p>修炼完成</p><h2>{result.passed ? "成功通关！" : "再试一次吧"}</h2><div className="result-stars">{"★".repeat(result.stars)}{"☆".repeat(3 - result.stars)}</div><div className="result-grid"><div><small>正确率</small><b>{Math.round(result.accuracy * 100)}%</b></div><div><small>获得经验</small><b>+{result.xp_gained} XP</b></div></div><button className="primary" onClick={() => setQuiz(false)}>返回修炼塔</button></div>}</section>}
   </main>;

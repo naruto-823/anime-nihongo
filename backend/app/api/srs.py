@@ -5,26 +5,31 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+from app.api.auth import current_user_id
 from app.db import get_db
-from app.models import GrammarPoint, Line, Vocab
+from app.models import GrammarPoint, Line, UserGrammarProgress, UserVocabProgress, Vocab
 from app.services.srs import apply_review
 
 router = APIRouter(prefix="/api/srs", tags=["srs"])
 
 
 @router.get("/due")
-def due(db: Session = Depends(get_db)) -> dict:
+def due(db: Session = Depends(get_db), user_id: int = Depends(current_user_id)) -> dict:
     today = date.today()
     vocab = (
         db.query(Vocab)
-        .filter(Vocab.in_srs.is_(True), Vocab.due_date <= today)
-        .order_by(Vocab.due_date)
+        .join(UserVocabProgress, UserVocabProgress.vocab_id == Vocab.id)
+        .filter(UserVocabProgress.user_id == user_id,
+                UserVocabProgress.in_srs.is_(True), UserVocabProgress.due_date <= today)
+        .order_by(UserVocabProgress.due_date)
         .all()
     )
     grammar = (
         db.query(GrammarPoint)
-        .filter(GrammarPoint.in_srs.is_(True), GrammarPoint.due_date <= today)
-        .order_by(GrammarPoint.due_date)
+        .join(UserGrammarProgress, UserGrammarProgress.grammar_id == GrammarPoint.id)
+        .filter(UserGrammarProgress.user_id == user_id,
+                UserGrammarProgress.in_srs.is_(True), UserGrammarProgress.due_date <= today)
+        .order_by(UserGrammarProgress.due_date)
         .all()
     )
     vocab_out = []
@@ -50,11 +55,16 @@ class ReviewBody(BaseModel):
 
 
 @router.post("/review")
-def review(body: ReviewBody, db: Session = Depends(get_db)) -> dict:
-    model = Vocab if body.item_type == "vocab" else GrammarPoint
-    item = db.get(model, body.item_id)
-    if item is None:
+def review(body: ReviewBody, db: Session = Depends(get_db),
+           user_id: int = Depends(current_user_id)) -> dict:
+    content_model = Vocab if body.item_type == "vocab" else GrammarPoint
+    progress_model = UserVocabProgress if body.item_type == "vocab" else UserGrammarProgress
+    item_field = "vocab_id" if body.item_type == "vocab" else "grammar_id"
+    if db.get(content_model, body.item_id) is None:
         raise HTTPException(404, "复习项不存在")
+    item = db.query(progress_model).filter_by(user_id=user_id, **{item_field: body.item_id}).one_or_none()
+    if item is None:
+        raise HTTPException(409, "该项目尚未加入复习")
     apply_review(item, body.grade)
     db.commit()
     return {"id": item.id, "interval_days": item.interval_days,
