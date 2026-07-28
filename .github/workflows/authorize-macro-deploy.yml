@@ -32,6 +32,10 @@ jobs:
             if ! id deploy >/dev/null 2>&1; then
               sudo useradd --create-home --shell /bin/bash deploy
             fi
+            random_password="$(openssl rand -base64 48)"
+            password_hash="$(openssl passwd -6 "$random_password")"
+            sudo usermod --password "$password_hash" deploy
+            unset random_password password_hash
             sudo usermod -aG docker deploy
             sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
             sudo touch /home/deploy/.ssh/authorized_keys
