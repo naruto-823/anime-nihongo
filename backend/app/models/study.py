@@ -1,7 +1,7 @@
 from datetime import date as _date
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, UniqueConstraint, func
+from sqlalchemy import CheckConstraint, ForeignKey, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import JSONB_OR_JSON, Base
@@ -81,6 +81,49 @@ class UserGrammarProgress(Base):
     lapses: Mapped[int] = mapped_column(default=0)
     due_date: Mapped[_date | None]
     last_reviewed: Mapped[datetime | None]
+
+
+class CurriculumItem(Base):
+    """Canonical N5-N1 syllabus index; exactly one content FK is populated."""
+    __tablename__ = "curriculum_item"
+    __table_args__ = (
+        CheckConstraint(
+            "(vocab_id IS NOT NULL AND grammar_id IS NULL) OR "
+            "(vocab_id IS NULL AND grammar_id IS NOT NULL)",
+            name="ck_curriculum_one_content",
+        ),
+        UniqueConstraint("vocab_id", name="uq_curriculum_vocab"),
+        UniqueConstraint("grammar_id", name="uq_curriculum_grammar"),
+        UniqueConstraint("level", "item_type", "sequence", name="uq_curriculum_sequence"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    level: Mapped[str] = mapped_column(index=True)
+    item_type: Mapped[str] = mapped_column(index=True)
+    vocab_id: Mapped[int | None] = mapped_column(ForeignKey("vocab.id", ondelete="CASCADE"))
+    grammar_id: Mapped[int | None] = mapped_column(ForeignKey("grammar_point.id", ondelete="CASCADE"))
+    sequence: Mapped[int]
+    topic: Mapped[str]
+    required_dimensions: Mapped[list] = mapped_column(JSONB_OR_JSON)
+
+
+class UserItemMastery(Base):
+    """Per-user evidence for one knowledge item and one tested skill dimension."""
+    __tablename__ = "user_item_mastery"
+    __table_args__ = (
+        UniqueConstraint("user_id", "item_type", "item_id", "dimension",
+                         name="uq_user_item_dimension"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    item_type: Mapped[str] = mapped_column(index=True)
+    item_id: Mapped[int] = mapped_column(index=True)
+    dimension: Mapped[str]
+    attempts: Mapped[int] = mapped_column(default=0)
+    correct: Mapped[int] = mapped_column(default=0)
+    mastery: Mapped[float] = mapped_column(default=0.0)
+    last_seen_at: Mapped[datetime | None]
 
 
 class DailySession(Base):

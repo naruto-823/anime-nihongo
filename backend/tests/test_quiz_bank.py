@@ -34,7 +34,7 @@ def test_vocab_meaning_q_basic():
     assert q["answer"] in q["options"]
     assert len(q["options"]) == 4
     assert len(set(q["options"])) == 4          # 无重复
-    assert q["item"] == {"kind": "vocab", "id": 1}
+    assert q["item"] == {"kind": "vocab", "id": 1, "dimension": "meaning"}
 
 
 def test_vocab_reading_q_basic():
@@ -88,7 +88,7 @@ def test_grammar_meaning_q():
     assert q["type"] == "grammar"
     assert q["prompt"] == "〜にあたって"
     assert q["answer"] == "在…之际" and len(q["options"]) == 4
-    assert q["item"] == {"kind": "grammar", "id": 1}
+    assert q["item"] == {"kind": "grammar", "id": 1, "dimension": "meaning"}
 
 
 def test_make_vocab_question_always_returns():

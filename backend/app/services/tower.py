@@ -11,6 +11,13 @@ from app.models import (
     UserVocabProgress,
     Vocab,
 )
+from app.services.curriculum import (
+    grammar_dimensions,
+    mastery_index,
+    next_dimension,
+    record_mastery,
+    vocab_dimensions,
+)
 from app.services.quiz_bank import make_grammar_question, make_vocab_question
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
@@ -191,6 +198,8 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None, 
         # Content is shared and immutable; learning state is isolated per user.
         original_grammar_status = getattr(obj, "status", None) if kind == "grammar" else None
         progress = _study_progress(db, kind, iid, user_id, today)
+        record_mastery(db, user_id, kind, iid,
+                       r["item"].get("dimension", "meaning"), r["correct"])
         if not r["correct"]:
             progress.due_date = today
         if r["correct"]:
@@ -267,17 +276,25 @@ def tower_map(db, user_id=1):
     return {"levels": levels_out}
 
 
-def build_quiz(db, level, zone_idx, stage_idx, is_boss, rng):
+def build_quiz(db, level, zone_idx, stage_idx, is_boss, rng, user_id=1):
     vocab_pool, grammar_pool = level_items(db, level)
     if is_boss:
         vs, gs = zone_items(db, level, zone_idx)
     else:
         vs, gs = stage_items(db, level, zone_idx, stage_idx)
+    index = mastery_index(db, user_id, {
+        "vocab": [v.id for v in vs],
+        "grammar": [g.id for g in gs],
+    })
     questions = []
     for v in vs:
-        questions.append(make_vocab_question(v, vocab_pool, rng))
+        dimensions = vocab_dimensions(v)
+        dimension = next_dimension("vocab", v.id, dimensions, index)
+        questions.append(make_vocab_question(v, vocab_pool, rng, dimension))
     for g in gs:
-        questions.append(make_grammar_question(g, grammar_pool, rng))
+        dimensions = grammar_dimensions(g)
+        dimension = next_dimension("grammar", g.id, dimensions, index)
+        questions.append(make_grammar_question(g, grammar_pool, rng, dimension))
     rng.shuffle(questions)
     if is_boss:
         questions = questions[:BOSS_MAX_Q]
