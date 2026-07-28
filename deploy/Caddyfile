@@ -9,3 +9,8 @@ api.narutoooo.com {
     reverse_proxy app:8000
     encode zstd gzip
 }
+
+influencer.narutoooo.com, influencer.47.242.92.136.sslip.io {
+    reverse_proxy host.docker.internal:5180
+    encode zstd gzip
+}
