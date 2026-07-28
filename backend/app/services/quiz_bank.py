@@ -52,7 +52,7 @@ def vocab_meaning_q(target, pool, rng) -> dict:
         "hint": "选择正确的中文释义",
         "options": options,
         "answer": target.meaning_zh,
-        "item": {"kind": "vocab", "id": target.id},
+        "item": {"kind": "vocab", "id": target.id, "dimension": "meaning"},
     }
 
 
@@ -72,7 +72,7 @@ def vocab_reading_q(target, pool, rng):
         "hint": "选择正确的假名读音",
         "options": options,
         "answer": target.reading,
-        "item": {"kind": "vocab", "id": target.id},
+        "item": {"kind": "vocab", "id": target.id, "dimension": "reading"},
     }
 
 
@@ -101,7 +101,7 @@ def vocab_conjugation_q(target, rng):
         "hint": f"请选出「{answer_form['label']}」",
         "options": options,
         "answer": answer_form["surface"],
-        "item": {"kind": "vocab", "id": target.id},
+        "item": {"kind": "vocab", "id": target.id, "dimension": "conjugation"},
     }
 
 
@@ -122,11 +122,53 @@ def grammar_meaning_q(target, pool, rng):
         "hint": "选择正确的中文含义",
         "options": options,
         "answer": target.explanation,
-        "item": {"kind": "grammar", "id": target.id},
+        "item": {"kind": "grammar", "id": target.id, "dimension": "meaning"},
     }
 
 
-def make_vocab_question(target, pool, rng):
+def vocab_recall_q(target, pool, rng):
+    others = [v for v in pool if v.id != target.id and v.headword != target.headword]
+    rng.shuffle(others)
+    distractors = _distractors(target, others, key=lambda v: v.headword)
+    options = _assemble(target.headword, distractors, rng)
+    return {
+        "id": f"v{target.id}-recall",
+        "type": "recall",
+        "prompt": target.meaning_zh,
+        "hint": "选择对应的日语词汇",
+        "options": options,
+        "answer": target.headword,
+        "item": {"kind": "vocab", "id": target.id, "dimension": "recall"},
+    }
+
+
+def grammar_recall_q(target, pool, rng):
+    others = [g for g in pool if g.id != target.id and g.name != target.name]
+    rng.shuffle(others)
+    distractors = _distractors(target, others, key=lambda g: g.name)
+    options = _assemble(target.name, distractors, rng)
+    return {
+        "id": f"g{target.id}-recall",
+        "type": "grammar_recall",
+        "prompt": target.explanation,
+        "hint": "选择对应的语法形式",
+        "options": options,
+        "answer": target.name,
+        "item": {"kind": "grammar", "id": target.id, "dimension": "recall"},
+    }
+
+
+def make_vocab_question(target, pool, rng, dimension=None):
+    requested = {
+        "meaning": lambda: vocab_meaning_q(target, pool, rng),
+        "recall": lambda: vocab_recall_q(target, pool, rng),
+        "reading": lambda: vocab_reading_q(target, pool, rng),
+        "conjugation": lambda: vocab_conjugation_q(target, rng),
+    }
+    if dimension in requested:
+        question = requested[dimension]()
+        if question is not None:
+            return question
     builders = [lambda: vocab_conjugation_q(target, rng),
                 lambda: vocab_reading_q(target, pool, rng)]
     rng.shuffle(builders)
@@ -137,5 +179,7 @@ def make_vocab_question(target, pool, rng):
     return vocab_meaning_q(target, pool, rng)
 
 
-def make_grammar_question(target, pool, rng):
+def make_grammar_question(target, pool, rng, dimension=None):
+    if dimension == "recall":
+        return grammar_recall_q(target, pool, rng)
     return grammar_meaning_q(target, pool, rng)

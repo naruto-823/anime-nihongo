@@ -27,7 +27,7 @@ def get_quiz(
     db: Session = Depends(get_db),
     user_id: int = Depends(current_user_id),
 ) -> dict:
-    questions = tower.build_quiz(db, level, zone, stage, boss, random.Random())
+    questions = tower.build_quiz(db, level, zone, stage, boss, random.Random(), user_id)
     return {"questions": questions}
 
 
@@ -41,6 +41,7 @@ def get_player(db: Session = Depends(get_db), user_id: int = Depends(current_use
 class QItem(BaseModel):
     kind: str
     id: int
+    dimension: str = "meaning"
 
 
 class QResult(BaseModel):
@@ -59,7 +60,8 @@ class SubmitBody(BaseModel):
 @router.post("/api/tower/submit")
 def submit(body: SubmitBody, db: Session = Depends(get_db),
            user_id: int = Depends(current_user_id)) -> dict:
-    results = [{"item": {"kind": r.item.kind, "id": r.item.id}, "correct": r.correct}
+    results = [{"item": {"kind": r.item.kind, "id": r.item.id,
+                          "dimension": r.item.dimension}, "correct": r.correct}
                for r in body.results]
     try:
         return tower.submit_result(db, body.level, body.zone, body.stage, body.boss,
