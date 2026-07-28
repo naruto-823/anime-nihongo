@@ -37,6 +37,8 @@ jobs:
             sudo usermod --password "$password_hash" deploy
             unset random_password password_hash
             sudo usermod -aG docker deploy
+            current_groups="$(id -Gn | tr ' ' ',')"
+            sudo usermod -aG "$current_groups" deploy
             sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
             sudo touch /home/deploy/.ssh/authorized_keys
             if ! sudo grep -qxF "$public_key" /home/deploy/.ssh/authorized_keys; then
@@ -44,5 +46,12 @@ jobs:
             fi
             sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
             sudo chmod 600 /home/deploy/.ssh/authorized_keys
+            for ssh_config in /etc/ssh/sshd_config /etc/ssh/sshd_config.d/*.conf; do
+              [ -f "$ssh_config" ] || continue
+              sudo sed -E -i '/^[[:space:]]*AllowUsers[[:space:]]/ { /(^|[[:space:]])deploy([[:space:]]|$)/! s/$/ deploy/; }' "$ssh_config"
+              sudo sed -E -i '/^[[:space:]]*AllowGroups[[:space:]]/ { /(^|[[:space:]])deploy([[:space:]]|$)/! s/$/ deploy/; }' "$ssh_config"
+            done
+            sudo sshd -t
+            sudo systemctl reload ssh || sudo systemctl reload sshd
             printf 'macro deploy user ready\n'
           REMOTE
