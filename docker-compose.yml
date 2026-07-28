@@ -32,6 +32,7 @@ services:
       VOICEVOX_URL: ${VOICEVOX_URL:-http://host.docker.internal:50021}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
       REQUIRE_AUTH: "true"
+      AUTH_COOKIE_SECURE: "true"
     expose:
       - "8000"
     extra_hosts:

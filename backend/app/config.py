@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     # 用户会话（生产环境必须覆盖）
     jwt_secret: str = "dev-change-me"
     require_auth: bool = False
+    auth_cookie_secure: bool = False
+    auth_cookie_name: str = "nihongo_session"
 
     def validate_ai(self) -> bool:
         return bool(self.anthropic_api_key and self.anthropic_api_key != "your_key")
