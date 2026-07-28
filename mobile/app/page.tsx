@@ -30,10 +30,20 @@ async function api<T>(path: string, init?: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-function stageName(stage: Stage) {
-  if (stage.is_boss) return ["赤鬼守门人", "赤鬼の門番"];
-  const names = [["入门试炼", "はじめの一歩"], ["五十音之森", "かなの森"], ["词汇道场", "言葉の道場"], ["助词迷阵", "助詞の迷路"], ["动词山道", "動詞の山道"]];
-  return names[stage.stage_idx] ?? [`第 ${stage.stage_idx + 1} 关`, "日本語の修行"];
+function stageName(stage: Stage, zone: number) {
+  const firstZone = [["入门试炼", "はじめの一歩"], ["五十音之森", "かなの森"], ["词汇道场", "言葉の道場"], ["助词迷阵", "助詞の迷路"], ["动词山道", "動詞の山道"]];
+  const themes = [
+    ["基础之里", "基礎の里"], ["日常村落", "日常の村"], ["时光回廊", "時の回廊"],
+    ["数词秘境", "数の秘境"], ["形容之庭", "形容の庭"], ["动词峡谷", "動詞の谷"],
+    ["助词机关", "助詞の砦"], ["会话港口", "会話の港"], ["听解瀑布", "聞き取りの滝"],
+    ["阅读古卷", "読解の巻"], ["综合天守", "総合の天守"],
+  ];
+  const trials = [["词印初探", "言葉の印"], ["读音追踪", "読みの追跡"], ["语法结界", "文法の結界"], ["句型演武", "文型の稽古"], ["实战试炼", "実戦試練"]];
+  if (zone === 0 && !stage.is_boss) return firstZone[stage.stage_idx] ?? [`基础修炼 ${stage.stage_idx + 1}`, "基礎修行"];
+  const theme = themes[zone] ?? [`第 ${zone + 1} 区`, `第${zone + 1}区`];
+  if (stage.is_boss) return [`${theme[0]}守门人`, `${theme[1]}の門番`];
+  const trial = trials[stage.stage_idx] ?? [`修炼 ${stage.stage_idx + 1}`, `修行 ${stage.stage_idx + 1}`];
+  return [`${theme[0]}·${trial[0]}`, `${theme[1]}・${trial[1]}`];
 }
 
 export default function Home() {
@@ -159,7 +169,7 @@ export default function Home() {
     <section className="map" aria-label="修炼塔关卡地图">
       <div className="chapter"><span>壹</span><div><b>{level?.level ?? "N5"} · 基础修炼</b><small>每关题目来自独立词汇与语法题库</small></div></div><div className="path" />
       {level?.zones.flatMap((zone) => zone.stages.map((stage, index) => {
-        const [name, jp] = stageName(stage); const current = stage.unlocked && !stage.cleared; const row = zone.zone_idx * 6 + index;
+        const [name, jp] = stageName(stage, zone.zone_idx); const current = stage.unlocked && !stage.cleared; const row = zone.zone_idx * 6 + index;
         return <article className={`stage-row ${row % 2 ? "right" : "left"}`} key={`${zone.zone_idx}-${stage.stage_idx}-${stage.is_boss}`}><button className={`stage-node ${stage.cleared ? "done" : ""} ${current ? "current" : ""} ${!stage.unlocked ? "locked" : ""} ${stage.is_boss ? "boss" : ""}`} onClick={() => stage.unlocked && setSelected({ stage, zone: zone.zone_idx })}><span>{stage.is_boss ? "鬼" : stage.cleared ? "✓" : !stage.unlocked ? "鎖" : stage.stage_idx + 1}</span></button><div className="stage-copy"><b>{name}</b><small>{jp}</small>{stage.cleared && <div className="stars">{"★".repeat(stage.stars)}{"☆".repeat(3 - stage.stars)}</div>}{current && <i>可挑战</i>}</div></article>;
       }))}
     </section></>}
@@ -168,7 +178,7 @@ export default function Home() {
     {activeTab === "profile" && <section className="tab-page"><div className="tab-heading"><p>忍者档案</p><h2>{user}</h2><span>你的修炼数据已在所有设备同步</span></div><div className="profile-grid"><article><small>忍者等级</small><b>Lv. {player?.player_level ?? 1}</b></article><article><small>总经验</small><b>{player?.total_xp ?? 0} XP</b></article></div><button className="profile-logout" onClick={logout}>退出当前账号</button></section>}
     {loading && activeTab !== "tower" && <div className="tab-loading">卷轴展开中…</div>}
     <nav className="bottom-nav" aria-label="主导航"><button className={activeTab === "tower" ? "active" : ""} onClick={() => setActiveTab("tower")}><span>塔</span>修炼</button><button className={activeTab === "vocab" ? "active" : ""} onClick={() => setActiveTab("vocab")}><span>巻</span>词卷</button><button className={activeTab === "review" ? "active" : ""} onClick={() => setActiveTab("review")}><span>火</span>复习</button><button className={activeTab === "profile" ? "active" : ""} onClick={() => setActiveTab("profile")}><span>人</span>我的</button></nav>
-    {selected && <div className="backdrop" onClick={() => setSelected(null)}><section className="stage-sheet" onClick={(e) => e.stopPropagation()}><div className="sheet-grip" /><div className={`sheet-icon ${selected.stage.is_boss ? "boss" : "normal"}`}>{selected.stage.is_boss ? "鬼" : selected.stage.stage_idx + 1}</div><p>{level?.level} · 第 {selected.zone + 1} 区</p><h2>{stageName(selected.stage)[0]}</h2><span className="jp">{stageName(selected.stage)[1]}</span><div className="reward"><span>本关题库</span><b>{selected.stage.is_boss ? "区域综合" : "专属词汇 + 语法"}</b></div><button className="primary" onClick={beginQuiz}>开始修炼 <span>→</span></button></section></div>}
+    {selected && <div className="backdrop" onClick={() => setSelected(null)}><section className="stage-sheet" onClick={(e) => e.stopPropagation()}><div className="sheet-grip" /><div className={`sheet-icon ${selected.stage.is_boss ? "boss" : "normal"}`}>{selected.stage.is_boss ? "鬼" : selected.stage.stage_idx + 1}</div><p>{level?.level} · 第 {selected.zone + 1} 区</p><h2>{stageName(selected.stage, selected.zone)[0]}</h2><span className="jp">{stageName(selected.stage, selected.zone)[1]}</span><div className="reward"><span>本关题库</span><b>{selected.stage.is_boss ? "区域综合" : "专属词汇 + 语法"}</b></div><button className="primary" onClick={beginQuiz}>开始修炼 <span>→</span></button></section></div>}
     {quiz && <section className="quiz-screen">{!result ? <><header><button onClick={() => setQuiz(false)}>×</button><div className="quiz-progress"><i style={{ width: `${questions.length ? ((question + 1) / questions.length) * 100 : 0}%` }} /></div><span>{question + 1}/{questions.length}</span></header>{questions[question] && <div className="quiz-body"><p className="question-type">选择正确答案</p><h2>{questions[question].prompt}</h2><span className="hint">{questions[question].hint}</span><div className="answers">{questions[question].options.map((option, index) => { const state = picked ? option === questions[question].answer ? "correct" : option === picked ? "wrong" : "muted" : ""; return <button className={state} key={option} onClick={() => choose(option)} disabled={!!picked}><i>{String.fromCharCode(65 + index)}</i><span>{option}</span>{state === "correct" && <b>✓</b>}{state === "wrong" && <b>×</b>}</button>; })}</div></div>}</> : <div className="result"><div className="sunburst"><span>忍</span></div><p>修炼完成</p><h2>{result.passed ? "成功通关！" : "再试一次吧"}</h2><div className="result-stars">{"★".repeat(result.stars)}{"☆".repeat(3 - result.stars)}</div><div className="result-grid"><div><small>正确率</small><b>{Math.round(result.accuracy * 100)}%</b></div><div><small>获得经验</small><b>+{result.xp_gained} XP</b></div></div><button className="primary" onClick={() => setQuiz(false)}>返回修炼塔</button></div>}</section>}
   </main>;
 }
