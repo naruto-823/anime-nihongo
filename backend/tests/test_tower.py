@@ -76,11 +76,13 @@ def test_submit_updates_progress_xp_and_srs(db_session):
     tp = db_session.query(TowerProgress).filter_by(level="N5", zone_idx=0,
                                                    stage_idx=0, is_boss=False).one()
     assert tp.attempts == 1 and tp.best_accuracy == 0.5
-    # SRS:都入池;答错的语法 due=今天且 learning
-    assert db_session.get(Vocab, v.id).in_srs is True
-    gg = db_session.get(GrammarPoint, g.id)
-    assert gg.in_srs is True and gg.status == "learning"
-    assert gg.due_date == date(2026, 6, 25)
+    # SRS 状态按用户隔离，不修改公共题库
+    from app.models import UserGrammarProgress, UserVocabProgress
+    vp = db_session.query(UserVocabProgress).filter_by(user_id=1, vocab_id=v.id).one()
+    gp = db_session.query(UserGrammarProgress).filter_by(user_id=1, grammar_id=g.id).one()
+    assert vp.in_srs is True
+    assert gp.in_srs is True and gp.status == "learning"
+    assert gp.due_date == date(2026, 6, 25)
 
 
 def test_submit_keeps_best_and_anime_bonus(db_session):
@@ -253,8 +255,11 @@ def test_grammar_anime_bonus_uses_original_status(db_session):
     # seen → 15 XP; locked → 10 XP; 合计 25
     assert out["xp_gained"] == 25, f"期望 25 XP,实际 {out['xp_gained']}"
 
-    # 提交后两个 grammar 的 status 都应被改为 learning
+    # 公共题库保持不变；用户学习状态独立变为 learning
     db_session.refresh(g_seen)
     db_session.refresh(g_locked)
-    assert g_seen.status == "learning"
-    assert g_locked.status == "learning"
+    assert g_seen.status == "seen"
+    assert g_locked.status == "locked"
+    from app.models import UserGrammarProgress
+    rows = db_session.query(UserGrammarProgress).filter_by(user_id=1).all()
+    assert len(rows) == 2 and all(row.status == "learning" for row in rows)

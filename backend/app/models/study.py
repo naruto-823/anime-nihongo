@@ -48,6 +48,41 @@ class GrammarPoint(Base):
     last_reviewed: Mapped[datetime | None]
 
 
+class UserVocabProgress(Base):
+    """Mutable vocabulary learning state owned by one user."""
+    __tablename__ = "user_vocab_progress"
+    __table_args__ = (UniqueConstraint("user_id", "vocab_id", name="uq_user_vocab_progress"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    vocab_id: Mapped[int] = mapped_column(ForeignKey("vocab.id", ondelete="CASCADE"), index=True)
+    in_srs: Mapped[bool] = mapped_column(default=True)
+    ease: Mapped[float] = mapped_column(default=2.5)
+    interval_days: Mapped[int] = mapped_column(default=0)
+    reps: Mapped[int] = mapped_column(default=0)
+    lapses: Mapped[int] = mapped_column(default=0)
+    due_date: Mapped[_date | None]
+    last_reviewed: Mapped[datetime | None]
+
+
+class UserGrammarProgress(Base):
+    """Mutable grammar learning state owned by one user."""
+    __tablename__ = "user_grammar_progress"
+    __table_args__ = (UniqueConstraint("user_id", "grammar_id", name="uq_user_grammar_progress"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    grammar_id: Mapped[int] = mapped_column(ForeignKey("grammar_point.id", ondelete="CASCADE"), index=True)
+    status: Mapped[str] = mapped_column(default="learning")
+    in_srs: Mapped[bool] = mapped_column(default=True)
+    ease: Mapped[float] = mapped_column(default=2.5)
+    interval_days: Mapped[int] = mapped_column(default=0)
+    reps: Mapped[int] = mapped_column(default=0)
+    lapses: Mapped[int] = mapped_column(default=0)
+    due_date: Mapped[_date | None]
+    last_reviewed: Mapped[datetime | None]
+
+
 class DailySession(Base):
     __tablename__ = "daily_session"
 

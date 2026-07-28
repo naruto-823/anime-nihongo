@@ -3,7 +3,14 @@ from math import ceil
 
 from sqlalchemy import select
 
-from app.models import GrammarPoint, PlayerStats, TowerProgress, Vocab
+from app.models import (
+    GrammarPoint,
+    PlayerStats,
+    TowerProgress,
+    UserGrammarProgress,
+    UserVocabProgress,
+    Vocab,
+)
 from app.services.quiz_bank import make_grammar_question, make_vocab_question
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
@@ -145,6 +152,25 @@ def _player(db, user_id=1):
     return p
 
 
+def _study_progress(db, kind, item_id, user_id, today):
+    model = UserVocabProgress if kind == "vocab" else UserGrammarProgress
+    item_field = "vocab_id" if kind == "vocab" else "grammar_id"
+    progress = db.query(model).filter_by(user_id=user_id, **{item_field: item_id}).one_or_none()
+    if progress is None:
+        values = {"user_id": user_id, item_field: item_id, "in_srs": True, "due_date": today}
+        if kind == "grammar":
+            values["status"] = "learning"
+        progress = model(**values)
+        db.add(progress)
+    else:
+        progress.in_srs = True
+        if kind == "grammar":
+            progress.status = "learning"
+        if progress.due_date is None:
+            progress.due_date = today
+    return progress
+
+
 def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None, user_id=1):
     if not is_cell_unlocked(db, level, zone_idx, stage_idx, is_boss, user_id):
         raise LockedStageError(f"关卡未解锁: {level} zone{zone_idx} stage{stage_idx} boss={is_boss}")
@@ -162,15 +188,11 @@ def submit_result(db, level, zone_idx, stage_idx, is_boss, results, today=None, 
         obj = db.get(model, iid)
         if obj is None:
             continue
-        obj.in_srs = True
-        # 在修改 status 之前先捕获原始状态,用于番剧加成判定
+        # Content is shared and immutable; learning state is isolated per user.
         original_grammar_status = getattr(obj, "status", None) if kind == "grammar" else None
-        if kind == "grammar":
-            obj.status = "learning"
+        progress = _study_progress(db, kind, iid, user_id, today)
         if not r["correct"]:
-            obj.due_date = today
-        elif obj.due_date is None:
-            obj.due_date = today
+            progress.due_date = today
         if r["correct"]:
             if kind == "vocab":
                 anime = getattr(obj, "source_line_id", None) is not None

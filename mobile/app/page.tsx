@@ -12,15 +12,17 @@ type Question = { id: string; prompt: string; hint: string | null; options: stri
 type Player = { total_xp: number; player_level: number };
 
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = localStorage.getItem("nihongo-token");
+  const legacyToken = typeof window === "undefined" ? null : localStorage.getItem("nihongo-token");
   const response = await fetch(`${API_BASE}${path}`, {
     ...init,
-    headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}), ...init?.headers },
+    credentials: "include",
+    headers: { "Content-Type": "application/json", ...(legacyToken ? { Authorization: `Bearer ${legacyToken}` } : {}), ...init?.headers },
   });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
     throw new Error(body.detail || "网络请求失败");
   }
+  if (response.status === 204) return undefined as T;
   return response.json() as Promise<T>;
 }
 
@@ -60,9 +62,11 @@ export default function Home() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      const saved = localStorage.getItem("nihongo-user") ?? "";
-      setUser(saved);
-      if (!saved) setLoading(false);
+      // The session lives in an HttpOnly cookie and cannot be read by JS.
+      // Ask the server who is logged in instead of trusting browser storage.
+      void api<{ username: string }>("/api/auth/me")
+        .then((me) => { setUser(me.username); localStorage.removeItem("nihongo-token"); })
+        .catch(() => setLoading(false));
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
@@ -75,16 +79,15 @@ export default function Home() {
   async function authenticate() {
     setError("");
     try {
-      const data = await api<{ token: string; user: { username: string } }>(`/api/auth/${authMode}`, {
+      const data = await api<{ user: { username: string } }>(`/api/auth/${authMode}`, {
         method: "POST", body: JSON.stringify({ username, password }),
       });
-      localStorage.setItem("nihongo-token", data.token);
-      localStorage.setItem("nihongo-user", data.user.username);
       setUser(data.user.username);
     } catch (e) { setError(e instanceof Error ? e.message : "登录失败"); }
   }
 
-  function logout() {
+  async function logout() {
+    await api<void>("/api/auth/logout", { method: "POST" }).catch(() => undefined);
     localStorage.removeItem("nihongo-token"); localStorage.removeItem("nihongo-user");
     setUser(""); setTower(null); setPlayer(null);
   }
