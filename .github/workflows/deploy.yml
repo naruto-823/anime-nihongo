@@ -46,21 +46,35 @@ jobs:
       url: https://narutoooo.com
     steps:
       - name: Configure SSH
+        id: configure_ssh
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
+          set -euo pipefail
+          : "${DEPLOY_KEY:?DEPLOY_SSH_KEY is not configured}"
+          : "${DEPLOY_HOST:?DEPLOY_HOST is not configured}"
           install -m 700 -d ~/.ssh
           printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          for attempt in $(seq 1 5); do
+            if ssh-keyscan -T 10 -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts; then
+              break
+            fi
+            if [ "$attempt" -eq 5 ]; then
+              echo "SSH host key scan failed after $attempt attempts" >&2
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
 
       - name: Deploy and verify
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' <<'REMOTE'
+          ssh -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 \
+            -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' <<'REMOTE'
             set -euo pipefail
             cd "$HOME/anime-nihongo"
             git fetch origin main:refs/remotes/origin/main
@@ -85,7 +99,8 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' <<'REMOTE'
+          ssh -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 \
+            -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'bash -se' <<'REMOTE'
             set -euo pipefail
             cd "$HOME/anime-nihongo"
             sudo docker compose exec -T app python -m app.curriculum_backfill
@@ -97,8 +112,11 @@ jobs:
           curl --fail --retry 20 --retry-all-errors --retry-delay 5 https://narutoooo.com/
 
       - name: Show gateway logs on failure
-        if: failure()
+        if: failure() && steps.configure_ssh.outcome == 'success'
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-        run: ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" 'cd "$HOME/anime-nihongo" && sudo docker compose logs --tail=150 caddy'
+        run: |
+          ssh -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 \
+            -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" \
+            'cd "$HOME/anime-nihongo" && sudo docker compose logs --tail=150 caddy'
