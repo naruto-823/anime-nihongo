@@ -15,6 +15,14 @@ class Credentials(BaseModel):
     password: str = Field(min_length=6, max_length=128)
 
 
+def _native_session(user: User) -> dict:
+    return {
+        "access_token": create_token(user.id),
+        "token_type": "bearer",
+        "user": {"id": user.id, "username": user.username},
+    }
+
+
 def current_user_id(request: Request, authorization: str | None = Header(default=None),
                     db: Session = Depends(get_db)) -> int:
     # Cookie is the primary transport. Bearer remains temporarily supported so
@@ -62,6 +70,25 @@ def login(body: Credentials, response: Response, db: Session = Depends(get_db)) 
         raise HTTPException(status_code=401, detail="用户名或密码错误")
     _set_session(response, user.id)
     return {"user": {"id": user.id, "username": user.username}}
+
+
+@router.post("/native/register")
+def native_register(body: Credentials, db: Session = Depends(get_db)) -> dict:
+    if db.query(User).filter_by(username=body.username).first():
+        raise HTTPException(status_code=409, detail="用户名已存在")
+    user = User(username=body.username, password_hash=hash_password(body.password))
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return _native_session(user)
+
+
+@router.post("/native/login")
+def native_login(body: Credentials, db: Session = Depends(get_db)) -> dict:
+    user = db.query(User).filter_by(username=body.username).first()
+    if user is None or not verify_password(body.password, user.password_hash):
+        raise HTTPException(status_code=401, detail="用户名或密码错误")
+    return _native_session(user)
 
 
 @router.post("/logout", status_code=204)

@@ -25,11 +25,17 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: mobile/package-lock.json
+          cache-dependency-path: |
+            mobile/package-lock.json
+            native/package-lock.json
       - run: npm ci
         working-directory: mobile
       - run: npm run lint && npm run build
         working-directory: mobile
+      - run: npm ci
+        working-directory: native
+      - run: npm run typecheck && npm run export:ios && npm run export:android
+        working-directory: native
 
   deploy:
     needs: test
