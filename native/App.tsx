@@ -57,7 +57,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    music.loop = true; music.volume = .16;
+    music.loop = true; music.volume = .10;
     if (user && soundOn) music.play(); else music.pause();
   }, [music, soundOn, user]);
 
